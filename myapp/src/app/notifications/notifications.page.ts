@@ -24,12 +24,15 @@ export class NotificationsPage implements OnInit {
   categoryTransactionsPerToday: CategoryTransaction[];
   categoryTransactionsPerYestarday: CategoryTransaction[];
   categoryTransactionsPerThisWeek: CategoryTransaction[];
+  myDate: Date;
   
 
   constructor(private transactionService: TransactionService,
               private categoryTransactionService: CategoryTransactionsService) { }
 
   ngOnInit() {
+    this.myDate = new Date();
+    console.log(this.myDate);
     this.userId = this.getUserId();
     this.getTransactionPerToday();
     this.getTransactionPerYestarday();
@@ -41,6 +44,7 @@ export class NotificationsPage implements OnInit {
 
 
   }
+
 
   getCategoryTransactionPerToday() {
     this.categoryTransactionService.getCategoryTransactionNotificationForToday(this.userId)

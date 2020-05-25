@@ -1,7 +1,7 @@
 <ion-header no-border>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="tabs"></ion-back-button>
+      <ion-back-button color="primary" defaultHref="tabs"></ion-back-button>
     </ion-buttons>
     <ion-title>Notifications</ion-title>
     <ion-buttons slot="end">
@@ -75,31 +75,34 @@
   </div>
   <div class="section">
     <div class="section-title">
-      <h4>This weekend</h4>
+      <h4>This week</h4>
     </div>
     <div class="the-list">
-      <ion-item *ngFor="let transaction of transactionsNotificationForThisWeek">
-        <ion-avatar slot="start">
-          <img  src="https://ucarecdn.com/{{transaction.user[0].profilePictureName}}/"/>
-        </ion-avatar>
-        <ion-label *ngIf="transaction.transactions.userId == userId">
-          <h5 text-wrap>You received a payment of <span class="amount">{{transaction.transactions.unit}} {{transaction.transactions.value.toFixed(2)}}</span> from <span class="person">
-            {{transaction.user1Name[0]}}
-          </span> </h5>
-          <p>{{transaction.transactions.date | date:'shortTime' }}</p>
-        </ion-label>
-
-        <ion-label  *ngIf="transaction.transactions.userId != userId">
-          <h5 text-wrap> <span class="person">{{transaction.user[0].name}}</span> requested a payment of<span class="amount">{{transaction.transactions.unit}} {{transaction.transactions.value.toFixed(2)}}</span>
-            from </h5>
-          <p>{{transaction.transactions.date | date:'shortTime' }}</p>
-        </ion-label>
-        <div class="end-slot" slot="end"  *ngIf="transaction.transactions.userId != userId">
-          <ion-button>
-            Pay
-          </ion-button>
-        </div>
-      </ion-item>
+      <div *ngFor="let transaction of transactionsNotificationForThisWeek">
+        <ion-item *ngIf="(transaction.transactions.date | date:'ww') == (myDate | date:'ww')">
+          <ion-avatar slot="start">
+            <img  src="https://ucarecdn.com/{{transaction.user[0].profilePictureName}}/"/>
+          </ion-avatar>
+          <ion-label *ngIf="transaction.transactions.userId == userId">
+            <h5 text-wrap>You received a payment of <span class="amount">{{transaction.transactions.unit}} {{transaction.transactions.value.toFixed(2)}}</span> from <span class="person">
+              {{transaction.user1Name[0]}}
+            </span> </h5>
+            <p>{{transaction.transactions.date | date:'shortTime' }}</p>
+          </ion-label>
+  
+          <ion-label  *ngIf="transaction.transactions.userId != userId">
+            <h5 text-wrap> <span class="person">{{transaction.user[0].name}}</span> requested a payment of<span class="amount">{{transaction.transactions.unit}} {{transaction.transactions.value.toFixed(2)}}</span>
+              from </h5>
+            <p>{{transaction.transactions.date | date:'shortTime' }}</p>
+          </ion-label>
+          <div class="end-slot" slot="end"  *ngIf="transaction.transactions.userId != userId">
+            <ion-button>
+              Pay
+            </ion-button>
+          </div>
+        </ion-item>
+      </div>
+      
     </div>
   </div>
 </ion-content>
