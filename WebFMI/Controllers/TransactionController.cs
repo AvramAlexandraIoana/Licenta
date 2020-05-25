@@ -34,8 +34,20 @@ namespace WebFMI.Controllers
         [HttpGet("index/{id}")]
         public async Task<IActionResult> Transactions(int id)
         {
-            var transactions = await _context.Transactions.Where(u => u.UserId == id || u.UserId1 == id).ToListAsync();
-            return Ok(transactions);
+
+            var transactionList = await _context.Transactions.Where(u => u.UserId == id || u.UserId1 == id).Where(d => (d.Date.Month == DateTime.Now.Month && d.Date.Year == DateTime.Now.Year))
+                                        .Select(transaction => new
+                                        {
+                                            Transactions = transaction,
+                                            User = (from user in _context.Users
+                                                    where transaction.UserId == user.Id
+                                                    select user).ToList(),
+                                            User1Name = (from user in _context.Users
+                                                         where transaction.UserId1 == user.Id
+                                                         select user.Name).ToList()
+
+                                        }).ToListAsync();
+            return Ok(transactionList);
         }
 
         [HttpGet("show/{id}")]

@@ -34,15 +34,23 @@ export class NotificationsPage implements OnInit {
     this.myDate = new Date();
     console.log(this.myDate);
     this.userId = this.getUserId();
-    this.getTransactionPerToday();
-    this.getTransactionPerYestarday();
-    this.getTransactionPertThisWeek();
-    this.getCategoryTransactionPerToday();
-    this.getCategoryTransactionPerYestarday();
-    this.getCategoryTransactionPerThisWeek();
+    this.getTransactionPerId();
+    // this.getTransactionPerToday();
+    // this.getTransactionPerYestarday();
+    // this.getTransactionPertThisWeek();
+    // this.getCategoryTransactionPerToday();
+    // this.getCategoryTransactionPerYestarday();
+    // this.getCategoryTransactionPerThisWeek();
 
 
 
+  }
+
+  getTransactionPerId() {
+    this.transactionService.getTransactions(this.userId).subscribe(res => {
+      console.log(res);
+      this.transactions = res;
+    })
   }
 
 
