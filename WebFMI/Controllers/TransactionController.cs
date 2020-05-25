@@ -29,8 +29,8 @@ namespace WebFMI.Controllers
 
         }
 
-        [HttpGet("allNotification/{id}")]
-        public async Task<IActionResult> AllNotifications(int id)
+        [HttpGet("index/{id}")]
+        public async Task<IActionResult> Transactions(int id)
         {
             var transactions = await _context.Transactions.Where(u => u.UserId == id || u.UserId1 == id).ToListAsync();
             return Ok(transactions);

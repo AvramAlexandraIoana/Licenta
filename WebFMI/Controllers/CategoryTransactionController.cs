@@ -29,6 +29,13 @@ namespace WebFMI.Controllers
 
         }
 
+        [HttpGet("index/{id}")]
+        public async Task<IActionResult> CategoryTransactions(int id)
+        {
+            var categoryTransactions = await _context.CategoryTransactions.Where(u => u.UserId == id).ToListAsync();
+            return Ok(categoryTransactions);
+        }
+
         [HttpGet("show/{id}")]
         public async Task<IActionResult> ShowCategoryTransaction(int id)
         {
