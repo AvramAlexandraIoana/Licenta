@@ -25,6 +25,8 @@ namespace WebFMI.Models
 
         public DateTime TransactionDate { get; set; }
 
+        public string Unit { get; set; }
+
         public virtual Category Category { get; set; }
 
         //public ICollection<Category> Categories { get; set; }

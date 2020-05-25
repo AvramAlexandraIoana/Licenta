@@ -108,6 +108,7 @@ export class AddTransactionPage implements OnInit {
     this.model.Value = Number(this.categoryTransaction.controls['suma'].value);
     this.model.categoryId = Number(this.categoryTransaction.controls["categoryId"].value);
     this.model.transactionDate = this.categoryTransaction.controls["transactionDate"].value;
+    this.model.Unit = this.categoryTransaction.controls["unit"].value;
     this.model.UserId =  this.getUserId();
     console.log(this.model);
     this.categoryTransactionService.saveCategoryTransaction(this.model).subscribe(res => {

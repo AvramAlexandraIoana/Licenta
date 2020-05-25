@@ -5,6 +5,7 @@ export class Transaction {
    CategoryId: number;
    UserId: number;
    UserId1: number;
+   Unit: string;
     
 }   
 

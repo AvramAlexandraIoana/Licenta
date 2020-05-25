@@ -128,6 +128,7 @@ export class RequestViewPage implements OnInit {
       this.model.Value = Number(this.peopleSelected[i].data.suma);
       this.model.UserId =  this.getUserId();
       this.model.UserId1 = this.peopleSelected[i]._objectInstance.id;
+      this.model.Unit = this.sendMoneyData.unit;
       this.transactionService.saveTransaction(this.model).subscribe(res => {
         console.log("Tranzactie adaugata cu succes!");
       });
