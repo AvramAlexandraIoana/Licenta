@@ -4,6 +4,7 @@ import { CategoryTransaction } from '../_models/CategoryTransaction';
 import { CategoryTransactionsService } from '../api/category-transactions.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Transaction } from '../_models/Transaction';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-notifications',
@@ -16,6 +17,13 @@ export class NotificationsPage implements OnInit {
   userId: number;
   transactions: Transaction[];
   categoryTransactions: CategoryTransaction[];
+  groupByTransactions: any;
+  transactionsNotificationForToday: Transaction[];
+  transactionsNotificationForYestarday: Transaction[];
+  transactionsNotificationForThisWeek: Transaction[];
+  categoryTransactionsPerToday: CategoryTransaction[];
+  categoryTransactionsPerYestarday: CategoryTransaction[];
+  categoryTransactionsPerThisWeek: CategoryTransaction[];
   
 
   constructor(private transactionService: TransactionService,
@@ -23,26 +31,71 @@ export class NotificationsPage implements OnInit {
 
   ngOnInit() {
     this.userId = this.getUserId();
-    this.getTransactionPerId();
-    this.getCategoryTransactionPerId();
+    this.getTransactionPerToday();
+    this.getTransactionPerYestarday();
+    this.getTransactionPertThisWeek();
+    this.getCategoryTransactionPerToday();
+    this.getCategoryTransactionPerYestarday();
+    this.getCategoryTransactionPerThisWeek();
+
+
 
   }
 
-
-  getTransactionPerId() {
-    this.transactionService.getTransactions(this.userId).subscribe( res => {
-      console.log(res);
-      this.transactions = res;
-    });
+  getCategoryTransactionPerToday() {
+    this.categoryTransactionService.getCategoryTransactionNotificationForToday(this.userId)
+        .subscribe(res => {
+          console.log(res);
+          console.log("Transactii pe categorie pe azi");
+          this.categoryTransactionsPerToday = res;
+        })
   }
 
-  getCategoryTransactionPerId() {
-    this.categoryTransactionService.getCategoryTransactions(this.userId).subscribe( res => {
+  getCategoryTransactionPerYestarday() {
+    this.categoryTransactionService.getCategoryTransactionNotificationForYestarday(this.userId)
+    .subscribe(res => {
       console.log(res);
-      this.categoryTransactions = res;
+      console.log("Transactii pe categorie pe ieri");
+      this.categoryTransactionsPerYestarday = res;
     })
   }
 
+  getCategoryTransactionPerThisWeek() {
+    this.categoryTransactionService.getCategoryTransactionNotificationForThisWeek(this.userId)
+    .subscribe(res => {
+      console.log(res);
+      console.log("Transactii pe categorie pe aceasta saptamana");
+      this.categoryTransactionsPerThisWeek = res;
+    })
+  }
+
+  getTransactionPerToday() {
+    this.transactionService.getTransactionNotificationForToday(this.userId).subscribe( res => {
+      console.log("Tranzactii pe ziua de azi");
+      console.log(res);
+      this.transactionsNotificationForToday = res;
+    })
+
+  }
+
+  getTransactionPerYestarday() {
+    this.transactionService.getTransactionNotificationForYestarday(this.userId).subscribe( res => {
+      console.log("Tranzactii pe ieri");
+      console.log(res);
+      this.transactionsNotificationForYestarday = res;
+    })
+  }
+
+  getTransactionPertThisWeek() {
+    this.transactionService.getTransactionNotificationForThisWeek(this.userId).subscribe( res => {
+      console.log("Tranzactii pe aceasta saptamana!");
+      console.log(res);
+      this.transactionsNotificationForThisWeek = res;
+    })
+  }
+
+
+ 
   
 
 

@@ -30,6 +30,30 @@ export class CategoryTransactionsService {
 
   }
 
+  getCategoryTransactionNotificationForToday(userId: number): Observable<CategoryTransaction[]> {
+    return this.http.get<CategoryTransaction[]>(this.url + '/getCategoryNotificationsForToday/' + userId, this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.errorHandler)
+    );
+  }
+
+  getCategoryTransactionNotificationForYestarday(userId: number): Observable<CategoryTransaction[]> {
+    return this.http.get<CategoryTransaction[]>(this.url + '/getCategoryNotificationsForYestarday/' + userId, this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.errorHandler)
+    );
+  }
+
+  getCategoryTransactionNotificationForThisWeek(userId: number): Observable<CategoryTransaction[]> {
+    return this.http.get<CategoryTransaction[]>(this.url + '/getCategoryNotificationsForThisWeek/' + userId, this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.errorHandler)
+    );
+  }
+
   getCategoryTransactions(userId: number): Observable<CategoryTransaction[]> {
     return this.http.get<CategoryTransaction[]>(this.url + '/index/' + userId, this.httpOptions)
     .pipe(

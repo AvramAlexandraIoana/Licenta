@@ -139,7 +139,7 @@ namespace WebFMI.Controllers
         [HttpGet("getTransactionsForYear/{id}")]
         public async Task<IActionResult> GetTransactionCurrentYear(int id)
         {
-            var transactionList = await _context.Transactions.Where(u => u.UserId == id).Where(d => (d.Date.Month == DateTime.Now.Month && d.Date.Year == DateTime.Now.Year))
+            var transactionList = await _context.Transactions.Where(u => u.UserId == id).Where(d => (d.Date.Year == DateTime.Now.Year))
                                         .Select(transaction => new
                                         {
                                             Transactions = transaction
@@ -147,6 +147,44 @@ namespace WebFMI.Controllers
                                         }).ToListAsync();
             return Ok(transactionList);
         }
+
+        [HttpGet("getNotificationsForToday/{id}")]
+        public async Task<IActionResult> GetNotificationsForToday(int id)
+        {
+            var transactionList = await _context.Transactions.Where(u => u.UserId == id || u.UserId1 == id).Where(d => (d.Date.Day == DateTime.Now.Day && d.Date.Month == DateTime.Now.Month && d.Date.Year == DateTime.Now.Year))
+                                        .Select(transaction => new
+                                        {
+                                            Transactions = transaction
+
+                                        }).ToListAsync();
+            return Ok(transactionList);
+        }
+
+        [HttpGet("getNotificationsForYestarday/{id}")]
+        public async Task<IActionResult> GetNotificationsForYestarday(int id)
+        {
+            var transactionList = await _context.Transactions.Where(u => u.UserId == id || u.UserId1 == id).Where(d => (d.Date.Day == DateTime.Now.Day - 1 && d.Date.Month == DateTime.Now.Month && d.Date.Year == DateTime.Now.Year))
+                                        .Select(transaction => new
+                                        {
+                                            Transactions = transaction
+
+                                        }).ToListAsync();
+            return Ok(transactionList);
+        }
+
+        [HttpGet("getNotificationsForThisWeek/{id}")]
+        public async Task<IActionResult> GetNotificationsForThisWeek(int id)
+        {
+            var transactionList = await _context.Transactions.Where(u => u.UserId == id || u.UserId1 == id).Where(d => ( d.Date.Month == DateTime.Now.Month && d.Date.Year == DateTime.Now.Year))
+                                        .Select(transaction => new
+                                        {
+                                            Transactions = transaction
+
+                                        }).ToListAsync();
+            return Ok(transactionList);
+        }
+
+
 
     }
 }

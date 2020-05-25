@@ -97,5 +97,41 @@ namespace WebFMI.Controllers
             return Ok(201);
         }
 
+        [HttpGet("getCategoryNotificationsForToday/{id}")]
+        public async Task<IActionResult> GetNotificationsForToday(int id)
+        {
+            var categoryTransactionsList = await _context.CategoryTransactions.Where(u => u.UserId == id).Where(d => (d.TransactionDate.Day == DateTime.Now.Day && d.TransactionDate.Month == DateTime.Now.Month && d.TransactionDate.Year == DateTime.Now.Year))
+                                        .Select(transaction => new
+                                        {
+                                            Transactions = transaction
+
+                                        }).ToListAsync();
+            return Ok(categoryTransactionsList);
+        }
+
+        [HttpGet("getCategoryNotificationsForYestarday/{id}")]
+        public async Task<IActionResult> GetCategoryNotificationsForYestarday(int id)
+        {
+            var categoryTransactionsList = await _context.CategoryTransactions.Where(u => u.UserId == id).Where(d => (d.TransactionDate.Day == DateTime.Now.Day - 1 && d.TransactionDate.Month == DateTime.Now.Month && d.TransactionDate.Year == DateTime.Now.Year))
+                                         .Select(transaction => new
+                                         {
+                                             Transactions = transaction
+
+                                         }).ToListAsync();
+            return Ok(categoryTransactionsList);
+        }
+
+        [HttpGet("getCategoryNotificationsForThisWeek/{id}")]
+        public async Task<IActionResult> GetCategoryNotificationsForThisWeek(int id)
+        {
+            var categoryTransactionsList = await _context.CategoryTransactions.Where(u => u.UserId == id).Where(d => (d.TransactionDate.Day == DateTime.Now.Day && d.TransactionDate.Month == DateTime.Now.Month && d.TransactionDate.Year == DateTime.Now.Year))
+                                        .Select(transaction => new
+                                        {
+                                            Transactions = transaction
+
+                                        }).ToListAsync();
+            return Ok(categoryTransactionsList);
+        }
+
     }
 }
