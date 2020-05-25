@@ -24,6 +24,7 @@ export class NotificationsPage implements OnInit {
   categoryTransactionsPerToday: CategoryTransaction[];
   categoryTransactionsPerYestarday: CategoryTransaction[];
   categoryTransactionsPerThisWeek: CategoryTransaction[];
+  transactionPerDay: Transaction[];
   
 
   constructor(private transactionService: TransactionService,
@@ -45,8 +46,8 @@ export class NotificationsPage implements OnInit {
   getCategoryTransactionPerToday() {
     this.categoryTransactionService.getCategoryTransactionNotificationForToday(this.userId)
         .subscribe(res => {
-          console.log(res);
           console.log("Transactii pe categorie pe azi");
+          console.log(res);
           this.categoryTransactionsPerToday = res;
         })
   }
@@ -54,8 +55,8 @@ export class NotificationsPage implements OnInit {
   getCategoryTransactionPerYestarday() {
     this.categoryTransactionService.getCategoryTransactionNotificationForYestarday(this.userId)
     .subscribe(res => {
-      console.log(res);
       console.log("Transactii pe categorie pe ieri");
+      console.log(res);
       this.categoryTransactionsPerYestarday = res;
     })
   }
@@ -63,8 +64,8 @@ export class NotificationsPage implements OnInit {
   getCategoryTransactionPerThisWeek() {
     this.categoryTransactionService.getCategoryTransactionNotificationForThisWeek(this.userId)
     .subscribe(res => {
-      console.log(res);
       console.log("Transactii pe categorie pe aceasta saptamana");
+      console.log(res);
       this.categoryTransactionsPerThisWeek = res;
     })
   }
@@ -73,7 +74,7 @@ export class NotificationsPage implements OnInit {
     this.transactionService.getTransactionNotificationForToday(this.userId).subscribe( res => {
       console.log("Tranzactii pe ziua de azi");
       console.log(res);
-      this.transactionsNotificationForToday = res;
+      this.transactionPerDay = res;
     })
 
   }
