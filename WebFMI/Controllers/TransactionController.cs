@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebFMI.Data;
 using WebFMI.Models;
+using System.Globalization;
+
 
 namespace WebFMI.Controllers
 {
@@ -154,7 +156,14 @@ namespace WebFMI.Controllers
             var transactionList = await _context.Transactions.Where(u => u.UserId == id || u.UserId1 == id).Where(d => (d.Date.Day == DateTime.Now.Day && d.Date.Month == DateTime.Now.Month && d.Date.Year == DateTime.Now.Year))
                                         .Select(transaction => new
                                         {
-                                            Transactions = transaction
+                                            Transactions = transaction,
+                                            User = (from user in _context.Users
+                                                   where transaction.UserId == user.Id
+                                                    select user).ToList(),
+
+                                            User1Name = (from user in _context.Users
+                                                         where transaction.UserId1 == user.Id
+                                                         select user.Name).ToList()
 
                                         }).ToListAsync();
             return Ok(transactionList);
@@ -166,19 +175,44 @@ namespace WebFMI.Controllers
             var transactionList = await _context.Transactions.Where(u => u.UserId == id || u.UserId1 == id).Where(d => (d.Date.Day == DateTime.Now.Day - 1 && d.Date.Month == DateTime.Now.Month && d.Date.Year == DateTime.Now.Year))
                                         .Select(transaction => new
                                         {
-                                            Transactions = transaction
+                                            Transactions = transaction,
+                                            User = (from user in _context.Users
+                                                    where transaction.UserId == user.Id
+                                                    select user).ToList(),
+                                            User1Name = (from user in _context.Users
+                                                         where transaction.UserId1 == user.Id
+                                                         select user.Name).ToList()
 
                                         }).ToListAsync();
             return Ok(transactionList);
+        }
+        public int GetWeekNumber(DateTime date)
+        {
+            CultureInfo ciCurr = CultureInfo.CurrentCulture;
+            int weekNum = ciCurr.Calendar.GetWeekOfYear(date, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+            return weekNum;
         }
 
         [HttpGet("getNotificationsForThisWeek/{id}")]
         public async Task<IActionResult> GetNotificationsForThisWeek(int id)
         {
+
+            DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
+            DateTime date1 = new DateTime(2011, 1, 1);
+            Calendar cal = dfi.Calendar;
+
+          
+
             var transactionList = await _context.Transactions.Where(u => u.UserId == id || u.UserId1 == id).Where(d => ( d.Date.Month == DateTime.Now.Month && d.Date.Year == DateTime.Now.Year))
                                         .Select(transaction => new
                                         {
-                                            Transactions = transaction
+                                            Transactions = transaction,
+                                            User = (from user in _context.Users
+                                                    where transaction.UserId == user.Id
+                                                    select user).ToList(),
+                                            User1Name = (from user in _context.Users
+                                                         where transaction.UserId1 == user.Id
+                                                         select user.Name).ToList()
 
                                         }).ToListAsync();
             return Ok(transactionList);

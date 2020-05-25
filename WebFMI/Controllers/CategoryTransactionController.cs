@@ -103,7 +103,10 @@ namespace WebFMI.Controllers
             var categoryTransactionsList = await _context.CategoryTransactions.Where(u => u.UserId == id).Where(d => (d.TransactionDate.Day == DateTime.Now.Day && d.TransactionDate.Month == DateTime.Now.Month && d.TransactionDate.Year == DateTime.Now.Year))
                                         .Select(transaction => new
                                         {
-                                            Transactions = transaction
+                                            Transactions = transaction,
+                                            User = (from user in _context.Users
+                                                    where transaction.UserId == user.Id
+                                                    select user).ToList()
 
                                         }).ToListAsync();
             return Ok(categoryTransactionsList);
@@ -115,7 +118,10 @@ namespace WebFMI.Controllers
             var categoryTransactionsList = await _context.CategoryTransactions.Where(u => u.UserId == id).Where(d => (d.TransactionDate.Day == DateTime.Now.Day - 1 && d.TransactionDate.Month == DateTime.Now.Month && d.TransactionDate.Year == DateTime.Now.Year))
                                          .Select(transaction => new
                                          {
-                                             Transactions = transaction
+                                             Transactions = transaction,
+                                             User = (from user in _context.Users
+                                                     where transaction.UserId == user.Id
+                                                     select user).ToList()
 
                                          }).ToListAsync();
             return Ok(categoryTransactionsList);
@@ -127,7 +133,10 @@ namespace WebFMI.Controllers
             var categoryTransactionsList = await _context.CategoryTransactions.Where(u => u.UserId == id).Where(d => (d.TransactionDate.Day == DateTime.Now.Day && d.TransactionDate.Month == DateTime.Now.Month && d.TransactionDate.Year == DateTime.Now.Year))
                                         .Select(transaction => new
                                         {
-                                            Transactions = transaction
+                                            Transactions = transaction,
+                                            User = (from user in _context.Users
+                                                    where transaction.UserId == user.Id
+                                                    select user).ToList()
 
                                         }).ToListAsync();
             return Ok(categoryTransactionsList);

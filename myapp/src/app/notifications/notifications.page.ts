@@ -24,7 +24,6 @@ export class NotificationsPage implements OnInit {
   categoryTransactionsPerToday: CategoryTransaction[];
   categoryTransactionsPerYestarday: CategoryTransaction[];
   categoryTransactionsPerThisWeek: CategoryTransaction[];
-  transactionPerDay: Transaction[];
   
 
   constructor(private transactionService: TransactionService,
@@ -74,7 +73,8 @@ export class NotificationsPage implements OnInit {
     this.transactionService.getTransactionNotificationForToday(this.userId).subscribe( res => {
       console.log("Tranzactii pe ziua de azi");
       console.log(res);
-      this.transactionPerDay = res;
+      this.transactionsNotificationForToday = res;
+      console.log(this.transactionsNotificationForToday[0]);
     })
 
   }

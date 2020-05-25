@@ -18,32 +18,30 @@
       <h4>Today</h4>
     </div>
     <div class="the-list">
-      <ion-item>
+      <ion-item *ngFor="let transaction of transactionsNotificationForToday">
         <ion-avatar slot="start">
-          <img src="assets/imgs/josie.png" alt="">
+          <img  src="https://ucarecdn.com/{{transaction.user[0].profilePictureName}}/"/>
         </ion-avatar>
-        <ion-label>
-          <h5 text-wrap>You received a payment of <span class="amount">$860.00</span> from <span class="person">Josie
-              Amanda</span> </h5>
-          <p>09:20AM</p>
+        <ion-label *ngIf="transaction.transactions.userId == userId">
+          <h5 text-wrap>You received a payment of <span class="amount">{{transaction.transactions.unit}} {{transaction.transactions.value.toFixed(2)}}</span> from <span class="person">
+            {{transaction.user1Name[0]}}
+          </span> </h5>
+          <p>{{transaction.transactions.date | date:'shortTime' }}</p>
         </ion-label>
-      </ion-item>
 
-      <ion-item>
-        <ion-avatar slot="start">
-          <img src="assets/imgs/yogie.png" alt="">
-        </ion-avatar>
-        <ion-label>
-          <h5 text-wrap> <span class="person">John Doe</span>Y requested a payment of<span class="amount">$200.00</span>
+        <ion-label  *ngIf="transaction.transactions.userId != userId">
+          <h5 text-wrap> <span class="person">{{transaction.user[0].name}}</span> requested a payment of<span class="amount">{{transaction.transactions.unit}} {{transaction.transactions.value.toFixed(2)}}</span>
             from </h5>
-          <p>08:00AM</p>
+          <p>{{transaction.transactions.date | date:'shortTime' }}</p>
         </ion-label>
-        <div class="end-slot" slot="end">
+        <div class="end-slot" slot="end"  *ngIf="transaction.transactions.userId != userId">
           <ion-button>
             Pay
           </ion-button>
         </div>
       </ion-item>
+
+      
     </div>
   </div>
   <div class="section">
@@ -51,15 +49,27 @@
       <h4>Yesterday</h4>
     </div>
     <div class="the-list">
-      <ion-item>
+      <ion-item *ngFor="let transaction of transactionsNotificationForYestarday">
         <ion-avatar slot="start">
-          <img src="assets/imgs/josie.png" alt="">
+          <img  src="https://ucarecdn.com/{{transaction.user[0].profilePictureName}}/"/>
         </ion-avatar>
-        <ion-label>
-          <h5 text-wrap>You received a payment of <span class="amount">$860.00</span> from <span class="person">Josie
-              Amanda</span> </h5>
-          <p>09:20AM</p>
+        <ion-label *ngIf="transaction.transactions.userId == userId">
+          <h5 text-wrap>You received a payment of <span class="amount">{{transaction.transactions.unit}} {{transaction.transactions.value.toFixed(2)}}</span> from <span class="person">
+            {{transaction.user1Name[0]}}
+          </span> </h5>
+          <p>{{transaction.transactions.date | date:'shortTime' }}</p>
         </ion-label>
+
+        <ion-label  *ngIf="transaction.transactions.userId != userId">
+          <h5 text-wrap> <span class="person">{{transaction.user[0].name}}</span> requested a payment of<span class="amount">{{transaction.transactions.unit}} {{transaction.transactions.value.toFixed(2)}}</span>
+            from </h5>
+          <p>{{transaction.transactions.date | date:'shortTime' }}</p>
+        </ion-label>
+        <div class="end-slot" slot="end"  *ngIf="transaction.transactions.userId != userId">
+          <ion-button>
+            Pay
+          </ion-button>
+        </div>
       </ion-item>
     </div>
   </div>
@@ -68,30 +78,27 @@
       <h4>This weekend</h4>
     </div>
     <div class="the-list">
-      <ion-item>
+      <ion-item *ngFor="let transaction of transactionsNotificationForThisWeek">
         <ion-avatar slot="start">
-          <img src="assets/imgs/yogie.png" alt="">
+          <img  src="https://ucarecdn.com/{{transaction.user[0].profilePictureName}}/"/>
         </ion-avatar>
-        <ion-label>
-          <h5 text-wrap> <span class="person">John Doe</span>Y requested a payment of<span class="amount">$200.00</span>
-            from </h5>
-          <p>08:00AM</p>
+        <ion-label *ngIf="transaction.transactions.userId == userId">
+          <h5 text-wrap>You received a payment of <span class="amount">{{transaction.transactions.unit}} {{transaction.transactions.value.toFixed(2)}}</span> from <span class="person">
+            {{transaction.user1Name[0]}}
+          </span> </h5>
+          <p>{{transaction.transactions.date | date:'shortTime' }}</p>
         </ion-label>
-        <div class="end-slot" slot="end">
+
+        <ion-label  *ngIf="transaction.transactions.userId != userId">
+          <h5 text-wrap> <span class="person">{{transaction.user[0].name}}</span> requested a payment of<span class="amount">{{transaction.transactions.unit}} {{transaction.transactions.value.toFixed(2)}}</span>
+            from </h5>
+          <p>{{transaction.transactions.date | date:'shortTime' }}</p>
+        </ion-label>
+        <div class="end-slot" slot="end"  *ngIf="transaction.transactions.userId != userId">
           <ion-button>
             Pay
           </ion-button>
         </div>
-      </ion-item>
-      <ion-item>
-        <ion-avatar slot="start">
-          <img src="assets/imgs/josie.png" alt="">
-        </ion-avatar>
-        <ion-label>
-          <h5 text-wrap>You received a payment of <span class="amount">$860.00</span> from <span class="person">Josie
-              Amanda</span> </h5>
-          <p>09:20AM</p>
-        </ion-label>
       </ion-item>
     </div>
   </div>
