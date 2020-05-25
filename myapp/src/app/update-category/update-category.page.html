@@ -1,0 +1,65 @@
+<ion-header no-border>
+  <div class="navbarBackground">
+    <ion-buttons slot="start">
+      <ion-back-button color="light" defaultHref="tabs"></ion-back-button>
+    </ion-buttons>
+  </div>
+</ion-header>
+
+<ion-content>
+
+  <ion-item lines="none" class="infoHeader">
+    <ion-label class="header" color="dark">Doresti sa updatezi aceasta categorie?</ion-label>
+  </ion-item>
+  <div style="font-size: 13px; color:gray; text-align: center;">
+    O vom folosi pentru tranzactiile pe categorii
+     <br/>
+  </div>
+  <form [formGroup]="categoryForm">
+    <ion-list lines="full" class="paddingList">
+      <div>
+        <ion-item>
+          <ion-label position="stacked">Introdu numele categoriei</ion-label>
+          <ion-input  formControlName="categoryName" placeholder="Introdu numele categoriei" type="text"></ion-input>
+        </ion-item>
+        <div class="error-messages">
+            <ng-container *ngFor="let error of errorMessages.categoryName">
+              <div class="error-message"
+                *ngIf="categoryForm.get('categoryName').hasError(error.type) && (categoryForm.get('categoryName').dirty || categoryForm.get('categoryName').touched)">
+                {{error.message}}
+              </div>
+          </ng-container>
+        </div>
+      </div>
+      <div class="detail-item"  padding-horizontal scrollX="true" style="position: relative; top: 30px;">
+        <ion-label>Select one of this category icons</ion-label>
+          <div class="category-holder" >
+            <ion-radio-group formControlName="categoryUrl">
+              <div class="rad-item" text-center *ngFor="let icon of iconObject;">
+                <ion-item text-center>
+                  <img src="assets/imgs/{{icon.CategoryUrl}}" alt="">
+                  <ion-radio value="{{icon.CategoryUrl}}"></ion-radio>
+                </ion-item>
+                <ion-label>{{icon.CategoryName}}</ion-label>
+              </div>
+            </ion-radio-group>
+         </div> 
+      </div> 
+      <div class="error-messages">
+        <ng-container *ngFor="let error of errorMessages.CategoryUrl">
+          <div class="error-message"
+            *ngIf="categoryForm.get('CategoryUrl').hasError(error.type) && (categoryForm.get('CategoryUrl').dirty || categoryForm.get('CategoryUrl').touched)">
+            {{error.message}}
+          </div>
+        </ng-container>
+    </div>
+    </ion-list>
+  </form>
+  
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <div class="ion-padding">
+    <ion-button (click)="updateCategory()" expand="block" shape="round" expand="full" class="sendButton" [disabled]="categoryForm.invalid">Updateaza</ion-button>
+  </div>
+</ion-footer>

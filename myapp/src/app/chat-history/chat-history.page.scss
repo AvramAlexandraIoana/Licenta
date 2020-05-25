@@ -1,0 +1,49 @@
+.toolBar {
+    position: relative;
+    top: 15%;
+    //margin-left: 5%;
+    ion-avatar {
+        position: relative;
+        left: 8%;
+    }
+    ion-label {
+        font-size: 25px;
+        left: -15%;
+        font-weight: bold;
+    }
+}
+.search {
+    position: relative;
+    width: 98%;
+    left: 5%;
+    top: 10px;
+}
+
+.paddingLeft {
+    position: relative;
+    left: 5%;
+}
+
+.colLeft {
+    font-size: 16px;
+    font-weight: bolder;
+}
+
+.msg {
+    font-size: 14px;
+    color: gray;
+}
+
+ion-avatar {
+    height: 60px;
+    width: 60px;
+}
+
+
+.backIcon {
+    font-weight: bolder; 
+    font-size: 23px;
+    margin-left: 4%; 
+    position: relative;
+    top: 15%;
+ }

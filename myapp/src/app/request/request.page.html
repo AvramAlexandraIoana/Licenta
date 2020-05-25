@@ -1,0 +1,128 @@
+<ion-header>
+  <div class="navbarBackground">
+      <ion-buttons slot="start">
+        <ion-back-button color="light" defaultHref="tabs"></ion-back-button>
+      </ion-buttons>
+      <ion-input [(ngModel)]="inputValue" placeholder="Cauta in agenda" (keyup)="onKeyUp($event); isKeyPress=true"></ion-input>
+      <ion-icon *ngIf="!isKeyPress" class="group" name="search-outline"></ion-icon>
+      <div (click)="changeInputValue()" tappable>
+        <ion-icon *ngIf="isKeyPress" class="group"  name="close-outline" ></ion-icon>
+      </div>
+  </div>
+</ion-header>
+
+<ion-content> 
+<div class="selected-contacts" padding-horizontal scrollX="true">
+  <div class="people" text-center *ngFor="let people of peopleSelected;">
+      <ion-avatar class="avatarContact1" slot="start" *ngIf="people?.imageURL">
+          <img  src="https://ucarecdn.com/{{(people?.imageURL)}}/"/>
+      </ion-avatar> 
+     <ion-avatar  class="avatarContact1"  slot="start" *ngIf="!people?.imageURL">
+        <img src="assets/imgs/yogie.png" alt="">
+      </ion-avatar>
+      <div class="closeIcon" (click)="deleteSelectedContact(people)">
+        <ion-icon  name="close-outline" ></ion-icon>
+      </div>
+      <p text-wrap class="phoneText">
+         {{people?.displayName}}
+         <br/>
+         {{people?.phoneNumbers[0].value}}
+      </p>
+  </div>
+  <div class="noneSelected" *ngIf="!peopleSelected.length">
+      <p>
+        Nu ai selectat niciun contact
+      </p>
+  </div>
+</div>
+<ion-item lines="none"  class="paddingClass">
+<ion-select  interface="popover" [(ngModel)]="selectOption" (ionChange)="filterOption()">
+  <ion-select-option [value]="option" *ngFor="let option of options">{{option}}</ion-select-option>
+</ion-select>
+</ion-item>
+<ion-item *ngIf="title=='Request Page'">
+  <div class="start-item" slot="start">
+    <ion-button fill="none">
+      <ion-icon name="share-icon"></ion-icon>
+    </ion-button>
+  </div>
+  <ion-label text-left>Share your custom link to get paid</ion-label>
+  <div class="end-slot" slot="end">
+    <ion-badge color="primary" mode="md">New</ion-badge>
+  </div>
+</ion-item>
+
+<div *ngIf="selectOption=='Utilizate Frecvent'">
+  <ion-list>
+    <ion-card  [ngClass]="contact.isSelected ? 'selectedItem' : 'unselectedItem'" *ngFor="let contact of filterCond(contactsFound, 1)">
+      <ion-card-content  [ngClass]="contact?.isSelected ? 'selectedItem' : 'unselectedItem'" >
+        <ion-item   (click)="addToSelectPeople(contact, contact.isSelected)" lines="none">
+          <ion-avatar class="avatarContact" slot="start" *ngIf="contact?.imageURL">
+              <img  src="https://ucarecdn.com/{{(contact?.imageURL)}}/"/>
+          </ion-avatar> 
+          <ion-avatar  class="avatarContact"  slot="start" *ngIf="!contact?.imageURL">
+              <img src="assets/imgs/yogie.png" alt="">
+          </ion-avatar>
+          <ion-label class="contactLabel">
+            <h2>{{contact?.displayName}}</h2>
+            <p>{{contact?.phoneNumbers[0].value}}</p> 
+          </ion-label>
+          <ion-icon *ngIf="contact?.isSaved" name="card-outline">
+          </ion-icon>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+  <ion-list>
+    <ion-label class="paddingClass">Restul contactelor</ion-label>
+    <ion-card  [ngClass]="contact.isSelected ? 'selectedItem' : 'unselectedItem'" *ngFor="let contact of filterCond(contactsFound, 2)">
+      <ion-card-content  [ngClass]="contact.isSelected ? 'selectedItem' : 'unselectedItem'">
+        <ion-item (click)="addToSelectPeople(contact)" lines="none">
+          <ion-avatar class="avatarContact"   slot="start" *ngIf="contact?.imageURL">
+              <img  src="https://ucarecdn.com/{{(contact?.imageURL)}}/"/>
+          </ion-avatar> 
+          <ion-avatar class="avatarContact"  slot="start" *ngIf="!contact?.imageURL">
+              <img src="assets/imgs/yogie.png" alt="">
+          </ion-avatar>
+
+          <ion-label class="contactLabel">
+            <h2>{{contact?.displayName}}</h2>
+            <p>{{contact?.phoneNumbers[0].value}}</p> 
+          </ion-label>
+          <ion-icon *ngIf="contact?.isSaved" name="card-outline">
+          </ion-icon>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+</ion-list>
+</div>
+
+<div *ngIf="selectOption!='Utilizate Frecvent'">
+  <ion-list>
+      <ion-card  [ngClass]="contact.isSelected ? 'selectedItem' : 'unselectedItem'"  *ngFor="let contact of contactsFound">
+        <ion-card-content [ngClass]="contact.isSelected ? 'selectedItem' : 'unselectedItem'">
+          <ion-item (click)="addToSelectPeople(contact)" lines="none">
+            <ion-avatar slot="start">
+                <img src="assets/imgs/yogie.png" alt="">
+            </ion-avatar>
+            <ion-label>
+              <h2>{{contact?.displayName}}</h2>
+              <p>{{contact?.phoneNumbers[0].value}}</p> 
+            </ion-label>
+            <ion-icon *ngIf="contact?.isSaved" name="card-outline">
+            </ion-icon>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+  </ion-list> 
+</div> 
+</ion-content>
+<ion-badge class="badge">Transfera prin IBAN</ion-badge>
+<ion-footer no-border>
+<ion-toolbar>
+  <ion-button (click)="goSendMoneyPage()" class="footer" expand="block" [disabled]="!peopleSelected.length">
+    Continua
+  </ion-button>
+</ion-toolbar>
+</ion-footer>
+

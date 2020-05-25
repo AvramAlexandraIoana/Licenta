@@ -1,0 +1,6 @@
+<svg id="Up" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+  <rect id="Rectangle" width="48" height="48" rx="8" fill="rgba(41,191,118,0.1)"/>
+  <g id="arrow" transform="translate(16.5 35.5) rotate(-90)">
+    <path id="Path" d="M21.687,6.747,15.144.3A1.033,1.033,0,0,0,13.7.3a1,1,0,0,0,0,1.426l4.8,4.731H1.022a1.008,1.008,0,1,0,0,2.016H18.5L13.7,13.2a1,1,0,0,0,0,1.426,1.033,1.033,0,0,0,1.446,0l6.543-6.452A1,1,0,0,0,21.687,6.747Z" transform="translate(0 0.074)" fill="#1bc773"/>
+  </g>
+</svg>

@@ -1,0 +1,114 @@
+
+
+
+.search {
+    --placeholder-color: whitesmoke;
+    text-align: left;
+    color: white;
+    margin-left: 10%;
+    width: 80%;
+}
+
+ion-back-button {
+    position: absolute;
+    margin-top: 5%;
+    //margin-left: -3.5vw;
+}
+
+.group {
+    position: absolute;
+    top: 22%;
+    left: 90%;
+    width: 40px;
+    height: 20px;
+    color: white;
+}
+div.navbarBackground {
+    background-image: url("../../assets/imgs/mobile-banking-network-online-payment-260nw-1431394361.webp")!important;
+    background-repeat: no-repeat;
+    background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    background-position: center center;
+}
+
+ion-item{
+    margin-left: -6vw;
+   .start-slot
+   {
+    margin-right: 0 !important;
+   }
+
+   ion-label{
+       font-size: .9rem !important;
+   }
+
+   .end-slot
+   {
+       margin: 0 !important;
+       ion-badge{
+           //font-weight: lighter !important;
+       }
+   }
+}
+
+.searchbar-input-container ion-icon {
+    margin-left: 100px !important;
+}
+
+ion-grid
+{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+* {
+    margin: 0;
+    //font-size: 16px;
+}
+input{
+   width: 50vw !important
+}
+form {
+    display: flex !important;
+}
+.update {
+    height: 40px !important;
+    width: 25vw !important;
+    margin-left: 10px;
+    font-size: 16px;
+    --background: white;
+    --color: black;
+}
+
+.delete {
+    height: 40px !important;
+    width: 12vw !important;
+    margin-left: 10px;
+    --background: white;
+}
+ion-row {
+    margin-top: 15px;
+}
+
+.save {
+    height: 40px !important;
+    width: 25vw !important;
+    margin-left: 10px;
+    font-size: 13px;
+    --background: rgb(35, 175, 35);
+}
+
+.lightClass {
+   width: 40vw !important;
+   font-size: 13px;
+   margin-left: 10vw;
+}
+
+ion-button {
+    position: relative;
+    left: 10px;
+}
+
+

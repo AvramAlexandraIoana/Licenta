@@ -1,0 +1,98 @@
+<ion-header no-border>
+  <div class="navbarBackground">
+    <ion-buttons slot="start">
+      <ion-back-button color="light" defaultHref="tabs"></ion-back-button>
+    </ion-buttons>
+  </div>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="categoryTransaction">
+    <ion-grid class="request-money-container">
+      <ion-row justify-content-center align-items-center>
+        <div class="money-content">
+          <div class="labelForSum" *ngIf="(isEnterSumInput  ||  !categoryTransaction.get('suma').invalid)">
+            <p>Introdu aici suma</p>
+          </div>
+          <ion-item>
+            <div class="sign-container">
+              <h1>{{categoryTransaction.get('unit').value}}</h1>
+            </div>
+            <ion-input [placeholder]="!isEnterSumInput ? 'Introdu aici suma' : ''" (ionInput)="isEnterSumInput=true" (ionFocus)="isEnterSumInput=true;" (ionBlur)="isEnterSumInput=false;" type="tel" formControlName="suma" class="suma"  value="5" text-center></ion-input>
+          </ion-item>
+          <div class="error-messages">
+            <p *ngIf="!categoryTransaction.get('suma').invalid" style="color: gray;">Suma minima este de 5 {{categoryTransaction.get('unit').value}} iar maxima este de 5000 {{categoryTransaction.get('unit').value}}</p>
+            <ng-container *ngFor="let error of errorMessages.suma">
+              <div class="error-message"
+                *ngIf="categoryTransaction.get('suma').hasError(error.type) && (categoryTransaction.get('suma').dirty || categoryTransaction.get('suma').touched)">
+                {{error.message}}
+              </div>
+            </ng-container>
+          </div>
+            <div class="unit-container">
+              <ion-item text-center lines="none">
+                <ion-select multiple="false" placeholder="Select Unit" formControlName="unit" (ionChange)="reset()">
+                  <ion-select-option value="$" selected>USD</ion-select-option>
+                  <ion-select-option value="e">EURO</ion-select-option>
+                  <ion-select-option value="r">RON</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </div>  
+          </div>
+      </ion-row>
+      <ion-row>
+        <ion-label>Transaction Date</ion-label>
+        <ion-item> 
+          <ion-datetime formControlName="transactionDate" placeholder="Selecteaza data" min="1960" readonly></ion-datetime>
+
+        </ion-item>
+      </ion-row>
+      <div class="detail-item"  padding-horizontal scrollX="true">
+  
+        <ion-label>Category</ion-label>
+          <div class="category-holder" >
+            <ion-radio-group formControlName="categoryId">
+              <div class="rad-item" text-center *ngFor="let icon of categoryIcons">
+                <ion-item text-center>
+                  <img src="assets/imgs/{{icon.categoryUrl}}" alt="">
+                  <ion-radio value="{{icon.categoryId}}"></ion-radio>
+                </ion-item>
+                <ion-label>{{icon.categoryName}}</ion-label>
+              </div>
+          </ion-radio-group>
+        </div>
+      </div>
+  
+       
+      <ion-row class="detail-item-row" style="position: relative; top: 60px;">
+        <ion-label  [ngClass]="isEnterDescriptionInput  ||  !categoryTransaction.get('description').invalid ? 'visible' : 'hidden'">Introdu aici detaliile de plata</ion-label>
+        <ion-item style="position: relative; left: -4%;">
+          <ion-textarea rows="5" cols="50" placeholder="Enter any notes here..." formControlName="description">
+  
+          </ion-textarea>
+        </ion-item>
+        <!-- <ion-card>
+          <ion-card-content>
+            <ion-textarea  [placeholder]="!isEnterDescriptionInput ? 'Introdu aici detaliile de plata' : ''" 
+                          (ionInput)="isEnterDescriptionInput=true" (ionFocus)="isEnterDescriptionInput=true;" (ionBlur)="isEnterDescriptionInput=false;" formControlName="description" rows="2" cols="30" >
+            </ion-textarea>
+          </ion-card-content>
+        </ion-card> -->
+      </ion-row>
+      <ion-row >
+        <div class="error-messages">
+          <ng-container *ngFor="let error of errorMessages.description">
+            <div class="error-message"
+              *ngIf="categoryTransaction.get('description').hasError(error.type) && (categoryTransaction.get('description').dirty || categoryTransaction.get('description').touched)">
+              {{error.message}}
+            </div>
+          </ng-container>
+        </div>
+      </ion-row>
+    </ion-grid>
+    <div class="ion-padding">
+      <ion-button (click)="sendCategoryTransaction()" expand="block" shape="round" expand="full" class="sendButton">Trimite</ion-button>
+    </div>
+
+  </form>
+</ion-content>

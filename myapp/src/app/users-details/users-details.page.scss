@@ -1,0 +1,36 @@
+.page-count {
+    position: absolute !important;
+}
+
+ ion-input {
+   --placeholder-color: whitesmoke;
+   text-align: left;
+   color: white;
+   margin-left: 10%;
+   width: 80%;
+}
+
+ion-back-button {
+   position: absolute;
+   margin-top: 5%;
+   //margin-left: -3.5vw;
+}
+
+.group {
+   position: absolute;
+   top: 22%;
+   left: 90%;
+   width: 40px;
+   height: 20px;
+   color: white;
+}
+div.navbarBackground {
+   background-image: url("../../assets/imgs/mobile-banking-network-online-payment-260nw-1431394361.webp")!important;
+   background-repeat: no-repeat;
+   background-size: cover;
+   -moz-background-size: cover;
+   -webkit-background-size: cover;
+   -o-background-size: cover;
+   -ms-background-size: cover;
+   background-position: center center;
+}

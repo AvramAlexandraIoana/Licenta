@@ -1,0 +1,142 @@
+ion-toolbar {
+    --border-width: 0;
+    --background: #0047cc !important;
+    --color: white !important;
+
+    ion-title {
+        font-weight: 400 !important;
+    }
+}
+
+ion-content {
+    --background: #f8f9f9 !important;
+}
+
+
+.the-upper-back {
+    background: #0047cc;
+    height: 35%;
+}
+
+
+.the-top-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.08);
+    width: 85%;
+    height: 38vh;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+  
+    .top-row {
+      padding: 0 10px;
+      p {
+        font-size: 0.9rem !important;
+        margin: 0 !important;
+      }
+      .text-right {
+        margin-left: 18vh; 
+        color: #0047cc; 
+        font-weight: bold;
+      }
+    }
+    .precentage-row {
+      background: transparent !important;
+      margin-top: -60px;
+      z-index: 20;
+  
+      .column-left {
+        padding-left: 10px;
+        margin-left: 1vh;
+        margin-top: 3vh;    
+        p {
+            margin-left: 2.2vh !important;
+            //margin: 0 !important;
+          }
+      }
+  
+      .column-right {
+        padding-right: 10px;
+        margin-right: -23vh;
+        margin-top: 3vh;    
+        p {
+            margin-left: 1vh !important;
+            //margin: 0 !important;
+          }
+       }
+   
+    }
+  }
+
+
+ngx-gauge {
+    --position: absolute;
+    margin-left: 12% !important;
+    margin-top: 1% !important;
+}
+
+.inside-guage {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 23vh;
+    right: 0;
+    top: 60px !important;
+    z-index: 40;
+    p {
+      margin-left: -5vh !important;
+      margin-top: 0.5vh !important;
+    }
+  }
+  
+.bottom-section {
+    margin-top: 90px;
+    .btns-holder {
+      ion-button {
+        --background: #dfe7f5;
+        --border-radius: 12px !important;
+        --box-shadow: none;
+        --color: #0047cc;
+        --border-checked: red !important;
+        height: 50px !important;
+      }
+    }
+  
+    .details {
+      h3 {
+        font-weight: 400 !important;
+      }
+  
+      .segs {
+        padding: 0 10px !important;
+        ion-segment {
+          ion-segment-button {
+            --background-checked: #dfe7f5;
+            font-size: 0.8rem !important;
+            height: px !important;
+            ion-label {
+              margin: 0 !important;
+            }
+            //margin: 0 10px !important;
+          }
+        }
+      }
+  
+      .the-list {
+        ion-item {
+          .thumb {
+            // margin: 0 !important
+          }
+  
+          h5 {
+            color: #ee5a55 !important;
+          }
+        }
+      }
+    }
+}
+  

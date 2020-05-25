@@ -1,0 +1,187 @@
+
+ion-searchbar {
+    --background: transparent;
+    --clear-button-color: var(--ion-color-primary); 
+}
+
+
+ion-input {
+    --placeholder-color: whitesmoke;
+    text-align: left;
+    color: white;
+    margin-left: 10%;
+    width: 80%;
+}
+
+ion-back-button {
+    position: absolute;
+    margin-top: 5%;
+    //margin-left: -3.5vw;
+}
+ion-card {
+    height: 74px !important;
+}
+
+.group {
+    position: absolute;
+    top: 22%;
+    left: 90%;
+    width: 40px;
+    height: 20px;
+    color: white;
+}
+div.navbarBackground {
+    background-image: url("../../assets/imgs/mobile-banking-network-online-payment-260nw-1431394361.webp")!important;
+    background-repeat: no-repeat;
+    background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    background-position: center center;
+}
+
+ion-item{
+    margin-left: -6vw;
+   .start-slot
+   {
+    margin-right: 0 !important;
+   }
+
+   ion-label{
+       margin-bottom: 10px !important;
+       font-size: .9rem !important;
+   }
+
+   .end-slot
+   {
+       margin: 0 !important;
+       ion-badge{
+           //font-weight: lighter !important;
+       }
+   }
+}
+
+.searchbar-input-container ion-icon {
+    margin-left: 100px !important;
+}
+
+ion-button, .badge {
+  background-color: #4c8dff;
+  color: white;
+}
+ion-icon {
+    color: #4c8dff;
+    position: relative;
+    bottom: 13px !important;
+}
+
+.selected-contacts
+{
+  background-color: white;
+  height: 130px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  border: 1px solid #DFE7F5;
+  &::-webkit-scrollbar {
+    display: none;
+ }
+    .people
+    {
+        // width: 28.7vw;
+        // height: 20vh;
+        // background: white;
+        // border: 1px solid #DFE7F5;
+        // border-radius: 12px;
+        display: inline-block;
+        margin-left: 4%;
+        padding-top: 10px;
+        .closeIcon {
+            width: 18px;
+            height: 18px;
+            background-color: white;
+            border-radius: 8px 8px 8px 8px;
+            position: relative;
+            left: 63%;
+            top: -59px;
+            ion-icon {
+                top: -5% !important;
+                color: rgb(117, 112, 111);
+            }
+        }
+     
+        ion-avatar{
+            margin-left: auto;
+            margin-right: auto;
+        }
+        p{
+            //margin: 0 !important;
+            text-align: center;
+            margin-top: -10px;
+        }
+    }
+
+}
+
+.people:first-child {
+    margin-left: 5vw !important;
+
+}
+
+.noneSelected {
+    position: absolute;
+    top: 6vh;
+    left: 22%;
+    text-align: center;
+    
+}
+
+ion-list {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.paddingClass {
+    padding-left: 10px;
+}
+
+.phoneText {
+    font-size: 13px;
+}
+
+.selectedItem {
+    --ion-background-color: #F0F8FF;
+}
+
+.unselectedItem {
+    --ion-background-color: white;
+}
+.badge {
+    display: block;
+    position: absolute;
+    //top: 90%;
+    bottom: 7.5%;
+    left: 32%;
+    border-radius: 10px 10px 10px 10px;
+    z-index: 9999;
+}
+   
+
+.avatarContact {
+    position: relative;
+    bottom: 10px !important;
+    height: 52px !important;
+    width: 54px !important;
+}
+
+.avatarContact1 {
+    position: relative;
+    height: 55px !important;
+    width: 58px !important;
+}
+
+.contactLabel {
+    position: relative;
+    bottom: 10px !important;
+}

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="46" height="48" viewBox="0 0 46 48">
+  <g id="shopping" transform="translate(-191 -1088.5)">
+    <g id="Group_14" data-name="Group 14">
+      <rect id="Rectangle_3" data-name="Rectangle 3" width="46" height="48" transform="translate(191 1088.5)" fill="none"/>
+      <g id="shopping-cart" transform="translate(198 1098.5)">
+        <path id="Path_11" data-name="Path 11" d="M10.357,18.718H27.266a.933.933,0,0,0,.9-.679l3.744-13.1a.935.935,0,0,0-.9-1.193H8.2L7.528.733A.936.936,0,0,0,6.614,0H.936a.936.936,0,0,0,0,1.872H5.862L9.242,17.08a2.806,2.806,0,0,0,1.115,5.382H27.266a.936.936,0,0,0,0-1.872H10.357a.936.936,0,1,1,0-1.872Zm0,0" fill="#0041c4"/>
+        <path id="Path_12" data-name="Path 12" d="M151,362.812A2.808,2.808,0,1,0,153.808,360,2.811,2.811,0,0,0,151,362.812Zm0,0" transform="translate(-141.579 -337.542)" fill="#0041c4"/>
+        <path id="Path_13" data-name="Path 13" d="M362,362.812A2.808,2.808,0,1,0,364.812,360,2.811,2.811,0,0,0,362,362.812Zm0,0" transform="translate(-339.418 -337.542)" fill="#0041c4"/>
+        <path id="Path_25" data-name="Path 25" d="M362,361.973A1.969,1.969,0,1,0,363.973,360,1.971,1.971,0,0,0,362,361.973Zm0,0" transform="translate(-338.578 -336.703)" fill="#00b3f3"/>
+      </g>
+    </g>
+  </g>
+</svg>

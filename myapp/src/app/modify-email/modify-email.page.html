@@ -1,0 +1,45 @@
+<ion-header  class="ion-no-border">
+  <ion-toolbar>
+    <ion-icon (click)="dismiss()" style="font-weight: bolder; font-size: 28px; margin-left: 4%;" name="close-outline"></ion-icon>
+   </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item lines="none" class="infoHeader">
+    <ion-label class="header" color="dark">Care este adresa ta principala de e-mail?</ion-label>
+  </ion-item>
+  <div style="font-size: 13px; color:gray; text-align: center;">
+     O vom folosi numai pentru a te informa despre
+     <br/>
+  </div>
+  <div style="font-size: 13px; color:gray; text-align: center;">
+    modificari importante
+    <br/>
+ </div>
+  <form  [formGroup]="modifyEmailForm">
+    <ion-list lines="full" class="paddingList">
+      <div>
+        <ion-item>
+          <ion-label position="stacked">Introdu e-mail nou</ion-label>
+          <ion-input  formControlName="email" placeholder="Introdu e-mail nou" type="text"></ion-input>
+        </ion-item>
+        <div class="error-messages">
+          <ng-container *ngFor="let error of errorMessages.email">
+            <div class="error-message"
+              *ngIf="modifyEmailForm.get('email').hasError(error.type) && (modifyEmailForm.get('email').dirty || modifyEmailForm.get('email').touched)">
+              {{error.message}}
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </ion-list>
+  </form>
+
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <div class="ion-padding">
+    <ion-button  (click)="changeEmail()" expand="block" shape="round" expand="full" class="sendButton" [disabled]="modifyEmailForm.invalid">Modifica adresa de e-mail</ion-button>
+  </div>
+</ion-footer>

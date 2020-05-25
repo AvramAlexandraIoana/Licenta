@@ -1,0 +1,214 @@
+<ion-header no-border>
+  <div class="navbarBackground">
+    <ion-buttons slot="start">
+      <ion-back-button color="gray" defaultHref="request"></ion-back-button>
+      <ion-label>
+        <ion-title>
+          {{typeView == 'send' ? 'Confirmarea platii' : 'Confirmarea solicitarii de plata'}}
+        </ion-title>
+      </ion-label>
+    </ion-buttons>
+  </div>
+</ion-header>
+<ion-content>
+<div class="container-card">
+  <ion-label>
+    {{typeView == 'send' ? 'Alege cardul dorit si plateste' : 'Alege cardul unde vor intra banii'}}
+  </ion-label>
+  <ion-slides class="slides-card" mode="ios" [options]="sliderConfig">
+    <ion-slide>
+      <div class="visa-card" text-center>
+        <svg id="Card_1" data-name="Card 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="290" height="177" viewBox="0 0 290 177">
+          <defs>
+            <clipPath id="clip-path">
+              <rect id="Card_Color" data-name="Card Color" width="290" height="177" rx="11.7" fill="#1E90FF"/>
+            </clipPath>
+          </defs>
+          <rect id="Card_Color-2" data-name="Card Color" width="290" height="177" rx="11.7" fill="#1E90FF"/>
+          <g id="Card_1-2" data-name="Card 1" clip-path="url(#clip-path)">
+            <ellipse id="Oval_2" data-name="Oval 2" cx="144" cy="144.5" rx="144" ry="144.5" transform="translate(166 -24)" fill="#fff" opacity="0.08"/>
+            <ellipse id="Oval_2_Copy" data-name="Oval 2 Copy" cx="145" cy="144.5" rx="145" ry="144.5" transform="translate(-24 120)" fill="#fff" opacity="0.08"/>
+            <text id="{{userName}}" data-name="{{userName}}" transform="translate(24 137)" fill="#fff" font-size="16" font-family="SegoeUI, Segoe UI" letter-spacing="0.033em"><tspan x="0" y="17">{{userName}}</tspan></text>
+            <text id="_11_22" data-name="11/22" transform="translate(211 136.5)" fill="#fff" font-size="16" font-family="SegoeUI, Segoe UI" letter-spacing="0.033em"><tspan x="0" y="17">11/22</tspan></text>
+            <text id="_0113" data-name="•••• •••• •••• 0113" transform="translate(24 99)" fill="#fff" font-size="17" font-family="SegoeUI, Segoe UI" letter-spacing="0.033em"><tspan x="0" y="18" xml:space="preserve">••••  ••••  ••••  0113</tspan></text>
+            <g id="master_logo" data-name="master logo" transform="translate(24 40)">
+              <path id="Combined_Shape" data-name="Combined Shape" d="M27.78,29.939A16.7,16.7,0,0,1,16.851,34a17,17,0,0,1,0-34A16.7,16.7,0,0,1,27.78,4.061,16.7,16.7,0,0,1,38.711,0a17,17,0,0,1,0,34A16.7,16.7,0,0,1,27.78,29.939Z" fill="#ff5e00"/>
+              <path id="Combined_Shape-2" data-name="Combined Shape" d="M16.851,34A16.666,16.666,0,0,1,4.935,29.021a17.107,17.107,0,0,1,0-24.042A16.742,16.742,0,0,1,27.78,4.061a17.1,17.1,0,0,0,0,25.878A16.764,16.764,0,0,1,16.851,34Z" fill="#ed0006"/>
+              <path id="Combined_Shape-3" data-name="Combined Shape" d="M10.93,34A16.764,16.764,0,0,1,0,29.939,17.048,17.048,0,0,0,5.92,17,17.049,17.049,0,0,0,0,4.061a16.742,16.742,0,0,1,22.845.918,17.107,17.107,0,0,1,0,24.042A16.666,16.666,0,0,1,10.93,34Z" transform="translate(27.78)" fill="#f9a000"/>
+            </g>
+          </g>
+        </svg>
+     </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="master-card" text-center>
+        <svg id="Card_2" data-name="Card 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="290" height="177" viewBox="0 0 290 177">
+          <defs>
+            <clipPath id="clip-path">
+              <rect id="Card_Color" data-name="Card Color" width="290" height="177" rx="11.7" fill="#dfe7f5"/>
+            </clipPath>
+          </defs>
+          <rect id="Card_Color-2" data-name="Card Color" width="290" height="177" rx="11.7" fill="#dfe7f5"/>
+          <g id="Card_2-2" data-name="Card 2" clip-path="url(#clip-path)">
+            <ellipse id="Oval_2" data-name="Oval 2" cx="144" cy="144.5" rx="144" ry="144.5" transform="translate(166 -24)" fill="#fff" opacity="0.08"/>
+            <ellipse id="Oval_2_Copy" data-name="Oval 2 Copy" cx="145" cy="144.5" rx="145" ry="144.5" transform="translate(-24 120)" fill="#fff" opacity="0.08"/>
+            <text id="MICHAEL_SCOTT" data-name="MICHAEL SCOTT" transform="translate(24 136.5)" fill="#042c5c" font-size="16" font-family="SegoeUI, Segoe UI" letter-spacing="0.033em"><tspan x="0" y="17">MICHAEL SCOTT</tspan></text>
+            <text id="_11_22" data-name="11/22" transform="translate(221 136.5)" fill="#042c5c" font-size="16" font-family="SegoeUI, Segoe UI" letter-spacing="0.033em"><tspan x="0" y="17">11/22</tspan></text>
+            <text id="_0113" data-name="•••• •••• •••• 0113" transform="translate(24 99)" fill="#042c5c" font-size="17" font-family="SegoeUI, Segoe UI" letter-spacing="0.033em"><tspan x="0" y="18" xml:space="preserve">••••  ••••  ••••  0113</tspan></text>
+            <g id="master_logo" data-name="master logo" transform="translate(24 40)">
+              <path id="Combined_Shape" data-name="Combined Shape" d="M27.78,29.939A16.7,16.7,0,0,1,16.851,34a17,17,0,0,1,0-34A16.7,16.7,0,0,1,27.78,4.061,16.7,16.7,0,0,1,38.711,0a17,17,0,0,1,0,34A16.7,16.7,0,0,1,27.78,29.939Z" fill="#ff5e00"/>
+              <path id="Combined_Shape-2" data-name="Combined Shape" d="M16.851,34A16.666,16.666,0,0,1,4.935,29.021a17.107,17.107,0,0,1,0-24.042A16.742,16.742,0,0,1,27.78,4.061a17.1,17.1,0,0,0,0,25.878A16.764,16.764,0,0,1,16.851,34Z" fill="#ed0006"/>
+              <path id="Combined_Shape-3" data-name="Combined Shape" d="M10.93,34A16.764,16.764,0,0,1,0,29.939,17.048,17.048,0,0,0,5.92,17,17.049,17.049,0,0,0,0,4.061a16.742,16.742,0,0,1,22.845.918,17.107,17.107,0,0,1,0,24.042A16.666,16.666,0,0,1,10.93,34Z" transform="translate(27.78)" fill="#f9a000"/>
+            </g>
+          </g>
+        </svg>          
+      </div>
+    </ion-slide>
+  </ion-slides>
+</div>
+<ion-card class="detailItem">
+  <!-- <ion-card-header>
+    <ion-card-title>Madison, WI</ion-card-title>
+  </ion-card-header> -->
+  <ion-card-content>
+    <ion-item class="detail">
+      Detalii: 
+      <ion-col  class="detail1">
+        {{sendMoneyData.description}}
+      </ion-col>
+    </ion-item>
+     <ion-item lines="none" class="detail">
+        Comision: 
+        <ion-col  class="detail1">
+          0.00 {{sendMoneyData.unit}}
+        </ion-col>
+    </ion-item>
+  </ion-card-content>
+</ion-card>
+<ion-item lines="none">
+  <ion-label *ngIf="!error" class="paddingClass">{{peopleSelected.length}} {{legatura}}</ion-label>
+    <div *ngIf="error" class="alert-content">
+      <ion-icon class="alert-icon" name="alert-outline"></ion-icon>
+    </div>
+    <ion-label *ngIf="error" class="error errorLabel">Ai introdus o suma prea mare pentru unele contacte.</ion-label>
+</ion-item>
+<ion-list>
+  <div *ngFor="let contact of peopleSelected;let i = index" >
+    <div class="alert-content2" *ngIf="contact?.error">
+      <ion-icon class="alert-icon" name="alert-outline"></ion-icon>
+    </div>
+    <ion-card [ngClass]="contact?.data.suma > limit ? 'warningClass' : 'okayClass'">
+      <ion-card-content>
+        <ion-item lines="none">
+          <ion-avatar slot="start" style="height: 50px;">
+            <ion-icon *ngIf="peopleSelected.length > 1" class="closeIcon" name="close-outline" (click)="deleteContacts(i)"></ion-icon>
+              <img src="assets/imgs/yogie.png" alt="">
+          </ion-avatar>
+          <ion-col>
+            <ion-label>
+              <h2> {{contact?._objectInstance.displayName}}</h2>
+              <p>{{contact?._objectInstance.phoneNumbers[0].value}}</p> 
+            </ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-item class="suma">
+              <!-- <ion-label>Ioana</ion-label> -->
+              <ion-input   (ionChange)="getValue(i)" value="{{contact?.data.suma}}" class="inputClass" placeholder="Suma" type="tel" [(ngModel)]="contact?.data.suma">
+              </ion-input>
+              <p class="unit">{{sendMoneyData.unit}}</p>
+            </ion-item>
+          </ion-col>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </div>
+ 
+  
+</ion-list>
+
+<!-- <ion-card>
+  <ion-card-header>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-badge color="primary" mode="ios">$20.00 USD</ion-badge>
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="assets/imgs/josie.png" alt="">
+      </ion-avatar>
+      <ion-label>
+        <h5 text-wrap>Jessy Neila</h5>
+        <p>jeessy@abc.com</p>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <div class="start-slot" slot="start">
+        <ion-button fill="none">
+          <ion-icon slot="icon-only" name="add" color="primary"></ion-icon>
+        </ion-button>
+      </div>
+      <ion-input type="text" placeholder="Add a note"></ion-input>
+      <ion-button fill="none" slot="end">
+        <ion-icon name="arrow-forward"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-card-content>
+</ion-card> 
+<ion-list *ngIf="typeView=='send'">
+  <ion-item>
+    <div class="thumb" slot="start">
+      <img src="assets/imgs/visa.svg" alt="">
+    </div>
+    <ion-label>
+      <h2>Visa</h2>
+      <p>Debit ****1234</p>
+    </ion-label>
+    <ion-button fill="none" slot="end">
+      <ion-icon name="ios-arrow-forward"></ion-icon>
+    </ion-button>
+  </ion-item>
+  <ion-item>
+    <h5 slot="start">
+      Amount in USD
+    </h5>
+    <h6 slot="end">$5.00 USD</h6>
+  </ion-item>
+  <ion-item>
+    <h5 slot="start">
+      Transaction fees
+    </h5>
+    <h6 slot="end">$0.00 USD</h6>
+  </ion-item>
+  <ion-item>
+    <h5 slot="start">
+      Payment Receved
+    </h5>
+    <h6 slot="end">In Seconds</h6>
+  </ion-item>
+</ion-list>  -->
+</ion-content>
+<!-- <ion-footer no-border>
+<ion-toolbar>
+    <ion-button expand="block" (click)="showSuccessModal()">
+       {{typeView}} now <ion-icon name="ïos-arrow-forward"></ion-icon>
+    </ion-button>
+</ion-toolbar>
+</ion-footer> -->
+<ion-footer no-border  *ngIf="!IsKeyboardOpen">
+<ion-row>
+  <ion-col *ngIf="!error" class="colLeft">
+    {{typeView == 'send' ? 'Suma totala' : 'Suma totala care se va solicita'}}
+  </ion-col>
+  <ion-col *ngIf="error" class="colLeft errorLabel">
+    Suma totala depaseste limita de 4000
+  </ion-col>
+  <ion-col class="colRight" [ngClass]="error ? 'errorSum' : 'okaySum'"> 
+    {{calculateTotalSum()}}
+    {{sendMoneyData.unit}}
+  </ion-col>
+</ion-row>
+<ion-toolbar >
+  <ion-button expand="block"  class="footer"  (click)="showSuccessModal()" routerDirection="root">
+    Continua
+  </ion-button>
+</ion-toolbar>
+</ion-footer>

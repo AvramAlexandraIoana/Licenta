@@ -1,0 +1,41 @@
+.phone-holder
+{
+    z-index: 1;
+    text-align: center;
+}
+.intro-content {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: white;
+
+    .slide-content {
+        p {
+          margin-top: 10px !important;
+          padding-bottom: 20px !important;
+        }
+
+    }
+
+    .btn-user {
+        margin: 0 10px;
+        padding-bottom: 10px !important;
+    }
+
+    ion-button {
+        display: inline-block !important;
+        margin: 0 5px !important;
+        width: 45% !important;
+        height: 50px !important;
+        --border-radius: 12px !important;
+        text-transform: none !important;
+    }
+
+    #signUp
+    {
+        background-color: white !important;
+        border: 1px solid #77869E !important;
+        border-radius: 12px !important;
+    }
+}

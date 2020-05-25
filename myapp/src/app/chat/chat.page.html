@@ -1,0 +1,80 @@
+
+<ion-header>
+  <ion-toolbar class="toolBar">
+    <ion-row>
+      <ion-col size="1">
+        <ion-icon (click)="dismiss()" class="backIcon" color="dark" name="arrow-back-outline"></ion-icon>
+      </ion-col>
+      <ion-col size="3">
+        <ion-avatar class="avatar" *ngIf="otherUser.profilePictureName">
+          <img  src="https://ucarecdn.com/{{otherUser.profilePictureName}}/"/>
+        </ion-avatar>
+        <ion-avatar class="avatar" *ngIf="!otherUser.profilePictureName">
+          <img src="assets/imgs/josie.png" alt="">
+        </ion-avatar>
+      </ion-col>
+      <ion-col  class="colLeft">
+        <ion-label *ngIf="otherUser">{{otherUser.name}}</ion-label>
+      </ion-col>
+     
+    </ion-row>
+  
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content>
+ 
+  <ion-grid>
+    <ion-text color="medium" text-center>
+      <!-- <p>You joined the chat as {{ currentUser }}</p> -->
+    </ion-text>
+    <ion-row *ngFor="let message of messages">   
+      <!-- <ion-col size="9" *ngIf="!message.userId1 && message.user !== currentUser" class="message other-message">
+        <span>{{ message.msg }}</span>
+        <div class="time" text-right><br>{{ message.createdAt | date:'short' }}</div>
+      </ion-col> -->
+     
+      <!-- {{message.userId3 }}
+      {{message.user}} 
+      {{otherUser.id}}
+      {{cUser}} -->
+
+
+      <ion-col size="9" *ngIf="(message.user && message.user == otherUser.id && message.userId3 == cUser) || message.userId2 ==  cUser" class="message other-message">
+        <span>{{ message.messagge ? message.messagge :  message.msg }}</span>
+        <div class="time1" text-right><br>{{ message.createdAt | date:'short' }}</div>
+      </ion-col>
+
+      <!-- <ion-col offset="3" size="9" *ngIf="!message.userId1  && message.user === currentUser" class="message my-message">
+        <span>{{ message.msg }}</span>
+        <div class="time" text-right><br>{{ message.createdAt | date:'short' }}</div>
+      </ion-col> -->
+     
+      <!-- {{cUser}} -->
+      
+      <ion-col offset="3" size="9" *ngIf="message.userId1 == cUser || message.user == cUser" class="message my-message">
+        <!-- <b>{{ message.userId1 }}</b><br> -->
+        <span>{{ message.messagge ? message.messagge :  message.msg }}</span>
+        <div class="time" text-right><br>{{ message.createdAt | date:'short' }}</div>
+      </ion-col>
+ 
+    </ion-row>
+  </ion-grid>
+ 
+</ion-content>
+ 
+<ion-footer>
+  <ion-toolbar color="light">
+    <ion-row align-items-center>
+      <ion-col size="10">
+        <ion-textarea auto-grow class="message-input" rows="1" [(ngModel)]="message"></ion-textarea>
+      </ion-col>
+      <ion-col size="2">
+        <ion-button expand="block" fill="clear" color="primary" [disabled]="message === ''" class="msg-btn" 
+          (click)="sendMessage()">
+          <ion-icon name="send" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

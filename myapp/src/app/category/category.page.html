@@ -1,0 +1,41 @@
+<ion-header>
+  <div class="navbarBackground">
+      <ion-buttons slot="start">
+        <ion-back-button color="light" defaultHref="tabs"></ion-back-button>
+      </ion-buttons>
+      <ion-input class="search" [(ngModel)]="inputValue" placeholder="Cauta in lista de categorii" (keyup)="onKeyUp($event); isKeyPress=true"></ion-input>
+      <ion-icon *ngIf="!isKeyPress" class="group" name="search-outline"></ion-icon>
+      <div (click)="changeInputValue()" tappable>
+        <ion-icon *ngIf="isKeyPress" class="group"  name="close-outline" ></ion-icon>
+      </div>
+  </div>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-label >Category Name</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-button  class="lightClass"  (click)="newCategory()"> 
+          <i class="fa fa-plus "></i>  
+          New Category
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngFor="let fg of categoryForms.controls; let i=index">
+      <form   class="tr" [formGroup]="fg">
+        <input readonly type="text" class="form-control" formControlName="categoryName" >
+        <ion-button (click)="recordSubmit(fg)">
+          <ion-label>Update</ion-label>
+        </ion-button>
+        <ion-button  class="delete" (click)="onDelete(fg.get('categoryId').value,i)"> 
+          <ion-icon  name="trash" color="danger"></ion-icon>
+        </ion-button>
+      
+      </form>
+    </ion-row>
+    
+  </ion-grid>
+
+</ion-content>

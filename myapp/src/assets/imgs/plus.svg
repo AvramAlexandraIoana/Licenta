@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+  <g id="plus" transform="translate(1 1)">
+    <path id="Stroke_111" data-name="Stroke 111" d="M20,10A10,10,0,1,1,10,0,10,10,0,0,1,20,10Z" fill="none" stroke="#0047cc" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <path id="Stroke_112" data-name="Stroke 112" d="M0,0H6" transform="translate(7 10)" fill="none" stroke="#0eafe6" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <path id="Stroke_113" data-name="Stroke 113" d="M0,0V6" transform="translate(10 7)" fill="none" stroke="#0eafe6" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+  </g>
+</svg>

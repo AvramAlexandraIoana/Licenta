@@ -1,0 +1,89 @@
+.paddingList {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+ion-label {
+    --color: gray !important;
+}
+
+ion-input {
+    --placeholder-color: gray;
+}
+
+.infoHeader {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+.header {
+    font-weight: bold;
+}
+
+ion-item {
+    margin-top: 15px !important;
+}
+
+.infoHeader1 {
+    font-size: 13px;
+    margin-top: -18px !important;
+}
+
+
+ion-button  {
+    --background: linear-gradient(to right,#b5cefa, #4c8dff);
+    margin-left: 7.5% !important;
+    height: 45px;
+    width: 85%;
+}
+
+div.navbarBackground {
+    background-image: url("../../assets/imgs/mobile-banking-network-online-payment-260nw-1431394361.webp")!important;
+    background-repeat: no-repeat;
+    background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    background-position: center center;
+}
+
+
+.error-messages
+{
+    font-size: 0.7em;
+    color: red;
+    text-align:left;
+}
+
+.detail-item
+{
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    margin: 15px 0 !important;
+    ion-label{
+        font-size: .9rem !important;
+        color: #77869E !important;
+        text-align: center;
+    }
+    .rad-item {
+        width: 28.7vw;
+        height: 10vw;
+        background: white;
+        display: inline-block;
+        margin-left: 13px;
+        padding-top: 10px;
+        p{
+            //margin: 0 !important;
+            text-align: center;
+            margin-top: 0.5vh;
+            
+        }
+    }
+}

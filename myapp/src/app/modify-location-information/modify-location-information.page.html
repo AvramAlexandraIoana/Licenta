@@ -1,0 +1,96 @@
+<ion-header  class="ion-no-border">
+  <ion-toolbar>
+    <ion-icon (click)="dismiss()" style="font-weight: bolder; font-size: 28px; margin-left: 4%;" name="close-outline"></ion-icon>
+   </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item lines="none" class="infoHeader">
+    <ion-label class="header" color="dark">Care este adresa ta de acasa?</ion-label>
+  </ion-item>
+  <ion-item lines="none" class="infoHeader1">
+    <ion-label>Fara casute postale, te rugam</ion-label>
+  </ion-item>
+  <form [formGroup]="modifyLocationForm">
+    <ion-list lines="full" class="paddingList">
+      <div>
+        <ion-item>
+          <ion-label position="stacked">Tara</ion-label>
+          <ion-input formControlName="country" placeholder="Tara" type="text"></ion-input>
+        </ion-item>
+        <div class="error-messages">
+          <ng-container *ngFor="let error of errorMessages.country">
+            <div class="error-message"
+              *ngIf="modifyLocationForm.get('country').hasError(error.type) && (modifyLocationForm.get('country').dirty || modifyLocationForm.get('country').touched)">
+              {{error.message}}
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+      <ion-item>
+        <ion-label position="stacked">Cod postal</ion-label>
+        <ion-input formControlName="postalCode" placeholder="Cod postal"  type="text" oninput="handleLastNameValue(event)"></ion-input>
+      </ion-item> 
+       
+      <div>
+        <ion-item>
+          <ion-label position="floating">Adresa randul 1</ion-label>
+          <ion-input  formControlName="adress" type="text" [placeholder]="!isEnterAdress1Input ? 'Adresa randul 1' : 'Strada si numarul'" (ionInput)="isEnterAdress1Input=true" (ionFocus)="isEnterAdress1Input=true;" (ionBlur)="isEnterAdress1Input=false;"></ion-input>
+        </ion-item>
+        <div class="error-messages">
+          <ng-container *ngFor="let error of errorMessages.adress">
+            <div class="error-message"
+              *ngIf="modifyLocationForm.get('adress').hasError(error.type) && (modifyLocationForm.get('adress').dirty || modifyLocationForm.get('adress').touched)">
+              {{error.message}}
+            </div>
+          </ng-container>
+        </div>
+      </div>
+     
+
+      <ion-item>
+        <ion-label position="floating">Adresa randul 2 (optional)</ion-label>
+        <ion-input formControlName="adress1" type="text" [placeholder]="!isEnterAdress2Input ? 'Adresa randul 2(optional)' : 'Apartament, unitate, claidre, etaj etc.'" (ionInput)="isEnterAdress2Input=true" (ionFocus)="isEnterAdress2Input=true;" (ionBlur)="isEnterAdress2Input=false;"></ion-input>
+      </ion-item>
+
+      <div>
+        <ion-item>
+          <ion-label position="floating">Oras</ion-label>
+          <ion-input formControlName="city"  type="text" placeholder="Oras"></ion-input>
+        </ion-item>
+        <div class="error-messages">
+          <ng-container *ngFor="let error of errorMessages.city">
+            <div class="error-message"
+              *ngIf="modifyLocationForm.get('city').hasError(error.type) && (modifyLocationForm.get('city').dirty || modifyLocationForm.get('city').touched)">
+              {{error.message}}
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+     <div>
+      <ion-item>
+        <ion-label position="floating">Regiune</ion-label>
+        <ion-input formControlName="judet" type="text" placeholder="Regiune"></ion-input>
+      </ion-item>
+      <div class="error-messages">
+        <ng-container *ngFor="let error of errorMessages.judet">
+          <div class="error-message"
+            *ngIf="modifyLocationForm.get('judet').hasError(error.type) && (modifyLocationForm.get('judet').dirty || modifyLocationForm.get('judet').touched)">
+            {{error.message}}
+          </div>
+        </ng-container>
+      </div>
+
+     </div>
+     
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button  (click)="modifyLocationInformation()" expand="block" shape="round" expand="full" class="sendButton"  [disabled]="modifyLocationForm.invalid">Gata</ion-button>
+    </div>
+  </form>
+
+</ion-content>

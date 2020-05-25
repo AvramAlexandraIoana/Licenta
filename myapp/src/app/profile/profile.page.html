@@ -1,0 +1,116 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="the-top-back"></div>
+
+  <div class="the-top-card" text-center padding-vertical>
+      <div class="img-container">
+        <ion-avatar *ngIf="isFirstLoad" class="avatar">
+          <img  src="https://ucarecdn.com/{{imageURL}}/"/>
+        </ion-avatar>
+        <ion-avatar *ngIf="!isFirstLoad" class="avatar">
+          <img src="{{pictureUrl}}"/>
+        </ion-avatar>
+
+      </div>
+      <div class="details">
+        <ion-button fill="clear" expand="full" color="primary" (click)="selectImage()">
+          <ion-icon slot="start" name="camera"></ion-icon>
+          {{pictureUrl ? 'Change Profile Image' : 'Add Profile Image'}}</ion-button>
+        <!-- <h5>{{user.userName}}<span> <img src="assets/imgs/verified.svg" alt=""></span> </h5>
+        <p>{{user.email}}</p> -->
+      </div>
+  </div>
+
+  <div class="bottom-section">
+      <div class="general">
+          <h3>GENERAL</h3>
+          <div class="generic-list">
+              <!-- <ion-item lines="none" (click)="goToModifyProfile()">
+                <div class="thumb" slot="start">
+                  <img src="assets/imgs/settings.svg" alt="">
+                </div>
+                <div>
+                  <p class="header">Profile Settings</p>
+                  <p class="body">Update and modify your profile</p>
+                </div>
+              </ion-item> -->
+              <ion-item lines="none" (click)="goToModifyProfile()">
+                <div class="thumb1" slot="start">
+                  <img src="assets/imgs/profile-20s-128px (1).svg" alt="">
+                </div>
+                <div>
+                  <p class="header">Personal Data</p>
+                  <p class="body">Modify your personal data</p>
+                </div>
+              </ion-item>
+              <ion-item lines="none" (click)="goToHistoryImages()">
+                <div class="thumb1" slot="start">
+                  <img src="assets/imgs/photo-20s-128px (2).svg" alt="">
+                </div>
+                <div>
+                    <p class="header">Profile   Image History</p>
+                    <p class="body">Update and modify profile image</p>
+                 </div>
+              </ion-item>
+              <ion-item lines="none" (click)="goToChangePassword()">
+                <div class="thumb" slot="start">
+                  <img src="assets/imgs/security.svg" alt="">
+                </div>
+                <div>
+                    <p class="header">Privacy</p>
+                    <p class="body">Change your password</p>
+                 </div>
+              </ion-item>
+              <ion-item lines="none">
+                <div class="thumb" slot="start">
+                  <img src="assets/imgs/notification.svg" alt="">
+                </div>
+                <div>
+                  <p class="header">Notifications</p>
+                  <p class="body">Change your notification settings</p>
+                </div>
+              </ion-item>      
+          </div>
+      </div>
+
+      <div class="chart-section">
+          <h3>CHART</h3>
+          <div class="chart-list">
+              <ion-item lines="none">
+                <div class="thumb" slot="start">
+                  <img src="assets/imgs/chartsmall.svg" alt="">
+                </div>
+                <div>
+                  <p class="header">Show Volumes</p>
+                  <p class="body">Edit graphics</p>
+                </div>
+              </ion-item>
+          </div>
+      </div>
+
+      <div class="chart-section">
+        <h3>CHART</h3>
+        <div class="chart-list">
+            <ion-item lines="none"  (click)="logOut()">
+              <div class="thumb" slot="start">
+                <ion-icon class="iconLogOut" name="log-out-outline"></ion-icon>
+              </div>
+              <div>
+                <p class="header">Log out</p>
+                <p class="body">Log out from banking application</p>
+              </div>
+            </ion-item>
+        </div>
+     </div>
+    </div>
+
+
+</ion-content>

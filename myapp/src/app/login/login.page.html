@@ -1,0 +1,99 @@
+<!-- <ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="onboard"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+ -->
+ <ion-content>
+  <div class="the-content">
+    <div class="the-title">
+      <h2>Welcome Login</h2>
+    </div>
+    <div class="btns-holder">
+      <ion-row>
+        <ion-col>
+          <ion-button fill="none" text-center (click)="loginWithFacebook()">
+            <img src="assets/imgs/facebook.svg" alt="">
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button fill="none" text-center (click)="doGoogleLogin()">
+            <img src="assets/imgs/google.svg" alt="">
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <div class="details">
+
+        <div class="detail-item">
+          <ion-label>Username</ion-label>
+          <ion-item>
+            <span class="icn" slot="start" *ngIf="!loginForm.get('username').invalid">
+              <ion-icon name="checkmark-circle"></ion-icon>
+            </span>
+            <ion-input formControlName="username" class="username" placeholder="Enter Name"> </ion-input>
+          </ion-item>
+
+          <div class="error-messages">
+            <ng-container *ngFor="let error of errorMessages.username">
+              <div class="error-message"
+                *ngIf="loginForm.get('username').hasError(error.type) && (loginForm.get('username').dirty || loginForm.get('username').touched)">
+                {{error.message}}
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        <div class="detail-item">
+          <ion-label>Password</ion-label>
+          <ion-item>
+            <span class="icn" slot="start" *ngIf="!loginForm.get('password').invalid">
+              <ion-icon name="checkmark-circle"></ion-icon>
+            </span>
+              <ion-label> <ion-icon name="md-lock"></ion-icon></ion-label>
+            <ion-input #toggleInput formControlName="password" class="half-inp half-border-inp" type="password" placeholder="Password"></ion-input>
+            <button class="showhidePass" color="light" type="button" clear item-end passwordToggle [appTargetInput]="toggleInput">
+              <ion-icon name="eye-off-outline"></ion-icon>
+            </button>          
+          </ion-item>
+        </div>
+
+
+        <div class="error-messages">
+          <ng-container *ngFor="let error of errorMessages.password">
+            <div class="error-message"
+              *ngIf="loginForm.get('password').hasError(error.type) && (loginForm.get('password').dirty || loginForm.get('password').touched)">
+              {{error.message}}
+            </div>
+          </ng-container>
+        </div>
+
+        <div class="second-item">
+          <ion-row>
+            <ion-col>
+              <ion-item lines="none" id="rem" class="ion-no-padding">
+                <ion-label>Remember me</ion-label>
+                <ion-checkbox mode="ios" slot="start"></ion-checkbox>
+              </ion-item>
+            </ion-col>
+            <ion-col class="col-forgot" text-right (click)="goToForgotPassword()">
+              <p>Forgot Password?</p>
+            </ion-col>
+          </ion-row>
+        </div>
+
+      </div>
+      <div class="login" text-center>
+        <ion-button size="block" type="submit" routerDirection="root" [disabled]="loginForm.invalid">
+          Login
+        </ion-button>
+      </div>
+
+    </form>
+    <div class="signup" text-center padding-horizontal>
+      <p>Don't have an account?<span (click)="goSignup()">Sign Up</span></p>
+    </div>
+  </div>
+</ion-content>

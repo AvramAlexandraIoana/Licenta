@@ -1,0 +1,59 @@
+div.containerBackground {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    right:0;
+    top: -10px;
+    height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+    width: 100%;
+    background-image: url("../../assets/imgs/light-blue-background.jpg")!important;
+    background-repeat: no-repeat;
+    background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    background-position: center center;
+}
+
+
+div.navbarBackground {
+    background-image: url("../../assets/imgs/light-blue-background.jpg")!important;
+    background-repeat: no-repeat;
+    background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    background-position: center center;
+}
+.logoImg {
+    position: relative;
+    left: 28% !important;
+}
+
+
+ion-card-title {
+    text-align: center !important;
+}
+ion-label {
+    --color: gray !important;
+}
+
+ion-input {
+    --placeholder-color: gray;
+}
+
+ion-card {
+    position: relative;
+    top: 10vh;
+    left: 5%;
+    width: 85%;
+}
+
+.error-messages
+{
+    font-size: 0.7em;
+    color: red;
+    text-align: center;
+}

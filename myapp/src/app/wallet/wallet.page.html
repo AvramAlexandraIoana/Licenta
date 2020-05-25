@@ -1,0 +1,197 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Wallet <span>Platinum Card</span></ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="addNewCard()">
+        <img src="assets/imgs/Addcard.svg" alt="">
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <ion-slides mode="ios" [options]="sliderConfig">
+      <ion-slide *ngFor="let card of cards;  index as pos">
+        <div *ngIf="conditionPosition(pos)" class="visa-card" text-center>
+            <svg id="Card_1" data-name="Card 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="290" height="177" viewBox="0 0 290 177">
+              <defs>
+                <clipPath id="clip-path">
+                  <rect id="Card_Color" data-name="Card Color" width="290" height="177" rx="11.7" fill="#0047cc"/>
+                </clipPath>
+              </defs>
+              <rect id="Card_Color-2" data-name="Card Color" width="290" height="177" rx="11.7" fill="#0047cc"/>
+              <g id="Card_1-2" data-name="Card 1" clip-path="url(#clip-path)">
+                <ellipse id="Oval_2" data-name="Oval 2" cx="144" cy="144.5" rx="144" ry="144.5" transform="translate(166 -24)" fill="#fff" opacity="0.08"/>
+                <ellipse id="Oval_2_Copy" data-name="Oval 2 Copy" cx="145" cy="144.5" rx="145" ry="144.5" transform="translate(-24 120)" fill="#fff" opacity="0.08"/>
+                <text id="JONATHAN_DAVIS" data-name="JONATHAN DAVIS" transform="translate(24 137)" fill="#fff" font-size="16" font-family="SegoeUI, Segoe UI" letter-spacing="0.033em"><tspan x="0" y="17">{{card.cardHolderName}}</tspan></text>
+                <text id="_11_22" data-name="11/22" transform="translate(211 136.5)" fill="#fff" font-size="16" font-family="SegoeUI, Segoe UI" letter-spacing="0.033em"><tspan x="0" y="17">{{card.expiryDate}}</tspan></text>
+                <text id="_0113" data-name="•••• •••• •••• 0113" transform="translate(24 99)" fill="#fff" font-size="17" font-family="SegoeUI, Segoe UI" letter-spacing="0.033em"><tspan x="0" y="18" xml:space="preserve">{{card.accountNumber.substring(0,4)}}  {{card.accountNumber.substring(4,8)}}  {{card.accountNumber.substring(8,12)}}  {{card.accountNumber.substring(12,16)}}</tspan></text>
+                <g id="master_logo" data-name="master logo" transform="translate(24 40)">
+                  <path id="Combined_Shape" data-name="Combined Shape" d="M27.78,29.939A16.7,16.7,0,0,1,16.851,34a17,17,0,0,1,0-34A16.7,16.7,0,0,1,27.78,4.061,16.7,16.7,0,0,1,38.711,0a17,17,0,0,1,0,34A16.7,16.7,0,0,1,27.78,29.939Z" fill="#ff5e00"/>
+                  <path id="Combined_Shape-2" data-name="Combined Shape" d="M16.851,34A16.666,16.666,0,0,1,4.935,29.021a17.107,17.107,0,0,1,0-24.042A16.742,16.742,0,0,1,27.78,4.061a17.1,17.1,0,0,0,0,25.878A16.764,16.764,0,0,1,16.851,34Z" fill="#ed0006"/>
+                  <path id="Combined_Shape-3" data-name="Combined Shape" d="M10.93,34A16.764,16.764,0,0,1,0,29.939,17.048,17.048,0,0,0,5.92,17,17.049,17.049,0,0,0,0,4.061a16.742,16.742,0,0,1,22.845.918,17.107,17.107,0,0,1,0,24.042A16.666,16.666,0,0,1,10.93,34Z" transform="translate(27.78)" fill="#f9a000"/>
+                </g>
+              </g>
+            </svg>
+          </div>
+          <div *ngIf="!conditionPosition(pos)" class="visa-card" text-center>
+            <svg id="Card_2" data-name="Card 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="290" height="177" viewBox="0 0 290 177">
+              <defs>
+                <clipPath id="clip-path">
+                  <rect id="Card_Color" data-name="Card Color" width="290" height="177" rx="11.7" fill="#dfe7f5"/>
+                </clipPath>
+              </defs>
+              <rect id="Card_Color-2" data-name="Card Color" width="290" height="177" rx="11.7" fill="#dfe7f5"/>
+              <g id="Card_2-2" data-name="Card 2" clip-path="url(#clip-path)">
+                <ellipse id="Oval_2" data-name="Oval 2" cx="144" cy="144.5" rx="144" ry="144.5" transform="translate(166 -24)" fill="#fff" opacity="0.08"/>
+                <ellipse id="Oval_2_Copy" data-name="Oval 2 Copy" cx="145" cy="144.5" rx="145" ry="144.5" transform="translate(-24 120)" fill="#fff" opacity="0.08"/>
+                <text id="MICHAEL_SCOTT" data-name="MICHAEL SCOTT" transform="translate(24 136.5)" fill="#042c5c" font-size="16" font-family="SegoeUI, Segoe UI" letter-spacing="0.033em"><tspan x="0" y="17">{{card.cardHolderName}}</tspan></text>
+                <text id="_11_22" data-name="11/22" transform="translate(221 136.5)" fill="#042c5c" font-size="16" font-family="SegoeUI, Segoe UI" letter-spacing="0.033em"><tspan x="0" y="17">{{card.expiryDate}}</tspan></text>
+                <text id="_0113" data-name="•••• •••• •••• 0113" transform="translate(24 99)" fill="#042c5c" font-size="17" font-family="SegoeUI, Segoe UI" letter-spacing="0.033em"><tspan x="0" y="18" xml:space="preserve">{{card.accountNumber.substring(0,4)}}  {{card.accountNumber.substring(4,8)}}  {{card.accountNumber.substring(8,12)}}  {{card.accountNumber.substring(12,16)}}</tspan></text>
+                <g id="master_logo" data-name="master logo" transform="translate(24 40)">
+                  <path id="Combined_Shape" data-name="Combined Shape" d="M27.78,29.939A16.7,16.7,0,0,1,16.851,34a17,17,0,0,1,0-34A16.7,16.7,0,0,1,27.78,4.061,16.7,16.7,0,0,1,38.711,0a17,17,0,0,1,0,34A16.7,16.7,0,0,1,27.78,29.939Z" fill="#ff5e00"/>
+                  <path id="Combined_Shape-2" data-name="Combined Shape" d="M16.851,34A16.666,16.666,0,0,1,4.935,29.021a17.107,17.107,0,0,1,0-24.042A16.742,16.742,0,0,1,27.78,4.061a17.1,17.1,0,0,0,0,25.878A16.764,16.764,0,0,1,16.851,34Z" fill="#ed0006"/>
+                  <path id="Combined_Shape-3" data-name="Combined Shape" d="M10.93,34A16.764,16.764,0,0,1,0,29.939,17.048,17.048,0,0,0,5.92,17,17.049,17.049,0,0,0,0,4.061a16.742,16.742,0,0,1,22.845.918,17.107,17.107,0,0,1,0,24.042A16.666,16.666,0,0,1,10.93,34Z" transform="translate(27.78)" fill="#f9a000"/>
+                </g>
+              </g>
+            </svg>
+            
+          </div>
+          
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <div class="progress-group" padding-horizontal>
+    <ion-row>
+      <ion-col text-left>
+        <ion-label>Remaining Amount</ion-label>
+      </ion-col>
+      <ion-col class="text-right">
+        <ion-label>30%</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-progress-bar value="0.25"></ion-progress-bar>
+  </div>
+
+  <div class="statics">
+    <ion-row>
+      <ion-col text-left>
+         <ion-item>
+              <div class="thumb" slot="start">
+                <img src="assets/imgs/Up1.svg" alt="">
+              </div>
+              <ion-label>
+                <p>Income</p>
+                <h4>$3,214</h4>
+              </ion-label>
+          </ion-item>
+      </ion-col>
+      <ion-col text-left>
+        <ion-item>
+             <div class="thumb" slot="start">
+              <img src="assets/imgs/Down1.svg" alt="">
+            </div>
+             <ion-label>
+               <p>Expense</p>
+               <h4>$3,214</h4>
+             </ion-label>
+         </ion-item>
+     </ion-col>
+    </ion-row>
+  </div>
+
+  <div class="send-money" padding-horizontal scrollX="true">
+      <div (click)="addNewContact()" class="recip-card" text-center style="position: relative; top: -15px;">
+          <ion-avatar>
+            <img src="assets/imgs/plus.svg" alt="">
+          </ion-avatar>
+          <p text-wrap>
+            Add new  <br>  contact
+          </p>
+      </div>
+      <!-- <ion-item-sliding *ngFor="let c of myContacts">
+        <ion-item>
+          <ion-label>{{ c.name.givenName}} <b> {{ c.name.familyName}} </b>
+            <p>
+              {{ c.phoneNumbers[0].value}}
+            </p>
+          </ion-label>
+        </ion-item> -->
+      <span *ngFor="let c of myContacts; index as i">
+        <div *ngIf="condition(i)" class="recip-card" text-center  >
+          <ion-avatar>
+            <img src="assets/imgs/josie.png" alt="">
+          </ion-avatar>
+          <p text-wrap>
+            {{ c.name.givenName}} <br>  
+          </p>
+          <p style="font-size: 14px; color:gray;">{{ c.phoneNumbers[0].value}}</p>
+      </div>
+      </span>
+     
+  </div>
+
+  <div class="details">
+    <h3>Transaction</h3>
+    <div class="segment">
+        <ion-segment (ionChange)="segmentChanged($event)" value="category">
+          <ion-segment-button value="day">
+            <ion-label>Day</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="week">
+            <ion-label>Week</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="Month">
+            <ion-label>Month</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="Year">
+            <ion-label>Year</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+     </div>
+     <div class="the-list" *ngIf="category == 'day'">
+       <ion-item>
+        <div class="thumb" slot="start">
+          <img src="assets/imgs/Gas.svg" alt="">
+        </div>
+        <ion-label>
+          <h4>Shell</h4>
+          <p>17 Monday June</p>
+        </ion-label>
+        <div slot="end">
+          <h5>-$35</h5>
+        </div>
+       </ion-item>
+       <ion-item>
+        <div class="thumb" slot="start">
+          <img src="assets/imgs/shopping.svg" alt="">
+        </div>
+        <ion-label>
+          <h4>Amazon</h4>
+          <p>17 Monday June</p>
+        </ion-label>
+        <div slot="end">
+          <h5>-$79</h5>
+        </div>
+       </ion-item>
+       <ion-item>
+        <div class="thumb" slot="start">
+          <img src="assets/imgs/Bill.svg" alt="">
+        </div>
+        <ion-label>
+          <h4>Vodafone</h4>
+          <p>17 Monday June</p>
+        </ion-label>
+        <div slot="end">
+          <h5>-$35</h5>
+        </div>
+       </ion-item>
+     </div>
+   </div>
+
+</ion-content>

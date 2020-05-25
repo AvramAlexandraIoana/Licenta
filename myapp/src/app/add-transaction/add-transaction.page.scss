@@ -1,0 +1,159 @@
+ion-title{
+    font-weight: bolder !important;
+    span{
+        font-size: 1rem !important;
+        font-weight: lighter !important;
+    }
+}
+
+.money-content
+{
+    ion-item{
+        span{
+            margin: 0 !important;
+        }
+
+        ion-input{
+            //font-size: 2.5rem !important;
+        }
+    }
+}
+
+.unit-container {
+    ion-item {
+        ion-select {
+            margin-left: 35% !important;
+            ion-select-option {
+                text-align: center;
+            }
+        }
+    }
+}
+
+.sign-container {
+    position: absolute;
+    left: 15vw;
+    top: -1.5vh;
+    h1 {
+        font-size: 2.2rem !important;
+        font-weight: lighter !important;
+    }
+}
+
+.detail-item-row {
+    margin: 15px 0 !important;
+    ion-label{
+         font-size: .9rem !important;
+         color: #77869E !important;
+    }
+
+    ion-textarea{
+         --background:#dfe7f5;
+    }
+}
+
+
+ion-footer{
+    ion-button{
+        height: 50px !important;
+    }
+}
+
+.detail-item
+{
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    margin: 15px 0 !important;
+    ion-label{
+        font-size: .9rem !important;
+        color: #77869E !important;
+        text-align: center;
+    }
+    .rad-item {
+        width: 28.7vw;
+        height: 10vw;
+        background: white;
+        display: inline-block;
+        margin-left: 13px;
+        padding-top: 10px;
+        p{
+            //margin: 0 !important;
+            text-align: center;
+            margin-top: 0.5vh;
+            
+        }
+    }
+}
+
+ion-grid {
+    margin-left: 7vw;
+}
+
+
+ion-input {
+    position: relative;
+    width: 75vw;
+    text-align: center;
+    
+}
+
+
+div.navbarBackground {
+    background-image: url("../../assets/imgs/mobile-banking-network-online-payment-260nw-1431394361.webp")!important;
+    background-repeat: no-repeat;
+    background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    background-position: center center;
+}
+
+.sign-container {
+    position: absolute;
+    left: 90%;
+    top: -20px;
+    h1 {
+        font-size: 2.2rem !important;
+        font-weight: lighter !important;
+    }
+}
+
+
+.labelForSum {
+    font-size: 13px;
+    text-align: center;
+}
+
+ion-grid {
+    margin-top: 7vh;
+}
+
+ion-radio-group {
+    text-align: center;
+}
+
+.error-messages
+{
+    font-size: 0.7em;
+    color: red;
+    text-align: center;
+}
+
+ion-button  {
+    --background: linear-gradient(to right,#b5cefa, #4c8dff);
+    margin-top: 70px !important;
+    margin-left: 7.5% !important;
+    height: 40px;
+    width: 85%;
+}
+
+
+.category-holder {
+    position: relative;
+    left: -6%;
+}

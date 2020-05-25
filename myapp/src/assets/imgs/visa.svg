@@ -1,0 +1,20 @@
+<svg id="Card_1" data-name="Card 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="290" height="177" viewBox="0 0 290 177">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Card_Color" data-name="Card Color" width="290" height="177" rx="11.7" fill="#0047cc"/>
+    </clipPath>
+  </defs>
+  <rect id="Card_Color-2" data-name="Card Color" width="290" height="177" rx="11.7" fill="#0047cc"/>
+  <g id="Card_1-2" data-name="Card 1" clip-path="url(#clip-path)">
+    <ellipse id="Oval_2" data-name="Oval 2" cx="144" cy="144.5" rx="144" ry="144.5" transform="translate(166 -24)" fill="#fff" opacity="0.08"/>
+    <ellipse id="Oval_2_Copy" data-name="Oval 2 Copy" cx="145" cy="144.5" rx="145" ry="144.5" transform="translate(-24 120)" fill="#fff" opacity="0.08"/>
+    <text id="JONATHAN_DAVIS" data-name="JONATHAN DAVIS" transform="translate(24 137)" fill="#fff" font-size="16" font-family="SegoeUI, Segoe UI" letter-spacing="0.033em"><tspan x="0" y="17">JONATHAN DAVIS</tspan></text>
+    <text id="_11_22" data-name="11/22" transform="translate(211 136.5)" fill="#fff" font-size="16" font-family="SegoeUI, Segoe UI" letter-spacing="0.033em"><tspan x="0" y="17">11/22</tspan></text>
+    <text id="_0113" data-name="•••• •••• •••• 0113" transform="translate(24 99)" fill="#fff" font-size="17" font-family="SegoeUI, Segoe UI" letter-spacing="0.033em"><tspan x="0" y="18" xml:space="preserve">••••  ••••  ••••  0113</tspan></text>
+    <g id="master_logo" data-name="master logo" transform="translate(24 40)">
+      <path id="Combined_Shape" data-name="Combined Shape" d="M27.78,29.939A16.7,16.7,0,0,1,16.851,34a17,17,0,0,1,0-34A16.7,16.7,0,0,1,27.78,4.061,16.7,16.7,0,0,1,38.711,0a17,17,0,0,1,0,34A16.7,16.7,0,0,1,27.78,29.939Z" fill="#ff5e00"/>
+      <path id="Combined_Shape-2" data-name="Combined Shape" d="M16.851,34A16.666,16.666,0,0,1,4.935,29.021a17.107,17.107,0,0,1,0-24.042A16.742,16.742,0,0,1,27.78,4.061a17.1,17.1,0,0,0,0,25.878A16.764,16.764,0,0,1,16.851,34Z" fill="#ed0006"/>
+      <path id="Combined_Shape-3" data-name="Combined Shape" d="M10.93,34A16.764,16.764,0,0,1,0,29.939,17.048,17.048,0,0,0,5.92,17,17.049,17.049,0,0,0,0,4.061a16.742,16.742,0,0,1,22.845.918,17.107,17.107,0,0,1,0,24.042A16.666,16.666,0,0,1,10.93,34Z" transform="translate(27.78)" fill="#f9a000"/>
+    </g>
+  </g>
+</svg>

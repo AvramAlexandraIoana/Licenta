@@ -1,0 +1,160 @@
+ion-toolbar {
+    --border-width: 0;
+    --background: #0047CC !important;
+    --color: white !important;
+
+    ion-title{
+        font-weight: 400 !important;
+    }
+}
+
+ion-content {
+    --background: #F8F9F9!important;
+}
+
+.the-top-back {
+    background: #0047CC;
+    height: 35vh;
+    border-bottom-right-radius: 40px;
+}
+
+.the-top-card
+{
+    background: white;
+    border-radius: 12px;
+    box-shadow:0px 0px 20px rgba(0, 0, 0, 0.08);
+    width: 85%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 30px;
+    height: 40vh;
+    margin-left: auto;
+    margin-right: auto;
+
+    .img-container
+    {
+        position: absolute;
+        left: 12vw;
+        top: 20px;
+        width: 200px;
+        // height: 300px;
+        ion-avatar{
+            width: 250px;
+            img {
+                height: 30vh;
+                border-radius:  0;
+            }
+        }
+    }
+
+    .details{
+        position: absolute;
+        top: 32vh;
+        left: 10vw;
+        text-align: center;
+        h5{
+            color: #042C5C !important;
+        }
+    }
+
+    .badge-holder
+    {
+       margin: 0 20px;
+        background: #F8F9F9;
+        border-radius: 12px;
+        padding: 10px 0;
+        .badge{
+            display: inline-block;
+            margin:0 5px;
+        }
+    }
+
+  
+  
+    
+ 
+}
+
+.bottom-section
+{
+    margin-top: 75px;
+    h3{
+        font-weight: 300 !important;
+        font-size: 14px !important;
+        margin-left: 29px;
+        color: #77869E !important;
+        }
+    .general{
+     
+        .gen-list{
+            ion-item{
+                margin-top: 10px !important;
+                --background: white !important;
+            }
+        }
+    }
+}
+
+
+ion-item {
+    height: 70px;
+    margin-top: 20px;
+    margin-left: 29px;
+    margin-right: 29px;
+    border-radius: 10px 10px 10px 10px;
+}
+.thumb
+{
+    position: relative;
+    top: -5px;
+    height: 50px;
+    width: 50px;
+    background: #dfe7f5;
+    border-radius: 8px 8px 8px 8px;
+    img {
+        height: 48px;
+
+    }
+}
+
+.thumb1
+{
+    position: relative;
+    top: -5px;
+    height: 50px;
+    width: 50px;
+    img {
+        height: 48px;
+        border-radius: 8px 8px 8px 8px;
+    }
+}
+
+
+ion-label {
+    position: relative;
+    font-size: 17px;
+}
+
+.header {
+    position: relative;
+    top: 11px;
+    color: rgb(59, 59, 59);
+
+}
+
+.body {
+    position: relative;
+    top: -5px;
+    font-size: 13px;
+    color: rgb(126, 125, 125);
+}
+
+
+.iconLogOut {
+    color: #0047cc;
+    font-size: 25px;
+    position: relative;
+    top: 10px;
+    left: 25%;
+}

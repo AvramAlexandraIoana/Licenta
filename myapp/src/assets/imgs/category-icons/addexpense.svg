@@ -1,0 +1,4 @@
+<svg id="Component_Icon_Donation" data-name="Component/Icon/Donation" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+  <path id="Path" d="M33.334,26.667H6.667A6.675,6.675,0,0,1,0,20V0H40V20A6.674,6.674,0,0,1,33.334,26.667ZM19.048,8.966v7.225a.952.952,0,0,0,1.9,0V8.966l2.183,2.183A.953.953,0,1,0,24.484,9.8L20.673,5.994a.952.952,0,0,0-1.346,0L15.518,9.8a.952.952,0,1,0,1.346,1.346l2.18-2.18Z" transform="translate(4 17.333)" fill="#0041c4"/>
+  <path id="Path-2" data-name="Path" d="M40,11.429H0V2.857A2.857,2.857,0,0,1,2.857,0H37.143A2.857,2.857,0,0,1,40,2.857Z" transform="translate(4 4)" fill="#00b3f3"/>
+</svg>

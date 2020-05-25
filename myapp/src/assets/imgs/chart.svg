@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="384" height="398" viewBox="0 0 384 398">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.439" y1="1" x2="0.439" y2="0.143" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#5eceb1" stop-opacity="0"/>
+      <stop offset="0.367" stop-color="#5eceb1" stop-opacity="0.11"/>
+      <stop offset="0.573" stop-color="#5eceb1" stop-opacity="0.157"/>
+      <stop offset="1" stop-color="#5eceb1" stop-opacity="0.494"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.561" y1="1" x2="0.561" y2="0.143" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#f6e6e7" stop-opacity="0"/>
+      <stop offset="0.449" stop-color="#ffdadd"/>
+      <stop offset="0.732" stop-color="#ffcace"/>
+      <stop offset="1" stop-color="#ffb6bb"/>
+    </linearGradient>
+    <filter id="Oval" x="172" y="94" width="45" height="45" filterUnits="userSpaceOnUse">
+      <feOffset dy="2" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feFlood flood-opacity="0.184"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Oval-2" x="172" y="242" width="45" height="45" filterUnits="userSpaceOnUse">
+      <feOffset dy="2" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5" result="blur-2"/>
+      <feFlood flood-opacity="0.184"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Monthly" x="0" y="0" width="161" height="92" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10" result="blur-3"/>
+      <feFlood flood-opacity="0.051"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_1" data-name="Group 1" transform="translate(6 -185)">
+    <g id="Chart" transform="translate(0 265)">
+      <path id="Path_2" data-name="Path 2" d="M0,41.537S14.212,8.895,29.078,8.895s32.988,32.17,62.365,26.337,17.7,32.946,40.762,36.888,42.929-37.541,55.3-39.732,29.951,19.181,46.895,22.844,22-7.091,34.132-9.89,18.355,27.046,33.487,24.874,5.036-24.874,23.25-24.874S331.821,0,347.641,12.49,375,0,375,0V285H0Z" opacity="0.2" fill="url(#linear-gradient)"/>
+      <path id="Path_2-2" data-name="Path 2" d="M0,41.537S14.212,8.895,29.078,8.895s32.988,32.17,62.365,26.337,17.7,32.946,40.762,36.888,42.929-37.541,55.3-39.732,29.951,19.181,46.895,22.844,22-7.091,34.132-9.89,18.355,27.046,33.487,24.874,5.036-24.874,23.25-24.874S331.821,0,347.641,12.49,375,0,375,0" transform="translate(0 1)" fill="none" stroke="#4df1a1" stroke-miterlimit="10" stroke-width="3"/>
+      <path id="Path_2-3" data-name="Path 2" d="M0,61.537S-24.212,38.895-39.078,38.895-57.5,52.387-68.97,52.387s-11.469-17.156-32.473-17.156S-127.808,72.119-142.2,72.119s-14.868-19.712-27.235-21.9-25.45,13.243-35.455,5.382-26.05-29.578-42.994-25.915-38.994,42.7-54.126,40.533-5.036-24.874-23.25-24.874S-331.821,0-347.641,12.49-375,0-375,0" transform="translate(375 129)" fill="none" stroke="#f24750" stroke-miterlimit="10" stroke-width="3"/>
+      <path id="Path_2-4" data-name="Path 2" d="M0,61.5S-24.212,38.895-39.078,38.895-57.5,52.387-68.97,52.387s-11.469-17.156-32.473-17.156S-127.808,72.119-142.2,72.119s-14.868-19.712-27.235-21.9-25.45,13.243-35.455,5.382-26.05-29.578-42.994-25.915-38.994,42.7-54.126,40.533-5.036-24.874-23.25-24.874S-331.821,0-347.641,12.49-375,0-375,0l2.512,150H0Z" transform="translate(375 127)" opacity="0.2" fill="url(#linear-gradient-2)"/>
+      <g id="Group_12" data-name="Group 12" transform="translate(0 250)">
+        <path id="Line" d="M0,1H375" transform="translate(0 14)" fill="none" stroke="#9fa8b2" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1" stroke-dasharray="1 10"/>
+        <g id="Group_11" data-name="Group 11" transform="translate(7)">
+          <rect id="Rectangle_2" data-name="Rectangle 2" width="24" height="27" rx="6" fill="#fff"/>
+          <text id="_0" data-name="0" transform="translate(8 18)" fill="#1d3041" font-size="13" font-family="Poppins-Medium, Poppins" font-weight="500"><tspan x="0" y="0">0</tspan></text>
+        </g>
+      </g>
+      <g id="Group_12-2" data-name="Group 12" transform="translate(0 175)">
+        <path id="Line-2" data-name="Line" d="M0,1H375" transform="translate(0 14)" fill="none" stroke="#77869e" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1" stroke-dasharray="1 10"/>
+        <g id="Group_11-2" data-name="Group 11" transform="translate(7)">
+          <rect id="Rectangle_2-2" data-name="Rectangle 2" width="56" height="27" rx="6" fill="#fff"/>
+          <text id="_1_000" data-name="1,000" transform="translate(11 19)" fill="#1d3041" font-size="13" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">1,000</tspan></text>
+        </g>
+      </g>
+      <g id="Group_12-3" data-name="Group 12" transform="translate(0 100)">
+        <path id="Line-3" data-name="Line" d="M0,1H375" transform="translate(0 14)" fill="none" stroke="#77869e" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1" stroke-dasharray="1 10"/>
+        <rect id="Rectangle_2-3" data-name="Rectangle 2" width="56" height="27" rx="6" transform="translate(7)" fill="#fff"/>
+        <text id="_2_000" data-name="2,000" transform="translate(17 19)" fill="#1d3041" font-size="13" font-family="SegoeUI, Segoe UI" letter-spacing="0.008em"><tspan x="0" y="0">2,000</tspan></text>
+      </g>
+      <g id="Group_12-4" data-name="Group 12" transform="translate(0 25)">
+        <path id="Line-4" data-name="Line" d="M0,1H375" transform="translate(0 14)" fill="none" stroke="#77869e" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1" stroke-dasharray="1 10"/>
+        <g id="Group_11-3" data-name="Group 11" transform="translate(7)">
+          <rect id="Rectangle_2-4" data-name="Rectangle 2" width="56" height="27" rx="6" fill="#fff"/>
+          <text id="_3_000" data-name="3,000" transform="translate(10 19)" fill="#1d3041" font-size="13" font-family="SegoeUI, Segoe UI" letter-spacing="0.008em"><tspan x="0" y="0">3,000</tspan></text>
+        </g>
+      </g>
+      <text id="_01" data-name="01" transform="translate(25 315)" fill="#77869e" font-size="13" font-family="SegoeUI, Segoe UI" letter-spacing="0.019em"><tspan x="0" y="0">01</tspan></text>
+      <text id="_02" data-name="02" transform="translate(64 315)" fill="#77869e" font-size="13" font-family="SegoeUI, Segoe UI" letter-spacing="0.019em"><tspan x="0" y="0">02</tspan></text>
+      <text id="_03" data-name="03" transform="translate(103 315)" fill="#77869e" font-size="13" font-family="SegoeUI, Segoe UI" letter-spacing="0.019em"><tspan x="0" y="0">03</tspan></text>
+      <text id="_04" data-name="04" transform="translate(142 315)" fill="#77869e" font-size="13" font-family="SegoeUI, Segoe UI" letter-spacing="0.019em"><tspan x="0" y="0">04</tspan></text>
+      <text id="_05" data-name="05" transform="translate(181 315)" fill="#042c5c" font-size="13" font-family="SegoeUI, Segoe UI" letter-spacing="0.019em"><tspan x="0" y="0">05</tspan></text>
+      <text id="_06" data-name="06" transform="translate(220 315)" fill="#77869e" font-size="13" font-family="SegoeUI, Segoe UI" letter-spacing="0.019em"><tspan x="0" y="0">06</tspan></text>
+      <text id="_07" data-name="07" transform="translate(259 315)" fill="#77869e" font-size="13" font-family="SegoeUI, Segoe UI" letter-spacing="0.019em"><tspan x="0" y="0">07</tspan></text>
+      <text id="_08" data-name="08" transform="translate(298 315)" fill="#77869e" font-size="13" font-family="SegoeUI, Segoe UI" letter-spacing="0.019em"><tspan x="0" y="0">08</tspan></text>
+      <text id="_09" data-name="09" transform="translate(337 315)" fill="#77869e" font-size="13" font-family="SegoeUI, Segoe UI" letter-spacing="0.019em"><tspan x="0" y="0">09</tspan></text>
+      <g id="Group_2" data-name="Group 2" transform="translate(188 10)">
+        <path id="Line-5" data-name="Line" d="M.5,0V275" fill="none" stroke="#77869e" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1" opacity="0.9"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, -6, -80)" filter="url(#Oval)">
+        <g id="Oval-3" data-name="Oval" transform="translate(187 107)" fill="#fff" stroke="#4df1a1" stroke-miterlimit="10" stroke-width="4">
+          <circle cx="7.5" cy="7.5" r="7.5" stroke="none"/>
+          <circle cx="7.5" cy="7.5" r="5.5" fill="none"/>
+        </g>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, -6, -80)" filter="url(#Oval-2)">
+        <g id="Oval-4" data-name="Oval" transform="translate(187 255)" fill="#fff" stroke="#f46069" stroke-miterlimit="10" stroke-width="4">
+          <circle cx="7.5" cy="7.5" r="7.5" stroke="none"/>
+          <circle cx="7.5" cy="7.5" r="5.5" fill="none"/>
+        </g>
+      </g>
+    </g>
+    <g id="Monthly-2" data-name="Monthly" transform="translate(24 215)">
+      <g id="Monthly-3" data-name="Monthly">
+        <g transform="matrix(1, 0, 0, 1, -30, -30)" filter="url(#Monthly)">
+          <rect id="Monthly-4" data-name="Monthly" width="101" height="32" rx="16" transform="translate(30 30)" fill="#fff"/>
+        </g>
+        <text id="Monthly-5" data-name="Monthly" transform="translate(16 21)" fill="#77869e" font-size="13" font-family="SegoeUI, Segoe UI" letter-spacing="0.009em"><tspan x="0" y="0">Monthly</tspan></text>
+        <g id="down" transform="translate(79 15)">
+          <path id="Shape" d="M0,0,3,3,6,0" fill="none" stroke="#77869e" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+        </g>
+      </g>
+      <g id="Jan" transform="translate(133)">
+        <rect id="Jan-2" data-name="Jan" width="38" height="32" rx="6" fill="#dfe7f5"/>
+        <text id="Jan-3" data-name="Jan" transform="translate(8 21)" fill="#0047cc" font-size="13" font-family="SegoeUI, Segoe UI" letter-spacing="0.009em"><tspan x="0" y="0">Jan</tspan></text>
+      </g>
+      <text id="Feb" transform="translate(193 21)" fill="#77869e" font-size="13" font-family="SegoeUI, Segoe UI" letter-spacing="0.009em"><tspan x="0" y="0">Feb</tspan></text>
+      <text id="Mar" transform="translate(238 21)" fill="#77869e" font-size="13" font-family="SegoeUI, Segoe UI" letter-spacing="0.009em"><tspan x="0" y="0">Mar</tspan></text>
+      <text id="Apr" transform="translate(284 21)" fill="#77869e" font-size="13" font-family="SegoeUI, Segoe UI" letter-spacing="0.009em"><tspan x="0" y="0">Apr</tspan></text>
+      <text id="May" transform="translate(329 21)" fill="#77869e" font-size="13" font-family="SegoeUI, Segoe UI" letter-spacing="0.009em"><tspan x="0" y="0">May</tspan></text>
+    </g>
+  </g>
+</svg>

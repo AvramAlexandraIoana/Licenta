@@ -1,0 +1,137 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Your Budgets</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="viewNotifications()">
+        <ion-icon name="notifications"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="the-upper-back">
+    </div>
+    <div class="the-top-card" text-center padding-vertical>
+      <ion-row class="top-row">
+        <ion-col size="auto" text-left>
+          <p>for Platinum Card</p>
+        </ion-col>
+        <ion-col class="text-right">
+          <p>Add Budget</p>
+        </ion-col>
+      </ion-row>
+      <ngx-gauge [type]="gaugeType" size="250" [value]="gaugeValue" [label]="gaugeLabel" 
+        [prepend]="gaugePrependText" thick="12" cap="round" foregroundColor="rgb(0, 71, 204)">
+       
+      </ngx-gauge>
+      <div class="inside-guage" text-center>
+        <img src="assets/imgs/card.svg" alt="">
+        <p>You are spent</p>
+      </div>
+      <div class="precentage-row">
+        <ion-row>
+          <ion-col class="column-left">
+            <p>0%</p>
+          </ion-col>
+          <ion-col class="column-right">
+            <p>100%</p>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+    <div class="bottom-section" padding>
+      <ion-row class="btns-holder">
+        <ion-col>
+          <ion-button expand="block">
+            <img src="assets/imgs/send.svg" alt="">
+            &nbsp;Send Money
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button expand="block">
+            <img src="assets/imgs/calculation.svg" alt="">
+            &nbsp;Calculation
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+      <div class="details">
+        <h3>Transaction</h3>
+        <div class="segment">
+            <ion-segment (ionChange)="segmentChanged($event)" value="category">
+              <ion-segment-button value="day">
+                <ion-label>Day</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="week">
+                <ion-label>Week</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="month">
+                <ion-label>Month</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="year">
+                <ion-label>Year</ion-label>
+              </ion-segment-button>
+            </ion-segment>
+         </div>
+         <div class="the-list" *ngIf="category == 'day'">
+           <ion-item *ngFor="let transaction of transactionPerDay">
+            <div class="thumb" slot="start">
+              <img src="assets/imgs/Gas.svg" alt="">
+            </div>
+            <ion-label>
+              <h4>Shell</h4>
+              <p>{{todayDate | date:'d EEEE  MMMM' }}</p>
+            </ion-label>
+            <div slot="end">
+              <h5>-$ {{transaction.transactions.value}}</h5>
+            </div>
+          </ion-item>
+         </div>
+         <div class="the-list" *ngIf="category == 'week'">
+          <ion-item *ngFor="let transaction of transactionPerWeek">
+           <div class="thumb" slot="start">
+             <img src="assets/imgs/Gas.svg" alt="">
+           </div>
+           <ion-label>
+             <h4>Shell</h4>
+             <p>{{transaction.transactions.date | date:'d EEEE  MMMM' }}</p>
+            </ion-label>
+           <div slot="end">
+             <h5>-$ {{transaction.transactions.value}}</h5>
+           </div>
+         </ion-item>
+        </div>
+        <div class="the-list" *ngIf="category == 'month'">
+          <ion-item *ngFor="let transaction of transactionPerMonth">
+           <div class="thumb" slot="start">
+             <img src="assets/imgs/Gas.svg" alt="">
+           </div>
+           <ion-label>
+             <h4>Shell</h4>
+             <p>{{transaction.transactions.date | date:'d EEEE  MMMM' }}</p>
+           </ion-label>
+           <div slot="end">
+             <h5>-$ {{transaction.transactions.value}}</h5>
+           </div>
+         </ion-item>
+        </div>
+        <div class="the-list" *ngIf="category == 'year'">
+          <ion-item *ngFor="let transaction of transactionPerYear">
+           <div class="thumb" slot="start">
+             <img src="assets/imgs/Gas.svg" alt="">
+           </div>
+           <ion-label>
+             <h4>Shell</h4>
+             <p>{{transaction.transactions.date | date:'d EEEE  MMMM' }}</p>
+            </ion-label>
+           <div slot="end">
+             <h5>-$ {{transaction.transactions.value}}</h5>
+           </div>
+         </ion-item>
+        </div>
+       </div>
+    </div>
+</ion-content>

@@ -1,0 +1,96 @@
+ion-title{
+    span{
+        font-size: .9rem !important;
+    }
+}
+
+ion-content{
+    --background:#F8F9F9;
+}
+
+.visa-card
+{
+    padding-bottom: 10px;
+   
+}
+
+.progress-group {
+    ion-progress-bar{
+        --progress-background:#4DF1A1;
+        --buffer-background:#F24750;
+    }
+  
+}
+
+.text-right {
+   text-align: right;
+}
+.statics {
+    margin: 20px 0;
+}
+
+.send-money
+{
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  &::-webkit-scrollbar {
+    display: none;
+ }
+    .recip-card
+    {
+        width: 28.7vw;
+        height: 145px;       
+        background: white;
+        border: 1px solid #DFE7F5;
+        border-radius: 12px;
+        display: inline-block;
+        margin-left: 13px;
+        padding-top: 10px;
+        ion-avatar{
+            margin-left: auto;
+            margin-right: auto;
+        }
+        p{
+            //margin: 0 !important;
+            text-align: center;
+            margin-top: 0.5vh;
+            
+        }
+    }
+
+}
+
+.details {
+    margin-top: 20px;
+    h3 {
+      font-weight: 400 !important;
+    }
+
+    .segs {
+      padding: 0 10px !important;
+      ion-segment {
+        ion-segment-button {
+          --background-checked: #dfe7f5;
+          font-size: 0.8rem !important;
+          height: px !important;
+          ion-label {
+            margin: 0 !important;
+          }
+          //margin: 0 10px !important;
+        }
+      }
+    }
+
+    .the-list {
+      ion-item {
+        .thumb {
+          // margin: 0 !important
+        }
+
+        h5 {
+          color: #ee5a55 !important;
+        }
+      }
+    }
+}

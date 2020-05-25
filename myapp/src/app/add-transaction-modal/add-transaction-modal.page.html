@@ -1,0 +1,58 @@
+<ion-content >
+  <ion-grid style="height: 100%">
+      <ion-row justify-content-center align-items-center style="height: 100%">
+          <div class="the-holder" padding>
+              <ion-row class="title-row">
+                  <ion-col size="8" text-left>
+                    <h4>Add Transaction</h4>
+                  </ion-col>
+                  <ion-col size="4" text-right (click)="dismiss()">
+                    <p>Cancel</p>
+                  </ion-col>
+               </ion-row>
+               <div class="the-grid-app">
+                  <ion-row class="category-row" text-center>
+                      <ion-col size="5" class="category-column">
+                         <ion-button text-center fill="none"  expand="block" (click)="goRequestMoney()">
+                            <ion-label>
+                              <img src="assets/imgs/category-icons/request.svg" alt="">
+                              <p>Request Money</p>
+                            </ion-label>
+
+                         </ion-button>
+                      </ion-col>
+                      <ion-col size="5" class="category-column">
+                        <ion-button text-center fill="none"  expand="block" (click)="goSendMoney()">
+                           <ion-label>
+                             <img src="assets/imgs/category-icons/send.svg" alt="">
+                             <p>Send Money</p>
+                           </ion-label>
+
+                        </ion-button>
+                     </ion-col>
+                  </ion-row>
+                  <ion-row class="category-row" text-center>
+                    <ion-col size="5" class="category-column">
+                       <ion-button text-center fill="none"  expand="block" (click)="goAddtransaction()">
+                          <ion-label>
+                            <img src="assets/imgs/category-icons/addincome.svg" alt="">
+                            <p>Add Income</p>
+                          </ion-label>
+
+                       </ion-button>
+                    </ion-col>
+                    <ion-col size="5" class="category-column">
+                      <ion-button text-center fill="none"  expand="block">
+                         <ion-label>
+                           <img src="assets/imgs/category-icons/addexpense.svg" alt="">
+                           <p>Add Expense</p>
+                         </ion-label>
+
+                      </ion-button>
+                   </ion-col>
+                </ion-row>
+               </div>
+          </div>
+    </ion-row>
+  </ion-grid>
+</ion-content>

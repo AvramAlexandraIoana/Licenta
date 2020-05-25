@@ -1,0 +1,66 @@
+<!-- <ion-header>
+    <ion-toolbar color="dark">
+      <ion-buttons slot="start">
+        <ion-button (click)="switchStyle()">
+          {{ tableStyle }}
+        </ion-button>
+      </ion-buttons>
+    
+      <ion-buttons slot="end">
+        <ion-button (click)="customRowClass = !customRowClass">
+          <ion-icon name="bulb-outline"></ion-icon>      
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+</ion-header> -->
+<ion-header>
+  <div class="navbarBackground">
+      <ion-buttons slot="start">
+        <ion-back-button color="light" defaultHref="tabs"></ion-back-button>
+      </ion-buttons>
+      <ion-input [(ngModel)]="inputValue" placeholder="Cauta in lista"  (keyup)="updateFilter($event); isKeyPress=true"></ion-input>
+      <ion-icon *ngIf="!isKeyPress" class="group" name="search-outline"></ion-icon>
+      <div (click)="changeInputValue()" tappable>
+        <ion-icon *ngIf="isKeyPress" class="group"  name="close-outline" ></ion-icon>
+      </div>
+  </div>
+</ion-header>
+
+
+<ion-content>
+  <ngx-datatable 
+      [rows]="rows"
+      [ngClass]="tableStyle"
+      [rowHeight]="'auto'"
+      [columnMode]="'force'"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [limit]="5"  
+      [selected]="selected"
+      [selectionType]="single"
+      (select)="onSelect($event)"
+      (activate)="onActivate($event)">
+      <ngx-datatable-column name="userName">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row.userName }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Phone Number">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row.phoneNumber }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="City">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row.city }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Actions" [sortable]="false">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <ion-button size="small" fill="outline" (click)="openEditRolesModal(row)">
+            Edit Roles
+          </ion-button>
+        </ng-template>
+      </ngx-datatable-column>
+  </ngx-datatable>
+</ion-content>

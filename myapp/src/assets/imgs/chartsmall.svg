@@ -1,0 +1,5 @@
+<svg id="chart" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+  <rect id="Rectangle" width="40" height="40" rx="8" fill="#dfe7f5"/>
+  <path id="Fill_90" data-name="Fill 90" d="M8.1,8.1H0V0A8.618,8.618,0,0,1,5.593,2.506,8.617,8.617,0,0,1,8.1,8.1" transform="translate(20.671 11)" fill="#22b4e7"/>
+  <path id="Fill_91" data-name="Fill 91" d="M8.549,17.059H8.542a8.546,8.546,0,0,1-5.586-2.093L8.819,9.1l8.242.026a8.525,8.525,0,0,1-8.512,7.933ZM2.1,14.1h0A8.529,8.529,0,0,1,7.934,0V8.281L2.1,14.1Z" transform="translate(11 11.709)" fill="#0047cc"/>
+</svg>

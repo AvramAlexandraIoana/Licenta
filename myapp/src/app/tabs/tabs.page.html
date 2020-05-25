@@ -1,0 +1,43 @@
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button (click)="clickTab('home')" tab="tab1">
+      <ion-label>
+        <img *ngIf="isActived == 'home'" src="assets/imgs/tabicn/Homea.svg" alt="">
+        <img *ngIf="isActived != 'home'" src="assets/imgs/tabicn/Home.svg" alt="">
+        <p>Home</p>
+      </ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button (click)="clickTab('expenses')" tab="tab2">
+      <ion-label>
+        <img  *ngIf="isActived == 'expenses'" src="assets/imgs/tabicn/Expensesa.svg" alt="">
+        <img  *ngIf="isActived != 'expenses'" src="assets/imgs/tabicn/Expenses.svg" alt="">
+        <p>Expenses</p>
+      </ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button  tab="tab3">
+    </ion-tab-button>
+
+    <ion-tab-button (click)="clickTab('wallet')" tab="tab4">
+      <ion-label>
+        <img  *ngIf="isActived != 'wallet'" src="assets/imgs/tabicn/Wallet.svg" alt="">
+        <img  *ngIf="isActived == 'wallet'" src="assets/imgs/tabicn/Walleta.svg" alt="">
+        <p>Wallet</p>
+      </ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button (click)="clickTab('profile')" tab="tab5">
+      <ion-label>
+        <img *ngIf="isActived != 'profile'" src="assets/imgs/tabicn/profile.svg" alt="">
+        <img *ngIf="isActived == 'profile'" src="assets/imgs/tabicn/profilea.svg" alt="">
+        <p>Profile</p>
+      </ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
+<ion-fab vertical="bottom" horizontal="center" slot="fixed">
+  <ion-fab-button (click)="openAddTransactionModal()">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>

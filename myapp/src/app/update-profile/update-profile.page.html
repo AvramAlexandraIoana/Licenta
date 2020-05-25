@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="primary" defaultHref="profile"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+  <div class="bottom-section">
+    <div class="general">
+        <h3>UPDATE AND MODIFY YOUR PROFILE</h3>
+        <div class="generic-list">
+            <ion-item lines="none" (click)="goToModifyProfile()">
+              <div class="thumb" slot="start">
+                <img src="assets/imgs/profile-20s-128px (1).svg" alt="">
+              </div>
+              <div>
+                <p class="header">Personal Data</p>
+                <p class="body">Modify your personal data</p>
+              </div>
+            </ion-item>
+            <ion-item lines="none" (click)="goToHistoryImages()">
+              <div class="thumb" slot="start">
+                <img src="assets/imgs/photo-20s-128px (2).svg" alt="">
+              </div>
+              <div>
+                  <p class="header">Profile   Image History</p>
+                  <p class="body">Update and modify profile image</p>
+               </div>
+            </ion-item>
+        </div>
+    </div>
+  </div>
+
+</ion-content>

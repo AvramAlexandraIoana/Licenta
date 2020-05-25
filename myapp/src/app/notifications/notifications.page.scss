@@ -1,0 +1,43 @@
+ion-title{
+    font-weight: bolder !important;
+}
+
+.section
+{
+    margin: 10px 0 !important;
+    
+    .section-title{
+        h4{
+            color: #C1C7D0 !important;
+            font-weight: bolder !important;
+        }
+    }
+
+    .the-list
+    {
+        ion-item{
+            .thumb{
+                img{
+                    border-radius: 50%;
+                    height: 70px;
+                    width: 70px;
+                }
+            }
+
+            ion-label{
+                h5{
+                    color: #002251 !important;
+                    .amount{
+                        color: var(--ion-color-primary) !important;
+                        font-weight: bolder !important;
+                    }
+
+                    .person{
+                        //color: black !important;
+                        font-weight: bold !important;
+                    }
+                }
+            }
+        }
+    }
+}

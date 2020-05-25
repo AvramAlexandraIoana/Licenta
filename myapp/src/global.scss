@@ -1,0 +1,147 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+
+@import "~@swimlane/ngx-datatable/index.css";
+@import "~@swimlane/ngx-datatable/themes/dark.css";
+@import "~@swimlane/ngx-datatable/themes/bootstrap.css";
+@import "~@swimlane/ngx-datatable/assets/icons.css";
+
+ion-searchbar ion-icon {
+    right: -4vw !important;
+    margin-top: 1vw !important;
+    margin-right: -5vw !important;
+    left: auto !important;
+}
+
+.searchbar-input-container {
+    left: -6.5vw;
+}
+
+.page-count {
+    position: absolute !important;
+    color: dodgerblue;
+}
+
+
+ .ngx-datatable.bootstrap .datatable-footer {
+    background: rgb(189, 227, 250)!important;
+    .pager {
+      li {
+
+           a {
+              color: dodgerblue;
+              text-decoration: none;
+           }
+        }
+   }
+ }
+
+ .ngx-datatable.bootstrap .datatable-body .datatable-body-row.datatable-row-even
+ {
+    background-color: rgb(232, 244, 252) !important;
+ }
+
+ .ngx-datatable.bootstrap .datatable-footer .datatable-pager ul li:not(.disabled).active a {
+    background-color: rgb(171, 217, 247) !important;
+ }
+
+ //Style rules for the footer pagination elements
+ .datatable-icon-done-all:before {
+    content: ">>";
+ }
+
+ .datatable-icon-left:before {
+    content: "<";
+ }
+
+ .datatable-icon-right:before {
+    content: ">";
+ }
+
+ .datatable-icon-skip:before {
+    content: ">>";
+ }
+ 
+ .datatable-icon-prev:before {
+    content: "<<";
+ }
+
+ 
+.modal-wrapper{
+    background: transparent !important;
+}
+
+.searchbar-input-container{
+   padding-left: 10px !important;
+}
+
+.emailAdress .form-control{
+   height: 50px !important;
+   border-radius: 30px 30px 30px 30px !important;
+   background-color: rgb(164, 217, 248) !important;
+   border: 1px solid #00ffff !important;
+   color: white !important;
+}
+
+.emailAdress .form-control:focus  {
+   background-color:  rgb(164, 217, 248)  !important;
+   border: 1px solid #00ffff !important;
+   height: 50px !important;
+   color: white !important;
+
+}
+.password .form-control  {
+   height: 50px !important;
+   border-radius: 30px 30px 30px 30px !important;
+   background-color: rgb(188, 224, 245) !important;
+   border: 1px solid #85ffff !important;
+   color:dodgerblue !important;
+}
+
+
+.password  .form-control:focus {
+   background-color:  rgb(224, 235, 245)  !important;
+   border: 1px solid #85ffff !important;
+   height: 50px !important;
+   color:dodgerblue !important;
+}
+
+
+.email .native-input.sc-ion-input-md, .password .native-input.sc-ion-input-md {
+   position: absolute !important;
+}
+
+.sc-ion-modal-md-h:first-of-type {
+   --backdrop-opacity: var(--ion-backdrop-opacity, 0) !important;
+}
+
+ion-searchbar ion-icon {
+   left: 16px !important;
+   right: auto !important;
+   top: -4px !important;
+ }

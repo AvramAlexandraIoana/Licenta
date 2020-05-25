@@ -1,0 +1,17 @@
+<svg id="badge_1" data-name="badge 1" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+  <path id="Path" d="M48,24A24.01,24.01,0,0,1,32.769,46.347l-.012,0a24.1,24.1,0,0,1-17.517,0l-.01,0A24,24,0,1,1,48,24Z" fill="#2cba8f"/>
+  <path id="Path-2" data-name="Path" d="M47.673,21.192A24,24,0,0,1,4.183,32.161,23.837,23.837,0,0,1,0,21.192a24,24,0,0,1,47.673,0Z" transform="translate(0.164)" fill="#74daa4"/>
+  <rect id="Rectangle" width="3.532" height="6.468" transform="translate(22.234 16.122)" fill="#feb247"/>
+  <g id="Group" transform="translate(11.069)">
+    <rect id="Rectangle-2" data-name="Rectangle" width="20.489" height="13.471" transform="translate(2.686 2.654)" fill="#fd5b67"/>
+    <rect id="Rectangle-3" data-name="Rectangle" width="20.489" height="2.489" transform="translate(2.686 2.654)" fill="#ef297b"/>
+    <rect id="Rectangle-4" data-name="Rectangle" width="20.489" height="3.01" transform="translate(2.686 7.696)" fill="#ffe26b"/>
+    <path id="Path-3" data-name="Path" d="M25.681,2a2,2,0,0,1-2,2H2A2,2,0,1,1,2,0H23.68A2,2,0,0,1,25.681,2Z" transform="translate(0.09 14.401)" fill="#bbc0e0"/>
+    <path id="Path-4" data-name="Path" d="M25.681,2a2,2,0,0,1-2,2H2A2,2,0,1,1,2,0H23.68A2,2,0,0,1,25.681,2Z" transform="translate(0.09)" fill="#bbc0e0"/>
+    <path id="Path-5" data-name="Path" d="M22.361,2a2,2,0,0,1-2,2H2A2,2,0,0,1,2,0H20.36A2,2,0,0,1,22.361,2Z" transform="translate(3.41 14.401)" fill="#fefdfc"/>
+    <path id="Path-6" data-name="Path" d="M22.361,2a2,2,0,0,1-2,2H2A2,2,0,0,1,2,0H20.36A2,2,0,0,1,22.361,2Z" transform="translate(3.41)" fill="#fefdfc"/>
+  </g>
+  <path id="Path-7" data-name="Path" d="M28.483,14.24a14.218,14.218,0,0,1-5.472,11.222l-.012,0a24.1,24.1,0,0,1-17.517,0l-.01,0A14.241,14.241,0,1,1,28.483,14.24Z" transform="translate(9.759 20.885)" fill="#ffe26b"/>
+  <circle id="Oval" cx="10.606" cy="10.606" r="10.606" transform="translate(13.394 24.52)" fill="#feb247"/>
+  <path id="Path-8" data-name="Path" d="M8.662.613l1.521,3.081a1.1,1.1,0,0,0,.828.6l3.4.494a1.1,1.1,0,0,1,.609,1.875l-2.46,2.4a1.1,1.1,0,0,0-.316.973l.581,3.386a1.1,1.1,0,0,1-1.595,1.159l-3.041-1.6a1.1,1.1,0,0,0-1.023,0l-3.041,1.6a1.1,1.1,0,0,1-1.595-1.159l.581-3.386a1.1,1.1,0,0,0-.316-.973l-2.46-2.4A1.1,1.1,0,0,1,.942,4.789l3.4-.494a1.1,1.1,0,0,0,.828-.6L6.69.613A1.1,1.1,0,0,1,8.662.613Z" transform="translate(16.324 27.195)" fill="#ffe26b"/>
+</svg>

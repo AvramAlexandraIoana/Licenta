@@ -1,0 +1,31 @@
+ion-label {
+    --color: rgb(189, 184, 184) !important;
+    font-size: 20px !important;
+
+}
+
+p {
+    margin-top: 6px !important;
+    font-size: 15px !important;
+    width: 80% !important;
+}
+
+ion-item {
+    margin-left: 10px !important;
+
+}
+
+svg {
+    position: relative;
+    top: -55px;
+    left: 89%;
+    width: 20px;;
+}
+
+.pressedClass {
+    --background: rgb(239, 251, 255) !important;
+}
+
+.nonePressed {
+    --background: white;
+}

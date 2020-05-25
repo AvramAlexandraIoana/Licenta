@@ -1,0 +1,53 @@
+<ion-header>
+  <div class="navbarBackground">
+      <ion-buttons slot="start">
+        <ion-back-button color="dark" defaultHref="chat-history"></ion-back-button>
+      </ion-buttons>
+      <ion-input [(ngModel)]="inputValue" placeholder="Cauta" (keyup)="onKeyUp($event); isKeyPress=true"></ion-input>
+      <ion-icon *ngIf="!isKeyPress" class="group" name="search-outline"></ion-icon>
+      <div (click)="changeInputValue()" tappable>
+        <ion-icon *ngIf="isKeyPress" class="group"  name="close-outline" ></ion-icon>
+      </div>
+  </div>
+</ion-header>
+
+
+<ion-content>
+  <ion-grid class="paddingLeft">
+    <ion-label *ngIf="!isKeyPress" class="labelS">Recent Searches</ion-label>
+    <div *ngIf="!isKeyPress" class="selected-contacts" padding-horizontal scrollX="true">
+      <div class="people" text-cente *ngFor="let user of recentUsers;">
+        <ion-avatar class="avatar2" *ngIf="user.profilePictureName">
+          <img  src="https://ucarecdn.com/{{user.profilePictureName}}/"/>
+        </ion-avatar>
+        <ion-avatar class="avatar2" *ngIf="!user.profilePictureName">
+          <img src="assets/imgs/josie.png" alt="">
+        </ion-avatar>
+        <p text-wrap class="nameText">
+          {{user?.name}}
+       </p>
+      </div>
+    </div>
+    <ion-label class="labelS">Suggested</ion-label>
+    <div *ngFor="let user of users">
+      <ion-row *ngIf="user.id != userId" (click)="goToMessageHistory(user)">
+        <ion-col  size="2.2">
+          <ion-avatar class="avatar" *ngIf="user.profilePictureName">
+            <img  src="https://ucarecdn.com/{{user.profilePictureName}}/"/>
+          </ion-avatar>
+          <ion-avatar class="avatar" *ngIf="!user.profilePictureName">
+              <img src="assets/imgs/josie.png" alt="">
+          </ion-avatar>
+
+        </ion-col>
+        <ion-col>
+          <ion-label class="colLeft">
+            {{user.name}}
+          </ion-label>
+        </ion-col>
+      
+      </ion-row>
+    </div>
+  </ion-grid>  
+
+</ion-content>

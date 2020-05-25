@@ -1,0 +1,46 @@
+.paddingList {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+ion-label {
+    --color: gray !important;
+}
+
+ion-input {
+    --placeholder-color: gray;
+}
+
+.infoHeader {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+.header {
+    font-weight: bold;
+}
+
+ion-item {
+    margin-top: 15px !important;
+}
+
+.infoHeader1 {
+    font-size: 13px;
+    margin-top: -18px !important;
+}
+
+
+ion-button  {
+    margin-left: 7.5% !important;
+    height: 45px;
+    width: 85%;
+}
+
+.error-messages
+{
+    font-size: 0.7em;
+    color: red;
+    text-align:left;
+}

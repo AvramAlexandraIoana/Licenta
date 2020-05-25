@@ -1,0 +1,65 @@
+<ion-header  class="ion-no-border">
+  <ion-toolbar>
+    <ion-icon (click)="dismiss()" style="font-weight: bolder; font-size: 28px; margin-left: 4%;" name="close-outline"></ion-icon>
+   </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="containerBackground">
+
+    <ion-card>
+      <div>
+        <img class="logoImg" src="assets/imgs/contacts-1.1s-128px (1).svg" alt="">
+      </div>
+      <ion-card-header>
+        <ion-card-title>Adauga un nou contact</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <form [formGroup]="contactForm">
+          <ion-list lines="full" class="paddingList">
+            <div>
+              <ion-item>
+                <ion-label position="stacked">Nume</ion-label>
+                <ion-input formControlName="name" placeholder="Numele contactului" type="text"></ion-input>
+              </ion-item>
+              <div class="error-messages">
+                <ng-container *ngFor="let error of errorMessages.name">
+                  <div class="error-message"
+                    *ngIf="contactForm.get('name').hasError(error.type) && (contactForm.get('name').dirty || contactForm.get('name').touched)">
+                    {{error.message}}
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+      
+            <div>
+              <ion-item>
+                <ion-label position="floating">Numar de telefon</ion-label>
+                <ion-input  formControlName="phoneNumber" type="tel" placeholder="Numar de telefon"  (ionInput)="isEnterAdress1Input=true" (ionFocus)="isEnterAdress1Input=true;" (ionBlur)="isEnterAdress1Input=false;"></ion-input>
+              </ion-item>
+              <div class="error-messages">
+                <ng-container *ngFor="let error of errorMessages.phoneNumber">
+                  <div class="error-message"
+                    *ngIf="contactForm.get('phoneNumber').hasError(error.type) && (contactForm.get('phoneNumber').dirty || contactForm.get('phoneNumber').touched)">
+                    {{error.message}}
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </ion-list>
+      
+          <div class="ion-padding">
+            <ion-button  (click)="createContact()" expand="block" shape="round" expand="full" class="sendButton"  [disabled]="contactForm.invalid">Salveaza</ion-button>
+          </div>
+
+        </form>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+
+  
+  
+</ion-content>
+
+

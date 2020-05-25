@@ -1,0 +1,99 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    //font-size: 16px;
+}
+
+.sigup-image {
+    height: 20%!important;
+    width: 90% !important;
+    margin-left: 5% !important;
+    margin-right: 5% !important;
+}
+
+.the-content{
+    padding: 0 16px;
+    margin-top: 10% !important;
+    .the-title
+    {
+        h2{
+            font-weight: 400 !important;
+            margin-top: 0 !important;
+        }
+    }
+
+    form{
+        //padding-left: 5% !important;
+        margin-top: 15px;
+        .details{
+            .detail-item{
+                --highlight-color-invalid:red;
+                --highlight-color-valid: #2AD95A;
+                margin-top: 20px !important;
+                ion-label{
+                    color: #77869E !important;
+                    font-size: .9rem !important;
+                    font-weight: 400 !important;
+                }
+                .icn{
+                    ion-icon{
+                        color: #2AD95A !important;
+                        font-size: 1.5rem !important;
+                        margin-right: 10px !important;
+                    }
+                }
+            }
+    
+            .error-messages
+            {
+                font-size: 0.7em;
+                color: red;
+                text-align:left;
+            }
+    
+            .second-item{
+                margin: 10px 0 !important;
+            }
+            #rem {
+                ion-label{
+                    font-size: 0.9rem !important;
+                    color: #77869E !important;
+                }
+            }
+            ion-checkbox{
+             margin-right: 5px !important;
+            }
+            .col-forgot
+            {
+                p{
+                    font-size: 0.9rem !important;
+                    color: #0047CC !important;
+                  //  margin: 0 !important;
+                }
+            }
+          
+        }
+    
+        .loginbtn-holder
+        {
+            ion-button{
+                height: 50px !important;
+                text-transform: none !important;
+                border-radius: 12px !important;
+            }
+        }  
+    }
+   
+
+    .signup-holder
+    {
+        margin-top: 20px !important;
+        p{
+            color: #77869E;
+            span{
+                font-weight: bolder !important;
+                color: #042C5C;
+            }
+        }
+    }
+}
