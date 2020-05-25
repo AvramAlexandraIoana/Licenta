@@ -29,6 +29,14 @@ export class TransactionService {
 
   }
 
+  getTransactions(userId: number): Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(this.url + '/index/' + userId, this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.errorHandler)
+    );
+  }
+
   getTransactionsForToday(transactionId: number): Observable<Transaction[]> {
     return this.http.get<Transaction[]>(this.url + '/getTransactionsForToday/' + transactionId, this.httpOptions)
     .pipe(

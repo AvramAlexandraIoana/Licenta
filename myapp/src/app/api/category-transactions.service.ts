@@ -30,6 +30,14 @@ export class CategoryTransactionsService {
 
   }
 
+  getCategoryTransactions(userId: number): Observable<CategoryTransaction[]> {
+    return this.http.get<CategoryTransaction[]>(this.url + '/index/' + userId, this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.errorHandler)
+    );
+  }
+
   getCategoryTransactionList(): Observable<CategoryTransaction[]> {
     return this.http.get<CategoryTransaction[]>(this.url + '/index', this.httpOptions)
     .pipe(
