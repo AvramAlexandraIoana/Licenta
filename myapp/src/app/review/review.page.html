@@ -1,9 +1,83 @@
-<ion-header>
+<ion-header  class="ion-no-border">
   <ion-toolbar>
-    <ion-title>review</ion-title>
+    <ion-icon (click)="dismiss()" style="font-weight: bolder; font-size: 28px; margin-left: 4%;" name="close-outline"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-item>
+    <img  class="image" src="assets\imgs\b11e88a064ab23687213c69965a6790b.jpg">
+  </ion-item>
+  <ion-card class="card-container">
+    <ion-card-header>
+      <ion-card-title>Send us your feedback!</ion-card-title>
+      <ion-card-subtitle>Do you have a suggestion or found some bug? 
+            <br>
+            let us know in the field below
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <form>
+        <ion-list>
+          <ion-item lines="none">
+            <ion-label>
+              How was your experiance?
+            </ion-label>
+          </ion-item>
+          <ion-row>
+            <ion-col size="2" (click)="changeImage(1)">
+                <img  *ngIf="!isFirstPressed" src="assets\imgs\disappointed face-20s-36px (1).svg">
+                <img  *ngIf="isFirstPressed" src="assets\imgs\disappointed face-20s-36px (2).svg">
+            </ion-col>
+            <ion-col size="2" (click)="changeImage(2)">
+              <img  *ngIf="!isSecondPressed" src="assets\imgs\poker face-20s-36px (1).svg">
+              <img  *ngIf="isSecondPressed" src="assets\imgs\poker face-20s-36px (2).svg">
+            </ion-col>
+            <ion-col size="2" (click)="changeImage(3)">
+              <img  *ngIf="!isThirdPressed" src="assets\imgs\smile face-20s-36px.svg">
+              <img  *ngIf="isThirdPressed" src="assets\imgs\smile face-20s-36px (1).svg">
+
+            </ion-col>
+            <ion-col size="2" (click)="changeImage(4)">
+              <img   *ngIf="!isFourPressed" src="assets\imgs\love face-20s-36px (4).svg">
+              <img   *ngIf="isFourPressed" src="assets\imgs\love face-20s-36px (3).svg">
+            </ion-col>
+          </ion-row>
+        
+          <ion-item>
+            <ion-label position="floating" style="font-size: 18px !important;">Describe your experiance here..</ion-label>
+            <ion-textarea  rows="3" cols="15" placeholder="Enter any notes here..."></ion-textarea>
+          </ion-item>   
+
+          <ion-row class="types">
+            <ion-radio-group>
+              <div class="rad-item" text-center>
+                <ion-item text-center lines="none">
+                  <ion-radio value="Bug"></ion-radio>
+                  <p>Bug</p>
+                </ion-item>
+              </div>
+              <div class="rad-item" text-center>
+                <ion-item text-center lines="none">
+                  <ion-radio value="Suggestion"></ion-radio>
+                  <p>Suggestion</p>
+                </ion-item>
+              </div>
+              <div class="rad-item" text-center>
+                <ion-item text-center lines="none">
+                  <ion-radio value="Others"></ion-radio>
+                  <p>Others</p>
+                </ion-item>
+              </div>
+            </ion-radio-group>
+          </ion-row>
+        </ion-list>
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+  <div>
+    <ion-button   expand="block" shape="round" class="sendButton">Send Feedback</ion-button>
+  </div>
 
 </ion-content>

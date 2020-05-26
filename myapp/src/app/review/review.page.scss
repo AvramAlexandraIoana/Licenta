@@ -1,0 +1,45 @@
+
+.card-container {
+    position: relative;
+    top: -5%;
+    z-index: 100;
+}
+ion-card-title {
+    font-size: 16px !important;
+}
+
+ion-card-subtitle {
+    font-size: 13px !important;
+}
+
+ion-label {
+    font-size: 14px !important;
+    font-weight:500;
+}
+ion-card-title, ion-card-subtitle {
+    text-align: center;
+}
+.rad-item {
+    display: inline-block;
+}
+
+p {
+    margin-left: 2vw;
+    margin-top: 1px;
+}
+
+.types {
+    position: relative;
+    top: 10px;
+}
+
+ion-textarea {
+    --background: rgb(248, 245, 245);
+}
+
+.sendButton {
+    margin-top: -30px;
+    width: 70vw;
+    margin-left: 15vw;
+
+}
