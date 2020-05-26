@@ -283,8 +283,8 @@ namespace WebFMI.Controllers
 
            // AnalyzeSentimentFromText(text);
 
-            var text1 = "Translate using Google";
-            var translatedText =  TranslateText(text1, "ro");
+            var text1 = "Este bine";
+            var translatedText =  TranslateText(text1, "en");
 
             // AnalyzeEverything(text);
 

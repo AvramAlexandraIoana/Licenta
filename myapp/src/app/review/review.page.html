@@ -17,14 +17,14 @@
       </ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-      <form>
+      <form [formGroup]="reviewForm">
         <ion-list>
           <ion-item lines="none">
             <ion-label>
               How was your experiance?
             </ion-label>
           </ion-item>
-          <ion-row>
+          <ion-row >
             <ion-col size="2" (click)="changeImage(1)">
                 <img  *ngIf="!isFirstPressed" src="assets\imgs\disappointed face-20s-36px (1).svg">
                 <img  *ngIf="isFirstPressed" src="assets\imgs\disappointed face-20s-36px (2).svg">
@@ -46,11 +46,19 @@
         
           <ion-item>
             <ion-label position="floating" style="font-size: 18px !important;">Describe your experiance here..</ion-label>
-            <ion-textarea  rows="3" cols="15" placeholder="Describe your experiance here.."></ion-textarea>
+            <ion-textarea formControlName="feedbackR" rows="3" cols="15" placeholder="Describe your experiance here.."></ion-textarea>
           </ion-item>   
+          <div class="error-messages">
+            <ng-container *ngFor="let error of errorMessages.feedbackR">
+              <div class="error-message"
+                *ngIf="reviewForm.get('feedbackR').hasError(error.type) && (reviewForm.get('feedbackR').dirty || reviewForm.get('feedbackR').touched)">
+                {{error.message}}
+              </div>
+            </ng-container>
+          </div>
 
           <ion-row class="types">
-            <ion-radio-group>
+            <ion-radio-group formControlName="type">
               <div class="rad-item" text-center>
                 <ion-item text-center lines="none">
                   <ion-radio value="Bug"></ion-radio>
@@ -71,13 +79,22 @@
               </div>
             </ion-radio-group>
           </ion-row>
+
+          <div class="error-messages">
+            <ng-container *ngFor="let error of errorMessages.type">
+              <div class="error-message"
+                *ngIf="reviewForm.get('type').hasError(error.type) && (reviewForm.get('type').dirty || reviewForm.get('type').touched)">
+                {{error.message}}
+              </div>
+            </ng-container>
+          </div>
         </ion-list>
       </form>
     </ion-card-content>
   </ion-card>
 
   <div>
-    <ion-button   expand="block" shape="round" class="sendButton">Send Feedback</ion-button>
+    <ion-button [disabled]="reviewForm.invalid || (!isFirstPressed  && !isSecondPressed && !isThirdPressed && !isFourPressed)" (click)="sendReview()"  expand="block" shape="round" class="sendButton" >Send Feedback</ion-button>
   </div>
 
 </ion-content>

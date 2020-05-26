@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Google.Cloud.Language.V1;
 using Google.Cloud.Translation.V2;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -52,8 +53,20 @@ namespace WebFMI.Controllers
         [HttpPost("new")]
         public async Task<IActionResult> Create(Review review)
         {
+            var translatedText = TranslateText(review.FeedbackR, "en");
+            review.FeedbackE = translatedText;
+
+            var client = LanguageServiceClient.Create();
+            var response = client.AnalyzeSentiment(Document.FromPlainText(translatedText));
+            var sentiment = response.DocumentSentiment;
+            Console.WriteLine($"Score: {sentiment.Score}");
+            Console.WriteLine($"Magnitude: {sentiment.Magnitude}");
+
+            review.Score = sentiment.Score;
+
             try
             {
+             
                 review.CreatedOn = DateTime.Now;
                 var rev = await _context.Reviews.AddAsync(review);
                 await _context.SaveChangesAsync();

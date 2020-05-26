@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../api/user.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { NavController } from '@ionic/angular';
+import { NavController, ToastController } from '@ionic/angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Review } from '../_models/Review';
+import { ReviewService } from '../api/review.service';
 
 @Component({
   selector: 'app-review',
@@ -18,14 +21,82 @@ export class ReviewPage implements OnInit {
   jwtHelper = new JwtHelperService();
   user: import("t:/Licenta/myapp/src/app/_models/User").User;
   imageURL: string;
+  reviewForm: FormGroup;
+
+  errorMessages = {
+    'emotion':[
+      { type:'required', message: 'Emoticon is required'}
+    ],
+    'feedbackR':[
+      { type:'required', message: 'Feedback is required'},
+      { type:'minlength', message: 'Feedback lenght must be longer than or equal to 5 characters '},
+      { type:'maxlength', message: 'Feedback lenght cannot exceed 20 characters '},
+    ],
+    'type':[
+      { type:'required', message: 'Type is required'}
+    ]
+  }
+  model: any;
 
 
   constructor(private userService: UserService,
-              private navControl: NavController) { }
+              private navControl: NavController,
+              private formBuilder: FormBuilder,
+              private reviewService: ReviewService,
+              private toastController: ToastController) { }
 
   ngOnInit() {
+    this.createReviewForm();
     this.userId = this.getUserId();
     this.getImageName(this.userId);
+
+
+  }
+
+  createReviewForm() {
+    this.reviewForm = this.formBuilder.group({
+      'feedbackR': ['', [Validators.required,
+                        Validators.minLength(5),
+                        Validators.maxLength(30)]],
+      'type': ['', [Validators.required]]
+    });
+
+  }
+
+  async presentToast(text, type) {
+    const toast = await this.toastController.create({
+        message: text,
+        position: 'bottom',
+        duration: 3000,
+        color: type
+      });
+    toast.present();
+  }
+
+  sendReview() {
+    var val;
+    if (this.isFirstPressed) {
+      val = "Disappointed";
+    } else if (this.isSecondPressed) {
+      val = "Poker Face";
+    } else if (this.isThirdPressed) {
+      val = "Smile Face";
+    } else {
+      val = "Love Face";
+    }
+
+    this.model = {
+      'Emotion': val,
+      'FeedbackR': this.reviewForm.controls['feedbackR'].value,
+      'Type': this.reviewForm.controls['type'].value,
+      'UserId': this.userId
+    }
+
+    this.reviewService.saveReview(this.model).subscribe(res => {
+      console.log("Review salvat");
+      this.presentToast("Review salvat", "success");
+      this.dismiss();
+    });
 
   }
 
@@ -98,4 +169,6 @@ export class ReviewPage implements OnInit {
   dismiss() {
     this.navControl.navigateBack(["tabs/tab5"]);
   }
+
+  
 }

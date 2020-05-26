@@ -22,6 +22,8 @@ namespace WebFMI.Models
 
         public string Type { get; set; }
 
+        public float Score { get; set; }
+
         public virtual User User { get; set; }
 
         public int UserId { get; set; }
