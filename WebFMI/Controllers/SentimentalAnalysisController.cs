@@ -17,7 +17,6 @@ namespace WebFMI.Controllers
     public class SentimentalAnalysisController : ControllerBase
     {
         public static string Usage;
-        // [START language_entities_gcs]
         private static void AnalyzeEntitiesFromFile(string gcsUri)
         {
             var client = LanguageServiceClient.Create();
@@ -28,9 +27,7 @@ namespace WebFMI.Controllers
             });
             WriteEntities(response.Entities);
         }
-        // [END language_entities_gcs]
-
-        // [START language_entities_text]
+       
         private static void AnalyzeEntitiesFromText(string text)
         {
             var client = LanguageServiceClient.Create();
@@ -42,7 +39,6 @@ namespace WebFMI.Controllers
             WriteEntities(response.Entities);
         }
 
-        // [START language_entities_gcs]
         private static void WriteEntities(IEnumerable<Entity> entities)
         {
             Console.WriteLine("Entities:");
@@ -61,10 +57,7 @@ namespace WebFMI.Controllers
                 }
             }
         }
-        // [END language_entities_gcs]
-        // [END language_entities_text]
-
-        // [START language_sentiment_gcs]
+     
         private static void AnalyzeSentimentFromFile(string gcsUri)
         {
             var client = LanguageServiceClient.Create();
@@ -75,9 +68,7 @@ namespace WebFMI.Controllers
             });
             WriteSentiment(response.DocumentSentiment, response.Sentences);
         }
-        // [END language_sentiment_gcs]
-
-        // [START language_sentiment_text]
+        
         private static void AnalyzeSentimentFromText(string text)
         {
             var client = LanguageServiceClient.Create();
@@ -89,7 +80,6 @@ namespace WebFMI.Controllers
             WriteSentiment(response.DocumentSentiment, response.Sentences);
         }
 
-        // [START language_sentiment_gcs]
         private static void WriteSentiment(Sentiment sentiment,
             RepeatedField<Sentence> sentences)
         {
@@ -103,10 +93,7 @@ namespace WebFMI.Controllers
                     + $"({sentence.Sentiment.Score})");
             }
         }
-        // [END language_sentiment_gcs]
-        // [END language_sentiment_text]
-
-        // [START language_syntax_gcs]
+        
         private static void AnalyzeSyntaxFromFile(string gcsUri)
         {
             var client = LanguageServiceClient.Create();
@@ -118,9 +105,7 @@ namespace WebFMI.Controllers
             new AnnotateTextRequest.Types.Features() { ExtractSyntax = true });
             WriteSentences(response.Sentences, response.Tokens);
         }
-        // [END language_syntax_gcs]
-
-        // [START language_syntax_text]
+       
         private static void AnalyzeSyntaxFromText(string text)
         {
             var client = LanguageServiceClient.Create();
@@ -149,10 +134,7 @@ namespace WebFMI.Controllers
                     + $"{token.Text.Content}");
             }
         }
-        // [END language_syntax_gcs]
-        // [END language_syntax_text]
-
-        // [START language_entity_sentiment_gcs]
+       
         private static void AnalyzeEntitySentimentFromFile(string gcsUri)
         {
             var client = LanguageServiceClient.Create();
@@ -163,9 +145,7 @@ namespace WebFMI.Controllers
             });
             WriteEntitySentiment(response.Entities);
         }
-        // [END language_entity_sentiment_gcs]
-
-        // [START language_entity_sentiment_text]
+     
         private static void AnalyzeEntitySentimentFromText(string text)
         {
             var client = LanguageServiceClient.Create();
@@ -177,7 +157,6 @@ namespace WebFMI.Controllers
             WriteEntitySentiment(response.Entities);
         }
 
-        // [START language_entity_sentiment_gcs]
         private static void WriteEntitySentiment(IEnumerable<Entity> entities)
         {
             Console.WriteLine("Entity Sentiment:");
@@ -189,10 +168,7 @@ namespace WebFMI.Controllers
                 Console.WriteLine($"\t\tMagnitude { entity.Sentiment.Magnitude}");
             }
         }
-        // [END language_entity_sentiment_gcs]
-        // [END language_entity_sentiment_text]
-
-        // [START language_classify_gcs]
+      
         private static void ClassifyTextFromFile(string gcsUri)
         {
             var client = LanguageServiceClient.Create();
@@ -203,9 +179,7 @@ namespace WebFMI.Controllers
             });
             WriteCategories(response.Categories);
         }
-        // [END language_classify_gcs]
-
-        // [START language_classify_text]
+        
         private static void ClassifyTextFromText(string text)
         {
             var client = LanguageServiceClient.Create();
@@ -217,7 +191,6 @@ namespace WebFMI.Controllers
             WriteCategories(response.Categories);
         }
 
-        // [START language_classify_gcs]
         private static void WriteCategories(IEnumerable<ClassificationCategory> categories)
         {
             Console.WriteLine("Categories:");
@@ -227,8 +200,7 @@ namespace WebFMI.Controllers
                 Console.WriteLine($"\t\tConfidence: {category.Confidence}");
             }
         }
-        // [END language_classify_text]
-        // [END language_classify_gcs]
+      
 
         private static void AnalyzeEverything(string text)
         {
@@ -253,6 +225,7 @@ namespace WebFMI.Controllers
             WriteEntitySentiment(response.Entities);
             WriteCategories(response.Categories);
         }
+
         // Some APIs, like Storage, accept a credential in their Create()
         // method.
         public object AuthExplicit(string projectId, string jsonPath)
@@ -280,12 +253,14 @@ namespace WebFMI.Controllers
             //AnalyzeEntitySentimentFromText("beautiful");
             string value = Environment.GetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS");
 
-            var text = "Yukihiro Matsumoto is great!";
-            var client = LanguageServiceClient.Create();
-            var response = client.AnalyzeSentiment(Document.FromPlainText(text));
-            var sentiment = response.DocumentSentiment;
-            Console.WriteLine($"Score: {sentiment.Score}");
-            Console.WriteLine($"Magnitude: {sentiment.Magnitude}");
+             var text = "Is not okay!";
+             /*var client = LanguageServiceClient.Create();
+             var response = client.AnalyzeSentiment(Document.FromPlainText(text));
+             var sentiment = response.DocumentSentiment;
+             Console.WriteLine($"Score: {sentiment.Score}");
+             Console.WriteLine($"Magnitude: {sentiment.Magnitude}");*/
+
+            AnalyzeSentimentFromText(text);
 
             return Ok(value);
 
