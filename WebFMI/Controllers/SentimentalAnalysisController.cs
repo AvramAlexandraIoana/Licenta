@@ -9,6 +9,8 @@ using Google.Protobuf.Collections;
 using Org.BouncyCastle.Math.EC.Rfc7748;
 using Google.Cloud.Storage.V1;
 using Google.Apis.Auth.OAuth2;
+using WebFMI.Data;
+using Google.Cloud.Translation.V2;
 
 namespace WebFMI.Controllers
 {
@@ -16,7 +18,26 @@ namespace WebFMI.Controllers
     [ApiController]
     public class SentimentalAnalysisController : ControllerBase
     {
+
         public static string Usage;
+
+        private readonly TranslationClient client;
+
+        public SentimentalAnalysisController()
+        {
+            string credential_path = "T:/Ioana/Downloads/My Project 79292-181c565ffbe1.json";
+            System.Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", credential_path);
+            client = TranslationClient.Create();
+
+        }
+
+        public string TranslateText(string text, string language)
+        {
+            var response = client.TranslateText(text, language);
+            return response.TranslatedText;
+        }
+
+
         private static void AnalyzeEntitiesFromFile(string gcsUri)
         {
             var client = LanguageServiceClient.Create();
@@ -248,21 +269,26 @@ namespace WebFMI.Controllers
         {
             AuthExplicit("teak-passage-278407", "T:/Ioana/Downloads/My Project 79292-181c565ffbe1.json");
 
-            string credential_path = "T:/Ioana/Downloads/My Project 79292-181c565ffbe1.json";
-            System.Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", credential_path);
+           // string credential_path = "T:/Ioana/Downloads/My Project 79292-181c565ffbe1.json";
+           // System.Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", credential_path);
             //AnalyzeEntitySentimentFromText("beautiful");
             string value = Environment.GetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS");
 
-             var text = "Is not okay!";
+             var text = "Textul de discurs în limba română!";
              /*var client = LanguageServiceClient.Create();
              var response = client.AnalyzeSentiment(Document.FromPlainText(text));
              var sentiment = response.DocumentSentiment;
              Console.WriteLine($"Score: {sentiment.Score}");
              Console.WriteLine($"Magnitude: {sentiment.Magnitude}");*/
 
-            AnalyzeSentimentFromText(text);
+           // AnalyzeSentimentFromText(text);
 
-            return Ok(value);
+            var text1 = "Translate using Google";
+            var translatedText =  TranslateText(text1, "ro");
+
+            // AnalyzeEverything(text);
+
+            return Ok(translatedText);
 
 
         }
