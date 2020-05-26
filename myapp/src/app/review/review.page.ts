@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../api/user.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-review',
@@ -19,7 +20,8 @@ export class ReviewPage implements OnInit {
   imageURL: string;
 
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+              private navControl: NavController) { }
 
   ngOnInit() {
     this.userId = this.getUserId();
@@ -94,6 +96,6 @@ export class ReviewPage implements OnInit {
   }
 
   dismiss() {
-
+    this.navControl.navigateBack(["tabs/tab5"]);
   }
 }

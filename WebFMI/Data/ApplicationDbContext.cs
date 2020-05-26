@@ -39,6 +39,8 @@ namespace WebFMI.Data
 
         public DbSet<RecentSearch> RecentSearches { get; set; }
 
+        public DbSet<Review> Reviews { get; set; }
+
 
 
        protected override void OnModelCreating(ModelBuilder builder)
