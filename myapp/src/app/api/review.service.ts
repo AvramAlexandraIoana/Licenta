@@ -46,8 +46,16 @@ export class ReviewService {
     );
   }
 
-  getReviewsSkip(num1: number, num2: number, sort: number): Observable<Review[]> {
-    return this.http.get<Review[]>(this.url + '/reviewIndex/' + num1 + '/' + num2 + '/' + sort, this.httpOptions)
+  getReviewsSkip(num1: number, num2: number, sort: number, filter: string): Observable<Review[]> {
+    return this.http.get<Review[]>(this.url + '/reviewIndex/' + num1 + '/' + num2 + '/' + sort + '/' + filter, this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.errorHandler)
+    );
+  }
+
+  getReviewsFilter(name: string): Observable<Review[]> {
+    return this.http.get<Review[]>(this.url + '/filter/', this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.errorHandler)

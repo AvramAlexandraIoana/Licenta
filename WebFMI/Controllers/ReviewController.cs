@@ -49,17 +49,34 @@ namespace WebFMI.Controllers
             return await _context.Reviews.ToListAsync();
         }
 
-        [HttpGet("reviewIndex/{num1}/{num2}/{sort}")]
-        public async Task<ActionResult<IEnumerable<Review>>> GetReviewLists1(int num1, int num2, int sort)
+        [HttpGet("reviewIndex/{num1}/{num2}/{sort}/{name}")]
+        public async Task<ActionResult<IEnumerable<Review>>> GetReviewLists1(int num1, int num2, int sort, string name)
         {
-            if (sort == 0)
+            if (sort == 0 && name == "null")
             {
                 return await _context.Reviews.Skip(num1).Take(num2).ToListAsync();
-            } else
+            }
+            else if (sort == 1 && name == "null")
             {
                 return await _context.Reviews.OrderByDescending(u => u.CreatedOn).Skip(num1).Take(num2).ToListAsync();
+            } else  if (sort == 0)
+            {
+                return await _context.Reviews.Where(u => u.Type == name).Skip(num1).Take(num2).ToListAsync();
+            } else
+            {
+                return await _context.Reviews.OrderByDescending(u => u.CreatedOn).Where(u => u.Type == name).Skip(num1).Take(num2).ToListAsync();
+
             }
 
+        }
+
+
+        [HttpGet("filter/{name}")]
+        public async Task<ActionResult<IEnumerable<Review>>> GetReviewFilter(string name)
+        {
+
+
+            return await _context.Reviews.Where(u => u.Type == name).ToListAsync();
         }
 
 

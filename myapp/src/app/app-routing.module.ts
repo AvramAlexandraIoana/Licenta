@@ -177,7 +177,8 @@ const routes: Routes = [
   {
     path: 'users-messages',
     loadChildren: () => import('./users-messages/users-messages.module').then( m => m.UsersMessagesPageModule)
-  },  {
+  },
+  {
     path: 'chat-s',
     loadChildren: () => import('./chat-s/chat-s.module').then( m => m.ChatSPageModule)
   },
@@ -192,6 +193,10 @@ const routes: Routes = [
   {
     path: 'review-list',
     loadChildren: () => import('./review-list/review-list.module').then( m => m.ReviewListPageModule)
+  },
+  {
+    path: 'review-modal',
+    loadChildren: () => import('./review-modal/review-modal.module').then( m => m.ReviewModalPageModule)
   }
 
 
