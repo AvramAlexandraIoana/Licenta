@@ -49,12 +49,17 @@ namespace WebFMI.Controllers
             return await _context.Reviews.ToListAsync();
         }
 
-        [HttpGet("reviewIndex/{num1}/{num2}")]
-        public async Task<ActionResult<IEnumerable<Review>>> GetReviewLists1(int num1, int num2)
+        [HttpGet("reviewIndex/{num1}/{num2}/{sort}")]
+        public async Task<ActionResult<IEnumerable<Review>>> GetReviewLists1(int num1, int num2, int sort)
         {
-            var list = await _context.Reviews.ToListAsync();
+            if (sort == 0)
+            {
+                return await _context.Reviews.Skip(num1).Take(num2).ToListAsync();
+            } else
+            {
+                return await _context.Reviews.OrderByDescending(u => u.CreatedOn).Skip(num1).Take(num2).ToListAsync();
+            }
 
-            return await _context.Reviews.Skip(num1).Take(num2).ToListAsync();
         }
 
 

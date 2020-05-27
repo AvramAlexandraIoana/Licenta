@@ -9,7 +9,9 @@
 
 <ion-content>
   <ion-row>
-    <ion-col class="header he1">
+    <ion-col class="header he1" (click)="sort()">
+      <ion-icon *ngIf="isSort" color="primary" name="arrow-up"></ion-icon>
+      <ion-icon *ngIf="!isSort" color="primary"  name="arrow-down"></ion-icon>
       <ion-icon name="funnel" color="primary"></ion-icon>
       SORT BY
       <br>
