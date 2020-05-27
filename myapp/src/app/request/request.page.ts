@@ -99,6 +99,8 @@ export class RequestPage implements OnInit {
           this.contactsFound[i].isSaved = true;
           this.contactsFound[i].id = user.id;
           this.contactsFound[i].imageURL = user.profilePictureName;
+          this.contactsFound[i].userName = user.name;
+          this.contactsFound[i].imageURL = user.profilePictureName;
           this.imageURL = user.profilePictureName;
         } else {
           this.contactsFound[i].isSaved = false;

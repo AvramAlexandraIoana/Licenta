@@ -91,18 +91,20 @@
           </ion-item>
          </div>
          <div class="the-list" *ngIf="category == 'week'">
-          <ion-item *ngFor="let transaction of transactionPerWeek">
-           <div class="thumb" slot="start">
-             <img src="assets/imgs/Gas.svg" alt="">
-           </div>
-           <ion-label>
-             <h4>Shell</h4>
-             <p>{{transaction.transactions.date | date:'d EEEE  MMMM' }}</p>
-            </ion-label>
-           <div slot="end">
-             <h5>-$ {{transaction.transactions.value}}</h5>
-           </div>
-         </ion-item>
+           <div  *ngFor="let transaction of transactionPerWeek">
+            <ion-item *ngIf="(transaction.transactions.date | date:'ww') == (myDate | date:'ww')"> 
+              <div class="thumb" slot="start">
+                <img src="assets/imgs/Gas.svg" alt="">
+              </div>
+              <ion-label>
+                <h4>Shell</h4>
+                <p>{{transaction.transactions.date | date:'d EEEE  MMMM' }}</p>
+              </ion-label>
+              <div slot="end">
+                <h5>-$ {{transaction.transactions.value}}</h5>
+              </div>
+            </ion-item>
+           </div>      
         </div>
         <div class="the-list" *ngIf="category == 'month'">
           <ion-item *ngFor="let transaction of transactionPerMonth">

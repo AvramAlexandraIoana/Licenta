@@ -5,6 +5,8 @@ import { CategoryTransactionsService } from '../api/category-transactions.servic
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Transaction } from '../_models/Transaction';
 import * as _ from 'lodash';
+import { User } from '../_models/User';
+import { UserService } from '../api/user.service';
 
 @Component({
   selector: 'app-notifications',
@@ -25,15 +27,21 @@ export class NotificationsPage implements OnInit {
   categoryTransactionsPerYestarday: CategoryTransaction[];
   categoryTransactionsPerThisWeek: CategoryTransaction[];
   myDate: Date;
+  user: User;
   
 
   constructor(private transactionService: TransactionService,
-              private categoryTransactionService: CategoryTransactionsService) { }
+              private categoryTransactionService: CategoryTransactionsService,
+              private userService: UserService) { }
 
   ngOnInit() {
     this.myDate = new Date();
     console.log(this.myDate);
     this.userId = this.getUserId();
+    this.userService.getUser(this.userId).subscribe(res => {
+      console.log(res);
+      this.user = res;
+    })
     this.getTransactionPerId();
     // this.getTransactionPerToday();
     // this.getTransactionPerYestarday();

@@ -6,6 +6,9 @@ export class Transaction {
    UserId: number;
    UserId1: number;
    Unit: string;
+   ImageUrl: string;
+   UserName: string;
+   IsSend: boolean;
     
 }   
 

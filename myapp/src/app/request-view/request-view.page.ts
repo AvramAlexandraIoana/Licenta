@@ -29,6 +29,8 @@ export class RequestViewPage implements OnInit {
   decodedToken: any;
   limit: any;
   error: boolean;
+  user: import("t:/Licenta/myapp/src/app/_models/User").User;
+  userId: number;
 
   
   constructor(private transactionService: TransactionService,
@@ -52,6 +54,8 @@ export class RequestViewPage implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.typeView = params["type"];
+      console.log("Ioana");
+      console.log(this.typeView);
       if (params && params.special) {
         this.peopleSelected = JSON.parse(params.special);
         if (this.peopleSelected) {
@@ -65,6 +69,13 @@ export class RequestViewPage implements OnInit {
         this.sendMoneyData = JSON.parse(params.data);
       }
     }
+
+    this.userId = this.getUserId();
+    this.userService.getUser(this.userId).subscribe(res => {
+      console.log(res);
+      this.user = res;
+    });
+   
   });
 
     this.setTitlePage();
@@ -126,9 +137,16 @@ export class RequestViewPage implements OnInit {
       this.model = new Transaction();
       this.model.Description = this.sendMoneyData.description;
       this.model.Value = Number(this.peopleSelected[i].data.suma);
-      this.model.UserId =  this.getUserId();
+      this.model.UserId =  this.userId;
       this.model.UserId1 = this.peopleSelected[i]._objectInstance.id;
       this.model.Unit = this.sendMoneyData.unit;
+      this.model.ImageUrl = this.user.profilePictureName;
+      this.model.UserName = this.user.name;
+      if (this.typeView == "send") {
+        this.model.IsSend = true;
+      } else {
+        this.model.IsSend = false;
+      }
       this.transactionService.saveTransaction(this.model).subscribe(res => {
         console.log("Tranzactie adaugata cu succes!");
       });

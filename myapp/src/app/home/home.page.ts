@@ -23,6 +23,7 @@ export class HomePage implements OnInit {
   transactionPerMonth: Transaction[];
   transactionPerYear: Transaction[];
   transactionPerWeek: Transaction[];
+  myDate: Date;
 
 
   constructor(private transactionService: TransactionService,
@@ -31,6 +32,8 @@ export class HomePage implements OnInit {
    }
 
   ngOnInit() {
+    this.myDate = new Date();
+    console.log(this.myDate);
   
   }
 

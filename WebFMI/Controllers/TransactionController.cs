@@ -35,18 +35,8 @@ namespace WebFMI.Controllers
         public async Task<IActionResult> Transactions(int id)
         {
 
-            var transactionList = await _context.Transactions.Where(u => u.UserId == id || u.UserId1 == id).Where(d => (d.Date.Month == DateTime.Now.Month && d.Date.Year == DateTime.Now.Year))
-                                        .Select(transaction => new
-                                        {
-                                            Transactions = transaction,
-                                            User = (from user in _context.Users
-                                                    where transaction.UserId == user.Id
-                                                    select user).ToList(),
-                                            User1Name = (from user in _context.Users
-                                                         where transaction.UserId1 == user.Id
-                                                         select user.Name).ToList()
-
-                                        }).ToListAsync();
+            var transactionList = await _context.Transactions.Where(u => u.UserId1 == id).Where(d => (d.Date.Month == DateTime.Now.Month && d.Date.Year == DateTime.Now.Year))
+                                    .ToListAsync();
             return Ok(transactionList);
         }
 
@@ -127,9 +117,7 @@ namespace WebFMI.Controllers
         public async Task<IActionResult> GetTransactionCurrentWeek(int id)
         {
 
-            CultureInfo ciCurr = CultureInfo.CurrentCulture;
-            int weekNum = ciCurr.Calendar.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
-            var transactionList = await _context.Transactions.Where(u => u.UserId == id).Where(d => (d.Date.Month == DateTime.Now.Month))
+            var transactionList = await _context.Transactions.Where(u => u.UserId == id).Where(d => (d.Date.Month == DateTime.Now.Month && d.Date.Year == DateTime.Now.Year))
                                         .Select(transaction => new
                                         {
                                             Transactions = transaction

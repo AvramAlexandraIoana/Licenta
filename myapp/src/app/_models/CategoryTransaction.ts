@@ -5,6 +5,9 @@ export class CategoryTransaction {
     CategoryId: number;
     UserId: number;
     TransactionDate: Date;
+    ImageUrl: string;
+    UserName: string;
+    IsSend: boolean;
      
  }   
  

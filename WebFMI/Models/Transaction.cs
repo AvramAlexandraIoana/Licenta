@@ -28,5 +28,12 @@ namespace WebFMI.Models
         public virtual User User { get; set; }
         public int UserId1 { get; set; }
 
+        public string UserName { get; set; }
+
+        public string ImageUrl { get; set; }
+
+        public bool IsSend { get; set; }
+
+
     }
 }
