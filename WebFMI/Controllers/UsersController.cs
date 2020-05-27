@@ -56,6 +56,21 @@ namespace WebFMI.Controllers
 
         }
 
+        [HttpGet("index/{num1}/{num2}/{name}")]
+        public async Task<ActionResult<IEnumerable<User>>> GetReviewLists1(int num1, int num2, string name)
+        {
+         
+            if (name == "null")
+            {
+                return await _context.Users.Skip(num1).Take(num2).ToListAsync();
+
+            } else
+            {
+                return await _context.Users.Where(u => u.Name.Contains(name)).Skip(num1).Take(num2).ToListAsync();
+            }
+
+        }
+
         [HttpGet("userTransactions/{id}")]
         public async Task<IActionResult> GetUsersFrecvent(int id)
         {

@@ -56,6 +56,14 @@ export class UserService {
     );
   }
 
+  getUsersSkip(num1: number, num2: number, name: string): Observable<User[]> {
+    return this.http.get<User[]>(this.url + '/index/' + num1 + '/' + num2 + '/' + name, this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.errorHandler)
+    );
+  }
+
   deleteUser(userId: number): Observable<User> {
     return this.http.delete<User>(this.url + '/' + userId, this.httpOptions)
     .pipe(

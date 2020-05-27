@@ -14,17 +14,25 @@ export class ManagerTransferMoneyPage implements OnInit {
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
   users: User[];
+  nr1: number;
+  nr2: number;
+  name: any;
+  inputValue: any;
+  isKeyPress: boolean;
 
   constructor(private userService: UserService,
               private modalControl: ModalController,
               private toastController: ToastController) { }
 
   ngOnInit() {
+    this.nr1 = 0;
+    this.nr2 = 4;
+    this.name = null;
     this.loadData1();
   }
 
   loadData1() {
-    this.userService.getUserList().subscribe(res => {
+    this.userService.getUsersSkip(this.nr1, this.nr2, this.name).subscribe( res => {
       console.log(res);
       this.users = res;
     })
@@ -75,6 +83,14 @@ export class ManagerTransferMoneyPage implements OnInit {
     setTimeout(() => {
       console.log('Done');
       event.target.complete();
+      this.nr1 = this.nr2;
+      this.nr2 += 3;
+      this.userService.getUsersSkip(this.nr1, this.nr2, this.name).subscribe( res => {
+        console.log(res);
+        for (var i = 0; i < res.length; i++){
+          this.users.push(res[i]);
+        }
+      });
 
       // App logic to determine if all data is loaded
       // and disable the infinite scroll
@@ -88,4 +104,30 @@ export class ManagerTransferMoneyPage implements OnInit {
     this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
   }
 
+  onKeyUp(event) {
+    if (event == null || event.target.value == "") {
+      this.nr1 = 0;
+      this.nr2 = 4;
+      this.name = null;
+      this.userService.getUsersSkip(this.nr1, this.nr2, this.name).subscribe( res => {
+        console.log(res);
+        this.users = res;
+      });
+    } else {
+      this.nr1 = 0;
+      this.nr2 = 4;
+      this.name = event.target.value;
+      this.userService.getUsersSkip(this.nr1, this.nr2, this.name).subscribe( res => {
+        console.log(res);
+        this.users = res;
+      })
+    }
+  
+  }
+
+  changeInputValue() {
+    this.inputValue = null;
+    this.isKeyPress = false;
+    this.onKeyUp(null);
+  }
 }

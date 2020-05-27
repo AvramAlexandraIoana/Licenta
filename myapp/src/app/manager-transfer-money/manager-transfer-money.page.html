@@ -27,18 +27,18 @@
       <ion-col  class="money" size="2">
         RON:
       </ion-col>
-      <ion-col  size="4" *ngIf="user.sr">
+      <ion-col  size="4" *ngIf="user.areSumaR">
         {{user.sumaR}}
       </ion-col>
-      <ion-col  size="4" *ngIf="user.sr">
+      <ion-col  size="4" *ngIf="user.areSumaR">
         <ion-item>
           <ion-input [(ngModel)]="user.sR" type="numeric" placeholder="Add Amount"></ion-input>
         </ion-item>
       </ion-col>
-      <ion-col  *ngIf="user.sr" size="2" style="text-align: end;" (click)="addAmount(user, 'R')">
+      <ion-col  *ngIf="user.areSumaR" size="2" style="text-align: end;" (click)="addAmount(user, 'R')">
         <img src="assets/imgs/plus-20s-23px.svg">
       </ion-col>
-      <ion-col  *ngIf="!user.sr" size="8" style="font-size: 14px;">
+      <ion-col  *ngIf="!user.areSumaR" size="8" style="font-size: 14px;">
           User doesn't had RON card
       </ion-col>
     </ion-row>
@@ -46,18 +46,18 @@
       <ion-col  class="money" size="2">
         EUR:
       </ion-col>
-      <ion-col  size="4" *ngIf="user.se">
+      <ion-col  size="4" *ngIf="user.areSumaE">
         {{user.sumaE}}
       </ion-col>
-      <ion-col  size="4" *ngIf="user.se">
+      <ion-col  size="4" *ngIf="user.areSumaE">
         <ion-item>
           <ion-input [(ngModel)]="user.sE" type="numeric" placeholder="Add Amount"></ion-input>
         </ion-item>     
       </ion-col>
-      <ion-col    *ngIf="user.se" size="2" style="text-align: end;" (click)="addAmount(user, 'E')">
+      <ion-col    *ngIf="user.areSumaE" size="2" style="text-align: end;" (click)="addAmount(user, 'E')">
         <img src="assets/imgs/plus-20s-23px.svg">
       </ion-col>
-      <ion-col  *ngIf="!user.se" size="8" style="font-size: 14px;">
+      <ion-col  *ngIf="!user.areSumaE" size="8" style="font-size: 14px;">
         User doesn't had EUR card
       </ion-col>
     </ion-row>
@@ -66,18 +66,18 @@
       <ion-col class="money" size="2">
         USD:
       </ion-col>
-      <ion-col  size="4" *ngIf="user.sd">
+      <ion-col  size="4" *ngIf="user.areSumaD">
         {{user.sumaD}}
       </ion-col>
-      <ion-col  size="4" *ngIf="user.sd">
+      <ion-col  size="4" *ngIf="user.areSumaD">
         <ion-item>
           <ion-input [(ngModel)]="user.sD" type="numeric" placeholder="Add Amount"></ion-input>
         </ion-item>
       </ion-col>
-      <ion-col *ngIf="user.sd" size="2" style="text-align: end;" (click)="addAmount(user, 'D')"> 
+      <ion-col *ngIf="user.areSumaD" size="2" style="text-align: end;" (click)="addAmount(user, 'D')"> 
         <img src="assets/imgs/plus-20s-23px.svg">
       </ion-col>
-      <ion-col  *ngIf="!user.sd" size="8" style="font-size: 14px;">
+      <ion-col  *ngIf="!user.areSumaD" size="8" style="font-size: 14px;">
         User doesn't had USD card
       </ion-col>
     </ion-row>
