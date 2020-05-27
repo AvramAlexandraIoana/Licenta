@@ -1,9 +1,58 @@
-<ion-header>
+<ion-header no-border>
   <ion-toolbar>
-    <ion-title>review-list</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button color="primary" defaultHref="tabs/tab1"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Reviews</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-row>
+    <ion-col class="header he1">
+      <ion-icon name="funnel" color="primary"></ion-icon>
+      SORT BY
+      <br>
+      <p class="clsP">Created Date</p>
+    </ion-col>
+    <ion-col  class="header he2">
+      <ion-icon name="filter-outline" color="primary"></ion-icon>
+      FILTER BY
+      <br>
+      <p class="clsP">Type</p>
+    </ion-col>
+  </ion-row>
 
+  <div *ngFor="let review of reviews" class="reviewContainer">
+    <ion-row class="rowContainer" style="height: 50px;">
+      <ion-col>
+        <ion-avatar>
+          <img  src="https://ucarecdn.com/{{review.imageUrl}}/"/>
+        </ion-avatar>
+      </ion-col>
+      <ion-col class="name">
+        {{review.name}}
+      </ion-col>
+    </ion-row>
+    <ion-row class="rowContainer">
+      <ion-col>
+        <img  *ngIf="review.emotion == 'Disappointed'"src="assets\imgs\disappointed face-20s-36px (2).svg">
+        <img  *ngIf="review.emotion == 'Poker Face'" src="assets\imgs\poker face-20s-36px (2).svg">
+      </ion-col>
+      <ion-col class="time"> 
+        {{review.createdOn | date:'MMM dd, yyyy'}}
+      </ion-col>
+    </ion-row>
+    <ion-row class="rowContainer1 rowContainer">
+      {{review.feedbackR}}
+    </ion-row>
+  </div>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  
 </ion-content>

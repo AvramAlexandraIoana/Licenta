@@ -6,4 +6,6 @@ export class Review {
     CreatedOn: Date;
     Type: string;
     UserId: number;
+    Name: string;
+    ImageUrl: string;
  }

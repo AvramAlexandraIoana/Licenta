@@ -38,6 +38,22 @@ export class ReviewService {
     );
   }
 
+  getReviewsIndex(): Observable<Review[]> {
+    return this.http.get<Review[]>(this.url + '/reviewIndex', this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.errorHandler)
+    );
+  }
+
+  getReviewsSkip(num1: number, num2: number): Observable<Review[]> {
+    return this.http.get<Review[]>(this.url + '/reviewIndex/' + num1 + '/' + num2, this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.errorHandler)
+    );
+  }
+
 
   deleteReview(reviewId: number): Observable<Review> {
     return this.http.delete<Review>(this.url + '/delete/' + reviewId, this.httpOptions)

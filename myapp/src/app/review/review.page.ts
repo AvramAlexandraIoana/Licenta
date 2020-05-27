@@ -30,7 +30,7 @@ export class ReviewPage implements OnInit {
     'feedbackR':[
       { type:'required', message: 'Feedback is required'},
       { type:'minlength', message: 'Feedback lenght must be longer than or equal to 5 characters '},
-      { type:'maxlength', message: 'Feedback lenght cannot exceed 20 characters '},
+      { type:'maxlength', message: 'Feedback lenght cannot exceed 120 characters '},
     ],
     'type':[
       { type:'required', message: 'Type is required'}
@@ -57,7 +57,7 @@ export class ReviewPage implements OnInit {
     this.reviewForm = this.formBuilder.group({
       'feedbackR': ['', [Validators.required,
                         Validators.minLength(5),
-                        Validators.maxLength(30)]],
+                        Validators.maxLength(120)]],
       'type': ['', [Validators.required]]
     });
 
@@ -89,7 +89,9 @@ export class ReviewPage implements OnInit {
       'Emotion': val,
       'FeedbackR': this.reviewForm.controls['feedbackR'].value,
       'Type': this.reviewForm.controls['type'].value,
-      'UserId': this.userId
+      'UserId': this.userId,
+      'ImageUrl': this.user.profilePictureName,
+      'Name': this.user.name
     }
 
     this.reviewService.saveReview(this.model).subscribe(res => {

@@ -50,6 +50,10 @@ export class AppComponent {
     {
       title: 'Notifications',
       url: 'notifications'
+    },
+    {
+      title: 'Review-list',
+      url: 'review-list' 
     }
   ]
   

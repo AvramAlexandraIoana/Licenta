@@ -41,6 +41,23 @@ namespace WebFMI.Controllers
             return await _context.Reviews.ToListAsync();
         }
 
+        [HttpGet("reviewIndex")]
+        public async Task<ActionResult<IEnumerable<Review>>> GetReviewLists()
+        {
+            
+
+            return await _context.Reviews.ToListAsync();
+        }
+
+        [HttpGet("reviewIndex/{num1}/{num2}")]
+        public async Task<ActionResult<IEnumerable<Review>>> GetReviewLists1(int num1, int num2)
+        {
+            var list = await _context.Reviews.ToListAsync();
+
+            return await _context.Reviews.Skip(num1).Take(num2).ToListAsync();
+        }
+
+
         [HttpGet("show/{id}")]
         public async Task<IActionResult> ShowReview(int id)
         {
