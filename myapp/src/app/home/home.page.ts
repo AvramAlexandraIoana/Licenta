@@ -3,6 +3,8 @@ import { TransactionService } from '../api/transaction.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Transaction } from '../_models/Transaction';
 import { NavController } from '@ionic/angular';
+import * as _ from 'lodash';
+import * as moment from 'moment'
 
 @Component({
   selector: 'app-home',
@@ -24,6 +26,9 @@ export class HomePage implements OnInit {
   transactionPerYear: Transaction[];
   transactionPerWeek: Transaction[];
   myDate: Date;
+  num: number;
+  userId: number;
+  notifictation: Transaction[];
 
 
   constructor(private transactionService: TransactionService,
@@ -32,9 +37,23 @@ export class HomePage implements OnInit {
    }
 
   ngOnInit() {
+    this.userId = this.getUserId();
     this.myDate = new Date();
     console.log(this.myDate);
+    this.getNotification();
   
+  }
+
+
+  getNotification() {
+    // (transaction.date | date:'ww') == (myDate | date:'ww')
+    this.transactionService.getTransactionNotificationNumber(this.userId).subscribe( res => {
+      console.log(res);
+      this.notifictation = res;
+      var currentDate = moment();
+      var filtered = this.notifictation.filter(d => moment(d.Date).isSame(currentDate, 'week'));
+      this.num = filtered.length;
+    });
   }
 
   goToReview() {

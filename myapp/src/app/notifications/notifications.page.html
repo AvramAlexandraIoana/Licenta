@@ -26,23 +26,38 @@
           <ion-avatar slot="start" *ngIf="transaction.isSend">
             <img  src="https://ucarecdn.com/{{user.profilePictureName}}/"/>
           </ion-avatar>
-          <ion-label *ngIf="transaction.userId1 == userId && transaction.isSend">
-            <h5 text-wrap>You received a payment of <span class="amount">{{transaction.unit}} {{transaction.value.toFixed(2)}}</span> from <span class="person">
-              {{transaction.userName}}
-            </span> </h5>
-                <p>{{transaction.date | date:'shortTime' }}</p>
-          </ion-label>
+          <div *ngIf="transaction.userId1 == userId && transaction.isSend">
+            <ion-label>
+              <div>
+                <h5 text-wrap>You received a payment of <span class="amount"> {{transaction.unit}} {{transaction.value.toFixed(2)}}</span> from  <span class="person">
+                  {{transaction.userName}}.
+                </span> </h5>
+                    <p>{{transaction.date | date:'shortTime' }}</p>
+              </div>
+            </ion-label>
+
+          </div>
+        
 
           <ion-label *ngIf="transaction.userId1 == userId && !transaction.isSend">
             <h5 text-wrap> <span class="person">{{transaction.userName}}
-              </span> requested a payment of<span class="amount">{{transaction.unit}} {{transaction.value.toFixed(2)}}</span>
-              from </h5>
+              </span> requested a payment of<span class="amount"> {{transaction.unit}} {{transaction.value.toFixed(2)}}</span>
+              from you.</h5>
               <p>{{transaction.date | date:'shortTime' }}</p>
-            </ion-label>
-          <div class="end-slot" slot="end">
-            <ion-button>
+          </ion-label>
+
+          <div class="end-slot" slot="end" *ngIf="transaction.userId1 == userId && !transaction.isSend">
+            <ion-button  (click)="acceptTransaction(transaction)" *ngIf="!transaction.accepted" style="width: 85px !important;">
               Pay
             </ion-button>
+            <img  *ngIf="transaction.accepted"src="assets/imgs/credit card-20s-40px (1).svg">
+          </div>
+
+          <div class="end-slot" slot="end" *ngIf="transaction.userId1 == userId && transaction.isSend">
+            <ion-button *ngIf="!transaction.accepted" color="success" (click)="acceptTransaction(transaction)">
+              Accept
+            </ion-button>
+            <img  *ngIf="transaction.accepted"src="assets/imgs/credit card-20s-40px.svg">
           </div>
         </ion-item>
 
@@ -75,11 +90,20 @@
               from </h5>
               <p>{{transaction.date | date:'shortTime' }}</p>
             </ion-label>
-          <div class="end-slot" slot="end">
-            <ion-button>
-              Pay
-            </ion-button>
-          </div>
+
+            <div class="end-slot" slot="end" *ngIf="transaction.userId1 == userId && !transaction.isSend">
+              <ion-button  (click)="acceptTransaction(transaction)" *ngIf="!transaction.accepted" style="width: 85px !important;">
+                Pay
+              </ion-button>
+              <img  *ngIf="transaction.accepted"src="assets/imgs/credit card-20s-40px (1).svg">
+            </div>
+  
+            <div class="end-slot" slot="end" *ngIf="transaction.userId1 == userId && transaction.isSend">
+              <ion-button *ngIf="!transaction.accepted" color="success" (click)="acceptTransaction(transaction)">
+                Accept
+              </ion-button>
+              <img  *ngIf="transaction.accepted"src="assets/imgs/credit card-20s-40px.svg">
+            </div>
         </ion-item>
 
       </div>
@@ -88,7 +112,7 @@
 
   <div class="section">
     <div class="section-title">
-      <h4>This weekend</h4>
+      <h4>This week</h4>
     </div>
     <div class="the-list">
       <div *ngFor="let transaction of transactions">
@@ -112,11 +136,20 @@
               from </h5>
               <p>{{transaction.date | date:'shortTime' }}</p>
             </ion-label>
-          <div class="end-slot" slot="end">
-            <ion-button>
-              Pay
-            </ion-button>
-          </div>
+         
+            <div class="end-slot" slot="end" *ngIf="transaction.userId1 == userId && !transaction.isSend">
+              <ion-button  (click)="acceptTransaction(transaction)" *ngIf="!transaction.accepted" style="width: 85px !important;">
+                Pay
+              </ion-button>
+              <img  *ngIf="transaction.accepted"src="assets/imgs/credit card-20s-40px (1).svg">
+            </div>
+  
+            <div class="end-slot" slot="end" *ngIf="transaction.userId1 == userId && transaction.isSend">
+              <ion-button *ngIf="!transaction.accepted" color="success" (click)="acceptTransaction(transaction)">
+                Accept
+              </ion-button>
+              <img  *ngIf="transaction.accepted"src="assets/imgs/credit card-20s-40px.svg">
+            </div>
         </ion-item>
        </div>
     </div>

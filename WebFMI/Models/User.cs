@@ -33,7 +33,12 @@ namespace WebFMI.Models
        
         public string Description { get; set; }
 
-        public string Suma { get; set; }
+        public float SumaR { get; set; }
+        public float SumaE { get; set; }
+
+        public float SumaD { get; set; }
+
+
 
         public string PasswordForgot { get; set; }
 

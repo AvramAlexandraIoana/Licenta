@@ -36,6 +36,22 @@ export class TransactionService {
       catchError(this.errorHandler)
     );
   }
+
+  updateTrasaction(transactionId: number, transaction): Observable<Transaction> {
+    return this.http.put<Transaction>(this.url + '/edit/' + transactionId, JSON.stringify(transaction), this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.errorHandler)
+    );
+  }
+
+  getTransactionNotificationNumber(userId: number): Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(this.url + '/getNumberOfNotification/' + userId, this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.errorHandler)
+    );
+  }
   
   getTransactionNotificationForToday(userId: number): Observable<Transaction[]> {
     return this.http.get<Transaction[]>(this.url + '/getNotificationsForToday/' + userId, this.httpOptions)

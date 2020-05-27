@@ -40,6 +40,14 @@ namespace WebFMI.Controllers
             return Ok(transactionList);
         }
 
+        [HttpGet("getNumberOfNotification/{id}")]
+        public async Task<IActionResult> GetNumberOfNotification(int id)
+        {
+            var transactionList = await _context.Transactions.Where(u => u.UserId1 == id && !u.Accepted).Where(d => (d.Date.Month == DateTime.Now.Month && d.Date.Year == DateTime.Now.Year))
+                                   .ToListAsync();
+            return Ok(transactionList);
+        }
+
         [HttpGet("show/{id}")]
         public async Task<IActionResult> ShowTransaction(int id)
         {
@@ -78,6 +86,7 @@ namespace WebFMI.Controllers
             }
             transaction.Description = requestTransaction.Description;
             transaction.Value = requestTransaction.Value;
+            transaction.Accepted = requestTransaction.Accepted;
 
             await _context.SaveChangesAsync();
             return Ok(transaction);
@@ -112,6 +121,8 @@ namespace WebFMI.Controllers
                                         }).ToListAsync();
             return Ok(transactionList);
         }
+
+
 
         [HttpGet("getTransactionsForWeek/{id}")]
         public async Task<IActionResult> GetTransactionCurrentWeek(int id)

@@ -1,5 +1,6 @@
 
 export class Transaction { 
+   TransactionId: number;
    Value: number;
    Description: string;
    CategoryId: number;
@@ -9,6 +10,7 @@ export class Transaction {
    ImageUrl: string;
    UserName: string;
    IsSend: boolean;
-    
+   Date: Date;
+   Accepted: boolean;
 }   
 
