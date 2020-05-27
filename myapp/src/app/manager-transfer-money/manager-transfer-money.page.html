@@ -3,7 +3,7 @@
       <ion-buttons slot="start">
         <ion-back-button color="light" defaultHref="tabs"></ion-back-button>
       </ion-buttons>
-      <ion-input class="header" [(ngModel)]="inputValue" placeholder="Cauta in lista de useri" (keyup)="onKeyUp($event); isKeyPress=true"></ion-input>
+      <ion-input class="header" [(ngModel)]="inputValue" placeholder="Search in users list" (keyup)="onKeyUp($event); isKeyPress=true"></ion-input>
       <ion-icon *ngIf="!isKeyPress" class="group" name="search-outline"></ion-icon>
       <div (click)="changeInputValue()" tappable>
         <ion-icon *ngIf="isKeyPress" class="group"  name="close-outline" ></ion-icon>
