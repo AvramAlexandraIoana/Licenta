@@ -139,4 +139,21 @@ ngx-gauge {
       }
     }
 }
+
+.divAlert {
+  color:white;
+  background-color: rgb(28, 124, 248);
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  border-radius: 8px 8px 8px 8px;
+  position: relative;
+  top: -8px;
+  left: -7px;
+  p {
+    position: relative;
+    top: 3px;
+    font-size: 13px;
+  }
+}
   

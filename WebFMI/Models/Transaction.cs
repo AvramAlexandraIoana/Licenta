@@ -34,6 +34,8 @@ namespace WebFMI.Models
 
         public bool IsSend { get; set; }
 
+        public bool Accepted { get; set; }
+
 
     }
 }

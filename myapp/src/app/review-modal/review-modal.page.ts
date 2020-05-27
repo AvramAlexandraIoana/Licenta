@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationExtras } from '@angular/router';
 import { ModalController, NavParams, NavController, ToastController } from '@ionic/angular';
 import { AdminService } from '../api/admin.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-review-modal',
