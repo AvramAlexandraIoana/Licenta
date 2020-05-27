@@ -197,7 +197,20 @@ const routes: Routes = [
   {
     path: 'review-modal',
     loadChildren: () => import('./review-modal/review-modal.module').then( m => m.ReviewModalPageModule)
+  },
+  {
+    path: 'manager-transfer-money',
+    loadChildren: () => import('./manager-transfer-money/manager-transfer-money.module').then( m => m.ManagerTransferMoneyPageModule)
+  },
+  {
+    path: 'default-card',
+    loadChildren: () => import('./default-card/default-card.module').then( m => m.DefaultCardPageModule)
+  },
+  {
+    path: 'add-amount-modal',
+    loadChildren: () => import('./add-amount-modal/add-amount-modal.module').then( m => m.AddAmountModalPageModule)
   }
+
 
 
 

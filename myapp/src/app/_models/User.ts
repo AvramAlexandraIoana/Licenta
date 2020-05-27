@@ -16,6 +16,11 @@ export class User {
     user: any;
     userId1: number;
     sendMess: Date;
-    
+    sumaD: number;
+    sumaR: number;
+    sumaE: number;
+    sD: number;
+    sR: number;
+    sE: number;
 }   
 

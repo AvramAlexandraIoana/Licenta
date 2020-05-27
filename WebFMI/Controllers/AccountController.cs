@@ -15,9 +15,13 @@ namespace WebFMI.Controllers
     public class AccountController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        public AccountController(ApplicationDbContext context)
+        private readonly IBankingRepository<User> _repo;
+
+        public AccountController(ApplicationDbContext context, IBankingRepository<User> repo)
         {
             this._context = context;
+            _repo = repo;
+
         }
 
         [HttpGet("getAllCards/{id}")]
@@ -50,6 +54,19 @@ namespace WebFMI.Controllers
 
 
             User user = await _context.Users.FindAsync(id);
+            if (card.ConversionMoney == "RON")
+            {
+                user.AreSumaR = true;
+            } else if (card.ConversionMoney == "USD")
+            {
+                user.AreSumaD = true;
+            } else
+            {
+                user.AreSumaE = true;
+            }
+
+            _repo.Update(user);
+            var save = await _repo.SaveAsync(user);
             account.UserId = id;
             account.CardHolderName = card.CardHolderName;
 

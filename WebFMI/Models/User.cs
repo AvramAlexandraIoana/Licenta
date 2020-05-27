@@ -38,6 +38,15 @@ namespace WebFMI.Models
 
         public float SumaD { get; set; }
 
+        public bool AreSumaR { get; set; }
+        public bool AreSumaE { get; set; }
+
+        public bool AreSumaD { get; set; }
+
+
+
+        public string DefaultCard { get; set; }
+
 
 
         public string PasswordForgot { get; set; }

@@ -49,7 +49,7 @@ export class UserService {
   }
 
   updateUser(userId: number, user): Observable<User> {
-    return this.http.put<User>(this.url + '/' + userId, JSON.stringify(user), this.httpOptions)
+    return this.http.put<User>(this.url + '/edit/' + userId, JSON.stringify(user), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.errorHandler)

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebFMI.Data;
 
 namespace WebFMI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200527181145_23945s22111")]
+    partial class _23945s22111
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -452,15 +454,6 @@ namespace WebFMI.Migrations
 
                     b.Property<string>("Adress1")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("AreSumaD")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("AreSumaE")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("AreSumaR")
-                        .HasColumnType("bit");
 
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");

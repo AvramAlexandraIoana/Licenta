@@ -54,6 +54,10 @@ export class AppComponent {
     {
       title: 'Review-list',
       url: 'review-list' 
+    },
+    {
+      title: 'Set amount user',
+      url: 'manager-transfer-money'
     }
   ]
   

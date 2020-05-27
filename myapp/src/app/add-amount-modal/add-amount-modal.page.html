@@ -1,0 +1,22 @@
+<ion-content >
+  <ion-grid style="height: 100%">
+      <ion-row justify-content-center align-items-center style="height: 100%">
+          <div class="the-holder" padding>
+              <ion-row class="title-row">
+                  <ion-col size="8" text-left>
+                    <h4>Add amount</h4>
+                  </ion-col>
+                  <ion-col size="4" text-right (click)="dismiss()">
+                    <ion-icon  name="close-outline"></ion-icon>
+                  </ion-col>
+               </ion-row>
+               <div class="the-grid-app">
+                <ion-item>
+                  <ion-label position="stacked">Stacked Label</ion-label>
+                  <ion-input></ion-input>
+                </ion-item>
+               </div>
+          </div>
+    </ion-row>
+  </ion-grid>
+</ion-content>

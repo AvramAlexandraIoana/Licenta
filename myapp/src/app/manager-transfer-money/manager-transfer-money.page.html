@@ -1,0 +1,93 @@
+<ion-header>
+  <div class="navbarBackground">
+      <ion-buttons slot="start">
+        <ion-back-button color="light" defaultHref="tabs"></ion-back-button>
+      </ion-buttons>
+      <ion-input class="header" [(ngModel)]="inputValue" placeholder="Cauta in lista de useri" (keyup)="onKeyUp($event); isKeyPress=true"></ion-input>
+      <ion-icon *ngIf="!isKeyPress" class="group" name="search-outline"></ion-icon>
+      <div (click)="changeInputValue()" tappable>
+        <ion-icon *ngIf="isKeyPress" class="group"  name="close-outline" ></ion-icon>
+      </div>
+  </div>
+</ion-header>
+
+<ion-content >
+  <div *ngFor="let user of users" class="reviewContainer">
+    <ion-row class="rowContainer" style="height: 50px;">
+      <ion-col size="2">
+        <ion-avatar>
+          <img  src="https://ucarecdn.com/{{user.profilePictureName}}/"/>
+        </ion-avatar>
+      </ion-col>
+      <ion-col class="name">
+        {{user.name}}
+      </ion-col>
+    </ion-row>
+    <ion-row class="rowContainer" >
+      <ion-col  class="money" size="2">
+        RON:
+      </ion-col>
+      <ion-col  size="4" *ngIf="user.sr">
+        {{user.sumaR}}
+      </ion-col>
+      <ion-col  size="4" *ngIf="user.sr">
+        <ion-item>
+          <ion-input [(ngModel)]="user.sR" type="numeric" placeholder="Add Amount"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col  *ngIf="user.sr" size="2" style="text-align: end;" (click)="addAmount(user, 'R')">
+        <img src="assets/imgs/plus-20s-23px.svg">
+      </ion-col>
+      <ion-col  *ngIf="!user.sr" size="8" style="font-size: 14px;">
+          User doesn't had RON card
+      </ion-col>
+    </ion-row>
+    <ion-row class="rowContainer" >
+      <ion-col  class="money" size="2">
+        EUR:
+      </ion-col>
+      <ion-col  size="4" *ngIf="user.se">
+        {{user.sumaE}}
+      </ion-col>
+      <ion-col  size="4" *ngIf="user.se">
+        <ion-item>
+          <ion-input [(ngModel)]="user.sE" type="numeric" placeholder="Add Amount"></ion-input>
+        </ion-item>     
+      </ion-col>
+      <ion-col    *ngIf="user.se" size="2" style="text-align: end;" (click)="addAmount(user, 'E')">
+        <img src="assets/imgs/plus-20s-23px.svg">
+      </ion-col>
+      <ion-col  *ngIf="!user.se" size="8" style="font-size: 14px;">
+        User doesn't had EUR card
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="rowContainer" >
+      <ion-col class="money" size="2">
+        USD:
+      </ion-col>
+      <ion-col  size="4" *ngIf="user.sd">
+        {{user.sumaD}}
+      </ion-col>
+      <ion-col  size="4" *ngIf="user.sd">
+        <ion-item>
+          <ion-input [(ngModel)]="user.sD" type="numeric" placeholder="Add Amount"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col *ngIf="user.sd" size="2" style="text-align: end;" (click)="addAmount(user, 'D')"> 
+        <img src="assets/imgs/plus-20s-23px.svg">
+      </ion-col>
+      <ion-col  *ngIf="!user.sd" size="8" style="font-size: 14px;">
+        User doesn't had USD card
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>

@@ -8,6 +8,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Ocsp;
 using WebFMI.Data;
 using WebFMI.Dtos;
 using WebFMI.Models;
@@ -41,7 +42,14 @@ namespace WebFMI.Controllers
                    UserName = user.UserName,
                    Name = user.Name,
                    PhoneNumber = user.PhoneNumber,
-                   ProfilePictureName = user.ProfilePictureName
+                   ProfilePictureName = user.ProfilePictureName,
+                   SumaR = user.SumaR,
+                   SumaE = user.SumaE,
+                   SumaD = user.SumaD,
+                   SR = user.AreSumaR,
+                   SD = user.AreSumaD,
+                   SE = user.AreSumaE
+
                }).ToListAsync();
 
             return Ok(userList);
@@ -97,39 +105,34 @@ namespace WebFMI.Controllers
         }
 
         // PUT: api/users/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> EditUser([FromRoute] int id, [FromBody] User user)
+        [HttpPut("edit/{id}")]
+        public async Task<IActionResult> EditTransaction(int id, User requestedUser)
         {
-            if (!ModelState.IsValid)
+            User user = await _context.Users.FindAsync(id);
+            if (user == null)
             {
-                return BadRequest(ModelState);
+                return BadRequest("Nu exista Tranzactia!");
             }
 
-            if (id != user.Id)
-            {
-                return BadRequest();
-            }
+            user.SumaD = requestedUser.SumaD;
+            user.SumaE = requestedUser.SumaE;
+            user.SumaR = requestedUser.SumaR;
+            user.ProfilePictureName = requestedUser.ProfilePictureName;
+            user.Adress = requestedUser.Adress;
+            user.Adress1 = requestedUser.Adress1;
+            user.Country = requestedUser.Country;
+            user.Judet = requestedUser.Judet;
+            user.City = requestedUser.City;
+            user.PostalCode = requestedUser.PostalCode;
+            user.UserName = requestedUser.UserName;
+            user.DateOfBirth = requestedUser.DateOfBirth;
+            user.Email = requestedUser.Email;
+           
 
-            _context.Entry(user).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return Ok(user);
 
-            try
-            {
-                _repo.Update(user);
-                var save = await _repo.SaveAsync(user);
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
 
-            return NoContent();
         }
 
         // DELETE: api/BlogPosts/5
