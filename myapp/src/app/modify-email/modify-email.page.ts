@@ -21,7 +21,7 @@ export class ModifyEmailPage implements OnInit {
     'email':[
       { type:'required', message: 'E-mail-ul este obligatoriu'},
       { type:'minlength', message: 'Lungimea e-mail-ului trebuie sa aiba cel putin 10 caractere '},
-      { type:'maxlength', message: 'Lungimea e-mail-ului trebuie sa aiba cel mult 20 caractere'},
+      { type:'maxlength', message: 'Lungimea e-mail-ului trebuie sa aiba cel mult 50 caractere'},
       { type:'pattern', message: 'Te rugam introduce o adresa de e-mail valida '}
     ]
   }
@@ -62,7 +62,7 @@ export class ModifyEmailPage implements OnInit {
     this.modifyEmailForm = this.formBuilder.group({
       'email': [this.user.email, [Validators.required,
                   Validators.minLength(10),
-                  Validators.maxLength(30),
+                  Validators.maxLength(50),
                   Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9.-]+.[a-zA-Z0-9.-]+$')]]
     });
   }
