@@ -37,6 +37,10 @@ export class HomePage implements OnInit {
   
   }
 
+  goToReview() {
+    this.navControl.navigateRoot(["review"]);
+  }
+
   segmentChanged(ev: any) {
     this.category = ev.detail.value;
     if (this.category == "day") {

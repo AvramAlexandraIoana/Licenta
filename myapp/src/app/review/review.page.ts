@@ -167,7 +167,7 @@ export class ReviewPage implements OnInit {
   }
 
   dismiss() {
-    this.navControl.navigateBack(["tabs/tab5"]);
+    this.navControl.navigateBack(["tabs/tab1"]);
   }
 
   
