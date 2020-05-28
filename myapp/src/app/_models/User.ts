@@ -17,8 +17,11 @@ export class User {
     userId1: number;
     sendMess: Date;
     sumaD: number;
+    sumaDSpend: number;
     sumaR: number;
+    sumaRSpend: number;
     sumaE: number;
+    sumaESpend: number;
     sD: number;
     sR: number;
     sE: number;

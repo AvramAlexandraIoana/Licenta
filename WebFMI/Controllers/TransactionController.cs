@@ -73,9 +73,9 @@ namespace WebFMI.Controllers
                     var user = await _context.Users.FindAsync(transaction.UserId);
                     if (transaction.Unit == "$" && transaction.IsSend && user.AreSumaD)
                     {
-                        if (user.SumaD - transaction.Value >= 0)
+                        if (user.SumaD - user.SumaDSpend - transaction.Value >= 0)
                         {
-                            user.SumaD -= transaction.Value;
+                            user.SumaDSpend += transaction.Value;
                         } else
                         {
                             return Ok(false);
@@ -83,9 +83,9 @@ namespace WebFMI.Controllers
                     }
                     else if (transaction.Unit == "€" && transaction.IsSend && user.AreSumaE)
                     {
-                        if (user.SumaE - transaction.Value >= 0)
+                        if (user.SumaE -  user.SumaESpend - transaction.Value >= 0)
                         {
-                            user.SumaE -= transaction.Value;
+                            user.SumaESpend += transaction.Value;
                         }
                         else
                         {
@@ -93,9 +93,9 @@ namespace WebFMI.Controllers
                         }
                     } else if (transaction.Unit == "r" && transaction.IsSend && user.AreSumaR)
                     {
-                        if (user.SumaR - transaction.Value >= 0)
+                        if (user.SumaR - user.SumaRSpend - transaction.Value >= 0)
                         {
-                            user.SumaR -= transaction.Value;
+                            user.SumaRSpend += transaction.Value;
                         }
                         else
                         {
@@ -140,9 +140,9 @@ namespace WebFMI.Controllers
             }
             else if (requestTransaction.Unit == "$" && !requestTransaction.IsSend && user.AreSumaD)
             {
-                if (user.SumaD - requestTransaction.Value >= 0 )
+                if (user.SumaD - user.SumaDSpend - requestTransaction.Value >= 0 )
                 {
-                    user.SumaD -= requestTransaction.Value;
+                    user.SumaDSpend += requestTransaction.Value;
                     transaction.Accepted = requestTransaction.Accepted;
 
                 }
@@ -158,9 +158,9 @@ namespace WebFMI.Controllers
             }
             else  if (requestTransaction.Unit == "€" && !!requestTransaction.IsSend && user.AreSumaE)
             { 
-                if (user.SumaE - requestTransaction.Value >= 0)
+                if (user.SumaE - user.SumaE - requestTransaction.Value >= 0)
                 {
-                    user.SumaE -= requestTransaction.Value;
+                    user.SumaESpend += requestTransaction.Value;
                     transaction.Accepted = requestTransaction.Accepted;
 
                 }
@@ -178,9 +178,9 @@ namespace WebFMI.Controllers
             }
             else if (requestTransaction.Unit == "r" && !!requestTransaction.IsSend &&  user.AreSumaR)
             {
-                if (user.SumaR - requestTransaction.Value >= 0)
+                if (user.SumaR - user.SumaRSpend -  requestTransaction.Value >= 0)
                 {
-                    user.SumaR -= requestTransaction.Value;
+                    user.SumaRSpend += requestTransaction.Value;
                     transaction.Accepted = requestTransaction.Accepted;
 
                 }

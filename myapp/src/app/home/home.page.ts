@@ -16,7 +16,7 @@ import { UserService } from '../api/user.service';
 export class HomePage implements OnInit {
   
   gaugeType = "arch";
-  gaugeValue = 28.3;
+  gaugeValue : any;
   gaugeLabel = "of $3824";
   gaugePrependText = "$"
   category: any = "day";
@@ -57,7 +57,7 @@ export class HomePage implements OnInit {
       console.log(res);
     })
   }
-  
+
   setAmount() {
     this.userService.getUser(this.userId).subscribe( res => {
       console.log(res);
@@ -70,6 +70,8 @@ export class HomePage implements OnInit {
       } else if (this.user.defaultCard == "USD") {
         this.gaugeLabel += '$' + this.user.sumaD;
         this.gaugePrependText = "$";
+        this.gaugeValue =  this.user.sumaDSpend * 100 / this.user.sumaD ;
+        console.log(this.gaugeValue);
       } else if (this.user.defaultCard == "EURO") {
         this.gaugeLabel += '€' + this.user.sumaE;
         this.gaugePrependText = "€";

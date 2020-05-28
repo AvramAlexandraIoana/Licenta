@@ -34,9 +34,16 @@ namespace WebFMI.Models
         public string Description { get; set; }
 
         public float SumaR { get; set; }
+
+        public float SumaRSpend { get; set; }
         public float SumaE { get; set; }
 
+        public float SumaESpend { get; set; }
+
+
         public float SumaD { get; set; }
+        public float SumaDSpend { get; set; }
+
 
         public bool AreSumaR { get; set; }
         public bool AreSumaE { get; set; }
