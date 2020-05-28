@@ -94,7 +94,7 @@ export class HomePage implements OnInit {
 
   getTransactionPerWeek() {
     var userId = this.getUserId();
-    this.transactionService.getTransactionsForToday(userId).subscribe( res => {
+    this.transactionService.getTransactionsForWeek(userId).subscribe( res => {
       this.transactionPerWeek = res;
       console.log("Week");
       console.log(this.transactionPerWeek);
