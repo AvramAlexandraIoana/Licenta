@@ -24,7 +24,7 @@ ion-content {
     border-radius: 12px;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.08);
     width: 85%;
-    height: 38vh;
+    height: 300px;
     position: absolute;
     left: 0;
     right: 0;
@@ -34,12 +34,14 @@ ion-content {
   
     .top-row {
       padding: 0 10px;
+      position: relative;
+      top: 5%;
       p {
         font-size: 0.9rem !important;
         margin: 0 !important;
       }
       .text-right {
-        margin-left: 18vh; 
+        margin-left: 23%; 
         color: #0047cc; 
         font-weight: bold;
       }
@@ -52,7 +54,7 @@ ion-content {
       .column-left {
         padding-left: 10px;
         margin-left: 1vh;
-        margin-top: 3vh;    
+        margin-top: 10%; 
         p {
             margin-left: 2.2vh !important;
             //margin: 0 !important;
@@ -61,8 +63,8 @@ ion-content {
   
       .column-right {
         padding-right: 10px;
-        margin-right: -23vh;
-        margin-top: 3vh;    
+        margin-right:  -35vw;
+        margin-top: 10%;    
         p {
             margin-left: 1vh !important;
             //margin: 0 !important;
@@ -75,17 +77,17 @@ ion-content {
 
 ngx-gauge {
     --position: absolute;
-    margin-left: 12% !important;
-    margin-top: 1% !important;
+    margin-left: 13% !important;
+    margin-top: 5% !important;
 }
 
 .inside-guage {
     position: absolute;
     margin-left: auto;
     margin-right: auto;
-    left: 23vh;
+    left: 38vw;
     right: 0;
-    top: 60px !important;
+    top: 85px !important;
     z-index: 40;
     p {
       margin-left: -5vh !important;

@@ -31,7 +31,7 @@ export class DefaultCardPage implements OnInit {
   }
   userId: number;
   decodedToken: any;
-  cards: Account[];
+  cards: any;
   
   constructor( private route: ActivatedRoute, 
               private formBuilder: FormBuilder,
@@ -44,20 +44,15 @@ export class DefaultCardPage implements OnInit {
   ngOnInit() {
 
     this.userId = this.getUserId();
+    this.getUser();
     this.loadDataAccount();
+  }
+
+  getUser() {
     this.userService.getUser(this.userId).subscribe(res => {
-      console.log(res);
       this.user = res;
-      var u = this.user;
-      var index = _.findIndex(this.cards, function(object) {
-        return object.conversion == u.defaultCard;
-      });
-      if(index != -1) {
-        this.cards[index].checked = true;
-        console.log("ioana");
-      }
+      console.log(res);
     });
-    
   }
 
   getUserId() {
@@ -72,6 +67,14 @@ export class DefaultCardPage implements OnInit {
     this.accountService.getAccountList(this.userId).subscribe(res => {
       console.log(res);
       this.cards = res;
+      var u = this.user;
+      var index = _.findIndex(this.cards, function(object) {
+        return object.conversion == u.defaultCard;
+      });
+      if(index != -1) {
+        this.cards[index].checked = true;
+        console.log("ioana");
+      }
     });
   }
 

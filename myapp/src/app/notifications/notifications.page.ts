@@ -7,6 +7,7 @@ import { Transaction } from '../_models/Transaction';
 import * as _ from 'lodash';
 import { User } from '../_models/User';
 import { UserService } from '../api/user.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-notifications',
@@ -28,11 +29,13 @@ export class NotificationsPage implements OnInit {
   categoryTransactionsPerThisWeek: CategoryTransaction[];
   myDate: Date;
   user: User;
+  response: Transaction;
   
 
   constructor(private transactionService: TransactionService,
               private categoryTransactionService: CategoryTransactionsService,
-              private userService: UserService) { }
+              private userService: UserService,
+              private toastController: ToastController) { }
 
   ngOnInit() {
     this.myDate = new Date();
@@ -52,6 +55,16 @@ export class NotificationsPage implements OnInit {
 
 
 
+  }
+
+  async presentToast(text, type) {
+    const toast = await this.toastController.create({
+        message: text,
+        position: 'bottom',
+        duration: 1000,
+        color: type
+      });
+    toast.present();
   }
 
   getTransactionPerId() {
@@ -129,9 +142,15 @@ export class NotificationsPage implements OnInit {
   }
 
   acceptTransaction(transaction) {
-    transaction.accepted = true;
+    //transaction.accepted = true;
     this.transactionService.updateTrasaction(transaction.transactionId, transaction).subscribe( res => {
       console.log(res);
+      if (!res) {
+        transaction.accepted = false;
+        this.presentToast("Fonduri insuficiente", "danger");
+      } else {
+        transaction.accepted = true;
+      }
     })
   }
 

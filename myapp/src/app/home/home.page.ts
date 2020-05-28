@@ -5,6 +5,8 @@ import { Transaction } from '../_models/Transaction';
 import { NavController } from '@ionic/angular';
 import * as _ from 'lodash';
 import * as moment from 'moment'
+import { User } from '../_models/User';
+import { UserService } from '../api/user.service';
 
 @Component({
   selector: 'app-home',
@@ -29,10 +31,13 @@ export class HomePage implements OnInit {
   num: number;
   userId: number;
   notifictation: Transaction[];
+  user: User;
+  money: string;
 
 
   constructor(private transactionService: TransactionService,
-              private navControl: NavController) {
+              private navControl: NavController,
+              private userService: UserService) {
     this.getTransactionPerDay();
    }
 
@@ -40,8 +45,38 @@ export class HomePage implements OnInit {
     this.userId = this.getUserId();
     this.myDate = new Date();
     console.log(this.myDate);
+    this.setAmount();
     this.getNotification();
+    this.getSpendMoney();
+   
   
+  }
+
+  getSpendMoney() {
+    this.transactionService.getMoneySpend(this.userId).subscribe( res => {
+      console.log(res);
+    })
+  }
+  
+  setAmount() {
+    this.userService.getUser(this.userId).subscribe( res => {
+      console.log(res);
+      this.user = res;
+      this.gaugeLabel = "of ";
+     
+      if (this.user.defaultCard == "RON") {
+        this.gaugeLabel += 'lei' + this.user.sumaR;
+        this.gaugePrependText = "lei";
+      } else if (this.user.defaultCard == "USD") {
+        this.gaugeLabel += '$' + this.user.sumaD;
+        this.gaugePrependText = "$";
+      } else if (this.user.defaultCard == "EURO") {
+        this.gaugeLabel += '€' + this.user.sumaE;
+        this.gaugePrependText = "€";
+
+      }
+
+    })
   }
 
 
@@ -82,8 +117,7 @@ export class HomePage implements OnInit {
   }
 
   getTransactionPerDay() {
-    var userId = this.getUserId();
-    this.transactionService.getTransactionsForToday(userId).subscribe( res => {
+    this.transactionService.getTransactionsForToday(this.getUserId()).subscribe( res => {
       this.transactionPerDay = res;
       console.log("Zi");
       console.log(this.transactionPerDay);
@@ -93,8 +127,7 @@ export class HomePage implements OnInit {
   }
 
   getTransactionPerWeek() {
-    var userId = this.getUserId();
-    this.transactionService.getTransactionsForWeek(userId).subscribe( res => {
+    this.transactionService.getTransactionsForWeek(this.userId).subscribe( res => {
       this.transactionPerWeek = res;
       console.log("Week");
       console.log(this.transactionPerWeek);
@@ -106,8 +139,7 @@ export class HomePage implements OnInit {
 
 
   getTransactionPerMonth() {
-    var userId = this.getUserId();
-    this.transactionService.getTransactionsForMonth(userId).subscribe( res => {
+    this.transactionService.getTransactionsForMonth(this.userId).subscribe( res => {
       this.transactionPerMonth = res;
       console.log("Luna");
       console.log(this.transactionPerDay);
@@ -117,8 +149,7 @@ export class HomePage implements OnInit {
   }
 
   getTransactionPerYear() {
-    var userId = this.getUserId();
-    this.transactionService.getTransactionsForYear(userId).subscribe( res => {
+    this.transactionService.getTransactionsForYear(this.userId).subscribe( res => {
       this.transactionPerYear = res;
       console.log("An");
       console.log(this.transactionPerDay);

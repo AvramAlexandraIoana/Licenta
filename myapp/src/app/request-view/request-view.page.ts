@@ -1,5 +1,5 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { NavController, ModalController, AlertController } from '@ionic/angular';
+import { NavController, ModalController, AlertController, ToastController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SuccessModalPage } from '../success-modal/success-modal.page';
 import _ from 'lodash';
@@ -41,7 +41,8 @@ export class RequestViewPage implements OnInit {
             public keyboard: Keyboard,   
             private router: Router,
             private userService: UserService,
-            public alertController: AlertController      
+            public alertController: AlertController,
+            private toastController: ToastController     
            
     ) { 
     this.userName = "Ioana Avram";
@@ -131,6 +132,17 @@ export class RequestViewPage implements OnInit {
         return Number(this.decodedToken.nameid);
     }
   }
+
+  async presentToast(text, type) {
+    const toast = await this.toastController.create({
+        message: text,
+        position: 'bottom',
+        duration: 3000,
+        color: type
+      });
+    toast.present();
+  }
+
  
   addTransaction() {
     for (var i = 0; i < this.peopleSelected.length; i++) {
@@ -148,7 +160,12 @@ export class RequestViewPage implements OnInit {
         this.model.IsSend = false;
       }
       this.transactionService.saveTransaction(this.model).subscribe(res => {
-        console.log("Tranzactie adaugata cu succes!");
+        console.log(res);
+        if (!res) {
+          this.presentToast("Nu ai fonduri suficiente", "danger");
+        } else {
+           this.showSuccessModal();
+        }
       });
 
     }
@@ -162,14 +179,15 @@ export class RequestViewPage implements OnInit {
     return suma;
   }
 
-  async showSuccessModal() {
-    this.addTransaction();
-    const modal = await this.modalControl.create({
-      component: SuccessModalPage,
-      backdropDismiss: true
-    });
+  async  showSuccessModal() {
+      const modal = await this.modalControl.create({
+        component: SuccessModalPage,
+        backdropDismiss: true
+      });
+  
+      return await modal.present();
 
-    return await modal.present();
+   
   }
 
   async presentAlert() {

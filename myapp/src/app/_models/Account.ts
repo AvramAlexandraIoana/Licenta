@@ -6,7 +6,7 @@ export class Account {
     SecurityCode: string;
     Conversion: string;
     UserId: number;
-    checked: boolean;
+    Checked: boolean;
  }
  
  

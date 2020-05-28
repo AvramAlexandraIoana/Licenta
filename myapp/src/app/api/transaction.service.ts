@@ -45,6 +45,13 @@ export class TransactionService {
     );
   }
 
+  getMoneySpend(userId: number): Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(this.url + '/getSpendMoney/' + userId, this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.errorHandler)
+    );
+  }
   getTransactionNotificationNumber(userId: number): Observable<Transaction[]> {
     return this.http.get<Transaction[]>(this.url + '/getNumberOfNotification/' + userId, this.httpOptions)
     .pipe(

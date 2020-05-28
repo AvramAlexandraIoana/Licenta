@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using WebFMI.Data;
 using WebFMI.Models;
 using System.Globalization;
-
+using Org.BouncyCastle.Ocsp;
 
 namespace WebFMI.Controllers
 {
@@ -35,7 +35,7 @@ namespace WebFMI.Controllers
         public async Task<IActionResult> Transactions(int id)
         {
 
-            var transactionList = await _context.Transactions.Where(u => u.UserId1 == id).Where(d => (d.Date.Month == DateTime.Now.Month && d.Date.Year == DateTime.Now.Year))
+            var transactionList = await _context.Transactions.OrderByDescending(u => u.Date).Where(u => u.UserId1 == id).Where(d => (d.Date.Month == DateTime.Now.Month && d.Date.Year == DateTime.Now.Year))
                                     .ToListAsync();
             return Ok(transactionList);
         }
@@ -63,9 +63,46 @@ namespace WebFMI.Controllers
         public async Task<IActionResult> AddTransaction(Transaction transaction)
         {
             transaction.Date = DateTime.Now;
+            
+           
 
             try
             {
+                if (transaction.IsSend)
+                {
+                    var user = await _context.Users.FindAsync(transaction.UserId);
+                    if (transaction.Unit == "$" && transaction.IsSend && user.AreSumaD)
+                    {
+                        if (user.SumaD - transaction.Value >= 0)
+                        {
+                            user.SumaD -= transaction.Value;
+                        } else
+                        {
+                            return Ok(false);
+                        }
+                    }
+                    else if (transaction.Unit == "€" && transaction.IsSend && user.AreSumaE)
+                    {
+                        if (user.SumaE - transaction.Value >= 0)
+                        {
+                            user.SumaE -= transaction.Value;
+                        }
+                        else
+                        {
+                            return Ok(false);
+                        }
+                    } else if (transaction.Unit == "r" && transaction.IsSend && user.AreSumaR)
+                    {
+                        if (user.SumaR - transaction.Value >= 0)
+                        {
+                            user.SumaR -= transaction.Value;
+                        }
+                        else
+                        {
+                            return Ok(false);
+                        }
+                    }
+                }
                 var transact = await _context.Transactions.AddAsync(transaction);
                 await _context.SaveChangesAsync();
             }
@@ -73,7 +110,14 @@ namespace WebFMI.Controllers
             {
                 return BadRequest("Nu se permite");
             }
-            return StatusCode(201);
+            return Ok(true);
+        }
+
+        [HttpGet("getSpendMoney/{id}")]
+        public async Task<IActionResult> GetSpendMoney(int id)
+        {
+            var transactionList = await _context.Transactions.Where(u => (u.UserId == id && !u.IsSend) || (u.UserId1 == id && !u.IsSend) && u.Accepted).ToListAsync();
+            return Ok(transactionList);
         }
 
         [HttpPut("edit/{id}")]
@@ -86,7 +130,66 @@ namespace WebFMI.Controllers
             }
             transaction.Description = requestTransaction.Description;
             transaction.Value = requestTransaction.Value;
-            transaction.Accepted = requestTransaction.Accepted;
+            var idUser = requestTransaction.UserId1;
+            var user = await _context.Users.FindAsync(idUser);
+            if (requestTransaction.Unit == "$" && requestTransaction.IsSend && user.AreSumaD)
+            {
+                user.SumaD += requestTransaction.Value;
+                transaction.Accepted = requestTransaction.Accepted;
+
+            }
+            else if (requestTransaction.Unit == "$" && !requestTransaction.IsSend && user.AreSumaD)
+            {
+                if (user.SumaD - requestTransaction.Value >= 0 )
+                {
+                    user.SumaD -= requestTransaction.Value;
+                    transaction.Accepted = requestTransaction.Accepted;
+
+                }
+                else
+                {
+                    return Ok(false);
+                }
+            } else if (requestTransaction.Unit == "€" && requestTransaction.IsSend &&  user.AreSumaE)
+            {
+                user.SumaE += requestTransaction.Value;
+                transaction.Accepted = requestTransaction.Accepted;
+
+            }
+            else  if (requestTransaction.Unit == "€" && !!requestTransaction.IsSend && user.AreSumaE)
+            { 
+                if (user.SumaE - requestTransaction.Value >= 0)
+                {
+                    user.SumaE -= requestTransaction.Value;
+                    transaction.Accepted = requestTransaction.Accepted;
+
+                }
+                else
+                {
+                    return Ok(false);
+
+                }
+            }
+            else if (requestTransaction.Unit == "r" && requestTransaction.IsSend && user.AreSumaR)
+            {
+                user.SumaR += requestTransaction.Value;
+                transaction.Accepted = requestTransaction.Accepted;
+
+            }
+            else if (requestTransaction.Unit == "r" && !!requestTransaction.IsSend &&  user.AreSumaR)
+            {
+                if (user.SumaR - requestTransaction.Value >= 0)
+                {
+                    user.SumaR -= requestTransaction.Value;
+                    transaction.Accepted = requestTransaction.Accepted;
+
+                }
+                else
+                {
+                    return Ok(false);
+
+                }
+            }
 
             await _context.SaveChangesAsync();
             return Ok(transaction);
