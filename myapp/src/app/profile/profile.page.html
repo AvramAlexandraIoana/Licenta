@@ -75,9 +75,18 @@
                     <p class="body">Change your password</p>
                  </div>
               </ion-item>
-              <ion-item lines="none">
+              <ion-item lines="none" (click)="goToDefaultCard()">
+                <div class="thumb1" slot="start">
+                  <img src="assets/imgs/credit card-20s-36px.svg" alt="" >
+                </div>
+                <div>
+                  <p class="header">Card</p>
+                  <p class="body">Change your default card</p>
+                </div>
+              </ion-item>  
+              <ion-item lines="none" (click)="goToNotification()">
                 <div class="thumb" slot="start">
-                  <img src="assets/imgs/notification.svg" alt="">
+                  <img src="assets/imgs/notification.svg" alt="" >
                 </div>
                 <div>
                   <p class="header">Notifications</p>

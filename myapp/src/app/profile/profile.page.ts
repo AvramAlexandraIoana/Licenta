@@ -432,6 +432,14 @@ export class ProfilePage implements OnInit {
   goToReview() {
     this.navControl.navigateRoot(["review"]);
   }
+
+  goToNotification() {
+    this.navControl.navigateRoot(["notification"]);
+  }
+
+  goToDefaultCard() {
+    this.navControl.navigateRoot(["default-card"]);
+  }
   
 }
 

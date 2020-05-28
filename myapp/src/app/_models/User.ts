@@ -22,5 +22,6 @@ export class User {
     sD: number;
     sR: number;
     sE: number;
+    defaultCard: string;
 }   
 

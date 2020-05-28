@@ -209,7 +209,11 @@ const routes: Routes = [
   {
     path: 'add-amount-modal',
     loadChildren: () => import('./add-amount-modal/add-amount-modal.module').then( m => m.AddAmountModalPageModule)
+  },  {
+    path: 'notification',
+    loadChildren: () => import('./notification/notification.module').then( m => m.NotificationPageModule)
   }
+
 
 
 

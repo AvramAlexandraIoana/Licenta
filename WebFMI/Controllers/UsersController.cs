@@ -142,6 +142,7 @@ namespace WebFMI.Controllers
             user.UserName = requestedUser.UserName;
             user.DateOfBirth = requestedUser.DateOfBirth;
             user.Email = requestedUser.Email;
+            user.DefaultCard = requestedUser.DefaultCard;
            
 
             await _context.SaveChangesAsync();
