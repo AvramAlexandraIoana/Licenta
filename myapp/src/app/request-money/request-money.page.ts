@@ -82,7 +82,7 @@ export class RequestMoneyPage implements OnInit {
     this.sendMoneyForm = this.formBuilder.group({
       'suma': ['', [Validators.required,
                         Validators.min(5),
-                        Validators.max(4000)]],
+                        Validators.max(5000)]],
       'unit': ['$', [Validators.required]],
       'description': ['', [Validators.required,
                           Validators.minLength(5),

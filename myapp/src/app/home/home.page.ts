@@ -119,6 +119,7 @@ export class HomePage implements OnInit {
   }
 
   getTransactionPerDay() {
+    this.userId = this.getUserId();
     this.transactionService.getTransactionsForToday(this.getUserId()).subscribe( res => {
       this.transactionPerDay = res;
       console.log("Zi");
@@ -126,6 +127,14 @@ export class HomePage implements OnInit {
         
     });
 
+  }
+
+  verifyType(transaction) {
+    if (transaction.userId == this.userId && transaction.isSend) {
+      return false;
+    } else   if (transaction.userId1 == this.userId && transaction.isSend){
+      return true;
+    }
   }
 
   getTransactionPerWeek() {

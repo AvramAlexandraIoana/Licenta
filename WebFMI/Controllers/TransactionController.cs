@@ -216,10 +216,13 @@ namespace WebFMI.Controllers
         [HttpGet("getTransactionsForToday/{id}")]
         public async Task<IActionResult> GetTransactionCurrentDay(int id)
         {
-            var transactionList = await _context.Transactions.Where(u => u.UserId == id).Where(d => (d.Date.Day == DateTime.Now.Day && d.Date.Month ==  DateTime.Now.Month && d.Date.Year == DateTime.Now.Year) )
+            var transactionList = await _context.Transactions.OrderByDescending(u => u.Date).Where(u => u.UserId == id || u.UserId1 == id).Where(d => (d.Date.Day == DateTime.Now.Day && d.Date.Month ==  DateTime.Now.Month && d.Date.Year == DateTime.Now.Year) )
                                         .Select(transaction => new
                                         {
-                                            Transactions = transaction
+                                            Transactions = transaction,
+                                            User = (from user in _context.Users
+                                                    where transaction.UserId1 == user.Id || transaction.UserId == user.Id
+                                                    select user).ToList()
 
                                         }).ToListAsync();
             return Ok(transactionList);
@@ -231,10 +234,13 @@ namespace WebFMI.Controllers
         public async Task<IActionResult> GetTransactionCurrentWeek(int id)
         {
 
-            var transactionList = await _context.Transactions.Where(u => u.UserId == id).Where(d => (d.Date.Month == DateTime.Now.Month && d.Date.Year == DateTime.Now.Year))
+            var transactionList = await _context.Transactions.OrderByDescending(u => u.Date).Where(u => u.UserId == id || u.UserId1 == id).Where(d => (d.Date.Month == DateTime.Now.Month && d.Date.Year == DateTime.Now.Year))
                                         .Select(transaction => new
                                         {
-                                            Transactions = transaction
+                                            Transactions = transaction,
+                                            User = (from user in _context.Users
+                                                    where transaction.UserId1 == user.Id || transaction.UserId == user.Id
+                                                    select user).ToList()
 
                                         }).ToListAsync();
             return Ok(transactionList);
@@ -243,10 +249,13 @@ namespace WebFMI.Controllers
         [HttpGet("getTransactionsForMonth/{id}")]
         public async Task<IActionResult> GetTransactionCurrentMonth(int id)
         {
-            var transactionList = await _context.Transactions.Where(u => u.UserId == id).Where(d => (d.Date.Month == DateTime.Now.Month && d.Date.Year == DateTime.Now.Year))
+            var transactionList = await _context.Transactions.OrderByDescending(u => u.Date).Where(u => u.UserId == id || u.UserId1 == id).Where(d => (d.Date.Month == DateTime.Now.Month && d.Date.Year == DateTime.Now.Year))
                                         .Select(transaction => new
                                         {
-                                            Transactions = transaction
+                                            Transactions = transaction,
+                                            User = (from user in _context.Users
+                                                    where transaction.UserId1 == user.Id || transaction.UserId == user.Id
+                                                    select user).ToList()
 
                                         }).ToListAsync();
             return Ok(transactionList);
@@ -255,10 +264,13 @@ namespace WebFMI.Controllers
         [HttpGet("getTransactionsForYear/{id}")]
         public async Task<IActionResult> GetTransactionCurrentYear(int id)
         {
-            var transactionList = await _context.Transactions.Where(u => u.UserId == id).Where(d => (d.Date.Year == DateTime.Now.Year))
+            var transactionList = await _context.Transactions.OrderByDescending(u => u.Date).Where(u => u.UserId == id || u.UserId1 == id).Where(d => (d.Date.Year == DateTime.Now.Year))
                                         .Select(transaction => new
                                         {
-                                            Transactions = transaction
+                                            Transactions = transaction,
+                                            User = (from user in _context.Users
+                                                    where transaction.UserId1 == user.Id || transaction.UserId == user.Id
+                                                    select user).ToList()
 
                                         }).ToListAsync();
             return Ok(transactionList);
