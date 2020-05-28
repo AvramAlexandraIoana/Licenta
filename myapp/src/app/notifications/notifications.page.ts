@@ -142,7 +142,7 @@ export class NotificationsPage implements OnInit {
   }
 
   acceptTransaction(transaction) {
-    //transaction.accepted = true;
+    transaction.accepted = true;
     this.transactionService.updateTrasaction(transaction.transactionId, transaction).subscribe( res => {
       console.log(res);
       if (!res) {
