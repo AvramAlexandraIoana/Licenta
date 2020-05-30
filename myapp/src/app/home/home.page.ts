@@ -64,15 +64,15 @@ export class HomePage implements OnInit {
       this.user = res;
       this.gaugeLabel = "of ";
      
-      if (this.user.defaultCard == "RON") {
+      if (this.user.defaultCard == "r") {
         this.gaugeLabel += 'lei' + this.user.sumaR;
         this.gaugePrependText = "lei";
-      } else if (this.user.defaultCard == "USD") {
+      } else if (this.user.defaultCard == "$") {
         this.gaugeLabel += '$' + this.user.sumaD;
         this.gaugePrependText = "$";
         this.gaugeValue =  this.user.sumaDSpend * 100 / this.user.sumaD ;
         console.log(this.gaugeValue);
-      } else if (this.user.defaultCard == "EURO") {
+      } else if (this.user.defaultCard == "€") {
         this.gaugeLabel += '€' + this.user.sumaE;
         this.gaugePrependText = "€";
 

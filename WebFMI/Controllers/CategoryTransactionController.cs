@@ -98,10 +98,15 @@ namespace WebFMI.Controllers
         public async Task<IActionResult> GetExpenses(int id, string unit)
         {
             var user = await _context.Users.FindAsync(id);
-            var categoryTransactions =  _context.CategoryTransactions.Where(u => (u.UserId == id && u.Unit == unit)).Sum(u => u.Value);
-
-
-            return Ok(categoryTransactions);
+            var leaveQuota = await _context.CategoryTransactions
+                             .Where(Q => Q.UserId == id)
+                             .GroupBy(x => x.CategoryId).Select(x =>
+                             new MoneySpend
+                             {
+                                 Sum = x.Sum(y => y.Value),
+                                 Id = x.Key
+                             }).ToListAsync();
+            return Ok(leaveQuota);
 
         }
 
