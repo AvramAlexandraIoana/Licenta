@@ -1,3 +1,6 @@
+* {
+    font-size: 16px;
+}
 ion-toolbar {
     --background: #F8F9F9 !important;
     ion-title{
@@ -7,7 +10,6 @@ ion-toolbar {
 
 
 ion-content{
-    --background:#F8F9F9;
 
     .top-item
     {
@@ -82,7 +84,16 @@ canvas.canvasjs-chart-canvas {
  }
 
  ion-select {
-     font-weight: bolder;
-     position: relative;
-     left: -15vw;
+    font-weight: bolder;
+    position: relative;
+    left: -15vw;
+ }
+
+ ion-card {
+    position: relative;
+    height: 80px;
+ }
+
+ ion-item {
+    border-bottom: 1px solid rgb(223, 220, 220);
  }

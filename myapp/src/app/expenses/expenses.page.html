@@ -20,20 +20,22 @@
        </ion-select>
     </ion-item>
     <ion-list style="position: relative; top: 300px;">
-        <ion-item *ngFor="let item of dataShow">
-          <div class="thumb" slot="start">
-            <img  *ngIf="item.url" src="assets/imgs/{{item.url}}" alt="">
-            <img  *ngIf="!item.url" src="assets/imgs/pay-20s-40px.svg" alt="">
-          </div>
-          <ion-label>
-            <h4>{{item.name}}</h4>
-            <p>{{item.size}} tranzactii</p>
-          </ion-label>
-          <div slot="end">
+      <ion-card *ngFor="let item of dataShow">
+        <ion-card-content>
+          <ion-item lines="none">
+            <div class="thumb" slot="start">
+              <img  *ngIf="item.url" src="assets/imgs/{{item.url}}" alt="">
+              <img  *ngIf="!item.url" src="assets/imgs/pay-20s-40px.svg" alt="">
+            </div>
             <ion-label>
-              <h4>{{item.sum}} {{item.conversion}}</h4>
+              <h4>{{item.name}}</h4>
+              <p>{{item.size}} tranzactii</p>
             </ion-label>
-          </div>
-        </ion-item>
+            <div slot="end" style="position: relative; top: -10px; font-size: 14px;">
+                {{item.sum}} {{item.conversion}}
+            </div>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
     </ion-list>
 </ion-content>
