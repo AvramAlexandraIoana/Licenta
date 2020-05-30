@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import CanvasJS from 'src/app/canvasjs.min.js'
+import { CategoryTransactionsService } from '../api/category-transactions.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { User } from '../_models/User';
+import { UserService } from '../api/user.service';
 
 @Component({
   selector: 'app-expenses',
@@ -8,10 +12,19 @@ import CanvasJS from 'src/app/canvasjs.min.js'
   styleUrls: ['./expenses.page.scss'],
 })
 export class ExpensesPage implements OnInit {
+  decodedToken: any;
+  jwtHelper = new JwtHelperService();
+  user: User;
+  userId: number;
 
-  constructor(private navCtrl: NavController) { }
+
+  constructor(private navCtrl: NavController, 
+              private categoryTransactionService: CategoryTransactionsService,
+              private userService: UserService) { }
 
   ngOnInit() {
+    this.userId = this.getUserId();
+    this.getUser();
     let dataPoints = [];
 	  let dpsLength = 0;
     let chart = new CanvasJS.Chart("chartContainer", {
@@ -41,6 +54,28 @@ export class ExpensesPage implements OnInit {
 
       
     chart.render();
+  }
+
+  getUser() {
+    this.userService.getUser(this.userId).subscribe(res => {
+      console.log(res);
+      this.user = res;
+      this.getData();
+    })
+  }
+
+  getUserId() {
+    var userToken = localStorage.getItem('token');
+    if (userToken) {
+        this.decodedToken = this.jwtHelper.decodeToken(userToken);
+        return Number(this.decodedToken.nameid);
+    }
+  }
+
+  getData() {
+    this.categoryTransactionService.getSumPerCategory(this.user.id, this.user.defaultCard).subscribe(res => {
+      console.log(res);
+    })
   }
 
  

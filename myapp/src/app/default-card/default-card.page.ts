@@ -68,6 +68,13 @@ export class DefaultCardPage implements OnInit {
       console.log(res);
       this.cards = res;
       var u = this.user;
+      if (u.defaultCard == "$") {
+        u.defaultCard = "USD";
+      } else if (u.defaultCard == "€") {
+        u.defaultCard = "EURO";
+      } else if   (u.defaultCard == "r") {
+        u.defaultCard = "RON";
+      }
       var index = _.findIndex(this.cards, function(object) {
         return object.conversion == u.defaultCard;
       });
@@ -123,7 +130,13 @@ export class DefaultCardPage implements OnInit {
     if (checkedCards.length > 1) {
       this.presentToast("Trebuie selectat un singur card!", "warning");
     } else if (checkedCards.length == 1) { 
-      this.user.defaultCard  = checkedCards[0].conversion;
+      if (checkedCards[0].conversion == "USD") {
+        this.user.defaultCard = "$";
+      } else if   (checkedCards[0].conversion == "EURO") {
+        this.user.defaultCard = "€";
+      } else if   (checkedCards[0].conversion == "RON") {
+        this.user.defaultCard = "r";
+      }
       this.userService.updateUser(this.user.id, this.user).subscribe( res => {
         console.log(res);
         this.presentToast("Card default salvat", "success");

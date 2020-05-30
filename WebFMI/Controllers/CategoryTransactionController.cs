@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using WebFMI.Data;
 using WebFMI.Models;
@@ -53,13 +54,55 @@ namespace WebFMI.Controllers
 
             try
             {
+                var user = await _context.Users.FindAsync(transaction.UserId);
+                if (transaction.Unit == "$")
+                {
+                    if (user.SumaD - user.SumaDSpend - transaction.Value >=0)
+                    {
+                        user.SumaDSpend += transaction.Value;
+                    } else
+                    {
+                        return Ok(false);
+                    }
+                } else if (transaction.Unit == "€")
+                {
+                    if (user.SumaE - user.SumaESpend - transaction.Value >= 0)
+                    {
+                        user.SumaESpend += transaction.Value;
+                    }
+                    else
+                    {
+                        return Ok(false);
+                    }
+                } else if (transaction.Unit == "r")
+                {
+                    if (user.SumaR - user.SumaRSpend - transaction.Value >= 0)
+                    {
+                        user.SumaRSpend += transaction.Value;
+                    }
+                    else
+                    {
+                        return Ok(false);
+                    }
+                }
                 var transact =  await _context.CategoryTransactions.AddAsync(transaction);
                 await _context.SaveChangesAsync();
             } catch(Exception e)
             {
                 return BadRequest("Nu se permite");
             }
-            return StatusCode(201);
+            return Ok(true);
+        }
+
+        [HttpGet("getExpenses/{id}/{unit}")]
+        public async Task<IActionResult> GetExpenses(int id, string unit)
+        {
+            var user = await _context.Users.FindAsync(id);
+            var categoryTransactions =  _context.CategoryTransactions.Where(u => (u.UserId == id && u.Unit == unit)).Sum(u => u.Value);
+
+
+            return Ok(categoryTransactions);
+
         }
 
         [HttpPut("edit/{id}")]

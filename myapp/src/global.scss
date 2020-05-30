@@ -154,8 +154,8 @@ ion-searchbar ion-icon {
    font-size: 35px !important;
  }
 
- canvas {
+ canvas.canvasjs-chart-canvas {
    position: absolute;
-   width: 100vw;
-   height: 300px;
+   width: 100vw !important;
+   height: 300px !important;
 }

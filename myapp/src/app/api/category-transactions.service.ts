@@ -30,6 +30,14 @@ export class CategoryTransactionsService {
 
   }
 
+  getSumPerCategory(userId: number, unit: string) {
+    return this.http.get<number>(this.url + '/getExpenses/' + userId + '/' + unit, this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.errorHandler)
+    );
+  }
+
   getCategoryTransactionNotificationForToday(userId: number): Observable<CategoryTransaction[]> {
     return this.http.get<CategoryTransaction[]>(this.url + '/getCategoryNotificationsForToday/' + userId, this.httpOptions)
     .pipe(
