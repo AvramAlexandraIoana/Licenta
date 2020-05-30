@@ -94,18 +94,36 @@ namespace WebFMI.Controllers
             return Ok(true);
         }
 
-        [HttpGet("getExpenses/{id}/{unit}")]
-        public async Task<IActionResult> GetExpenses(int id, string unit)
+        [HttpGet("getExpenses/{id}/{unit}/{month}")]
+        public async Task<IActionResult> GetExpenses(int id, string unit, int month)
         {
             var user = await _context.Users.FindAsync(id);
             var leaveQuota = await _context.CategoryTransactions
-                             .Where(Q => Q.UserId == id)
+                             .Where(Q => Q.UserId == id && Q.TransactionDate.Month == month + 1)
                              .GroupBy(x => x.CategoryId).Select(x =>
                              new MoneySpend
                              {
                                  Sum = x.Sum(y => y.Value),
-                                 Id = x.Key
+                                 Id = x.Key,
+                                 Size = x.Count()
                              }).ToListAsync();
+            var transactionCount = await _context.Transactions
+                                    .Where(u => u.UserId == id && u.IsSend && u.Date.Month == month + 1)
+                                    .GroupBy(x => x.UserId).Select(x =>
+                                     new MoneySpend
+                                     {
+                                         Sum = x.Sum(y => y.Value),
+                                         Id = x.Key,
+                                         Size = x.Count()
+                                     }).ToListAsync();
+            leaveQuota.Add(new MoneySpend {
+                Sum = transactionCount.First().Sum,
+                Size = transactionCount.First().Size
+            });
+
+
+
+
             return Ok(leaveQuota);
 
         }

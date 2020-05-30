@@ -153,9 +153,13 @@ ion-searchbar ion-icon {
 .reading-block {
    font-size: 35px !important;
  }
+ a.canvasjs-chart-credit {
+    display: none !important;
+ }
 
  canvas.canvasjs-chart-canvas {
    position: absolute;
-   width: 100vw !important;
+   width: 95vw !important;
    height: 300px !important;
+   margin-left: 2.5vw !important;
 }

@@ -30,8 +30,8 @@ export class CategoryTransactionsService {
 
   }
 
-  getSumPerCategory(userId: number, unit: string) {
-    return this.http.get<number>(this.url + '/getExpenses/' + userId + '/' + unit, this.httpOptions)
+  getSumPerCategory(userId: number, unit: string, month: number) {
+    return this.http.get<number>(this.url + '/getExpenses/' + userId + '/' + unit + '/' + month, this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.errorHandler)
