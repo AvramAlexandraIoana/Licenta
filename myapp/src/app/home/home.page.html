@@ -48,15 +48,15 @@
     <div class="bottom-section" padding>
       <ion-row class="btns-holder">
         <ion-col>
-          <ion-button expand="block">
-            <img src="assets/imgs/send.svg" alt="">
-            &nbsp;Send Money
+          <ion-button expand="block"  (click)="goToChat()">
+            <img src="assets/imgs/discussion-20s-36px.svg" alt="">
+           Chat
           </ion-button>
         </ion-col>
         <ion-col>
           <ion-button expand="block" (click)="goToReview()">
             <img src="assets/imgs/star-20s-40px.svg" alt="">
-            &nbsp;Feedback
+           Feedback
           </ion-button>
         </ion-col>
       </ion-row>
@@ -81,7 +81,7 @@
          </div>
          <div class="the-list" *ngIf="category == 'day'">
            <ion-item *ngFor="let transaction of transactionPerDay">
-             <ion-col size="2.5">
+             <ion-col size="2">
               <div *ngFor="let user of transaction.user">
                 <div class="thumb" slot="start" *ngIf="user.id != userId">
                   <ion-avatar>
@@ -96,7 +96,11 @@
               <div *ngFor="let user of transaction.user">
                   <h4 *ngIf="user.id != userId">{{user.name}}</h4>
               </div>
-              <p style="color: black; font-size: 13px; font-weight:500;">{{transaction.transactions.accepted ? 'Acceptata' : 'In asteptare'}}</p>
+              <div [ngClass]="transaction.transactions.accepted ? 'divAccepted' : 'divWaiting'">
+                <img  *ngIf="!transaction.transactions.accepted"  src="assets/imgs/wait-20s-32px.svg"/>
+                <img *ngIf="transaction.transactions.accepted" src="assets/imgs/check-20s-23px.svg"/>
+                {{transaction.transactions.accepted ? 'Acceptata' : 'In asteptare'}}
+              </div>
             </ion-label>
            </ion-col>
             <ion-col style="text-align: right;">
@@ -110,7 +114,9 @@
          </div>
          <div class="the-list" *ngIf="category == 'week'">
            <div  *ngFor="let transaction of transactionPerWeek">
-              <ion-item  *ngIf="(transaction.transactions.date | date:'ww') == (myDate | date:'ww')">
+             <!-- {{(transaction.transactions.date | date:'ww')}}
+             {{ (myDate | date:'ww')}} -->
+              <ion-item  *ngIf="(transaction.transactions.date | date:'ww') == (myDate | date:'ww') - 1">
                 <ion-col size="2.5">
                 <div *ngFor="let user of transaction.user">
                   <div class="thumb" slot="start" *ngIf="user.id != userId">
@@ -126,7 +132,11 @@
                 <div *ngFor="let user of transaction.user">
                     <h4 *ngIf="user.id != userId">{{user.name}}</h4>
                 </div>
-                <p style="color: black; font-size: 13px; font-weight:500;">{{transaction.transactions.accepted ? 'Acceptata' : 'In asteptare'}}</p>
+                <div [ngClass]="transaction.transactions.accepted ? 'divAccepted' : 'divWaiting'">
+                  <img  *ngIf="!transaction.transactions.accepted"  src="assets/imgs/wait-20s-32px.svg"/>
+                  <img *ngIf="transaction.transactions.accepted" src="assets/imgs/check-20s-23px.svg"/>
+                  {{transaction.transactions.accepted ? 'Acceptata' : 'In asteptare'}}
+                </div>
               </ion-label>
               </ion-col>
               <ion-col style="text-align: right;">
@@ -152,12 +162,16 @@
               </ion-col>
              
               <ion-col>
-              <ion-label>
-                <div *ngFor="let user of transaction.user">
-                    <h4 *ngIf="user.id != userId">{{user.name}}</h4>
-                </div>
-                <p style="color: black; font-size: 13px; font-weight:500;">{{transaction.transactions.accepted ? 'Acceptata' : 'In asteptare'}}</p>
-              </ion-label>
+                <ion-label>
+                  <div *ngFor="let user of transaction.user">
+                      <h4 *ngIf="user.id != userId">{{user.name}}</h4>
+                  </div>
+                  <div [ngClass]="transaction.transactions.accepted ? 'divAccepted' : 'divWaiting'">
+                    <img  *ngIf="!transaction.transactions.accepted"  src="assets/imgs/wait-20s-32px.svg"/>
+                    <img *ngIf="transaction.transactions.accepted" src="assets/imgs/check-20s-23px.svg"/>
+                    {{transaction.transactions.accepted ? 'Acceptata' : 'In asteptare'}}
+                  </div>           
+                </ion-label>
               </ion-col>
               <ion-col style="text-align: right;">
                 <ion-label>
@@ -180,12 +194,16 @@
              </ion-col>
             
              <ion-col>
-             <ion-label>
-               <div *ngFor="let user of transaction.user">
-                   <h4 *ngIf="user.id != userId">{{user.name}}</h4>
-               </div>
-               <p style="color: black; font-size: 13px; font-weight:500;">{{transaction.transactions.accepted ? 'Acceptata' : 'In asteptare'}}</p>
-             </ion-label>
+              <ion-label>
+                <div *ngFor="let user of transaction.user">
+                    <h4 *ngIf="user.id != userId">{{user.name}}</h4>
+                </div>
+                <div [ngClass]="transaction.transactions.accepted ? 'divAccepted' : 'divWaiting'">
+                  <img  *ngIf="!transaction.transactions.accepted"  src="assets/imgs/wait-20s-32px.svg"/>
+                  <img *ngIf="transaction.transactions.accepted" src="assets/imgs/check-20s-23px.svg"/>
+                  {{transaction.transactions.accepted ? 'Acceptata' : 'In asteptare'}}
+                </div>           
+              </ion-label>
              </ion-col>
              <ion-col style="text-align: right;">
                <ion-label>

@@ -212,6 +212,10 @@ const routes: Routes = [
   },  {
     path: 'notification',
     loadChildren: () => import('./notification/notification.module').then( m => m.NotificationPageModule)
+  },
+  {
+    path: 'limitation-category',
+    loadChildren: () => import('./limitation-category/limitation-category.module').then( m => m.LimitationCategoryPageModule)
   }
 
 

@@ -174,6 +174,10 @@ export class HomePage implements OnInit {
 
   }
 
+  goToChat() {
+    this.navControl.navigateRoot(["chat-history"]);
+  }
+
 
 
 

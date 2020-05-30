@@ -1,7 +1,7 @@
 <ion-header no-border>
   <ion-toolbar>
     <ion-title>Expenses</ion-title>
-    <ion-buttons slot="end" (click)="logout()">
+    <ion-buttons slot="end" (click)="limitation()">
       <ion-button>
        <img src="assets/imgs/Export.svg" alt="">
       </ion-button>
@@ -10,6 +10,7 @@
 </ion-header>
 
 <ion-content>
+    <div *ngIf="noData" style="text-align: center; font-weight: bold;">Nu ai tranzactii efectuate</div>
     <div id="chartContainer"></div>
     <ion-item lines="none" style="position: relative; top: 300px; text-align: center;" >
        <ion-label>Cheltuielile tale in luna</ion-label>

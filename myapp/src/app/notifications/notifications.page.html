@@ -116,7 +116,7 @@
     </div>
     <div class="the-list">
       <div *ngFor="let transaction of transactions">
-        <ion-item *ngIf="(transaction.date | date:'ww') == (myDate | date:'ww')">
+        <ion-item *ngIf="(transaction.date | date:'ww') == (myDate | date:'ww') - 1">
           <ion-avatar slot="start" *ngIf="!transaction.isSend">
             <img  src="https://ucarecdn.com/{{transaction.imageUrl}}/"/>
           </ion-avatar>

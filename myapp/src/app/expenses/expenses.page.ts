@@ -27,6 +27,7 @@ export class ExpensesPage implements OnInit {
   months = ["ianuarie", "februarie", "martie", "aprilie", "mai", "iunie", "iulie", "august", "septembrie", "noiembrie", "decembrie"];
   month: number;
   luna: string;
+  noData: boolean;
 
   constructor(private navCtrl: NavController, 
               private categoryTransactionService: CategoryTransactionsService,
@@ -74,7 +75,12 @@ export class ExpensesPage implements OnInit {
     this.categoryTransactionService.getSumPerCategory(this.user.id, this.user.defaultCard, month).subscribe(res => {
       console.log(res);
       this.data = res;
-      this.renderData();
+      if (this.data.length) {
+        this.renderData();
+      } else {
+        this.noData = true;
+        this.renderData();
+      }
     })
   }
 
@@ -132,10 +138,13 @@ export class ExpensesPage implements OnInit {
     } else if (this.user.defaultCard == "€") {
       money = this.user.sumaE - sum;
     }
-    if (x.size) {
-      dataPoints.push({y : money, name: "Transferuri Pay",  unit: this.user.defaultCard});
-      this.dataShow.push({name: "Transferuri Pay", size: x.size, sum: x.sum, conversion: moned});
+    if (x) {
+      if (x.size) {
+        dataPoints.push({y : money, name: "Transferuri Pay",  unit: this.user.defaultCard});
+        this.dataShow.push({name: "Transferuri Pay", size: x.size, sum: x.sum, conversion: moned});
+      }
     }
+   
     console.log(this.data);
     console.log(this.dataShow);
 
@@ -161,9 +170,9 @@ export class ExpensesPage implements OnInit {
 
  
 
-  logout()
+  limitation()
   {
-    this.navCtrl.navigateRoot('login')
+    this.navCtrl.navigateRoot(["limitation-category"]);
   }
 
 }

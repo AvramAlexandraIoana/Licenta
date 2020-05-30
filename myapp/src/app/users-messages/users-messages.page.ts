@@ -39,13 +39,13 @@ export class UsersMessagesPage implements OnInit {
   }
 
   getRecentSearches() {
-    // this.messageService.getRecentSearch(this.userId).subscribe(res => {
-    //   for (var i = 0; i < res.length; i++)
-    //       res[i].name = (res[i].name).split(" ")[0];
-    //   this.recentUsers = res;
-    //   console.log(res);
-    //   console.log(res.length);
-    // })
+    this.messageService.getRecentSearch(this.userId).subscribe((res: any) => {
+      for (var i = 0; i < res.length; i++)
+          res[i].name = (res[i].name).split(" ")[0];
+      this.recentUsers = res;
+      console.log(res);
+      console.log(res.length);
+    })
   }
 
   getUserId() {

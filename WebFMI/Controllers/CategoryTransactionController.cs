@@ -116,10 +116,15 @@ namespace WebFMI.Controllers
                                          Id = x.Key,
                                          Size = x.Count()
                                      }).ToListAsync();
-            leaveQuota.Add(new MoneySpend {
-                Sum = transactionCount.First().Sum,
-                Size = transactionCount.First().Size
-            });
+            if (transactionCount.Count() > 0)
+            {
+                leaveQuota.Add(new MoneySpend
+                {
+                    Sum = transactionCount.First().Sum,
+                    Size = transactionCount.First().Size
+                });
+            }
+          
 
 
 

@@ -112,9 +112,12 @@ export class AddTransactionPage implements OnInit {
     this.model.UserId =  this.getUserId();
     console.log(this.model);
     this.categoryTransactionService.saveCategoryTransaction(this.model).subscribe(res => {
-      console.log("Tranzactie adaugata cu succes!");
-      this.presentToast("Tranzactie adaugata cu succes!", "success");
-      this.navControl.navigateRoot('tabs');
+      console.log(res);
+        if (!res) {
+          this.presentToast("Nu ai fonduri suficiente", "danger");
+        } else {
+           this.showSuccessModal();
+        }
       
     });
   }
