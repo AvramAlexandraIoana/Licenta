@@ -1,9 +1,33 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>limitationCategory</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button color="primary" defaultHref="tabs/tab2"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-item lines="none" class="infoHeader">
+    <ion-label class="header" color="dark">Doresti sa adaugi limitari pe categorii?</ion-label>
+  </ion-item>
+  <div style="font-size: 13px; color:gray; text-align: center;">
+     Le vom folosi  cand efectuezi tranzactii
+     <br>
+  </div>
+  <ion-list>
+    <ion-item *ngFor="let item of categories">
+      <div class="thumb" slot="start">
+        <img  src="assets/imgs/{{item.categoryUrl}}" alt="">
+      </div>
+      <ion-label>
+        <h4>{{item.categoryName}}</h4>
+      </ion-label>
+      <div slot="end" style="position: relative; font-size: 14px;">
+         <ion-button  size="small" color="primary" (click)="addLimit(item)">
+           Seteaza
+         </ion-button>
+      </div>
+    </ion-item>
+  </ion-list>
 
 </ion-content>

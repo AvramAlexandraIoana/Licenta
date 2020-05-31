@@ -9,6 +9,7 @@ import { Transaction } from '../_models/Transaction';
 import { UserService } from '../api/user.service';
 import { AuthService } from '../api/auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { AccountService } from '../api/account.service';
 
 
 @Component({
@@ -31,6 +32,7 @@ export class RequestViewPage implements OnInit {
   error: boolean;
   user: import("t:/Licenta/myapp/src/app/_models/User").User;
   userId: number;
+  cards: Account[];
 
   
   constructor(private transactionService: TransactionService,
@@ -42,7 +44,8 @@ export class RequestViewPage implements OnInit {
             private router: Router,
             private userService: UserService,
             public alertController: AlertController,
-            private toastController: ToastController     
+            private toastController: ToastController,
+            private accountService: AccountService   
            
     ) { 
     this.userName = "Ioana Avram";
@@ -75,11 +78,26 @@ export class RequestViewPage implements OnInit {
     this.userService.getUser(this.userId).subscribe(res => {
       console.log(res);
       this.user = res;
+      this.getAccounts();
     });
    
   });
 
     this.setTitlePage();
+  }
+
+  getAccounts() {
+    this.accountService.getAccountList(this.userId).subscribe(res => {
+      console.log(res);
+      this.cards = res;
+    });
+  }
+
+  conditionPosition(position: number) {
+    if (position % 2 == 0) {
+      return true;
+    }
+    return false;
   }
 
   setTitlePage() 

@@ -41,9 +41,12 @@ namespace WebFMI.Data
 
         public DbSet<Review> Reviews { get; set; }
 
+        public DbSet<LimitationCategory> LimitationCategories { get; set; }
 
 
-       protected override void OnModelCreating(ModelBuilder builder)
+
+
+        protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
             /*builder.Entity<UserRole>(userRole =>

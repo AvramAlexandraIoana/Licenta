@@ -21,5 +21,7 @@ namespace WebFMI.Models
 
         public virtual ICollection<CategoryTransaction> CategoryTransactions { get; set; }
 
+  
+
     }
 }

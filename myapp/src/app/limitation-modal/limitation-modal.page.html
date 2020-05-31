@@ -1,0 +1,53 @@
+<ion-header  class="ion-no-border">
+  <ion-toolbar>
+    <ion-icon (click)="dismiss()" style="font-weight: bolder; font-size: 28px; margin-left: 4%;" name="close-outline"></ion-icon>
+   </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <ion-item lines="none" class="infoHeader">
+    <ion-label class="header" color="dark">Care este limita dorita pentru categorie?</ion-label>
+  </ion-item>
+  <div style="font-size: 13px; color:gray; text-align: center;">
+    O vom folosi pentru a limita tranzactiile 
+    <br/>
+ </div>
+ <div style="font-size: 13px; color:gray; text-align: center;">
+    lunare efectuate
+   <br/>
+</div>
+  <form [formGroup]="limitationForm">
+    <ion-list lines="full" class="paddingList">
+      <div>
+        <ion-item>
+          <ion-label position="stacked">Introdu suma</ion-label>
+          <ion-input placeholder="Introdu suma" type="number" formControlName="limit"></ion-input>
+        </ion-item>
+        <div class="error-messages">
+          <ng-container *ngFor="let error of errorMessages.limit">
+            <div class="error-message"
+              *ngIf="limitationForm.get('limit').hasError(error.type) && (limitationForm.get('limit').dirty || limitationForm.get('limit').touched)">
+              {{error.message}}
+            </div>
+          </ng-container>
+        </div>
+        <ion-item lines="none">
+          <ion-label  position="stacked">Selecteaza moneda</ion-label>
+        </ion-item>
+        <ion-select formControlName="moneda" class="selectForm" multiple="false" placeholder="Select Unit">
+          <ion-select-option value="$" selected>USD</ion-select-option>
+          <ion-select-option value="€">EURO</ion-select-option>
+          <ion-select-option value="r">RON</ion-select-option>
+        </ion-select>
+      </div>
+    </ion-list>
+  </form>
+ 
+ 
+ 
+</ion-content>
+<ion-footer class="ion-no-border">
+  <div class="ion-padding">
+    <ion-button  [disabled]="limitationForm.invalid" (click)="updateLimit()" expand="block" shape="round" expand="full" class="sendButton">Adauga limitare</ion-button>
+  </div>
+</ion-footer>

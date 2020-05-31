@@ -216,6 +216,10 @@ const routes: Routes = [
   {
     path: 'limitation-category',
     loadChildren: () => import('./limitation-category/limitation-category.module').then( m => m.LimitationCategoryPageModule)
+  },
+  {
+    path: 'limitation-modal',
+    loadChildren: () => import('./limitation-modal/limitation-modal.module').then( m => m.LimitationModalPageModule)
   }
 
 
