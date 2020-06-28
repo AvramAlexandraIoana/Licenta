@@ -37,6 +37,8 @@ export class IbanTransferPage implements OnInit {
 
   isEnterSumInput: boolean;
   isEnterDescriptionInput: boolean;
+  isEnterIban: boolean;
+  isEnterName: boolean;
   content: any;
   IsKeyboardOpen: boolean=false;
   model: any;

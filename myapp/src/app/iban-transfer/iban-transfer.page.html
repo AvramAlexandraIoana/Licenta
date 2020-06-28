@@ -23,7 +23,8 @@
           <div class="sign-container">
             <h1>{{sendMoneyForm.get('unit').value}}</h1>
           </div>
-          <ion-input [placeholder]="!isEnterSumInput ? 'Introdu aici suma' : ''" (ionInput)="isEnterSumInput=true" (ionFocus)="isEnterSumInput=true;" (ionBlur)="isEnterSumInput=false;" type="tel" formControlName="suma" class="suma"  value="5" text-center></ion-input>
+          <ion-input [placeholder]="!isEnterSumInput ? 'Introdu aici suma' : ''" (ionInput)="isEnterSumInput=true" 
+                    (ionFocus)="isEnterSumInput=true;" (ionBlur)="isEnterSumInput=false;" type="tel" formControlName="suma" class="suma"  value="5" text-center></ion-input>
         </ion-item>
         <div class="error-messages">
           <p *ngIf="!sendMoneyForm.get('suma').invalid" style="color: gray;">Suma minima este de 5 {{sendMoneyForm.get('unit').value}} iar maxima este de 5000 {{sendMoneyForm.get('unit').value}}</p>
@@ -34,9 +35,13 @@
             </div>
           </ng-container>
         </div>
-        <div>
+        <div class="money-content">
+          <div class="labelForSum" [ngClass]="isEnterIban  ||  !sendMoneyForm.get('iban').invalid ? 'visible' : 'hidden'">
+            <p>Introdu IBAN</p>
+          </div>
           <ion-item>
-            <ion-input  formControlName="iban" placeholder="Introdu IBAN" type="text"></ion-input>
+            <ion-input [placeholder]="!isEnterIban ? 'Introdu IBAN' : ''"  (ionInput)="isEnterIban=true" 
+            (ionFocus)="isEnterIban=true;" (ionBlur)="isEnterIban=false;" formControlName="iban"  type="text"></ion-input>
           </ion-item>
           <div class="error-messages">
             <ng-container *ngFor="let error of errorMessages.iban">
@@ -47,9 +52,13 @@
             </ng-container>
           </div>
         </div>
-        <div>
+        <div class="money-content">
+          <div class="labelForSum" [ngClass]="isEnterName  ||  !sendMoneyForm.get('beneficiar').invalid ? 'visible' : 'hidden'">
+            <p>Nume Beneficiar</p>
+          </div>
           <ion-item>
-            <ion-input  formControlName="beneficiar" placeholder="Nume Beneficiar" type="text"></ion-input>
+            <ion-input [placeholder]="!isEnterName ? 'Nume Beneficiar' : ''"  (ionInput)="isEnterName=true" 
+              (ionFocus)="isEnterName=true;" (ionBlur)="isEnterName=false;" formControlName="beneficiar"  type="text"></ion-input>
           </ion-item>
           <div class="error-messages">
             <ng-container *ngFor="let error of errorMessages.beneficiar">
@@ -84,11 +93,14 @@
   </div>
 
 </form>
+<div class="ion-padding">
+  <ion-button  (click)="changeEmail()" expand="block" shape="round" expand="full" class="sendButton" [disabled]="sendMoneyForm.invalid">Salveaza</ion-button>
+</div>
 
 </ion-content>
 
-<ion-footer class="ion-no-border">
+<!-- <ion-footer class="ion-no-border">
   <div class="ion-padding">
     <ion-button  (click)="changeEmail()" expand="block" shape="round" expand="full" class="sendButton" [disabled]="sendMoneyForm.invalid">Salveaza</ion-button>
   </div>
-</ion-footer>
+</ion-footer> -->
