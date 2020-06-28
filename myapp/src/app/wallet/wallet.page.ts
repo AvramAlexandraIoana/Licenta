@@ -196,6 +196,22 @@ requestSMSPermission() {
    this.navControl.navigateRoot(["create-contact"]);
   }
 
+  deleteCard(card: any) {
+    console.log(card);
+    console.log(this.cards);
+    this.accountService.deleteAccount(card.accountId).subscribe(res => {
+      var findCard = _.findIndex(this.cards, function(object) {
+        return object.accountId == card.accountId;
+      });
+      if (findCard != -1) {
+        this.cards.splice(findCard, 1);
+        console.log(this.cards);
+      }
+    });
+  }
+
+
+
   addNewCard() {
     this.navControl.navigateRoot(["add-new-card"]);
     //this.setNavigation(this.typeView, "add-new-card");

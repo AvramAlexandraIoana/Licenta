@@ -220,6 +220,10 @@ const routes: Routes = [
   {
     path: 'limitation-modal',
     loadChildren: () => import('./limitation-modal/limitation-modal.module').then( m => m.LimitationModalPageModule)
+  },
+  {
+    path: 'iban-transfer',
+    loadChildren: () => import('./iban-transfer/iban-transfer.module').then( m => m.IbanTransferPageModule)
   }
 
 

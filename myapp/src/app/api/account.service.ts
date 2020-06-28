@@ -38,6 +38,15 @@ export class AccountService {
     );
   }
 
+  deleteAccount(accountId: number): Observable<Account> {
+    return this.http.delete<Account>(this.url + '/delete/' + accountId, this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.errorHandler)
+    );
+
+  }
+
   
   errorHandler(error) {
     let errorMessage = '';
