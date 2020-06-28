@@ -1,0 +1,280 @@
+ion-title{
+    font-weight: bolder !important;
+    span{
+        font-size: 1rem !important;
+        font-weight: lighter !important;
+    }
+}
+
+.request-money-container {
+    position: absolute;
+    top: 20vh;
+}
+
+
+.money-content
+{          
+    ion-item{
+        span{
+            margin: 0 !important;
+        }
+
+        ion-input{
+            text-align: center;
+            // font-size: 2.5rem !important;
+        }
+    }
+}
+
+.unit-container {
+    ion-item {
+        ion-select {
+            margin-left: 35% !important;
+            ion-select-option {
+                text-align: center;
+            }
+        }
+    }
+}
+
+.sign-container {
+    position: absolute;
+    left: 90%;
+    bottom: 0.8%;
+    h1 {
+        font-size: 2.2rem !important;
+        font-weight: lighter !important;
+    }
+}
+
+
+.native-input.sc-ion-input-md {
+    text-align: center;
+}
+
+
+.error-messages
+{
+    font-size: 0.7em;
+    color: red;
+    text-align: center;
+}
+
+div.navbarBackground {
+    background-image: url("../../assets/imgs/mobile-banking-network-online-payment-260nw-1431394361.webp")!important;
+    background-repeat: no-repeat;
+    background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    background-position: center center;
+}
+
+.selected-contacts
+{
+  background-color: white;
+  height: 130px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  border: 1px solid #DFE7F5;
+  &::-webkit-scrollbar {
+    display: none;
+ }
+    .people
+    {
+        // width: 28.7vw;
+        // height: 20vh;
+        // background: white;
+        // border: 1px solid #DFE7F5;
+        // border-radius: 12px;
+        display: inline-block;
+        margin-left: 4%;
+        padding-top: 10px;
+        .closeIcon {
+            width: 18px;
+            height: 18px;
+            background-color: white;
+            border-radius: 8px 8px 8px 8px;
+            position: relative;
+            left: 63%;
+            top: -59px;
+            ion-icon {
+                top: -5% !important;
+                color: rgb(117, 112, 111);
+            }
+        }
+     
+        ion-avatar{
+            margin-left: auto;
+            margin-right: auto;
+        }
+        p{
+            //margin: 0 !important;
+            text-align: center;
+            margin-top: -10px;
+        }
+    }
+
+}
+
+form{
+    //padding-left: 5% !important;
+    margin-top: 10%;
+    .details{
+        .detail-item{
+            --highlight-color-invalid:red;
+            --highlight-color-valid: #2AD95A;
+            margin-top: 20px !important;
+            ion-label{
+                color: #77869E !important;
+                font-size: .9rem !important;
+                font-weight: 400 !important;
+            }
+            .icn{
+                ion-icon{
+                    color: #2AD95A !important;
+                    font-size: 1.5rem !important;
+                    margin-right: 10px !important;
+                }
+            }
+        }
+
+        .error-messages
+        {
+            font-size: 0.7em;
+            color: red;
+            text-align: center;
+        }
+
+        .second-item{
+            margin: 10px 0 !important;
+        }
+        #rem {
+            ion-label{
+                font-size: 0.9rem !important;
+                color: #77869E !important;
+            }
+        }
+        ion-checkbox{
+         margin-right: 5px !important;
+        }
+        .col-forgot
+        {
+            p{
+                font-size: 0.9rem !important;
+                color: #0047CC !important;
+              //  margin: 0 !important;
+            }
+        }
+      
+    }
+
+   
+}
+
+.next-holder
+{
+    //margin-top: 80%;
+    ion-button{
+        height: 50px !important;
+        text-transform: none !important;
+        border-radius: 12px !important;
+    }
+}  
+
+.phoneText {
+    font-size: 13px;
+}
+
+.labelForSum {
+    font-size: 13px;
+    text-align: center;
+}
+.visible {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}
+.detail-item-row {
+    margin: 15px 0 !important;
+    ion-label{
+         font-size: .9rem !important;
+         color: #77869E !important;
+    }
+
+    ion-textarea{
+        text-align: left;
+        //--background:#dfe7f5;
+    }
+}
+
+.footer {
+    border-radius: 10px 10px 10px 10px;
+}
+.colLeft {
+    position: absolute;
+    text-align: left;
+    margin-left: 10px;
+}
+.colRight {
+   text-align: right;
+   margin-right: 10px;
+}
+
+.avatarContact1 {
+    position: relative;
+    height: 55px !important;
+    width: 58px !important;
+}
+
+.paddingList {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+ion-label {
+    --color: gray !important;
+}
+
+ion-input {
+    --placeholder-color: gray;
+}
+
+.infoHeader {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+.header {
+    font-weight: bold;
+}
+
+ion-item {
+    margin-top: 15px !important;
+}
+
+.infoHeader1 {
+    font-size: 13px;
+    margin-top: -18px !important;
+}
+
+
+ion-button  {
+    margin-left: 7.5% !important;
+    height: 45px;
+    width: 85%;
+}
+
+.error-messages
+{
+    font-size: 0.7em;
+    color: red;
+    text-align:left;
+}
+

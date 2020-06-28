@@ -283,7 +283,7 @@ export class RequestPage implements OnInit {
   }
 
   goToIbanPage() {
-    this.navControl.navigateForward("iban-transfer");
+    this.navControl.navigateRoot("iban-transfer");
   }
 
   

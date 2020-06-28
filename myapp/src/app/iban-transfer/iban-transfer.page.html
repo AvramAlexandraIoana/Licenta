@@ -1,9 +1,94 @@
-<ion-header>
+<ion-header  class="ion-no-border">
   <ion-toolbar>
-    <ion-title>iban-transfer</ion-title>
-  </ion-toolbar>
+    <ion-icon (click)="dismiss()" style="font-weight: bolder; font-size: 28px; margin-left: 4%;" name="close-outline"></ion-icon>
+   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
+  <ion-item lines="none" class="infoHeader">
+    <ion-label class="header" color="dark">Doresti sa efectuezi un transfer prin IBAN?</ion-label>
+  </ion-item>
+  <div style="font-size: 13px; color:gray; text-align: center;">
+     Introdu urmatoarele detalii
+     <br/>
+  </div>
+ <form [formGroup]="sendMoneyForm" (ngSubmit)="goReviewRequestPage()">
+  <div class="details">
+      <div class="money-content">
+        <div class="labelForSum" [ngClass]="isEnterSumInput  ||  !sendMoneyForm.get('suma').invalid ? 'visible' : 'hidden'">
+          <p>Introdu aici suma pentru fiecare contact</p>
+        </div>
+        <ion-item>
+          <div class="sign-container">
+            <h1>{{sendMoneyForm.get('unit').value}}</h1>
+          </div>
+          <ion-input [placeholder]="!isEnterSumInput ? 'Introdu aici suma' : ''" (ionInput)="isEnterSumInput=true" (ionFocus)="isEnterSumInput=true;" (ionBlur)="isEnterSumInput=false;" type="tel" formControlName="suma" class="suma"  value="5" text-center></ion-input>
+        </ion-item>
+        <div class="error-messages">
+          <p *ngIf="!sendMoneyForm.get('suma').invalid" style="color: gray;">Suma minima este de 5 {{sendMoneyForm.get('unit').value}} iar maxima este de 5000 {{sendMoneyForm.get('unit').value}}</p>
+          <ng-container *ngFor="let error of errorMessages.suma">
+            <div class="error-message"
+              *ngIf="sendMoneyForm.get('suma').hasError(error.type) && (sendMoneyForm.get('suma').dirty || sendMoneyForm.get('suma').touched)">
+              {{error.message}}
+            </div>
+          </ng-container>
+        </div>
+        <div>
+          <ion-item>
+            <ion-input  formControlName="iban" placeholder="Introdu IBAN" type="text"></ion-input>
+          </ion-item>
+          <div class="error-messages">
+            <ng-container *ngFor="let error of errorMessages.iban">
+              <div class="error-message"
+                *ngIf="sendMoneyForm.get('iban').hasError(error.type) && (sendMoneyForm.get('iban').dirty || sendMoneyForm.get('iban').touched)">
+                {{error.message}}
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        <div>
+          <ion-item>
+            <ion-input  formControlName="beneficiar" placeholder="Nume Beneficiar" type="text"></ion-input>
+          </ion-item>
+          <div class="error-messages">
+            <ng-container *ngFor="let error of errorMessages.beneficiar">
+              <div class="error-message"
+                *ngIf="sendMoneyForm.get('beneficiar').hasError(error.type) && (sendMoneyForm.get('beneficiar').dirty || sendMoneyForm.get('beneficiar').touched)">
+                {{error.message}}
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="detail-item-row">
+        <div class="labelForSum" [ngClass]="isEnterDescriptionInput  ||  !sendMoneyForm.get('description').invalid ? 'visible' : 'hidden'">
+          <p>Introdu aici detaliile de plata</p>
+        </div>
+        <ion-card>
+          <ion-card-content>
+            <ion-textarea  [placeholder]="!isEnterDescriptionInput ? 'Introdu aici detaliile de plata' : ''" 
+                          (ionInput)="isEnterDescriptionInput=true" (ionFocus)="isEnterDescriptionInput=true;" (ionBlur)="isEnterDescriptionInput=false;" formControlName="description" rows="2" cols="30" >
+            </ion-textarea>
+          </ion-card-content>
+        </ion-card>
+      </div>
+      <div class="error-messages">
+        <ng-container *ngFor="let error of errorMessages.description">
+          <div class="error-message"
+            *ngIf="sendMoneyForm.get('description').hasError(error.type) && (sendMoneyForm.get('description').dirty || sendMoneyForm.get('description').touched)">
+            {{error.message}}
+          </div>
+        </ng-container>
+      </div>
+  </div>
+
+</form>
+
 </ion-content>
+
+<ion-footer class="ion-no-border">
+  <div class="ion-padding">
+    <ion-button  (click)="changeEmail()" expand="block" shape="round" expand="full" class="sendButton" [disabled]="sendMoneyForm.invalid">Salveaza</ion-button>
+  </div>
+</ion-footer>
