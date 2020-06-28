@@ -117,7 +117,7 @@
   </ion-list> 
 </div> 
 </ion-content>
-<ion-badge class="badge">Transfera prin IBAN</ion-badge>
+<ion-badge class="badge" (click)="goToIbanPage()">Transfera prin IBAN</ion-badge>
 <ion-footer no-border>
 <ion-toolbar>
   <ion-button (click)="goSendMoneyPage()" class="footer" expand="block" [disabled]="!peopleSelected.length">
