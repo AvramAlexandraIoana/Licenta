@@ -304,7 +304,8 @@ requestSMSPermission() {
     //this.navControl.navigateBack("request");
   }
 
-  slideChanged() {
+  slideChanged(card: any) {
+    console.log(card);
     console.log("Ioana");
   }
 

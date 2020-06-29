@@ -213,5 +213,40 @@ namespace WebFMI.Controllers
             return Ok(categoryTransactionsList);
         }
 
+        [HttpGet("getCategoryTransactionsForToday/{id}/{unit}")]
+        public async Task<IActionResult> GetTransactionCurrentDay(int id, string unit)
+        {
+            var categoryTransactionsList = await _context.CategoryTransactions.OrderByDescending(u => u.TransactionDate).Where(u => u.UserId == id).Where(d => (d.TransactionDate.Day == DateTime.Now.Day && d.TransactionDate.Month == DateTime.Now.Month && d.TransactionDate.Year == DateTime.Now.Year && d.Unit == unit))
+                                        .ToListAsync();
+            return Ok(categoryTransactionsList);
+        }
+
+
+
+        [HttpGet("getCategoryTransactionsForWeek/{id}/{unit}")]
+        public async Task<IActionResult> GetTransactionCurrentWeek(int id, string unit)
+        {
+
+            var categoryTransactionsList = await _context.CategoryTransactions.OrderByDescending(u => u.TransactionDate).Where(u => u.UserId == id).Where(d => (d.TransactionDate.Month == DateTime.Now.Month && d.TransactionDate.Year == DateTime.Now.Year && d.Unit == unit))
+                                       .ToListAsync();
+            return Ok(categoryTransactionsList);
+        }
+
+        [HttpGet("getCategoryTransactionsForMonth/{id}/{unit}")]
+        public async Task<IActionResult> GetTransactionCurrentMonth(int id, string unit)
+        {
+            var categoryTransactionsList = await _context.CategoryTransactions.OrderByDescending(u => u.TransactionDate).Where(u => u.UserId == id).Where(d => (d.TransactionDate.Month == DateTime.Now.Month && d.TransactionDate.Year == DateTime.Now.Year && d.Unit == unit))
+                                        .ToListAsync();
+            return Ok(categoryTransactionsList);
+        }
+
+        [HttpGet("getCategoryTransactionsForYear/{id}/{unit}")]
+        public async Task<IActionResult> GetTransactionCurrentYear(int id, string unit)
+        {
+            var categoryTransactionsList = await _context.CategoryTransactions.OrderByDescending(u => u.TransactionDate).Where(u => u.UserId == id).Where(d => (d.TransactionDate.Year == DateTime.Now.Year && d.Unit == unit))
+                                            .ToListAsync();
+            return Ok(categoryTransactionsList);
+        }
+
     }
 }

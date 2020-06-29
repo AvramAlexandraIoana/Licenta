@@ -14,7 +14,7 @@
 
 <ion-content>
   <div>
-    <ion-slides (ionSlideDidChange)="slideChanged()" mode="ios" [options]="sliderConfig">
+    <ion-slides (ionSlideWillChange)="slideChanged()"  mode="ios" [options]="sliderConfig">
       <ion-slide *ngFor="let card of cards;  index as pos">
         <div   class="icon-minus" (click)="deleteCard(card)">
           <img src="assets/imgs/cross-20s-32px.svg" alt="">
