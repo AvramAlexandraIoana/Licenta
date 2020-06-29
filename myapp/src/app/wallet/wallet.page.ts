@@ -5,12 +5,12 @@ import { ToastController, NavController, ModalController } from '@ionic/angular'
 import { Contacts, Contact, ContactName, ContactField } from  '@ionic-native/contacts';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { CreateContactPage } from '../create-contact/create-contact.page';
-
 import * as _ from 'lodash';
 import { NavigationExtras } from '@angular/router';
 import { AccountService } from '../api/account.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { TransactionService } from '../api/transaction.service';
+import { IonSlides } from '@ionic/angular';
 
 @Component({
   selector: 'app-wallet',
@@ -39,6 +39,9 @@ export class WalletPage implements OnInit {
   transactionPerYear: import("t:/Licenta/myapp/src/app/_models/Transaction").Transaction[];
   transactionPerDay: any;
   defaultCard: string;
+
+  
+  @ViewChild('slides', {static: true}) slides: IonSlides;
 
   constructor(private contacts: Contacts,
     private callNumber: CallNumber,
@@ -303,10 +306,11 @@ requestSMSPermission() {
     this.navControl.navigateRoot([url],navigationExtras);
     //this.navControl.navigateBack("request");
   }
-
-  slideChanged(card: any) {
-    console.log(card);
-    console.log("Ioana");
+ 
+  slideChanged(e: any) {
+    this.slides.getActiveIndex().then((index: number) => {
+        console.log(index);
+    });
   }
 
 }
