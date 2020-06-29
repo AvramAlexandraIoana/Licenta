@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CallNumber } from '@ionic-native/call-number/ngx';
 import { SMS } from '@ionic-native/sms/ngx';
 import { ToastController, NavController, ModalController } from '@ionic/angular';
@@ -10,6 +10,7 @@ import * as _ from 'lodash';
 import { NavigationExtras } from '@angular/router';
 import { AccountService } from '../api/account.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { TransactionService } from '../api/transaction.service';
 
 @Component({
   selector: 'app-wallet',
@@ -33,9 +34,11 @@ export class WalletPage implements OnInit {
   jwtHelper = new JwtHelperService();
   userId: number;
   cards: Account[];
-
-
- 
+  transactionPerWeek: import("t:/Licenta/myapp/src/app/_models/Transaction").Transaction[];
+  transactionPerMonth: import("t:/Licenta/myapp/src/app/_models/Transaction").Transaction[];
+  transactionPerYear: import("t:/Licenta/myapp/src/app/_models/Transaction").Transaction[];
+  transactionPerDay: any;
+  defaultCard: string;
 
   constructor(private contacts: Contacts,
     private callNumber: CallNumber,
@@ -44,7 +47,8 @@ export class WalletPage implements OnInit {
     private androidPermissions: AndroidPermissions,
     private navControl: NavController,
     private modalControl: ModalController,
-    private accountService: AccountService) { 
+    private accountService: AccountService,
+    private transactionService: TransactionService) { 
 
     }
 
@@ -67,6 +71,7 @@ export class WalletPage implements OnInit {
   
 
   ngOnInit() {
+    this.defaultCard = localStorage.getItem("card");
     this.userId = this.getUserId();
     console.log("asd");
     this.loadContacts();
@@ -98,8 +103,74 @@ export class WalletPage implements OnInit {
 
   segmentChanged(ev: any) {
     this.category = ev.detail.value;
-    console.log(this.category);
+    if (this.category == "day") {
+      this.getTransactionPerDay();
+    } else if (this.category == "week") {
+      this.getTransactionPerWeek();
+    } else if (this.category == "month") {
+      this.getTransactionPerMonth();
+    } else if (this.category == "year") {
+      this.getTransactionPerYear();
+    }
   }
+  getTransactionPerDay() {
+    this.userId = this.getUserId();
+    this.transactionService.getTransactionsForToday(this.getUserId(), this.defaultCard).subscribe( res => {
+      this.transactionPerDay = res;
+      console.log("Zi");
+      console.log(this.transactionPerDay);
+        
+    });
+
+  }
+
+  verifyType(transaction) {
+    console.log(transaction);
+    console.log(this.userId);
+    if (transaction.userId == this.userId && transaction.isSend) {
+      console.log("first");
+      return false;
+    } else   if (transaction.userId1 == this.userId && transaction.isSend){
+      console.log("second");
+      return true;
+    } else if (transaction.userId == this.userId && !transaction.isSend) {
+      return true;
+    }
+    return false;
+  }
+
+  getTransactionPerWeek() {
+    this.transactionService.getTransactionsForWeek(this.userId, this.defaultCard).subscribe( res => {
+      this.transactionPerWeek = res;
+      console.log("Week");
+      console.log(this.transactionPerWeek);
+        
+    });
+
+  }
+
+
+
+  getTransactionPerMonth() {
+    this.transactionService.getTransactionsForMonth(this.userId, this.defaultCard).subscribe( res => {
+      this.transactionPerMonth = res;
+      console.log("Luna");
+      console.log(this.transactionPerDay);
+        
+    });
+
+  }
+
+  getTransactionPerYear() {
+    this.transactionService.getTransactionsForYear(this.userId, this.defaultCard).subscribe( res => {
+      this.transactionPerYear = res;
+      console.log("An");
+      console.log(this.transactionPerDay);
+        
+    });
+
+  }
+
 
   
   loadContacts() {
@@ -231,6 +302,10 @@ requestSMSPermission() {
     
     this.navControl.navigateRoot([url],navigationExtras);
     //this.navControl.navigateBack("request");
+  }
+
+  slideChanged() {
+    console.log("Ioana");
   }
 
 }

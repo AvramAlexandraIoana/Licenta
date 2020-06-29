@@ -33,6 +33,7 @@ export class HomePage implements OnInit {
   notifictation: Transaction[];
   user: User;
   money: string;
+  defaultCard: string;
 
 
   constructor(private transactionService: TransactionService,
@@ -120,7 +121,8 @@ export class HomePage implements OnInit {
 
   getTransactionPerDay() {
     this.userId = this.getUserId();
-    this.transactionService.getTransactionsForToday(this.getUserId()).subscribe( res => {
+    this.defaultCard = localStorage.getItem("card");
+    this.transactionService.getTransactionsForToday(this.getUserId(), this.defaultCard).subscribe( res => {
       this.transactionPerDay = res;
       console.log("Zi");
       console.log(this.transactionPerDay);
@@ -130,15 +132,22 @@ export class HomePage implements OnInit {
   }
 
   verifyType(transaction) {
+    console.log(transaction);
+    console.log(this.userId);
     if (transaction.userId == this.userId && transaction.isSend) {
+      console.log("first");
       return false;
     } else   if (transaction.userId1 == this.userId && transaction.isSend){
+      console.log("second");
+      return true;
+    } else if (transaction.userId == this.userId && !transaction.isSend) {
       return true;
     }
+    return false;
   }
 
   getTransactionPerWeek() {
-    this.transactionService.getTransactionsForWeek(this.userId).subscribe( res => {
+    this.transactionService.getTransactionsForWeek(this.userId, this.defaultCard).subscribe( res => {
       this.transactionPerWeek = res;
       console.log("Week");
       console.log(this.transactionPerWeek);
@@ -150,7 +159,7 @@ export class HomePage implements OnInit {
 
 
   getTransactionPerMonth() {
-    this.transactionService.getTransactionsForMonth(this.userId).subscribe( res => {
+    this.transactionService.getTransactionsForMonth(this.userId, this.defaultCard).subscribe( res => {
       this.transactionPerMonth = res;
       console.log("Luna");
       console.log(this.transactionPerDay);
@@ -160,7 +169,7 @@ export class HomePage implements OnInit {
   }
 
   getTransactionPerYear() {
-    this.transactionService.getTransactionsForYear(this.userId).subscribe( res => {
+    this.transactionService.getTransactionsForYear(this.userId, this.defaultCard).subscribe( res => {
       this.transactionPerYear = res;
       console.log("An");
       console.log(this.transactionPerDay);

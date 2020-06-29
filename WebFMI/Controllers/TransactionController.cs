@@ -213,10 +213,10 @@ namespace WebFMI.Controllers
             return Ok(201);
         }
 
-        [HttpGet("getTransactionsForToday/{id}")]
-        public async Task<IActionResult> GetTransactionCurrentDay(int id)
+        [HttpGet("getTransactionsForToday/{id}/{unit}")]
+        public async Task<IActionResult> GetTransactionCurrentDay(int id, string unit)
         {
-            var transactionList = await _context.Transactions.OrderByDescending(u => u.Date).Where(u => u.UserId == id || u.UserId1 == id).Where(d => (d.Date.Day == DateTime.Now.Day && d.Date.Month ==  DateTime.Now.Month && d.Date.Year == DateTime.Now.Year) )
+            var transactionList = await _context.Transactions.OrderByDescending(u => u.Date).Where(u => u.UserId == id || u.UserId1 == id).Where(d => (d.Date.Day == DateTime.Now.Day && d.Date.Month ==  DateTime.Now.Month && d.Date.Year == DateTime.Now.Year && d.Unit == unit))
                                         .Select(transaction => new
                                         {
                                             Transactions = transaction,
@@ -230,11 +230,11 @@ namespace WebFMI.Controllers
 
 
 
-        [HttpGet("getTransactionsForWeek/{id}")]
-        public async Task<IActionResult> GetTransactionCurrentWeek(int id)
+        [HttpGet("getTransactionsForWeek/{id}/{unit}")]
+        public async Task<IActionResult> GetTransactionCurrentWeek(int id, string unit)
         {
 
-            var transactionList = await _context.Transactions.OrderByDescending(u => u.Date).Where(u => u.UserId == id || u.UserId1 == id).Where(d => (d.Date.Month == DateTime.Now.Month && d.Date.Year == DateTime.Now.Year))
+            var transactionList = await _context.Transactions.OrderByDescending(u => u.Date).Where(u => u.UserId == id || u.UserId1 == id).Where(d => (d.Date.Month == DateTime.Now.Month && d.Date.Year == DateTime.Now.Year && d.Unit == unit))
                                         .Select(transaction => new
                                         {
                                             Transactions = transaction,
@@ -246,10 +246,10 @@ namespace WebFMI.Controllers
             return Ok(transactionList);
         }
 
-        [HttpGet("getTransactionsForMonth/{id}")]
-        public async Task<IActionResult> GetTransactionCurrentMonth(int id)
+        [HttpGet("getTransactionsForMonth/{id}/{unit}")]
+        public async Task<IActionResult> GetTransactionCurrentMonth(int id, string unit)
         {
-            var transactionList = await _context.Transactions.OrderByDescending(u => u.Date).Where(u => u.UserId == id || u.UserId1 == id).Where(d => (d.Date.Month == DateTime.Now.Month && d.Date.Year == DateTime.Now.Year))
+            var transactionList = await _context.Transactions.OrderByDescending(u => u.Date).Where(u => u.UserId == id || u.UserId1 == id).Where(d => (d.Date.Month == DateTime.Now.Month && d.Date.Year == DateTime.Now.Year && d.Unit == unit))
                                         .Select(transaction => new
                                         {
                                             Transactions = transaction,
@@ -261,10 +261,10 @@ namespace WebFMI.Controllers
             return Ok(transactionList);
         }
 
-        [HttpGet("getTransactionsForYear/{id}")]
-        public async Task<IActionResult> GetTransactionCurrentYear(int id)
+        [HttpGet("getTransactionsForYear/{id}/{unit}")]
+        public async Task<IActionResult> GetTransactionCurrentYear(int id, string unit)
         {
-            var transactionList = await _context.Transactions.OrderByDescending(u => u.Date).Where(u => u.UserId == id || u.UserId1 == id).Where(d => (d.Date.Year == DateTime.Now.Year))
+            var transactionList = await _context.Transactions.OrderByDescending(u => u.Date).Where(u => u.UserId == id || u.UserId1 == id).Where(d => (d.Date.Year == DateTime.Now.Year && d.Unit == unit))
                                         .Select(transaction => new
                                         {
                                             Transactions = transaction,

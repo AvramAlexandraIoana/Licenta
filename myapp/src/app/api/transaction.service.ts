@@ -84,16 +84,16 @@ export class TransactionService {
     );
   }
 
-  getTransactionsForToday(transactionId: number): Observable<Transaction[]> {
-    return this.http.get<Transaction[]>(this.url + '/getTransactionsForToday/' + transactionId, this.httpOptions)
+  getTransactionsForToday(transactionId: number, unit: string): Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(this.url + '/getTransactionsForToday/' + transactionId + '/' + unit, this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.errorHandler)
     );
   }
 
-  getTransactionsForWeek(transactionId: number): Observable<Transaction[]> {
-    return this.http.get<Transaction[]>(this.url + '/getTransactionsForWeek/' + transactionId, this.httpOptions)
+  getTransactionsForWeek(transactionId: number, unit: string): Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(this.url + '/getTransactionsForWeek/' + transactionId + '/' + unit, this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.errorHandler)
@@ -101,16 +101,16 @@ export class TransactionService {
   }
 
 
-  getTransactionsForMonth(transactionId: number): Observable<Transaction[]> {
-    return this.http.get<Transaction[]>(this.url + '/getTransactionsForMonth/' + transactionId, this.httpOptions)
+  getTransactionsForMonth(transactionId: number, unit: string): Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(this.url + '/getTransactionsForMonth/' + transactionId + '/' + unit, this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.errorHandler)
     );
   }
 
-  getTransactionsForYear(transactionId: number): Observable<Transaction[]> {
-    return this.http.get<Transaction[]>(this.url + '/getTransactionsForYear/' + transactionId, this.httpOptions)
+  getTransactionsForYear(transactionId: number, unit: string): Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(this.url + '/getTransactionsForYear/' + transactionId + '/' + unit, this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.errorHandler)

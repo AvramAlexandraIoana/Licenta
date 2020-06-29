@@ -139,6 +139,7 @@ export class DefaultCardPage implements OnInit {
       }
       this.userService.updateUser(this.user.id, this.user).subscribe( res => {
         console.log(res);
+        localStorage.setItem("card", this.user.defaultCard);
         this.presentToast("Card default salvat", "success");
         this.dismiss();
       })
