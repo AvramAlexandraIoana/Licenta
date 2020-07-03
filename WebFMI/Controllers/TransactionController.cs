@@ -225,6 +225,7 @@ namespace WebFMI.Controllers
                                                     select user).ToList()
 
                                         }).ToListAsync();
+
             return Ok(transactionList);
         }
 
@@ -258,6 +259,7 @@ namespace WebFMI.Controllers
                                                     select user).ToList()
 
                                         }).ToListAsync();
+
             return Ok(transactionList);
         }
 

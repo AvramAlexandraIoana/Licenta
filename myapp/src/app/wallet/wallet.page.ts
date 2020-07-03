@@ -11,6 +11,7 @@ import { AccountService } from '../api/account.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { TransactionService } from '../api/transaction.service';
 import { IonSlides } from '@ionic/angular';
+import { Transaction } from '../_models/Transaction';
 
 @Component({
   selector: 'app-wallet',
@@ -33,15 +34,16 @@ export class WalletPage implements OnInit {
   decodedToken: any;
   jwtHelper = new JwtHelperService();
   userId: number;
-  cards: Account[];
-  transactionPerWeek: import("t:/Licenta/myapp/src/app/_models/Transaction").Transaction[];
-  transactionPerMonth: import("t:/Licenta/myapp/src/app/_models/Transaction").Transaction[];
-  transactionPerYear: import("t:/Licenta/myapp/src/app/_models/Transaction").Transaction[];
+  cards: any;
+  transactionPerWeek: Transaction[];
+  transactionPerMonth: Transaction[];
+  transactionPerYear: Transaction[];
   transactionPerDay: any;
   defaultCard: string;
-
+  currentTab = "day";
   
   @ViewChild('slides', {static: true}) slides: IonSlides;
+  currentUnit: any;
 
   constructor(private contacts: Contacts,
     private callNumber: CallNumber,
@@ -85,6 +87,17 @@ export class WalletPage implements OnInit {
     this.accountService.getAccountList(this.userId).subscribe( res => {
       console.log(res);
       this.cards = res;
+      for (var i = 0; i < this.cards.length; i++) {
+        if (this.cards[i].conversion == "USD") {
+          this.cards[i].unit = "$";
+        } else if (this.cards[i].conversion == "EURO") {
+          this.cards[i].unit = "€";
+        } else if (this.cards[i].conversion == "RON") {
+          this.cards[i].unit = "r";
+        }
+      }
+      this.currentUnit = this.cards[0].unit;
+      this.getTransactionPerDay(this.cards[0].unit);
     });
 
   }
@@ -106,19 +119,21 @@ export class WalletPage implements OnInit {
 
   segmentChanged(ev: any) {
     this.category = ev.detail.value;
+    var unit = this.currentUnit;
     if (this.category == "day") {
-      this.getTransactionPerDay();
+      this.getTransactionPerDay(unit);
     } else if (this.category == "week") {
-      this.getTransactionPerWeek();
+      this.getTransactionPerWeek(unit);
     } else if (this.category == "month") {
-      this.getTransactionPerMonth();
+      this.getTransactionPerMonth(unit);
     } else if (this.category == "year") {
-      this.getTransactionPerYear();
+      this.getTransactionPerYear(unit);
     }
   }
-  getTransactionPerDay() {
+  getTransactionPerDay(unit) {
+    this.currentTab = "day";
     this.userId = this.getUserId();
-    this.transactionService.getTransactionsForToday(this.getUserId(), this.defaultCard).subscribe( res => {
+    this.transactionService.getTransactionsForToday(this.getUserId(), unit).subscribe( res => {
       this.transactionPerDay = res;
       console.log("Zi");
       console.log(this.transactionPerDay);
@@ -142,8 +157,9 @@ export class WalletPage implements OnInit {
     return false;
   }
 
-  getTransactionPerWeek() {
-    this.transactionService.getTransactionsForWeek(this.userId, this.defaultCard).subscribe( res => {
+  getTransactionPerWeek(unit) {
+    this.currentTab = "week";
+    this.transactionService.getTransactionsForWeek(this.userId, unit).subscribe( res => {
       this.transactionPerWeek = res;
       console.log("Week");
       console.log(this.transactionPerWeek);
@@ -154,8 +170,9 @@ export class WalletPage implements OnInit {
 
 
 
-  getTransactionPerMonth() {
-    this.transactionService.getTransactionsForMonth(this.userId, this.defaultCard).subscribe( res => {
+  getTransactionPerMonth(unit) {
+    this.currentTab = "month";
+    this.transactionService.getTransactionsForMonth(this.userId, unit).subscribe( res => {
       this.transactionPerMonth = res;
       console.log("Luna");
       console.log(this.transactionPerDay);
@@ -164,8 +181,9 @@ export class WalletPage implements OnInit {
 
   }
 
-  getTransactionPerYear() {
-    this.transactionService.getTransactionsForYear(this.userId, this.defaultCard).subscribe( res => {
+  getTransactionPerYear(unit) {
+    this.currentTab = "year";
+    this.transactionService.getTransactionsForYear(this.userId, unit).subscribe( res => {
       this.transactionPerYear = res;
       console.log("An");
       console.log(this.transactionPerDay);
@@ -310,6 +328,17 @@ requestSMSPermission() {
   slideChanged(e: any) {
     this.slides.getActiveIndex().then((index: number) => {
         console.log(index);
+        console.log(this.cards[index]);
+        this.currentUnit = this.cards[index].unit;
+        if (this.currentTab == "day") {
+          this.getTransactionPerDay(this.cards[index].unit);
+        } else if (this.currentTab == "week") {
+          this.getTransactionPerWeek(this.cards[index].unit);
+        } else if (this.currentTab == "month") {
+          this.getTransactionPerMonth(this.cards[index].unit);
+        } else {
+          this.getTransactionPerYear(this.cards[index].unit);
+        }
     });
   }
 
