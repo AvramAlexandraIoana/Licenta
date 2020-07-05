@@ -13,6 +13,7 @@ import { TransactionService } from '../api/transaction.service';
 import { IonSlides } from '@ionic/angular';
 import { Transaction } from '../_models/Transaction';
 import { CategoryTransactionsService } from '../api/category-transactions.service';
+import { CategoryTransaction } from '../_models/CategoryTransaction';
 
 @Component({
   selector: 'app-wallet',
@@ -46,11 +47,11 @@ export class WalletPage implements OnInit {
   
   @ViewChild('slides', {static: true}) slides: IonSlides;
   currentUnit: any;
-  categoryTransactonPerWeek: import("t:/Licenta/myapp/src/app/_models/CategoryTransaction").CategoryTransaction[];
-  categoryTransactonPerMonth: import("t:/Licenta/myapp/src/app/_models/CategoryTransaction").CategoryTransaction[];
-  categoryTransactonPerYear: import("t:/Licenta/myapp/src/app/_models/CategoryTransaction").CategoryTransaction[];
-  categoryTransactonPerDay: import("t:/Licenta/myapp/src/app/_models/CategoryTransaction").CategoryTransaction[];
-  perDay: number;
+  categoryTransactonPerWeek: CategoryTransaction[];
+  categoryTransactonPerMonth: CategoryTransaction[];
+  categoryTransactonPerYear: CategoryTransaction[];
+  categoryTransactonPerDay: CategoryTransaction[];
+  perDay: any;
 
   constructor(private contacts: Contacts,
     private callNumber: CallNumber,
@@ -185,7 +186,7 @@ export class WalletPage implements OnInit {
     this.transactionService.getTransactionsForMonth(this.userId, unit).subscribe( res => {
       this.transactionPerMonth = res;
       console.log("Luna");
-      console.log(this.transactionPerDay);
+      console.log(this.transactionPerMonth);
         
     });
 
@@ -196,7 +197,7 @@ export class WalletPage implements OnInit {
     this.transactionService.getTransactionsForYear(this.userId, unit).subscribe( res => {
       this.transactionPerYear = res;
       console.log("An");
-      console.log(this.transactionPerDay);
+      console.log(this.transactionPerYear);
         
     });
 
@@ -204,11 +205,11 @@ export class WalletPage implements OnInit {
 
   getCategoryTransactionPerDay(unit) {
     this.categoryTransactionService.getCategoryTransactionsForToday(this.userId, unit).subscribe( res => {
-      this.categoryTransactonPerDay = res;
+      this.perDay = res;
       console.log("Day category");
-      console.log(this.categoryTransactonPerDay);
-      this.categoryTransactonPerDay.push(this.transactionPerDay);
-      console.log(this.categoryTransactonPerDay);
+      console.log(this.perDay);
+      this.perDay.push(this.transactionPerDay);
+      console.log(this.perDay);
         
     });
 
