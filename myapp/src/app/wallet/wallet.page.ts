@@ -52,6 +52,9 @@ export class WalletPage implements OnInit {
   categoryTransactonPerYear: CategoryTransaction[];
   categoryTransactonPerDay: CategoryTransaction[];
   perDay: any;
+  perWeek: any[];
+  perYear: any[];
+  perMonth: any[];
 
   constructor(private contacts: Contacts,
     private callNumber: CallNumber,
@@ -174,7 +177,7 @@ export class WalletPage implements OnInit {
       this.transactionPerWeek = res;
       console.log("Week");
       console.log(this.transactionPerWeek);
-        
+      this.getCategoryTransactionPerWeek(unit);
     });
 
   }
@@ -187,6 +190,7 @@ export class WalletPage implements OnInit {
       this.transactionPerMonth = res;
       console.log("Luna");
       console.log(this.transactionPerMonth);
+      this.getCategoryTransactionPerMonth(unit);
         
     });
 
@@ -198,6 +202,7 @@ export class WalletPage implements OnInit {
       this.transactionPerYear = res;
       console.log("An");
       console.log(this.transactionPerYear);
+      this.getCategoryTransactionPerYear(unit);
         
     });
 
@@ -217,9 +222,10 @@ export class WalletPage implements OnInit {
 
   getCategoryTransactionPerWeek(unit) {
     this.categoryTransactionService.getCategoryTransactionsForWeek(this.userId, unit).subscribe( res => {
-      this.categoryTransactonPerWeek = res;
+      this.perWeek = res;
       console.log("Week category");
-      console.log(this.categoryTransactonPerWeek);
+      this.perWeek.push(this.transactionPerWeek);
+      console.log(this.perWeek);
         
     });
 
@@ -229,9 +235,10 @@ export class WalletPage implements OnInit {
 
   getCategoryTransactionPerMonth(unit) {
     this.categoryTransactionService.getCategoryTransactionsForMonth(this.userId, unit).subscribe( res => {
-      this.categoryTransactonPerMonth = res;
-      console.log("Luna category");
-      console.log(this.categoryTransactonPerMonth);
+      this.perMonth = res;
+      console.log("Month category");
+      this.perMonth.push(this.transactionPerMonth);
+      console.log(this.perMonth);
         
     });
 
@@ -239,9 +246,10 @@ export class WalletPage implements OnInit {
 
   getCategoryTransactionPerYear(unit) {
     this.categoryTransactionService.getCategoryTransactionsForYear(this.userId, unit).subscribe( res => {
-      this.categoryTransactonPerYear = res;
+      this.perYear = res;
       console.log("Year category");
-      console.log(this.categoryTransactonPerYear);
+      this.perYear.push(this.transactionPerYear);
+      console.log(this.perYear);
         
     });
 
