@@ -14,6 +14,7 @@ import { IonSlides } from '@ionic/angular';
 import { Transaction } from '../_models/Transaction';
 import { CategoryTransactionsService } from '../api/category-transactions.service';
 import { CategoryTransaction } from '../_models/CategoryTransaction';
+import _ from 'lodash';
 
 @Component({
   selector: 'app-wallet',
@@ -37,9 +38,9 @@ export class WalletPage implements OnInit {
   jwtHelper = new JwtHelperService();
   userId: number;
   cards: any;
-  transactionPerWeek: Transaction[];
-  transactionPerMonth: Transaction[];
-  transactionPerYear: Transaction[];
+  transactionPerWeek: any[];
+  transactionPerMonth: any[];
+  transactionPerYear: any[];
   transactionPerDay: any;
   defaultCard: string;
   currentTab = "day";
@@ -213,7 +214,14 @@ export class WalletPage implements OnInit {
       this.perDay = res;
       console.log("Day category");
       console.log(this.perDay);
-      this.perDay.push(this.transactionPerDay);
+      for (var i = 0; i < this.transactionPerDay.length; i++) {
+        this.perDay.push(this.transactionPerDay[i].transactions);
+      }
+      this.perDay = _.sortBy(this.perDay, function(object) {
+        if (object.transactionDate) return object.transactionDate;
+        return object.date;
+      });
+
       console.log(this.perDay);
         
     });
@@ -224,7 +232,13 @@ export class WalletPage implements OnInit {
     this.categoryTransactionService.getCategoryTransactionsForWeek(this.userId, unit).subscribe( res => {
       this.perWeek = res;
       console.log("Week category");
-      this.perWeek.push(this.transactionPerWeek);
+      for (var i = 0; i < this.transactionPerWeek.length; i++) {
+        this.perWeek.push(this.transactionPerWeek[i].transactions);
+      }
+      this.perWeek = _.sortBy(this.perWeek, function(object) {
+        if (object.transactionDate) return object.transactionDate;
+        return object.date;
+      });
       console.log(this.perWeek);
         
     });
@@ -237,7 +251,13 @@ export class WalletPage implements OnInit {
     this.categoryTransactionService.getCategoryTransactionsForMonth(this.userId, unit).subscribe( res => {
       this.perMonth = res;
       console.log("Month category");
-      this.perMonth.push(this.transactionPerMonth);
+      for (var i = 0; i < this.transactionPerMonth.length; i++) {
+        this.perMonth.push(this.transactionPerMonth[i].transactions);
+      }      
+      this.perMonth = _.sortBy(this.perMonth, function(object) {
+        if (object.transactionDate) return object.transactionDate;
+        return object.date;
+      });
       console.log(this.perMonth);
         
     });
@@ -248,7 +268,13 @@ export class WalletPage implements OnInit {
     this.categoryTransactionService.getCategoryTransactionsForYear(this.userId, unit).subscribe( res => {
       this.perYear = res;
       console.log("Year category");
-      this.perYear.push(this.transactionPerYear);
+      for (var i = 0; i < this.transactionPerYear.length; i++) {
+        this.perYear.push(this.transactionPerYear[i].transactions);
+      }  
+      this.perYear = _.sortBy(this.perYear, function(object) {
+        if (object.transactionDate) return object.transactionDate;
+        return object.date;
+      }); 
       console.log(this.perYear);
         
     });
