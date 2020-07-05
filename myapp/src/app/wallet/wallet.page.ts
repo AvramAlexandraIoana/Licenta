@@ -220,7 +220,7 @@ export class WalletPage implements OnInit {
       this.perDay = _.sortBy(this.perDay, function(object) {
         if (object.transactionDate) return object.transactionDate;
         return object.date;
-      });
+      }).reverse();
 
       console.log(this.perDay);
         
@@ -238,7 +238,7 @@ export class WalletPage implements OnInit {
       this.perWeek = _.sortBy(this.perWeek, function(object) {
         if (object.transactionDate) return object.transactionDate;
         return object.date;
-      });
+      }).reverse();
       console.log(this.perWeek);
         
     });
@@ -257,7 +257,7 @@ export class WalletPage implements OnInit {
       this.perMonth = _.sortBy(this.perMonth, function(object) {
         if (object.transactionDate) return object.transactionDate;
         return object.date;
-      });
+      }).reverse();
       console.log(this.perMonth);
         
     });
@@ -274,7 +274,7 @@ export class WalletPage implements OnInit {
       this.perYear = _.sortBy(this.perYear, function(object) {
         if (object.transactionDate) return object.transactionDate;
         return object.date;
-      }); 
+      }).reverse(); 
       console.log(this.perYear);
         
     });
