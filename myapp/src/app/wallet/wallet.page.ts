@@ -12,6 +12,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { TransactionService } from '../api/transaction.service';
 import { IonSlides } from '@ionic/angular';
 import { Transaction } from '../_models/Transaction';
+import { CategoryTransactionsService } from '../api/category-transactions.service';
 
 @Component({
   selector: 'app-wallet',
@@ -41,9 +42,15 @@ export class WalletPage implements OnInit {
   transactionPerDay: any;
   defaultCard: string;
   currentTab = "day";
+  myDate: Date;
   
   @ViewChild('slides', {static: true}) slides: IonSlides;
   currentUnit: any;
+  categoryTransactonPerWeek: import("t:/Licenta/myapp/src/app/_models/CategoryTransaction").CategoryTransaction[];
+  categoryTransactonPerMonth: import("t:/Licenta/myapp/src/app/_models/CategoryTransaction").CategoryTransaction[];
+  categoryTransactonPerYear: import("t:/Licenta/myapp/src/app/_models/CategoryTransaction").CategoryTransaction[];
+  categoryTransactonPerDay: import("t:/Licenta/myapp/src/app/_models/CategoryTransaction").CategoryTransaction[];
+  perDay: number;
 
   constructor(private contacts: Contacts,
     private callNumber: CallNumber,
@@ -53,6 +60,7 @@ export class WalletPage implements OnInit {
     private navControl: NavController,
     private modalControl: ModalController,
     private accountService: AccountService,
+    private categoryTransactionService: CategoryTransactionsService,
     private transactionService: TransactionService) { 
 
     }
@@ -79,6 +87,7 @@ export class WalletPage implements OnInit {
     this.defaultCard = localStorage.getItem("card");
     this.userId = this.getUserId();
     console.log("asd");
+    this.myDate = new Date();
     this.loadContacts();
     this.loadCards();
   }
@@ -137,6 +146,7 @@ export class WalletPage implements OnInit {
       this.transactionPerDay = res;
       console.log("Zi");
       console.log(this.transactionPerDay);
+      this.getCategoryTransactionPerDay(unit);
         
     });
 
@@ -187,6 +197,50 @@ export class WalletPage implements OnInit {
       this.transactionPerYear = res;
       console.log("An");
       console.log(this.transactionPerDay);
+        
+    });
+
+  }
+
+  getCategoryTransactionPerDay(unit) {
+    this.categoryTransactionService.getCategoryTransactionsForToday(this.userId, unit).subscribe( res => {
+      this.categoryTransactonPerDay = res;
+      console.log("Day category");
+      console.log(this.categoryTransactonPerDay);
+      this.categoryTransactonPerDay.push(this.transactionPerDay);
+      console.log(this.categoryTransactonPerDay);
+        
+    });
+
+  }
+
+  getCategoryTransactionPerWeek(unit) {
+    this.categoryTransactionService.getCategoryTransactionsForWeek(this.userId, unit).subscribe( res => {
+      this.categoryTransactonPerWeek = res;
+      console.log("Week category");
+      console.log(this.categoryTransactonPerWeek);
+        
+    });
+
+  }
+
+
+
+  getCategoryTransactionPerMonth(unit) {
+    this.categoryTransactionService.getCategoryTransactionsForMonth(this.userId, unit).subscribe( res => {
+      this.categoryTransactonPerMonth = res;
+      console.log("Luna category");
+      console.log(this.categoryTransactonPerMonth);
+        
+    });
+
+  }
+
+  getCategoryTransactionPerYear(unit) {
+    this.categoryTransactionService.getCategoryTransactionsForYear(this.userId, unit).subscribe( res => {
+      this.categoryTransactonPerYear = res;
+      console.log("Year category");
+      console.log(this.categoryTransactonPerYear);
         
     });
 

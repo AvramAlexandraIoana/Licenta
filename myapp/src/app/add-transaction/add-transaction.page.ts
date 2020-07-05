@@ -92,7 +92,7 @@ export class AddTransactionPage implements OnInit {
     const toast = await this.toastController.create({
         message: text,
         position: 'bottom',
-        duration: 3000,
+        duration: 500,
         color: type
       });
     toast.present();

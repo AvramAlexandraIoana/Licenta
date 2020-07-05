@@ -102,6 +102,39 @@ export class CategoryTransactionsService {
     );
   }
 
+  getCategoryTransactionsForToday(categoryTransactionId: number, unit: string): Observable<CategoryTransaction[]> {
+    return this.http.get<CategoryTransaction[]>(this.url + '/getCategoryTransactionsForToday/' + categoryTransactionId + '/' + unit, this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.errorHandler)
+    );
+  }
+
+  getCategoryTransactionsForWeek(categoryTransactionId: number, unit: string): Observable<CategoryTransaction[]> {
+    return this.http.get<CategoryTransaction[]>(this.url + '/getCategoryTransactionsForWeek/' + categoryTransactionId + '/' + unit, this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.errorHandler)
+    );
+  }
+
+
+  getCategoryTransactionsForMonth(categoryTransactionId: number, unit: string): Observable<CategoryTransaction[]> {
+    return this.http.get<CategoryTransaction[]>(this.url + '/getCategoryTransactionsForMonth/' + categoryTransactionId + '/' + unit, this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.errorHandler)
+    );
+  }
+
+  getCategoryTransactionsForYear(categoryTransactionId: number, unit: string): Observable<CategoryTransaction[]> {
+    return this.http.get<CategoryTransaction[]>(this.url + '/getCategoryTransactionsForYear/' + categoryTransactionId + '/' + unit, this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.errorHandler)
+    );
+  }
+
   errorHandler(error) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

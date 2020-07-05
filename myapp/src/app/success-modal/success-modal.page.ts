@@ -14,7 +14,7 @@ export class SuccessModalPage implements OnInit {
     setTimeout(() => {
       this.dismiss();
       this.goHomePage();
-    }, 2000);
+    }, 500);
   }
 
   dismiss()
