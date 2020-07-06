@@ -87,6 +87,7 @@ namespace WebFMI.Controllers
                 }
                 var category = await _context.Categories.FindAsync(transaction.CategoryId);
                 transaction.ImageUrl = category.CategoryUrl;
+                transaction.TransactionDate = DateTime.Now;
                 var transact =  await _context.CategoryTransactions.AddAsync(transaction);
                 await _context.SaveChangesAsync();
             } catch(Exception e)

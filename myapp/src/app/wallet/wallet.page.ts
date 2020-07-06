@@ -14,7 +14,6 @@ import { IonSlides } from '@ionic/angular';
 import { Transaction } from '../_models/Transaction';
 import { CategoryTransactionsService } from '../api/category-transactions.service';
 import { CategoryTransaction } from '../_models/CategoryTransaction';
-import _ from 'lodash';
 
 @Component({
   selector: 'app-wallet',
@@ -215,6 +214,7 @@ export class WalletPage implements OnInit {
       console.log("Day category");
       console.log(this.perDay);
       for (var i = 0; i < this.transactionPerDay.length; i++) {
+        this.transactionPerDay[i].transactions.user = this.transactionPerDay[i].user;
         this.perDay.push(this.transactionPerDay[i].transactions);
       }
       this.perDay = _.sortBy(this.perDay, function(object) {
@@ -233,6 +233,7 @@ export class WalletPage implements OnInit {
       this.perWeek = res;
       console.log("Week category");
       for (var i = 0; i < this.transactionPerWeek.length; i++) {
+        this.transactionPerWeek[i].transactions.user = this.transactionPerWeek[i].user;
         this.perWeek.push(this.transactionPerWeek[i].transactions);
       }
       this.perWeek = _.sortBy(this.perWeek, function(object) {
@@ -252,6 +253,7 @@ export class WalletPage implements OnInit {
       this.perMonth = res;
       console.log("Month category");
       for (var i = 0; i < this.transactionPerMonth.length; i++) {
+        this.transactionPerMonth[i].transactions.user = this.transactionPerMonth[i].user;
         this.perMonth.push(this.transactionPerMonth[i].transactions);
       }      
       this.perMonth = _.sortBy(this.perMonth, function(object) {
@@ -269,6 +271,7 @@ export class WalletPage implements OnInit {
       this.perYear = res;
       console.log("Year category");
       for (var i = 0; i < this.transactionPerYear.length; i++) {
+        this.transactionPerYear[i].transactions.user = this.transactionPerYear[i].user;
         this.perYear.push(this.transactionPerYear[i].transactions);
       }  
       this.perYear = _.sortBy(this.perYear, function(object) {

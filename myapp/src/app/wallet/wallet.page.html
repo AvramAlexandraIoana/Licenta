@@ -158,42 +158,72 @@
         </ion-segment>
      </div>
      <div class="the-list" *ngIf="category == 'day'">
-       <ion-item *ngFor="let transaction of transactionPerDay">
-         <ion-col size="2">
-          <div *ngFor="let user of transaction.user">
-            <div class="thumb" slot="start" *ngIf="user.id != userId">
-              <ion-avatar>
-                <img  src="https://ucarecdn.com/{{user.profilePictureName}}/"/>
-              </ion-avatar>
-            </div>
-           </div>
-         </ion-col>        
-       <ion-col>
-        <ion-label>
-          <div *ngFor="let user of transaction.user">
-              <h4 *ngIf="user.id != userId">{{user.name}}</h4>
-          </div>
-          <div [ngClass]="transaction.transactions.accepted ? 'divAccepted' : 'divWaiting'">
-            <img  *ngIf="!transaction.transactions.accepted"  src="assets/imgs/wait-20s-32px.svg"/>
-            <img *ngIf="transaction.transactions.accepted" src="assets/imgs/check-20s-23px.svg"/>
-            {{transaction.transactions.accepted ? 'Acceptata' : 'In asteptare'}}
-          </div>
-        </ion-label>
-       </ion-col>
-        <ion-col style="text-align: right;">
-          <ion-label>
-            <h5>{{verifyType(transaction.transactions) ? '+' : '-'}} {{transaction.transactions.unit}} {{transaction.transactions.value.toFixed(2)}}</h5>
-            <p style="font-size: 13px;">{{transaction.transactions.date | date:'dd MMM yyyy' }}</p>
-          </ion-label>
-        </ion-col>
+       <div *ngFor="let transaction of perDay" >
+          <ion-item *ngIf="transaction.user">
+              <ion-col size="2" *ngIf="transaction.user">
+                <div  *ngFor="let user of transaction.user">
+                  <div class="thumb" slot="start" *ngIf="user.id != userId">
+                    <ion-avatar>
+                      <img  src="https://ucarecdn.com/{{user.profilePictureName}}/"/>
+                    </ion-avatar>
+                  </div>
+                </div>
+              </ion-col>        
+            <ion-col>
+              <ion-label>
+                  <div *ngFor="let user of transaction.user">
+                      <h4 *ngIf="user.id != userId">{{user.name}}</h4>
+                  </div>
+                  <div [ngClass]="transaction.accepted ? 'divAccepted' : 'divWaiting'">
+                    <img  *ngIf="!transaction.accepted"  src="assets/imgs/wait-20s-32px.svg"/>
+                    <img *ngIf="transaction.accepted" src="assets/imgs/check-20s-23px.svg"/>
+                    {{transaction.accepted ? 'Acceptata' : 'In asteptare'}}
+                  </div>
+              </ion-label>
+            </ion-col>
+            <ion-col style="text-align: right;">
+              <ion-label>
+                <h5>{{verifyType(transaction) ? '+' : '-'}} {{transaction.unit}} {{transaction.value.toFixed(2)}}</h5>
+                <p style="font-size: 13px;">{{transaction.date | date:'dd MMM yyyy' }}</p>
+              </ion-label>
+            </ion-col>
+          </ion-item>
+          <ion-item *ngIf="!transaction.user">
+            <ion-col size="2" >
+              <div>
+                <div class="thumb" slot="start">
+                  <ion-avatar>
+                    <img src="assets/imgs/{{transaction.imageUrl}}" alt="">
+                  </ion-avatar>
+                </div>
+              </div>
+            </ion-col>        
+          <ion-col>
+            <ion-label>
+                <div>
+                    <h4>{{transaction.categoryName}}</h4>
+                </div>
+                <div class="divAccepted">
+                  <img src="assets/imgs/check-20s-23px.svg"/>
+                  Acceptata
+                </div>
+            </ion-label>
+          </ion-col>
+          <ion-col style="text-align: right;">
+            <ion-label>
+              <h5> - {{transaction.unit}} {{transaction.value.toFixed(2)}}</h5>
+              <p style="font-size: 13px;">{{transaction.transactionDate | date:'dd MMM yyyy' }}</p>
+            </ion-label>
+          </ion-col>
+        </ion-item>
+       </div>
       
-      </ion-item>
      </div>
      <div class="the-list" *ngIf="category == 'week'">
-       <div  *ngFor="let transaction of transactionPerWeek">
+       <div  *ngFor="let transaction of perWeek">
          <!-- {{(transaction.transactions.date | date:'ww')}}
          {{ (myDate | date:'ww')}} -->
-          <ion-item  *ngIf="(transaction.transactions.date | date:'ww') == (myDate | date:'ww') - 1">
+          <ion-item *ngIf="(transaction.date | date:'ww') == (myDate | date:'ww') - 1 && transaction.user">
             <ion-col size="2.5">
             <div *ngFor="let user of transaction.user">
               <div class="thumb" slot="start" *ngIf="user.id != userId">
@@ -209,86 +239,176 @@
             <div *ngFor="let user of transaction.user">
                 <h4 *ngIf="user.id != userId">{{user.name}}</h4>
             </div>
-            <div [ngClass]="transaction.transactions.accepted ? 'divAccepted' : 'divWaiting'">
-              <img  *ngIf="!transaction.transactions.accepted"  src="assets/imgs/wait-20s-32px.svg"/>
-              <img *ngIf="transaction.transactions.accepted" src="assets/imgs/check-20s-23px.svg"/>
-              {{transaction.transactions.accepted ? 'Acceptata' : 'In asteptare'}}
+            <div [ngClass]="transaction.accepted ? 'divAccepted' : 'divWaiting'">
+              <img  *ngIf="!transaction.accepted"  src="assets/imgs/wait-20s-32px.svg"/>
+              <img *ngIf="transaction.accepted" src="assets/imgs/check-20s-23px.svg"/>
+              {{transaction.accepted ? 'Acceptata' : 'In asteptare'}}
             </div>
           </ion-label>
           </ion-col>
           <ion-col style="text-align: right;">
             <ion-label>
-              <h5>{{verifyType(transaction.transactions) ? '+' : '-'}} {{transaction.transactions.unit}} {{transaction.transactions.value.toFixed(2)}}</h5>
-              <p style="font-size: 13px;">{{transaction.transactions.date | date:'dd MMM yyyy' }}</p>
+              <h5>{{verifyType(transaction) ? '+' : '-'}} {{transaction.unit}} {{transaction.value.toFixed(2)}}</h5>
+              <p style="font-size: 13px;">{{transaction.date | date:'dd MMM yyyy' }}</p>
             </ion-label>
           </ion-col>
         </ion-item>
+        <ion-item *ngIf="!transaction.user">
+            <ion-col size="2" >
+              <div>
+                <div class="thumb" slot="start">
+                  <ion-avatar>
+                    <img src="assets/imgs/{{transaction.imageUrl}}" alt="">
+                  </ion-avatar>
+                </div>
+              </div>
+            </ion-col>        
+          <ion-col>
+            <ion-label>
+                <div>
+                    <h4>{{transaction.categoryName}}</h4>
+                </div>
+                <div class="divAccepted">
+                  <img src="assets/imgs/check-20s-23px.svg"/>
+                  Acceptata
+                </div>
+            </ion-label>
+          </ion-col>
+          <ion-col style="text-align: right;">
+            <ion-label>
+              <h5> - {{transaction.unit}} {{transaction.value.toFixed(2)}}</h5>
+              <p style="font-size: 13px;">{{transaction.transactionDate | date:'dd MMM yyyy' }}</p>
+            </ion-label>
+          </ion-col>
+       </ion-item>
        </div>      
     </div>
 
     <div class="the-list" *ngIf="category == 'month'">
-        <ion-item *ngFor="let transaction of transactionPerMonth">
-          <ion-col size="2.5">
-           <div *ngFor="let user of transaction.user">
-             <div class="thumb" slot="start" *ngIf="user.id != userId">
-               <ion-avatar>
-                 <img  src="https://ucarecdn.com/{{user.profilePictureName}}/"/>
-               </ion-avatar>
-             </div>
-            </div>
-          </ion-col>
-         
+        <div *ngFor="let transaction of perMonth">
+          <ion-item *ngIf="transaction.user">
+            <ion-col size="2.5">
+             <div *ngFor="let user of transaction.user">
+               <div class="thumb" slot="start" *ngIf="user.id != userId">
+                 <ion-avatar>
+                   <img  src="https://ucarecdn.com/{{user.profilePictureName}}/"/>
+                 </ion-avatar>
+               </div>
+              </div>
+            </ion-col>
+           
+            <ion-col>
+              <ion-label>
+                <div *ngFor="let user of transaction.user">
+                    <h4 *ngIf="user.id != userId">{{user.name}}</h4>
+                </div>
+                <div [ngClass]="transaction.accepted ? 'divAccepted' : 'divWaiting'">
+                  <img  *ngIf="!transaction.accepted"  src="assets/imgs/wait-20s-32px.svg"/>
+                  <img *ngIf="transaction.accepted" src="assets/imgs/check-20s-23px.svg"/>
+                  {{transaction.accepted ? 'Acceptata' : 'In asteptare'}}
+                </div>           
+              </ion-label>
+            </ion-col>
+            <ion-col style="text-align: right;">
+              <ion-label>
+                <h5>{{verifyType(transaction) ? '+' : '-'}} {{transaction.unit}} {{transaction.value.toFixed(2)}}</h5>
+                <p style="font-size: 13px;">{{transaction.date | date:'dd MMM yyyy' }}</p>
+              </ion-label>
+            </ion-col>
+          </ion-item>
+          <ion-item *ngIf="!transaction.user">
+            <ion-col size="2" >
+              <div>
+                <div class="thumb" slot="start">
+                  <ion-avatar>
+                    <img src="assets/imgs/{{transaction.imageUrl}}" alt="">
+                  </ion-avatar>
+                </div>
+              </div>
+            </ion-col>        
           <ion-col>
             <ion-label>
-              <div *ngFor="let user of transaction.user">
-                  <h4 *ngIf="user.id != userId">{{user.name}}</h4>
-              </div>
-              <div [ngClass]="transaction.transactions.accepted ? 'divAccepted' : 'divWaiting'">
-                <img  *ngIf="!transaction.transactions.accepted"  src="assets/imgs/wait-20s-32px.svg"/>
-                <img *ngIf="transaction.transactions.accepted" src="assets/imgs/check-20s-23px.svg"/>
-                {{transaction.transactions.accepted ? 'Acceptata' : 'In asteptare'}}
-              </div>           
+                <div>
+                    <h4>{{transaction.categoryName}}</h4>
+                </div>
+                <div class="divAccepted">
+                  <img src="assets/imgs/check-20s-23px.svg"/>
+                  Acceptata
+                </div>
             </ion-label>
           </ion-col>
           <ion-col style="text-align: right;">
             <ion-label>
-              <h5>{{verifyType(transaction.transactions) ? '+' : '-'}} {{transaction.transactions.unit}} {{transaction.transactions.value.toFixed(2)}}</h5>
-              <p style="font-size: 13px;">{{transaction.transactions.date | date:'dd MMM yyyy' }}</p>
+              <h5> - {{transaction.unit}} {{transaction.value.toFixed(2)}}</h5>
+              <p style="font-size: 13px;">{{transaction.transactionDate | date:'dd MMM yyyy' }}</p>
             </ion-label>
           </ion-col>
         </ion-item>
+
+        </div>
+       
     </div>
     <div class="the-list" *ngIf="category == 'year'">
-      <ion-item *ngFor="let transaction of transactionPerYear">
-        <ion-col size="2.5">
-          <div *ngFor="let user of transaction.user">
-            <div class="thumb" slot="start" *ngIf="user.id != userId">
-              <ion-avatar>
-                <img  src="https://ucarecdn.com/{{user.profilePictureName}}/"/>
-              </ion-avatar>
-            </div>
-           </div>
-         </ion-col>
-        
-         <ion-col>
-          <ion-label>
+      <div *ngFor="let transaction of perYear">
+        <ion-item *ngIf="transaction.user">
+          <ion-col size="2.5">
             <div *ngFor="let user of transaction.user">
-                <h4 *ngIf="user.id != userId">{{user.name}}</h4>
+              <div class="thumb" slot="start" *ngIf="user.id != userId">
+                <ion-avatar>
+                  <img  src="https://ucarecdn.com/{{user.profilePictureName}}/"/>
+                </ion-avatar>
+              </div>
+             </div>
+           </ion-col>
+          
+           <ion-col>
+            <ion-label>
+              <div *ngFor="let user of transaction.user">
+                  <h4 *ngIf="user.id != userId">{{user.name}}</h4>
+              </div>
+              <div [ngClass]="transaction.accepted ? 'divAccepted' : 'divWaiting'">
+                <img  *ngIf="!transaction.accepted"  src="assets/imgs/wait-20s-32px.svg"/>
+                <img *ngIf="transaction.accepted" src="assets/imgs/check-20s-23px.svg"/>
+                {{transaction.accepted ? 'Acceptata' : 'In asteptare'}}
+              </div>           
+            </ion-label>
+           </ion-col>
+           <ion-col style="text-align: right;">
+             <ion-label>
+               <h5>{{verifyType(transaction) ? '+' : '-'}} {{transaction.unit}} {{transaction.value.toFixed(2)}}</h5>
+               <p style="font-size: 13px;">{{transaction.date | date:'dd MMM yyyy' }}</p>
+             </ion-label>
+           </ion-col>
+       </ion-item>
+       <ion-item *ngIf="!transaction.user">
+          <ion-col size="2" >
+            <div>
+              <div class="thumb" slot="start">
+                <ion-avatar>
+                  <img src="assets/imgs/{{transaction.imageUrl}}" alt="">
+                </ion-avatar>
+              </div>
             </div>
-            <div [ngClass]="transaction.transactions.accepted ? 'divAccepted' : 'divWaiting'">
-              <img  *ngIf="!transaction.transactions.accepted"  src="assets/imgs/wait-20s-32px.svg"/>
-              <img *ngIf="transaction.transactions.accepted" src="assets/imgs/check-20s-23px.svg"/>
-              {{transaction.transactions.accepted ? 'Acceptata' : 'In asteptare'}}
-            </div>           
+          </ion-col>        
+        <ion-col>
+          <ion-label>
+              <div>
+                  <h4>{{transaction.categoryName}}</h4>
+              </div>
+              <div class="divAccepted">
+                <img src="assets/imgs/check-20s-23px.svg"/>
+                Acceptata
+              </div>
           </ion-label>
-         </ion-col>
-         <ion-col style="text-align: right;">
-           <ion-label>
-             <h5>{{verifyType(transaction.transactions) ? '+' : '-'}} {{transaction.transactions.unit}} {{transaction.transactions.value.toFixed(2)}}</h5>
-             <p style="font-size: 13px;">{{transaction.transactions.date | date:'dd MMM yyyy' }}</p>
-           </ion-label>
-         </ion-col>
-     </ion-item>
+        </ion-col>
+        <ion-col style="text-align: right;">
+          <ion-label>
+            <h5> - {{transaction.unit}} {{transaction.value.toFixed(2)}}</h5>
+            <p style="font-size: 13px;">{{transaction.transactionDate | date:'dd MMM yyyy' }}</p>
+          </ion-label>
+        </ion-col>
+      </ion-item>
+      </div>
     </div>
   </div>
 

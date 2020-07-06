@@ -8,6 +8,7 @@ import { CategoryTransaction } from '../_models/CategoryTransaction';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { CategoryService } from '../api/category.service';
 import { Category } from '../_models/Category';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-add-transaction',
@@ -108,6 +109,10 @@ export class AddTransactionPage implements OnInit {
     this.model.Value = Number(this.categoryTransaction.controls['suma'].value);
     this.model.categoryId = Number(this.categoryTransaction.controls["categoryId"].value);
     this.model.transactionDate = this.categoryTransaction.controls["transactionDate"].value;
+    var categoryId = this.model.categoryId;
+    this.model.categoryName = _.find(this.categoryIcons, function(object) {
+      return object.categoryId == categoryId;
+    }).categoryName;
     this.model.Unit = this.categoryTransaction.controls["unit"].value;
     this.model.UserId =  this.getUserId();
     console.log(this.model);

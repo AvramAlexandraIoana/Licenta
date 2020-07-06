@@ -23,6 +23,8 @@ namespace WebFMI.Models
         [Required(ErrorMessage = "Categoria este obligatorie")]
         public int CategoryId { get; set; }
 
+        public string CategoryName { get; set; }
+
         public DateTime TransactionDate { get; set; }
 
         public string Unit { get; set; }
