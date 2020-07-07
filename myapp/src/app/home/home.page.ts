@@ -34,6 +34,7 @@ export class HomePage implements OnInit {
   user: User;
   money: string;
   defaultCard: string;
+  language: string;
 
 
   constructor(private transactionService: TransactionService,
@@ -44,6 +45,8 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.userId = this.getUserId();
+    this.language = localStorage.getItem("limba");
+    console.log(this.language);
     this.myDate = new Date();
     console.log(this.myDate);
     this.setAmount();
