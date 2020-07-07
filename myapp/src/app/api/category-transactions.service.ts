@@ -11,13 +11,17 @@ import { CategoryTransaction } from '../_models/CategoryTransaction';
 export class CategoryTransactionsService {
 
   url: string;
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json; charset=utf-8'
-    })
-  };
+  token: any;
+  httpOptions: { headers: HttpHeaders; };
   constructor(private http: HttpClient) {
     this.url = environment.url + '/categoryTransaction';
+    this.token = localStorage.getItem('token');
+    this.httpOptions  = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8',
+        'Authorization':  `Bearer ${this.token}`
+      })
+    };
 
    }
 

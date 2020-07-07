@@ -11,14 +11,17 @@ import { RecentSearch } from '../_models/RecentSearch';
 export class RecentSearchService {
 
   url: string;
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json; charset=utf-8'
-    })
-  };
+  httpOptions: { headers: HttpHeaders; };
+  token: string;
   constructor(private http: HttpClient) {
     this.url = environment.url + '/recentSearch';
-
+    this.token = localStorage.getItem('token');
+    this.httpOptions  = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8',
+        'Authorization':  `Bearer ${this.token}`
+      })
+    };
    }
 
    saveRecentSearch(recentSearch: any) {

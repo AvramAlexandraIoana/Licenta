@@ -14,14 +14,18 @@ import { Value } from '../_models/Value';
 })
 export class UserService {
   url: string;
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json; charset=utf-8'
-    })
-  };
+  httpOptions: { headers: HttpHeaders; };
+  token: string;
  
   constructor(private http: HttpClient) {
       this.url = environment.url + '/users';
+      this.token = localStorage.getItem('token');
+      this.httpOptions  = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json; charset=utf-8',
+          'Authorization':  `Bearer ${this.token}`
+        })
+      };
   }
 
   // getValuesList(): Observable<Value[]> {

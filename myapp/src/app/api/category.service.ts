@@ -11,13 +11,17 @@ import { throwError, Observable } from 'rxjs';
 export class CategoryService {
 
   url: string;
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json; charset=utf-8'
-    })
-  };
+  token: string;
+  httpOptions: { headers: HttpHeaders; };
   constructor(private http: HttpClient) {
     this.url = environment.url + '/category';
+    this.token = localStorage.getItem('token');
+    this.httpOptions  = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8',
+        'Authorization':  `Bearer ${this.token}`
+      })
+    };
 
    }
 

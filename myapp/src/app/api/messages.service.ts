@@ -12,14 +12,17 @@ import { User } from '../_models/User';
 export class MessagesService {
 
   url: string;
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json; charset=utf-8'
-    })
-  };
+  httpOptions: { headers: HttpHeaders; };
+  token: string;
   constructor(private http: HttpClient) {
     this.url = environment.url + '/messages';
-
+    this.token = localStorage.getItem('token');
+    this.httpOptions  = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8',
+        'Authorization':  `Bearer ${this.token}`
+      })
+    };
    }
 
    saveMessage(message: any) {

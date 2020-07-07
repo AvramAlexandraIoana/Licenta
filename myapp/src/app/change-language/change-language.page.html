@@ -1,9 +1,38 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>change-language</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button color="primary" defaultHref="tabs/tab5"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-item lines="none" class="infoHeader">
+    <ion-label class="header" color="dark">Ce  limba doresti?</ion-label>
+  </ion-item>
+  <div style="font-size: 13px; color:gray; text-align: center;">
+     O vom folosi pentru limba folosita in aplicatie
+     <br/>
+  </div>
+  <ion-list lines="full" class="paddingList">
+    <ion-item *ngFor="let language of languages">
+      <ion-col >
+        <img src="assets/imgs/language-20s-49px.svg" alt="">
+      </ion-col>
+      <ion-col>
+        <ion-checkbox [(ngModel)]="language.checked" style="position: relative;left: 40%;" color="primary" checked></ion-checkbox>
+      </ion-col>
+      <ion-col>
+        {{language.name}}
+      </ion-col>
+      
+    </ion-item>
+  </ion-list>
 
 </ion-content>
+
+<ion-footer class="ion-no-border">
+<div class="ion-padding">
+  <ion-button  (click)="changeDefaultCard()" expand="block" shape="round" expand="full" class="sendButton">Modifica</ion-button>
+</div>
+</ion-footer>

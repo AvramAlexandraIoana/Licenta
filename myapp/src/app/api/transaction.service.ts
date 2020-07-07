@@ -10,14 +10,17 @@ import { retry, catchError, map } from 'rxjs/operators';
 })
 export class TransactionService {
   url: string;
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json; charset=utf-8'
-    })
-  };
+  httpOptions: { headers: HttpHeaders; };
+  token: string;
   constructor(private http: HttpClient) {
     this.url = environment.url + '/transaction';
-
+    this.token = localStorage.getItem('token');
+    this.httpOptions  = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8',
+        'Authorization':  `Bearer ${this.token}`
+      })
+    };
    }
 
    saveTransaction(transaction: any) {

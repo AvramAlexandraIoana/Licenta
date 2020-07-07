@@ -11,13 +11,18 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class ImageHistoryService {
 
   url: string;
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json; charset=utf-8'
-    })
-  };
+  token: any;
+  httpOptions: { headers: HttpHeaders; };
+
   constructor(private http: HttpClient) {
     this.url = environment.url + '/historyImage';
+    this.token = localStorage.getItem('token');
+    this.httpOptions  = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8',
+        'Authorization':  `Bearer ${this.token}`
+      })
+    };
 
    }
 
