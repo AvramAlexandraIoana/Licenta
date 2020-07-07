@@ -224,6 +224,10 @@ const routes: Routes = [
   {
     path: 'iban-transfer',
     loadChildren: () => import('./iban-transfer/iban-transfer.module').then( m => m.IbanTransferPageModule)
+  },
+  {
+    path: 'change-language',
+    loadChildren: () => import('./change-language/change-language.module').then( m => m.ChangeLanguagePageModule)
   }
 
 

@@ -440,6 +440,10 @@ export class ProfilePage implements OnInit {
   goToDefaultCard() {
     this.navControl.navigateRoot(["default-card"]);
   }
+
+  goToChangeLanguage() {
+    this.navControl.navigateRoot(["change-language"]);
+  }
   
 }
 

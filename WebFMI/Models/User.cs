@@ -22,6 +22,8 @@ namespace WebFMI.Models
 
         public string Gender { get; set; }
 
+        public string Language { get; set; }
+
         public DateTime DateOfBirth { get; set; }
 
         public DateTime Created { get; set; }
