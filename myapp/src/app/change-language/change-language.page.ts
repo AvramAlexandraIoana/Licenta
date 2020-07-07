@@ -23,8 +23,8 @@ export class ChangeLanguagePage implements OnInit {
   decodedToken: any;
   cards: any;
   languages: any[] =  [
-    {name: 'Română', value: 'Română', checked: false},
-    {name: 'Engleză', value: 'Engleză', checked: false},
+    {name: 'Română', value: 'romana', checked: false},
+    {name: 'Engleză', value: 'engleza', checked: false},
   ];
   
   constructor( private route: ActivatedRoute, 
@@ -46,6 +46,13 @@ export class ChangeLanguagePage implements OnInit {
     this.userService.getUser(this.userId).subscribe(res => {
       this.user = res;
       console.log(res);
+      if (this.user.language == "engleza") {
+        this.languages[1].checked = true;
+        this.languages[0].name = "Romanian";
+        this.languages[1].name = "English";
+      } else {
+        this.languages[0].checked = true;
+      }
     });
   }
 
@@ -57,27 +64,6 @@ export class ChangeLanguagePage implements OnInit {
     }
   }
 
-  loadDataAccount() {
-    this.accountService.getAccountList(this.userId).subscribe(res => {
-      console.log(res);
-      this.cards = res;
-      var u = this.user;
-      if (u.defaultCard == "$") {
-        u.defaultCard = "USD";
-      } else if (u.defaultCard == "€") {
-        u.defaultCard = "EURO";
-      } else if   (u.defaultCard == "r") {
-        u.defaultCard = "RON";
-      }
-      var index = _.findIndex(this.cards, function(object) {
-        return object.conversion == u.defaultCard;
-      });
-      if(index != -1) {
-        this.cards[index].checked = true;
-        console.log("ioana");
-      }
-    });
-  }
 
   
   async presentToast(text, type) {
@@ -98,30 +84,24 @@ export class ChangeLanguagePage implements OnInit {
 
   changeDefaultCard() {
     console.log("Ioana");
-    console.log(this.cards);
-    var checkedCards = _.filter(this.cards, function(object){
+    console.log(this.languages);
+    var checkedLanguage = _.filter(this.languages, function(object){
       return object.checked == true;
     });
-    console.log(checkedCards);
-    if (checkedCards.length > 1) {
-      this.presentToast("Trebuie selectat un singur card!", "warning");
-    } else if (checkedCards.length == 1) { 
-      if (checkedCards[0].conversion == "USD") {
-        this.user.defaultCard = "$";
-      } else if   (checkedCards[0].conversion == "EURO") {
-        this.user.defaultCard = "€";
-      } else if   (checkedCards[0].conversion == "RON") {
-        this.user.defaultCard = "r";
-      }
+    console.log(checkedLanguage);
+    if (checkedLanguage.length > 1) {
+      this.presentToast("Trebuie selectata o singura limba!", "warning");
+    } else if (checkedLanguage.length == 1) { 
+      this.user.language = checkedLanguage[0].value;
       this.userService.updateUser(this.user.id, this.user).subscribe( res => {
         console.log(res);
-        localStorage.setItem("card", this.user.defaultCard);
-        this.presentToast("Card default salvat", "success");
+        localStorage.setItem("limba", this.user.language);
+        this.presentToast("Limba schimbata", "success");
         this.dismiss();
       })
 
     } else {
-      this.presentToast("Trebuie selectat un  card!", "warning");
+      this.presentToast("Trebuie selectata o singura limba!", "warning");
 
     }
   }
