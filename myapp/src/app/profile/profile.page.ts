@@ -73,6 +73,7 @@ export class ProfilePage implements OnInit {
   }
   ngOnInit() {
     this.isInit = true;
+    this.language = localStorage.getItem("limba");
     this.userId = this.getUserId();
     this.getImageName(this.userId);
 

@@ -1,6 +1,7 @@
 <ion-header no-border>
   <ion-toolbar>
-    <ion-title>Expenses</ion-title>
+    <ion-title *ngIf="language == 'engleza'">Expenses</ion-title>
+    <ion-title *ngIf="language == 'romana'">Cheltuieli</ion-title>
     <ion-buttons slot="end" (click)="limitation()">
       <ion-button>
        <img src="assets/imgs/Export.svg" alt="">
@@ -13,7 +14,8 @@
     <div *ngIf="noData" style="text-align: center; font-weight: bold;">Nu ai tranzactii efectuate</div>
     <div id="chartContainer"></div>
     <ion-item lines="none" style="position: relative; top: 300px; text-align: center;" >
-       <ion-label>Cheltuielile tale in luna</ion-label>
+       <ion-label *ngIf="language == 'romana'">Cheltuielile tale in luna</ion-label>
+       <ion-label *ngIf="language == 'engleza'">Your expenses in the month</ion-label>
        <ion-select value="months[month]" (ionChange)="change($event)"> 
         <ion-select-option value="months[month]" selected>{{months[month]}}</ion-select-option>
         <ion-select-option value="months[month - 1]">{{months[month - 1]}}</ion-select-option>
@@ -30,7 +32,8 @@
             </div>
             <ion-label>
               <h4>{{item.name}}</h4>
-              <p>{{item.size}} tranzactii</p>
+              <p  *ngIf="language == 'romana'">{{item.size}} tranzactii</p>
+              <p  *ngIf="language == 'engleza'">{{item.size}} transactions</p>
             </ion-label>
             <div slot="end" style="position: relative; top: -10px; font-size: 14px;">
                 {{item.sum}} {{item.conversion}}

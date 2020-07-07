@@ -30,6 +30,7 @@ export class ResetPasswordProfilePage implements OnInit {
   errorList: string = null;
   model: any;
   decodedToken: any;
+  language: string;
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService) { }
 
@@ -46,6 +47,8 @@ export class ResetPasswordProfilePage implements OnInit {
     },  {
       validator: MustMatch('password', 'confirmPassword')
     })
+
+    this.language = localStorage.getItem("limba");
   }
 
   get f() { return this.resetForm.controls; }

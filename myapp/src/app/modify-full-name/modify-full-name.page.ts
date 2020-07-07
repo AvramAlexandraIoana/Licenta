@@ -26,6 +26,7 @@ export class ModifyFullNamePage implements OnInit {
       { type:'pattern', message: 'Te rugam introduce un username valid'}
     ]
   }
+  language: string;
   
 
 
@@ -45,6 +46,7 @@ export class ModifyFullNamePage implements OnInit {
         console.log(this.user);
       }
     });
+    this.language = localStorage.getItem("limba");
 
     this.createFullNameForm();
   }

@@ -32,6 +32,7 @@ export class DefaultCardPage implements OnInit {
   userId: number;
   decodedToken: any;
   cards: any;
+  language: string;
   
   constructor( private route: ActivatedRoute, 
               private formBuilder: FormBuilder,
@@ -44,6 +45,7 @@ export class DefaultCardPage implements OnInit {
   ngOnInit() {
 
     this.userId = this.getUserId();
+    this.language = localStorage.getItem("limba");
     this.getUser();
     this.loadDataAccount();
   }

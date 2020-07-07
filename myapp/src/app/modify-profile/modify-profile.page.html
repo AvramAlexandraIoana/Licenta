@@ -1,6 +1,7 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Date personale</ion-title>
+    <ion-title *ngIf="language == 'romana'">Date personale</ion-title>
+    <ion-title *ngIf="language == 'engleza'">Personal data</ion-title>
     <ion-buttons slot="start">
       <ion-back-button color="primary" defaultHref="profile"></ion-back-button>
     </ion-buttons>
@@ -8,7 +9,8 @@
 </ion-header>
 <ion-content>
   <ion-item [ngClass]="isPressed['name'] ? 'pressedClass' : 'nonePressed'"  (click)="editDateProfile('name')" lines="none">
-    <ion-label position="stacked">Nume complet si data nasterii</ion-label>
+    <ion-label position="stacked" *ngIf="language == 'romana'">Nume complet si data nasterii</ion-label>
+    <ion-label position="stacked" *ngIf="language == 'engleza'">Full name and date of birth</ion-label>
     <p>{{user.userName}}
        ,
        {{user.dateOfBirth | date}}
@@ -21,7 +23,9 @@
   </ion-item>
 
   <ion-item [ngClass]="isPressed['address'] ? 'pressedClass' : 'nonePressed'"   (click)="editDateProfile('address')" lines="none">
-    <ion-label position="stacked">Adresa</ion-label>
+    <ion-label position="stacked" *ngIf="language == 'romana'">Adresa</ion-label>
+    <ion-label position="stacked" *ngIf="language == 'engleza'">Address</ion-label>
+
     <p>{{user.adress}}
       , 
       {{ user.postalCode }}
@@ -39,7 +43,8 @@
     </svg>
     </ion-item>
   <ion-item lines="none">
-    <ion-label position="stacked">Numar de telefon</ion-label>
+    <ion-label position="stacked" *ngIf="language == 'romana'">Numar de telefon</ion-label>
+    <ion-label position="stacked" *ngIf="language == 'engleza'">Phone number</ion-label>
     <p>{{user.phoneNumber}}
     </p>
   </ion-item>

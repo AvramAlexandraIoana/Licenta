@@ -7,17 +7,20 @@
 <ion-content>
 
   <ion-item lines="none" class="infoHeader">
-    <ion-label class="header" color="dark">Care este adresa ta de acasa?</ion-label>
+    <ion-label class="header" color="dark" *ngIf="language == 'romana'">Care este adresa ta de acasa?</ion-label>
+    <ion-label class="header" color="dark" *ngIf="language == 'engleza'">What is your home address?</ion-label>
   </ion-item>
   <ion-item lines="none" class="infoHeader1">
-    <ion-label>Fara casute postale, te rugam</ion-label>
+    <ion-label *ngIf="language == 'romana'">Fara casute postale, te rugam</ion-label>
+    <ion-label *ngIf="language == 'engleza'">No mailboxes, please</ion-label>
   </ion-item>
   <form [formGroup]="modifyLocationForm">
     <ion-list lines="full" class="paddingList">
       <div>
         <ion-item>
-          <ion-label position="stacked">Tara</ion-label>
-          <ion-input formControlName="country" placeholder="Tara" type="text"></ion-input>
+          <ion-label position="stacked"  *ngIf="language == 'romana'">Tara</ion-label>
+          <ion-label position="stacked"  *ngIf="language == 'engleza'">Country</ion-label>
+          <ion-input formControlName="country" [placeholder]="language == 'romana' ? 'Tara' : 'Country'" type="text"></ion-input>
         </ion-item>
         <div class="error-messages">
           <ng-container *ngFor="let error of errorMessages.country">
@@ -30,14 +33,19 @@
       </div>
 
       <ion-item>
-        <ion-label position="stacked">Cod postal</ion-label>
-        <ion-input formControlName="postalCode" placeholder="Cod postal"  type="text" oninput="handleLastNameValue(event)"></ion-input>
+        <ion-label position="stacked" *ngIf="language == 'romana'">Cod postal</ion-label>
+        <ion-label position="stacked" *ngIf="language == 'engleza'">Postal code</ion-label>
+        <ion-input formControlName="postalCode" [placeholder]="language == 'romana' ? 'Cod postal' : 'Postal code'"  type="text" oninput="handleLastNameValue(event)"></ion-input>
       </ion-item> 
        
       <div>
-        <ion-item>
+        <ion-item *ngIf="language == 'romana'">
           <ion-label position="floating">Adresa randul 1</ion-label>
           <ion-input  formControlName="adress" type="text" [placeholder]="!isEnterAdress1Input ? 'Adresa randul 1' : 'Strada si numarul'" (ionInput)="isEnterAdress1Input=true" (ionFocus)="isEnterAdress1Input=true;" (ionBlur)="isEnterAdress1Input=false;"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="language == 'engleza'">
+          <ion-label position="floating" >Address Line 1</ion-label>
+          <ion-input  formControlName="adress" type="text" [placeholder]="!isEnterAdress1Input ? 'Address Line 1' : 'Street and number'" (ionInput)="isEnterAdress1Input=true" (ionFocus)="isEnterAdress1Input=true;" (ionBlur)="isEnterAdress1Input=false;"></ion-input>
         </ion-item>
         <div class="error-messages">
           <ng-container *ngFor="let error of errorMessages.adress">
@@ -50,15 +58,20 @@
       </div>
      
 
-      <ion-item>
-        <ion-label position="floating">Adresa randul 2 (optional)</ion-label>
+      <ion-item  *ngIf="language == 'romana'">
+        <ion-label position="floating"  *ngIf="language == 'romana'">Adresa randul 2 (optional)</ion-label>
         <ion-input formControlName="adress1" type="text" [placeholder]="!isEnterAdress2Input ? 'Adresa randul 2(optional)' : 'Apartament, unitate, claidre, etaj etc.'" (ionInput)="isEnterAdress2Input=true" (ionFocus)="isEnterAdress2Input=true;" (ionBlur)="isEnterAdress2Input=false;"></ion-input>
+      </ion-item>
+      <ion-item  *ngIf="language == 'engleza'">
+        <ion-label position="floating"  *ngIf="language == 'engleza'">Address Line 2 (optional)</ion-label>
+        <ion-input formControlName="adress1" type="text" [placeholder]="!isEnterAdress2Input ? 'Address Line 2(optional)' : 'Apartment, unit, cloisters, floor etc'" (ionInput)="isEnterAdress2Input=true" (ionFocus)="isEnterAdress2Input=true;" (ionBlur)="isEnterAdress2Input=false;"></ion-input>
       </ion-item>
 
       <div>
         <ion-item>
-          <ion-label position="floating">Oras</ion-label>
-          <ion-input formControlName="city"  type="text" placeholder="Oras"></ion-input>
+          <ion-label position="floating" *ngIf="language == 'romana'">Oras</ion-label>
+          <ion-label position="floating" *ngIf="language == 'engleza'">City</ion-label>
+          <ion-input formControlName="city"  type="text" [placeholder]="language == 'romana' ? 'Oras' : 'City'"></ion-input>
         </ion-item>
         <div class="error-messages">
           <ng-container *ngFor="let error of errorMessages.city">
@@ -72,8 +85,9 @@
 
      <div>
       <ion-item>
-        <ion-label position="floating">Regiune</ion-label>
-        <ion-input formControlName="judet" type="text" placeholder="Regiune"></ion-input>
+        <ion-label position="floating" *ngIf="language == 'romana'">Regiune</ion-label>
+        <ion-label position="floating" *ngIf="language == 'engleza'">Region</ion-label>
+        <ion-input formControlName="judet" type="text" [placeholder]="language == 'romana' ? 'Regiune' : 'Region'"></ion-input>
       </ion-item>
       <div class="error-messages">
         <ng-container *ngFor="let error of errorMessages.judet">
@@ -89,7 +103,7 @@
     </ion-list>
 
     <div class="ion-padding">
-      <ion-button  (click)="modifyLocationInformation()" expand="block" shape="round" expand="full" class="sendButton"  [disabled]="modifyLocationForm.invalid">Gata</ion-button>
+      <ion-button  (click)="modifyLocationInformation()" expand="block" shape="round" expand="full" class="sendButton"  [disabled]="modifyLocationForm.invalid">{{language == 'romana' ? 'Gata' : 'Done'}}</ion-button>
     </div>
   </form>
 

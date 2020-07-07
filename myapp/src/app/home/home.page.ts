@@ -71,14 +71,16 @@ export class HomePage implements OnInit {
       if (this.user.defaultCard == "r") {
         this.gaugeLabel += 'lei' + this.user.sumaR;
         this.gaugePrependText = "lei";
+        this.gaugeValue =  this.user.sumaRSpend * 100 / this.user.sumaR;
       } else if (this.user.defaultCard == "$") {
         this.gaugeLabel += '$' + this.user.sumaD;
         this.gaugePrependText = "$";
-        this.gaugeValue =  this.user.sumaDSpend * 100 / this.user.sumaD ;
+        this.gaugeValue =  this.user.sumaDSpend * 100 / this.user.sumaD;
         console.log(this.gaugeValue);
       } else if (this.user.defaultCard == "€") {
         this.gaugeLabel += '€' + this.user.sumaE;
         this.gaugePrependText = "€";
+        this.gaugeValue =  this.user.sumaESpend * 100 / this.user.sumaE;
 
       }
 

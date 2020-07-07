@@ -99,6 +99,19 @@ ngx-gauge {
       margin-top: 0.5vh !important;
     }
   }
+  .inside-guage1{
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 38vw;
+    right: 0;
+    top: 85px !important;
+    z-index: 40;
+    p {
+      margin-left: -3vh !important;
+      margin-top: 0.5vh !important;
+    }
+  }
   
 .bottom-section {
     margin-top: 90px;

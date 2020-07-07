@@ -7,22 +7,32 @@
 <ion-content>
 
   <ion-item lines="none" class="infoHeader">
-    <ion-label class="header" color="dark">Care este adresa ta principala de e-mail?</ion-label>
+    <ion-label class="header" color="dark" *ngIf="language == 'romana'">Care este adresa ta principala de e-mail?</ion-label>
+    <ion-label class="header" color="dark" *ngIf="language == 'engleza'">What is your main email address?</ion-label>
   </ion-item>
-  <div style="font-size: 13px; color:gray; text-align: center;">
+  <div style="font-size: 13px; color:gray; text-align: center;" *ngIf="language == 'romana'">
      O vom folosi numai pentru a te informa despre
      <br/>
   </div>
-  <div style="font-size: 13px; color:gray; text-align: center;">
+  <div style="font-size: 13px; color:gray; text-align: center;" *ngIf="language == 'romana'">
     modificari importante
     <br/>
  </div>
+ <div style="font-size: 13px; color:gray; text-align: center;" *ngIf="language == 'engleza'">
+    We will only use it to inform you about
+  <br/>
+</div>
+<div style="font-size: 13px; color:gray; text-align: center;" *ngIf="language == 'engleza'">
+  important changes
+ <br/>
+</div>
   <form  [formGroup]="modifyEmailForm">
     <ion-list lines="full" class="paddingList">
       <div>
         <ion-item>
-          <ion-label position="stacked">Introdu e-mail nou</ion-label>
-          <ion-input  formControlName="email" placeholder="Introdu e-mail nou" type="text"></ion-input>
+          <ion-label position="stacked" *ngIf="language == 'romana'">Introdu e-mail nou</ion-label>
+          <ion-label position="stacked" *ngIf="language == 'engleza'">Enter new email</ion-label>
+          <ion-input  formControlName="email" [placeholder]="language == 'romana' ? 'Introdu e-mail nou' : 'Enter new email'" type="text"></ion-input>
         </ion-item>
         <div class="error-messages">
           <ng-container *ngFor="let error of errorMessages.email">
@@ -40,6 +50,6 @@
 
 <ion-footer class="ion-no-border">
   <div class="ion-padding">
-    <ion-button  (click)="changeEmail()" expand="block" shape="round" expand="full" class="sendButton" [disabled]="modifyEmailForm.invalid">Modifica adresa de e-mail</ion-button>
+    <ion-button  (click)="changeEmail()" expand="block" shape="round" expand="full" class="sendButton" [disabled]="modifyEmailForm.invalid">{{language == 'romana' ? 'Modifica adresa de e-mail' : 'Change your email address' }}</ion-button>
   </div>
 </ion-footer>

@@ -25,6 +25,7 @@ export class ModifyEmailPage implements OnInit {
       { type:'pattern', message: 'Te rugam introduce o adresa de e-mail valida '}
     ]
   }
+  language: string;
   
   constructor( private route: ActivatedRoute, 
               private formBuilder: FormBuilder,
@@ -42,7 +43,7 @@ export class ModifyEmailPage implements OnInit {
         console.log(this.user);
       }
     });
-
+    this.language = localStorage.getItem("limba");
     this.createEmailForm();
     
   }

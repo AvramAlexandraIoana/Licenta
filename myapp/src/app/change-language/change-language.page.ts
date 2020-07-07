@@ -26,6 +26,7 @@ export class ChangeLanguagePage implements OnInit {
     {name: 'Română', value: 'romana', checked: false},
     {name: 'Engleză', value: 'engleza', checked: false},
   ];
+  language: string;
   
   constructor( private route: ActivatedRoute, 
               private formBuilder: FormBuilder,
@@ -38,6 +39,7 @@ export class ChangeLanguagePage implements OnInit {
   ngOnInit() {
 
     this.userId = this.getUserId();
+    this.language = localStorage.getItem("limba");
     this.getUser();
    
   }

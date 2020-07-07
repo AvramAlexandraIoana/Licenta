@@ -52,6 +52,8 @@ export class ModifyLocationInformationPage implements OnInit {
         console.log(this.user);
       }
     });
+
+    this.language = localStorage.getItem("limba");
     this.createModifyForm();
   }
 

@@ -7,18 +7,23 @@
 <ion-content>
 
   <ion-item lines="none" class="infoHeader">
-    <ion-label class="header" color="dark">Doresti sa updatezi username-ul?</ion-label>
+    <ion-label class="header" color="dark" *ngIf="language == 'romana'">Doresti sa updatezi username-ul?</ion-label>
+    <ion-label class="header" color="dark" *ngIf="language == 'engleza'">Do you want to update your username?</ion-label>
   </ion-item>
-  <div style="font-size: 13px; color:gray; text-align: center;">
+  <div style="font-size: 13px; color:gray; text-align: center;" *ngIf="language == 'romana'">
     Il vom folosi  pentru a te putea conecta
      <br/>
+  </div>
+  <div style="font-size: 13px; color:gray; text-align: center;" *ngIf="language == 'engleza'">
+    We will use it to connect you  <br/>
   </div>
   <form [formGroup]="fullNameForm">
     <ion-list lines="full" class="paddingList">
       <div>
         <ion-item>
-          <ion-label position="stacked">Introdu username-ul nou</ion-label>
-          <ion-input  formControlName="username" placeholder="Introdu username-ul nou" type="text"></ion-input>
+          <ion-label position="stacked" *ngIf="language == 'romana'">Introdu username-ul nou</ion-label>
+          <ion-label position="stacked" *ngIf="language == 'engleza'">Enter the new username</ion-label>
+          <ion-input  formControlName="username" [placeholder]="language == 'romana' ? 'Introdu username-ul nou' : 'Enter the new username'" type="text"></ion-input>
         </ion-item>
         <div class="error-messages">
           <ng-container *ngFor="let error of errorMessages.username">
@@ -30,8 +35,9 @@
         </div>
       </div>
       <ion-item>
-        <ion-label>Data nasterii</ion-label>
-        <ion-datetime formControlName="dateOfBirth" placeholder="Selecteaza data" min="1960" max="{{maxYear}}"></ion-datetime>
+        <ion-label *ngIf="language == 'romana'">Data nasterii</ion-label>
+        <ion-label *ngIf="language == 'engleza'">Date of birth</ion-label>
+        <ion-datetime formControlName="dateOfBirth" placeholder="language == 'romana' ? 'Selecteaza data' : 'Select the date'" min="1960" max="{{maxYear}}"></ion-datetime>
       </ion-item>
     </ion-list>
   </form>
@@ -40,6 +46,6 @@
 
 <ion-footer class="ion-no-border">
   <div class="ion-padding">
-    <ion-button  (click)="mofifyFullName()" expand="block" shape="round" expand="full" class="sendButton" [disabled]="fullNameForm.invalid">Gata</ion-button>
+    <ion-button  (click)="mofifyFullName()" expand="block" shape="round" expand="full" class="sendButton" [disabled]="fullNameForm.invalid">{{language == 'romana' ? 'Gata' : 'Done'}}</ion-button>
   </div>
 </ion-footer>

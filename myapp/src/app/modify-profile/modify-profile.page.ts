@@ -17,6 +17,7 @@ export class ModifyProfilePage implements OnInit {
   user = new User();
   isPressed = {};
   isInit: boolean = false;
+  language: string;
 
   constructor(private route: ActivatedRoute, 
               private navControl: NavController, 
@@ -37,6 +38,7 @@ export class ModifyProfilePage implements OnInit {
   ngOnInit() {
     this.isInit = true;
     console.log("init");
+    this.language = localStorage.getItem("limba");
     this.isPressed['name'] = false;
     this.isPressed['address'] = false;
     this.isPressed['email'] = false;

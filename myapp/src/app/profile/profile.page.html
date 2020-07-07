@@ -25,13 +25,21 @@
         </ion-avatar>
 
       </div>
-      <div class="details">
+      <div class="details" *ngIf="language == 'engleza'">
         <ion-button fill="clear" expand="full" color="primary" (click)="selectImage()">
           <ion-icon slot="start" name="camera"></ion-icon>
           {{pictureUrl ? 'Change Profile Image' : 'Add Profile Image'}}</ion-button>
         <!-- <h5>{{user.userName}}<span> <img src="assets/imgs/verified.svg" alt=""></span> </h5>
         <p>{{user.email}}</p> -->
       </div>
+      <div class="details" *ngIf="language == 'romana'">
+        <ion-button fill="clear" expand="full" color="primary" (click)="selectImage()">
+          <ion-icon slot="start" name="camera"></ion-icon>
+          {{pictureUrl ? 'Schimbă imaginea de profil' : 'Adaugă imagine de profil'}}</ion-button>
+        <!-- <h5>{{user.userName}}<span> <img src="assets/imgs/verified.svg" alt=""></span> </h5>
+        <p>{{user.email}}</p> -->
+      </div>
+      
   </div>
 
   <div class="bottom-section">
@@ -52,8 +60,10 @@
                   <img src="assets/imgs/profile-20s-128px (1).svg" alt="">
                 </div>
                 <div>
-                  <p class="header">Personal Data</p>
-                  <p class="body">Modify your personal data</p>
+                  <p class="header"  *ngIf="language == 'engleza'">Personal Data</p>
+                  <p class="body"  *ngIf="language == 'engleza'">Modify your personal data</p>
+                  <p class="header"  *ngIf="language == 'romana'">Date personale</p>
+                  <p class="body"  *ngIf="language == 'romana'">Modifică datele personale</p>
                 </div>
               </ion-item>
               <ion-item lines="none" (click)="goToHistoryImages()">
@@ -61,8 +71,10 @@
                   <img src="assets/imgs/photo-20s-128px (2).svg" alt="">
                 </div>
                 <div>
-                    <p class="header">Profile   Image History</p>
-                    <p class="body">Update and modify profile image</p>
+                    <p class="header"  *ngIf="language == 'engleza'">Profile  Image History</p>
+                    <p class="body"  *ngIf="language == 'engleza'">Update and modify profile image</p>
+                    <p class="header"  *ngIf="language == 'romana'">Istoricul imaginilor de profil</p>
+                    <p class="body"  *ngIf="language == 'romana'">Modifică imaginea de profil</p>
                  </div>
               </ion-item>
               <ion-item lines="none" (click)="goToChangePassword()">
@@ -70,8 +82,10 @@
                   <img src="assets/imgs/security.svg" alt="">
                 </div>
                 <div>
-                    <p class="header">Privacy</p>
-                    <p class="body">Change your password</p>
+                    <p class="header"  *ngIf="language == 'engleza'">Privacy</p>
+                    <p class="body"  *ngIf="language == 'engleza'">Change your password</p>
+                    <p class="header"  *ngIf="language == 'romana'">Privat</p>
+                    <p class="body"  *ngIf="language == 'romana'">Schimbă parola</p>
                  </div>
               </ion-item>
               <ion-item lines="none" (click)="goToDefaultCard()">
@@ -79,38 +93,46 @@
                   <img src="assets/imgs/credit card-20s-36px.svg" alt="" >
                 </div>
                 <div>
-                  <p class="header">Card</p>
-                  <p class="body">Change your default card</p>
+                  <p class="header"  *ngIf="language == 'engleza'">Card</p>
+                  <p class="body"  *ngIf="language == 'engleza'">Change your default card</p>
+                  <p class="header"  *ngIf="language == 'romana'">Card</p>
+                  <p class="body"  *ngIf="language == 'romana'">Schimbă cardul default</p>
                 </div>
               </ion-item>     
           </div>
       </div>
 
       <div class="chart-section">
-          <h3>LANGUAGE</h3>
+          <h3  *ngIf="language == 'engleza'">LANGUAGE</h3>
+          <h3  *ngIf="language == 'romana'">LIMBĂ</h3>
           <div class="chart-list">
               <ion-item lines="none" (click)="goToChangeLanguage()">
                 <div class="thumb1" slot="start">
                   <img src="assets/imgs/language-20s-32px.svg" alt="">
                 </div>
                 <div>
-                  <p class="header">Show Available Language</p>
-                  <p class="body">Edit language</p>
+                  <p class="header"  *ngIf="language == 'engleza'">Show Available Language</p>
+                  <p class="body"  *ngIf="language == 'engleza'">Edit language</p>
+                  <p class="header"  *ngIf="language == 'romana'">Vezi limbile disponibile</p>
+                  <p class="body"  *ngIf="language == 'romana'">Schimbă limba</p>
                 </div>
               </ion-item>
           </div>
       </div>
 
       <div class="chart-section">
-        <h3>CHART</h3>
+        <h3  *ngIf="language == 'engleza'">APPLICATION</h3>
+        <h3  *ngIf="language == 'romana'">APLICAȚIE</h3>
         <div class="chart-list">
             <ion-item lines="none"  (click)="logOut()">
               <div class="thumb" slot="start">
                 <ion-icon class="iconLogOut" name="log-out-outline"></ion-icon>
               </div>
               <div>
-                <p class="header">Log out</p>
-                <p class="body">Log out from banking application</p>
+                <p class="header" *ngIf="language == 'engleza'">Log out</p>
+                <p class="body" *ngIf="language == 'engleza'">Log out from banking application</p>
+                <p class="header" *ngIf="language == 'romana'">Deloghează-te</p>
+                <p class="body" *ngIf="language == 'romana'">Deloghează-te din aplicație</p>
               </div>
             </ion-item>
         </div>

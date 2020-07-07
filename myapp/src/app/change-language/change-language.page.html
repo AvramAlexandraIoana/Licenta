@@ -8,12 +8,17 @@
 
 <ion-content>
   <ion-item lines="none" class="infoHeader">
-    <ion-label class="header" color="dark">Ce  limba doresti?</ion-label>
+    <ion-label class="header" color="dark" *ngIf="language == 'romana'">Ce  limba doresti?</ion-label>
+    <ion-label class="header" color="dark" *ngIf="language == 'engleza'">What language do you want?</ion-label>
   </ion-item>
-  <div style="font-size: 13px; color:gray; text-align: center;">
+  <div style="font-size: 13px; color:gray; text-align: center;" *ngIf="language == 'romana'">
      O vom folosi pentru limba folosita in aplicatie
      <br/>
   </div>
+  <div style="font-size: 13px; color:gray; text-align: center;" *ngIf="language == 'engleza'">
+    We will use it for the language used in the application   
+    <br/>
+ </div>
   <ion-list lines="full" class="paddingList">
     <ion-item *ngFor="let language of languages">
       <ion-col >
@@ -33,6 +38,6 @@
 
 <ion-footer class="ion-no-border">
 <div class="ion-padding">
-  <ion-button  (click)="changeDefaultCard()" expand="block" shape="round" expand="full" class="sendButton">Modifica</ion-button>
+  <ion-button  (click)="changeDefaultCard()" expand="block" shape="round" expand="full" class="sendButton">{{language == 'romana' ? 'Modifica' : 'Modify'}}</ion-button>
 </div>
 </ion-footer>

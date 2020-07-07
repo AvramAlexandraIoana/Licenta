@@ -14,6 +14,7 @@ import { IonSlides } from '@ionic/angular';
 import { Transaction } from '../_models/Transaction';
 import { CategoryTransactionsService } from '../api/category-transactions.service';
 import { CategoryTransaction } from '../_models/CategoryTransaction';
+import { UserService } from '../api/user.service';
 
 @Component({
   selector: 'app-wallet',
@@ -55,6 +56,13 @@ export class WalletPage implements OnInit {
   perWeek: any[];
   perYear: any[];
   perMonth: any[];
+  language: string;
+  gaugeValue: number;
+  gaugePrependText: string;
+  gaugeLabel: string;
+  income: any;
+  expense: any;
+  procent: number;
 
   constructor(private contacts: Contacts,
     private callNumber: CallNumber,
@@ -65,7 +73,8 @@ export class WalletPage implements OnInit {
     private modalControl: ModalController,
     private accountService: AccountService,
     private categoryTransactionService: CategoryTransactionsService,
-    private transactionService: TransactionService) { 
+    private transactionService: TransactionService, 
+    private userService: UserService) { 
 
     }
 
@@ -89,11 +98,13 @@ export class WalletPage implements OnInit {
 
   ngOnInit() {
     this.defaultCard = localStorage.getItem("card");
+    this.language = localStorage.getItem("limba");
     this.userId = this.getUserId();
     console.log("asd");
     this.myDate = new Date();
     this.loadContacts();
     this.loadCards();
+    
   }
 
   loadCards() {
@@ -111,9 +122,32 @@ export class WalletPage implements OnInit {
       }
       this.currentUnit = this.cards[0].unit;
       this.getTransactionPerDay(this.cards[0].unit);
+      this.setAmount();
     });
 
   }
+
+  setAmount() {
+    this.userService.getUser(this.userId).subscribe( res => {
+      console.log(res);
+      this.user = res;     
+      if (this.currentUnit== "r") {
+        this.income =  this.user.sumaR - this.user.sumaRSpend;
+        this.expense = this.user.sumaRSpend;
+        this.procent =  this.user.sumaRSpend * 100 / this.user.sumaR ;
+      } else if (this.currentUnit== "$") {
+        this.income =  this.user.sumaD - this.user.sumaDSpend;
+        this.expense = this.user.sumaDSpend;        
+        this.procent =  this.user.sumaDSpend * 100 / this.user.sumaD ;
+      } else if (this.currentUnit== "€") {
+        this.income =  this.user.sumaE - this.user.sumaESpend;
+        this.expense = this.user.sumaESpend;   
+        this.procent =  this.user.sumaESpend * 100 / this.user.sumaE ;
+      }
+
+    })
+  }
+
 
   getUserId() {
     var userToken = localStorage.getItem('token');
