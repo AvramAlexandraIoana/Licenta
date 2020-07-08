@@ -8,10 +8,12 @@ import { NavigationExtras, Router } from '@angular/router';
   styleUrls: ['./add-transaction-modal.page.scss'],
 })
 export class AddTransactionModalPage implements OnInit {
+  language: string;
 
   constructor(private modalControl : ModalController,public navControl : NavController) { }
 
   ngOnInit() {
+    this.language = localStorage.getItem("limba");
   }
 
   dismiss() {

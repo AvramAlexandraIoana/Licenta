@@ -40,6 +40,7 @@ export class RequestMoneyPage implements OnInit {
   content: any;
   IsKeyboardOpen: boolean=false;
   model: any;
+  language: string;
 
   constructor(public ngZ: NgZone, public navControl: NavController, private route: ActivatedRoute, private formBuilder: FormBuilder, public  platform: Platform, public keyboard: Keyboard) {
      this.checkIfKeyboardIsOpen();
@@ -48,7 +49,8 @@ export class RequestMoneyPage implements OnInit {
 
 
   ngOnInit() {
-    this.unit = '$'
+    this.unit = '$';
+    this.language = localStorage.getItem("limba");
     this.route.queryParams.subscribe(params => {
       this.typeView = params["type"];
       if (params && params.special) {

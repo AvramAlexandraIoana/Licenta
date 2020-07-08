@@ -33,6 +33,7 @@ export class RequestViewPage implements OnInit {
   user: import("t:/Licenta/myapp/src/app/_models/User").User;
   userId: number;
   cards: Account[];
+  language: string;
 
   
   constructor(private transactionService: TransactionService,
@@ -56,6 +57,7 @@ export class RequestViewPage implements OnInit {
   }
 
   ngOnInit() {
+    this.language = localStorage.getItem("limba");
     this.route.queryParams.subscribe(params => {
       this.typeView = params["type"];
       console.log("Ioana");

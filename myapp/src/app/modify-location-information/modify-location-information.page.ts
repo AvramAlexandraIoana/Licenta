@@ -35,6 +35,7 @@ export class ModifyLocationInformationPage implements OnInit {
       { type: 'required', message: 'Regiunea este obligatorie'}
     ]
   }
+  language: string;
 
 
   constructor(private toastController: ToastController,

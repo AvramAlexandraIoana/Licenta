@@ -3,8 +3,11 @@
     <ion-buttons slot="start">
       <ion-back-button color="gray" defaultHref="request"></ion-back-button>
       <ion-label>
-        <ion-title>
-          {{typeView == 'send' ? 'Confirmarea platii' : 'Confirmarea solicitarii de plata'}}
+        <ion-title *ngIf="language == 'romana'">
+          {{typeView == 'send' ? 'Confirmarea plații' : 'Confirmarea solicitării de plată'}}
+        </ion-title>
+        <ion-title *ngIf="language == 'engleza'">
+          {{typeView == 'send' ? 'Payment confirmation' : 'Confirmation of payment request'}}
         </ion-title>
       </ion-label>
     </ion-buttons>
@@ -12,8 +15,11 @@
 </ion-header>
 <ion-content>
 <div class="container-card">
-  <ion-label>
-    {{typeView == 'send' ? 'Alege cardul dorit si plateste' : 'Alege cardul unde vor intra banii'}}
+  <ion-label *ngIf="language == 'romana'">
+    {{typeView == 'send' ? 'Alege cardul dorit și platește' : 'Alege cardul unde vor intra banii'}}
+  </ion-label>
+  <ion-label *ngIf="language == 'engleza'">
+    {{typeView == 'send' ? 'Choose the desired card and pay' : 'Choose the card where the money will go'}}
   </ion-label>
   <ion-slides mode="ios" [options]="sliderConfig">
     <ion-slide *ngFor="let card of cards;  index as pos">
@@ -71,18 +77,30 @@
     <ion-card-title>Madison, WI</ion-card-title>
   </ion-card-header> -->
   <ion-card-content>
-    <ion-item class="detail">
+    <ion-item class="detail" *ngIf="language == 'romana'">
       Detalii: 
       <ion-col  class="detail1">
         {{sendMoneyData.description}}
       </ion-col>
     </ion-item>
-     <ion-item lines="none" class="detail">
+    <ion-item class="detail" *ngIf="language == 'engleza'">
+      Details: 
+      <ion-col  class="detail1">
+        {{sendMoneyData.description}}
+      </ion-col>
+    </ion-item>
+     <ion-item lines="none" class="detail" *ngIf="language == 'romana'">
         Comision: 
         <ion-col  class="detail1">
           0.00 {{sendMoneyData.unit}}
         </ion-col>
     </ion-item>
+    <ion-item lines="none" class="detail" *ngIf="language == 'engleza'">
+      Commission: 
+      <ion-col  class="detail1">
+        0.00 {{sendMoneyData.unit}}
+      </ion-col>
+  </ion-item>
   </ion-card-content>
 </ion-card>
 <ion-item lines="none">
@@ -90,7 +108,8 @@
     <div *ngIf="error" class="alert-content">
       <ion-icon class="alert-icon" name="alert-outline"></ion-icon>
     </div>
-    <ion-label *ngIf="error" class="error errorLabel">Ai introdus o suma prea mare pentru unele contacte.</ion-label>
+    <ion-label *ngIf="error && language == 'engleza'" class="error errorLabel">You have entered too much for some contacts.</ion-label>
+    <ion-label *ngIf="error && language == 'romana'" class="error errorLabel">Ai introdus o suma prea mare pentru unele contacte.</ion-label>
 </ion-item>
 <ion-list>
   <div *ngFor="let contact of peopleSelected;let i = index" >
@@ -113,7 +132,7 @@
           <ion-col>
             <ion-item class="suma">
               <!-- <ion-label>Ioana</ion-label> -->
-              <ion-input   (ionChange)="getValue(i)" value="{{contact?.data.suma}}" class="inputClass" placeholder="Suma" type="tel" [(ngModel)]="contact?.data.suma">
+              <ion-input   (ionChange)="getValue(i)" value="{{contact?.data.suma}}" class="inputClass" [placeholder]="language == 'romana' ? 'Suma' : 'The amount'" type="tel" [(ngModel)]="contact?.data.suma">
               </ion-input>
               <p class="unit">{{sendMoneyData.unit}}</p>
             </ion-item>
@@ -195,11 +214,17 @@
 </ion-footer> -->
 <ion-footer no-border  *ngIf="!IsKeyboardOpen">
 <ion-row>
-  <ion-col *ngIf="!error" class="colLeft">
-    {{typeView == 'send' ? 'Suma totala' : 'Suma totala care se va solicita'}}
+  <ion-col *ngIf="!error && language == 'romana'" class="colLeft">
+    {{typeView == 'send' ? 'Suma totală' : 'Suma totală care se va solicita'}}
   </ion-col>
-  <ion-col *ngIf="error" class="colLeft errorLabel">
-    Suma totala depaseste limita de 4000
+  <ion-col *ngIf="!error && language == 'engleza'" class="colLeft">
+    {{typeView == 'send' ? 'Total amount' : 'The total amount that will be requested'}}
+  </ion-col>
+  <ion-col *ngIf="error && language == 'romana'" class="colLeft errorLabel">
+    Suma totală depășește limita de 4000
+  </ion-col>
+   <ion-col *ngIf="error && language == 'engleza'" class="colLeft errorLabel">
+    The total amount exceeds the limit of 4000
   </ion-col>
   <ion-col class="colRight" [ngClass]="error ? 'errorSum' : 'okaySum'"> 
     {{calculateTotalSum()}}
@@ -208,7 +233,7 @@
 </ion-row>
 <ion-toolbar >
   <ion-button expand="block"  class="footer"  (click)="addTransaction()" routerDirection="root">
-    Continua
+   {{language == 'romana' ? 'Continuă' : 'Continue'}} 
   </ion-button>
 </ion-toolbar>
 </ion-footer>

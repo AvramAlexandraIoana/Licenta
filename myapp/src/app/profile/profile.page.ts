@@ -51,6 +51,7 @@ export class ProfilePage implements OnInit {
   typeView: string;
   isInit: boolean = false;
   noFace: boolean;
+  language: string;
 
  
   constructor(private sanitizer: DomSanitizer, private st: AngularFireStorage, private userService: UserService, private camera: Camera, private file: File, private http: HttpClient, private webview: WebView,

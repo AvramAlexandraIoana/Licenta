@@ -27,7 +27,7 @@ namespace WebFMI.Controllers
             _context = context;
             _userManager = userManager;
         }
-        [Authorize(Policy = "RequireAdminRole")]
+        //[Authorize(Policy = "RequireAdminRole")]
         [HttpGet("usersWithRoles")]
 
         public async Task<IActionResult> GetUsersWithRoles()
@@ -85,7 +85,7 @@ namespace WebFMI.Controllers
             return Ok(roles);
 
         }
-        [Authorize(Policy = "RequireAdminRole")]
+        //[Authorize(Policy = "RequireAdminRole")]
         [HttpPost("editRoles/{userName}")]
         public async Task<IActionResult> EditRoles(string userName, RoleEditDto roleEditDto)
         {

@@ -36,6 +36,7 @@ export class RequestPage implements OnInit {
   jwtHelper = new JwtHelperService();
   decodedToken: any;
   imageURL: any;
+  language: string;
 
   constructor(public navControl: NavController, 
               private route: ActivatedRoute, 
@@ -54,6 +55,12 @@ export class RequestPage implements OnInit {
   }
 
   ngOnInit() {
+    this.language = localStorage.getItem("limba");
+    if (this.language == "engleza") {
+      this.options[0] = "Frequently used";
+      this.options[1] = "Alphabetical";
+      this.selectOption = "Frequently used";
+    }
     this.route.queryParams.subscribe(params => {
       this.typeView = params["type"];
     });
@@ -230,7 +237,7 @@ export class RequestPage implements OnInit {
   }
 
   filterOption() {
-    if (this.selectOption == "Alfabetic") {
+    if (this.selectOption == "Alfabetic" || this.selectOption == "Alphabetical") {
       var sortedContacts = _.sortBy(this.contactsFound, function(object){
         return object.displayName;
       });

@@ -30,16 +30,21 @@
         <div class="details">
             <div class="money-content">
               <div class="labelForSum" [ngClass]="isEnterSumInput  ||  !sendMoneyForm.get('suma').invalid ? 'visible' : 'hidden'">
-                <p>Introdu aici suma pentru fiecare contact</p>
+                <p *ngIf="language == 'romana'">Introdu aici suma pentru fiecare contact</p>
+                <p *ngIf="language == 'engleza'">Enter the amount for each contact here</p>
               </div>
               <ion-item>
                 <div class="sign-container">
                   <h1>{{sendMoneyForm.get('unit').value}}</h1>
                 </div>
-                <ion-input [placeholder]="!isEnterSumInput ? 'Introdu aici suma' : ''" (ionInput)="isEnterSumInput=true" (ionFocus)="isEnterSumInput=true;" (ionBlur)="isEnterSumInput=false;" type="tel" formControlName="suma" class="suma"  value="5" text-center></ion-input>
+                <ion-input *ngIf="language == 'romana'" [placeholder]="!isEnterSumInput ? 'Introdu aici suma' : ''" (ionInput)="isEnterSumInput=true" (ionFocus)="isEnterSumInput=true;" (ionBlur)="isEnterSumInput=false;" type="tel" formControlName="suma" class="suma"  value="5" text-center></ion-input>
+                <ion-input   *ngIf="language == 'engleza'" [placeholder]="!isEnterSumInput ? 'Enter the amount' : ''" (ionInput)="isEnterSumInput=true" (ionFocus)="isEnterSumInput=true;" (ionBlur)="isEnterSumInput=false;" type="tel" formControlName="suma" class="suma"  value="5" text-center></ion-input>
               </ion-item>
               <div class="error-messages">
-                <p *ngIf="!sendMoneyForm.get('suma').invalid" style="color: gray;">Suma minima este de 5 {{sendMoneyForm.get('unit').value}} iar maxima este de 5000 {{sendMoneyForm.get('unit').value}}</p>
+                <p *ngIf="!sendMoneyForm.get('suma').invalid && language == 'romana'" style="color: gray;">Suma minimă este de 5 {{sendMoneyForm.get('unit').value}} iar maximă este de 5000 {{sendMoneyForm.get('unit').value}}</p>
+                <p *ngIf="!sendMoneyForm.get('suma').invalid && language == 'engleza'" style="color: gray;">
+                  The minimum amount is 5 {{sendMoneyForm.get('unit').value}} 
+                  and the maximum is 5000 {{sendMoneyForm.get('unit').value}}</p>
                 <ng-container *ngFor="let error of errorMessages.suma">
                   <div class="error-message"
                     *ngIf="sendMoneyForm.get('suma').hasError(error.type) && (sendMoneyForm.get('suma').dirty || sendMoneyForm.get('suma').touched)">
@@ -61,13 +66,17 @@
             </div>
             <div class="detail-item-row">
               <div class="labelForSum" [ngClass]="isEnterDescriptionInput  ||  !sendMoneyForm.get('description').invalid ? 'visible' : 'hidden'">
-                <p>Introdu aici detaliile de plata</p>
+                <p *ngIf="language == 'romana'">Introdu aici detaliile de plată</p>
+                <p *ngIf="language == 'engleza'">Enter your payment details here</p>
               </div>
               <ion-card>
                 <ion-card-content>
-                  <ion-textarea  [placeholder]="!isEnterDescriptionInput ? 'Introdu aici detaliile de plata' : ''" 
-                                (ionInput)="isEnterDescriptionInput=true" (ionFocus)="isEnterDescriptionInput=true;" (ionBlur)="isEnterDescriptionInput=false;" formControlName="description" rows="2" cols="30" >
+                  <ion-textarea *ngIf="language == 'romana'" [placeholder]="!isEnterDescriptionInput ? 'Introdu aici detaliile de plata' : ''" 
+                      (ionInput)="isEnterDescriptionInput=true" (ionFocus)="isEnterDescriptionInput=true;" (ionBlur)="isEnterDescriptionInput=false;" formControlName="description" rows="2" cols="30" >
                   </ion-textarea>
+                  <ion-textarea *ngIf="language == 'engleza'" [placeholder]="!isEnterDescriptionInput ? 'Enter your payment details here' : ''" 
+                      (ionInput)="isEnterDescriptionInput=true" (ionFocus)="isEnterDescriptionInput=true;" (ionBlur)="isEnterDescriptionInput=false;" formControlName="description" rows="2" cols="30" >
+                   </ion-textarea>
                 </ion-card-content>
               </ion-card>
             </div>
@@ -85,8 +94,11 @@
 </ion-content>
 <ion-footer no-border  *ngIf="!IsKeyboardOpen">
   <ion-row>
-    <ion-col class="colLeft">
-      {{typeView == 'send' ? 'Suma totala' : 'Suma totala care se va solicita'}}
+    <ion-col class="colLeft"  *ngIf="language == 'romana'">
+      {{typeView == 'send' ? 'Suma totală' : 'Suma totală care se va solicita'}}
+    </ion-col>
+    <ion-col class="colLeft"  *ngIf="language == 'engleza'">
+      {{typeView == 'send' ? 'Total amount' : 'The total amount that will be requested'}}
     </ion-col>
     <ion-col class="colRight">
       {{sendMoneyForm.get('suma').value ? sendMoneyForm.get('suma').value : '0.00'}} {{sendMoneyForm.get('unit').value}}
@@ -94,7 +106,7 @@
   </ion-row>
   <ion-toolbar >
     <ion-button expand="block"  class="footer"  color="primary" (click)="goReviewRequestPage()" routerDirection="root" [disabled]="sendMoneyForm.invalid">
-      Continua
+      {{ language == 'romana' ? 'Continua' : 'Continue'}}
     </ion-button>
   </ion-toolbar>
 </ion-footer>

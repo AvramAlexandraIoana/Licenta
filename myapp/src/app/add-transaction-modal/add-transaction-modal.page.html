@@ -4,10 +4,12 @@
           <div class="the-holder" padding>
               <ion-row class="title-row">
                   <ion-col size="8" text-left>
-                    <h4>Add Transaction</h4>
+                    <h4 *ngIf="language == 'engleza'">Add Transaction</h4>
+                    <h4 *ngIf="language == 'romana'">Adăugați tranzacție</h4>
                   </ion-col>
                   <ion-col size="4" text-right (click)="dismiss()">
-                    <p>Cancel</p>
+                    <p *ngIf="language == 'engleza'"> Cancel</p>
+                    <p *ngIf="language == 'romana'"> Închide </p>
                   </ion-col>
                </ion-row>
                <div class="the-grid-app">
@@ -16,7 +18,8 @@
                          <ion-button text-center fill="none"  expand="block" (click)="goRequestMoney()">
                             <ion-label>
                               <img src="assets/imgs/category-icons/request.svg" alt="">
-                              <p>Request Money</p>
+                              <p *ngIf="language == 'engleza'">Request Money</p>
+                              <p *ngIf="language == 'romana'">Solicită bani</p>
                             </ion-label>
 
                          </ion-button>
@@ -25,7 +28,8 @@
                         <ion-button text-center fill="none"  expand="block" (click)="goSendMoney()">
                            <ion-label>
                              <img src="assets/imgs/category-icons/send.svg" alt="">
-                             <p>Send Money</p>
+                             <p *ngIf="language == 'engleza'">Send Money</p>
+                             <p *ngIf="language == 'romana'">Trimite bani</p>
                            </ion-label>
 
                         </ion-button>
@@ -36,7 +40,8 @@
                        <ion-button text-center fill="none"  expand="block" (click)="goAddtransaction()">
                           <ion-label>
                             <img src="assets/imgs/category-icons/addincome.svg" alt="">
-                            <p>Add Income</p>
+                            <p *ngIf="language == 'engleza'">Add Income</p>
+                            <p *ngIf="language == 'romana'">Trimite pe categorii</p>
                           </ion-label>
 
                        </ion-button>
@@ -45,7 +50,7 @@
                       <ion-button text-center fill="none"  expand="block">
                          <ion-label>
                            <img src="assets/imgs/category-icons/addexpense.svg" alt="">
-                           <p>Add Expense</p>
+                           <p> Add Expense</p>
                          </ion-label>
 
                       </ion-button>

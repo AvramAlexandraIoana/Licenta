@@ -3,7 +3,7 @@
       <ion-buttons slot="start">
         <ion-back-button color="light" defaultHref="tabs"></ion-back-button>
       </ion-buttons>
-      <ion-input [(ngModel)]="inputValue" placeholder="Cauta in agenda" (keyup)="onKeyUp($event); isKeyPress=true"></ion-input>
+      <ion-input [(ngModel)]="inputValue" [placeholder]="language == 'romana' ? 'Cauta in agenda' : 'Search the agenda'" (keyup)="onKeyUp($event); isKeyPress=true"></ion-input>
       <ion-icon *ngIf="!isKeyPress" class="group" name="search-outline"></ion-icon>
       <div (click)="changeInputValue()" tappable>
         <ion-icon *ngIf="isKeyPress" class="group"  name="close-outline" ></ion-icon>
@@ -30,8 +30,11 @@
       </p>
   </div>
   <div class="noneSelected" *ngIf="!peopleSelected.length">
-      <p>
+      <p *ngIf="language == 'romana'">
         Nu ai selectat niciun contact
+      </p>
+      <p *ngIf="language == 'engleza'">  
+        You have not selected any contacts
       </p>
   </div>
 </div>
@@ -52,7 +55,7 @@
   </div>
 </ion-item>
 
-<div *ngIf="selectOption=='Utilizate Frecvent'">
+<div *ngIf="selectOption == 'Utilizate Frecvent' ||  selectOption == 'Frequently used'">
   <ion-list>
     <ion-card  [ngClass]="contact.isSelected ? 'selectedItem' : 'unselectedItem'" *ngFor="let contact of filterCond(contactsFound, 1)">
       <ion-card-content  [ngClass]="contact?.isSelected ? 'selectedItem' : 'unselectedItem'" >
@@ -74,7 +77,8 @@
     </ion-card>
   </ion-list>
   <ion-list>
-    <ion-label class="paddingClass">Restul contactelor</ion-label>
+    <ion-label class="paddingClass" *ngIf="language == 'romana'">Restul contactelor</ion-label>
+    <ion-label class="paddingClass" *ngIf="language == 'engleza'">The rest of the contacts</ion-label>
     <ion-card  [ngClass]="contact.isSelected ? 'selectedItem' : 'unselectedItem'" *ngFor="let contact of filterCond(contactsFound, 2)">
       <ion-card-content  [ngClass]="contact.isSelected ? 'selectedItem' : 'unselectedItem'">
         <ion-item (click)="addToSelectPeople(contact)" lines="none">
@@ -97,7 +101,7 @@
 </ion-list>
 </div>
 
-<div *ngIf="selectOption!='Utilizate Frecvent'">
+<div *ngIf="selectOption == 'Alfabetic' || selectOption == 'Alphabetical'">
   <ion-list>
       <ion-card  [ngClass]="contact.isSelected ? 'selectedItem' : 'unselectedItem'"  *ngFor="let contact of contactsFound">
         <ion-card-content [ngClass]="contact.isSelected ? 'selectedItem' : 'unselectedItem'">
@@ -117,11 +121,12 @@
   </ion-list> 
 </div> 
 </ion-content>
-<ion-badge class="badge" (click)="goToIbanPage()">Transfera prin IBAN</ion-badge>
+<ion-badge class="badge" (click)="goToIbanPage()" *ngIf="language == 'romana'">Transfera prin IBAN</ion-badge>
+<ion-badge class="badge" (click)="goToIbanPage()" *ngIf="language == 'engleza'">Tsransfer via IBAN </ion-badge>
 <ion-footer no-border>
 <ion-toolbar>
   <ion-button (click)="goSendMoneyPage()" class="footer" expand="block" [disabled]="!peopleSelected.length">
-    Continua
+    {{ language == 'romana' ? 'Continua' : 'Continue'}}
   </ion-button>
 </ion-toolbar>
 </ion-footer>
