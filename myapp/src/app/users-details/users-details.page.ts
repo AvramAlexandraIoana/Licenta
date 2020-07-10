@@ -26,6 +26,7 @@ export class UsersDetailsPage implements OnInit {
     temp: UserAdmin[];
     @ViewChild(DatatableComponent) table: DatatableComponent;
     inputValue: any;
+  language: string;
     //roles: Role[] = [];
 
 
@@ -39,6 +40,7 @@ export class UsersDetailsPage implements OnInit {
   }
 
   ngOnInit() {
+    this.language = localStorage.getItem("limba");
   }
 
   switchStyle() {

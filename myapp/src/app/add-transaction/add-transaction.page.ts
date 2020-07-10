@@ -41,6 +41,7 @@ export class AddTransactionPage implements OnInit {
   decodedToken: any;
 
   categoryIcons: Array<Category> = [];
+  language: string;
   
 
   constructor(public toastController: ToastController,
@@ -50,6 +51,7 @@ export class AddTransactionPage implements OnInit {
 
   ngOnInit() {
     this.unit = '$';
+    this.language = localStorage.getItem("limba");
     this.createCategoryTransaction();
     this.categoryService.getCategoryList().subscribe(res => {
       this.categoryIcons = res;

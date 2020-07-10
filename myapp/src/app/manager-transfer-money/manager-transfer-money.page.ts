@@ -19,12 +19,14 @@ export class ManagerTransferMoneyPage implements OnInit {
   name: any;
   inputValue: any;
   isKeyPress: boolean;
+  language: string;
 
   constructor(private userService: UserService,
               private modalControl: ModalController,
               private toastController: ToastController) { }
 
   ngOnInit() {
+    this.language = localStorage.getItem("limba");
     this.nr1 = 0;
     this.nr2 = 4;
     this.name = null;

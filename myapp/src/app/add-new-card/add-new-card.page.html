@@ -3,19 +3,25 @@
     <ion-buttons slot="start">
       <ion-back-button color="primary" defaultHref="tabs/tab4"></ion-back-button>
     </ion-buttons>
-    <ion-title>Add new card</ion-title>
+    <ion-title *ngIf="language == 'engleza'">Add new card</ion-title>
+    <ion-title *ngIf="language == 'romana'">Adaugă un card</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   
   <ion-item lines="none" class="infoHeader">
-    <ion-label class="header" color="dark">Care este cardul pe care il adaugi?</ion-label>
+    <ion-label class="header" color="dark" *ngIf="language == 'engleza'">Which card do you add?</ion-label>
+    <ion-label class="header" color="dark" *ngIf="language == 'romana'">Care este cardul pe care il adaugi?</ion-label>
   </ion-item>
-  <div style="font-size: 13px; color:gray; text-align: center;">
-     Il vom folosi pentru noi tranzactii
+  <div style="font-size: 13px; color:gray; text-align: center;" *ngIf="language == 'romana'">
+     Îl vom folosi pentru noi tranzacții
      <br/>
   </div>
+  <div style="font-size: 13px; color:gray; text-align: center;" *ngIf="language == 'engleza'">
+    We will use it for new transactions
+    <br/>
+ </div>
   <span class="hidden">
     {{getImageUrl()}}
   </span>
@@ -26,8 +32,9 @@
     <ion-list lines="full" class="paddingList">
       <div>
         <ion-item>
-          <ion-label position="stacked">Numele titularului</ion-label>
-          <ion-input  formControlName="cardHolderName" placeholder="Introdu numele titularului" type="text"></ion-input>
+          <ion-label position="stacked" *ngIf="language == 'romana'">Numele titularului</ion-label>
+          <ion-label position="stacked" *ngIf="language == 'engleza'">Name of the holder</ion-label>
+          <ion-input  formControlName="cardHolderName" [placeholder]="language == 'romana' ? 'Introdu numele titularului' : 'Enter name of the holder'" type="text"></ion-input>
         </ion-item>
         <div class="error-messages">
           <ng-container *ngFor="let error of errorMessages.cardHolderName">
@@ -40,7 +47,8 @@
       </div>
       <div>
         <ion-item lines="none">
-          <ion-label  position="stacked">Selecteaza moneda pentru card</ion-label>
+          <ion-label  position="stacked" *ngIf="language == 'romana'">Selectează moneda pentru card</ion-label>
+          <ion-label  position="stacked" *ngIf="language == 'engleza'">Select the currency for the card</ion-label>
         </ion-item>
         <ion-select class="selectForm" multiple="false" placeholder="Select Unit"  formControlName="unit">
           <ion-select-option value="USD" selected>USD</ion-select-option>
@@ -51,7 +59,7 @@
     </ion-list>
 
     <div class="ion-padding">
-      <ion-button  (click)="addNewCard()" expand="block" shape="round" expand="full" class="sendButton" [disabled]="addNewCardForm.invalid">Adauga noul card</ion-button>
+      <ion-button  (click)="addNewCard()" expand="block" shape="round" expand="full" class="sendButton" [disabled]="addNewCardForm.invalid">{{language == 'romana' ? 'Adaugă noul card' : 'Add new card'}}</ion-button>
     </div>
   </form>
 

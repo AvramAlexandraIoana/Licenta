@@ -4,7 +4,8 @@
           <div class="the-holder" padding>
               <ion-row class="title-row">
                   <ion-col size="8" text-left>
-                    <h4>Edit Roles</h4>
+                    <h4 *ngIf="language == 'engleza'">Edit Roles</h4>
+                    <h4 *ngIf="language == 'romana'">Editează roluri</h4>
                   </ion-col>
                   <ion-col size="4" text-right (click)="dismiss()">
                     <ion-icon  name="close-outline"></ion-icon>
@@ -22,8 +23,8 @@
 
                     <ion-row class="rowButton">
                       <ion-item lines="none">
-                        <ion-button color="light"  (click)="dismiss()">Cancel</ion-button>
-                        <ion-button color="success"  (click)="updateRoles()">Submit</ion-button>
+                        <ion-button color="light"  (click)="dismiss()">{{language == 'engleza' ? 'Cancel' : 'Închide'}}</ion-button>
+                        <ion-button color="success"  (click)="updateRoles()"> {{language == 'engleza' ? 'Submit' : 'Setează'}}</ion-button>
                       </ion-item>
                     </ion-row>
 

@@ -32,6 +32,7 @@ export class LoginPage implements OnInit {
     ]
   }
   user: any;
+  language: string;
 
 
   constructor(  private googlePlus: GooglePlus,
@@ -47,6 +48,7 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
+    this.language = localStorage.getItem("limba");
   }
 
   createLoginForm() {

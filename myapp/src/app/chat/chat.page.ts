@@ -20,6 +20,7 @@ export class ChatPage implements OnInit {
   cUser: string;
   typeView: any;
   otherUser: any;
+  language: string;
 
  
   constructor(private socket: Socket, private toastCtrl: ToastController,
@@ -28,6 +29,7 @@ export class ChatPage implements OnInit {
             private navControl: NavController) { }
  
   ngOnInit() {
+    this.language = localStorage.getItem("limba");
     this.route.queryParams.subscribe(params => {
       this.typeView = params["type"];
       if (params && params.special) {

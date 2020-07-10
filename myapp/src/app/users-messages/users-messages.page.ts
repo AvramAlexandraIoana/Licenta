@@ -25,12 +25,14 @@ export class UsersMessagesPage implements OnInit {
   userM: User;
   typeView: string;
   userR:  Array<User> = [];
+  language: string;
   constructor(private usersService: UserService,
               private navControl: NavController,
               private recentSearchService: RecentSearchService,
               private messageService: MessagesService) { }
 
   ngOnInit() {
+    this.language = localStorage.getItem("limba");
     this.isKeyPress = false;
     this.userId = this.getUserId();
     this.getUsers();

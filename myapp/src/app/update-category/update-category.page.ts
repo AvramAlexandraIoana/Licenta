@@ -27,6 +27,7 @@ export class UpdateCategoryPage implements OnInit {
   model: Category;
   typeView: any;
   category: any;
+  language: string;
   
   constructor(private formBuilder: FormBuilder,
             private categoryService: CategoryService,
@@ -35,6 +36,7 @@ export class UpdateCategoryPage implements OnInit {
             private navControl: NavController) { }
 
   ngOnInit() {
+    this.language = localStorage.getItem("limba");
 
     var item = new Category();
     item.CategoryName = "Transport";

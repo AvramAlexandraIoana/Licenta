@@ -18,7 +18,7 @@
       <ion-buttons slot="start">
         <ion-back-button color="light" defaultHref="tabs"></ion-back-button>
       </ion-buttons>
-      <ion-input [(ngModel)]="inputValue" placeholder="Cauta in lista"  (keyup)="updateFilter($event); isKeyPress=true"></ion-input>
+      <ion-input [(ngModel)]="inputValue" [placeholder]="language == 'romana' ? 'Caută în listă' : 'Search the list'"  (keyup)="updateFilter($event); isKeyPress=true"></ion-input>
       <ion-icon *ngIf="!isKeyPress" class="group" name="search-outline"></ion-icon>
       <div (click)="changeInputValue()" tappable>
         <ion-icon *ngIf="isKeyPress" class="group"  name="close-outline" ></ion-icon>
@@ -58,7 +58,7 @@
       <ngx-datatable-column name="Actions" [sortable]="false">
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
           <ion-button size="small" fill="outline" (click)="openEditRolesModal(row)">
-            Edit Roles
+            {{language == 'engleza' ? 'Edit Roles' : 'Editează rolurile'}}
           </ion-button>
         </ng-template>
       </ngx-datatable-column>

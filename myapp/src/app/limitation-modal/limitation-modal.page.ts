@@ -22,6 +22,7 @@ export class LimitationModalPage implements OnInit {
       { type:'required', message: 'Limita  este obligatorie'}
     ]
   }
+  language: string;
   
   constructor(private modalControl : ModalController, 
               public navControl : NavController,
@@ -31,6 +32,7 @@ export class LimitationModalPage implements OnInit {
               private limitationService: LimitationService) { }
 
   ngOnInit() {
+    this.language = localStorage.getItem("limba");
     this.moned = "$";
     this.category  = this.params.data;
     this.createForm();

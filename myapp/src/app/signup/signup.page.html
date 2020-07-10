@@ -10,18 +10,20 @@
   <img class="sigup-image"src="assets/imgs/BaaS.jpg"/>
   <div class="the-content">
     <div class="the-title">
-      <h2>Welcome to Singup</h2>
+      <h2 *ngIf="language == 'engleza'">Welcome to Singup</h2>
+      <h2 *ngIf="language == 'romana'">Pagina de înregistrare</h2>
     </div>
     <form [formGroup]="signupForm" (ngSubmit)="signup()">
       <div class="details">
 
         <div class="detail-item">
-          <ion-label>Username</ion-label>
+          <ion-label *ngIf="language == 'engleza'">Username</ion-label>
+          <ion-label *ngIf="language == 'romana'">Numele de utilizator</ion-label>
           <ion-item>
             <span class="icn" slot="start" *ngIf="!signupForm.get('username').invalid">
               <ion-icon name="checkmark-circle"></ion-icon>
             </span>
-            <ion-input formControlName="username" class="username" placeholder="Enter Name"></ion-input>
+            <ion-input formControlName="username" class="username" [placeholder]="language == 'engleza' ? 'Enter Name' : 'Introdu numele de utilizator'"></ion-input>
           </ion-item>
 
           <div class="error-messages">
@@ -40,7 +42,7 @@
             <span class="icn" slot="start" *ngIf="!signupForm.get('email').invalid">
               <ion-icon name="checkmark-circle"></ion-icon>
             </span>
-            <ion-input formControlName="email" class="email" placeholder="Enter Email"></ion-input>
+            <ion-input formControlName="email" class="email" [placeholder]="language == 'engleza' ? 'Enter Email' : 'Introdu email-ul'"></ion-input>
           </ion-item>
 
           <div class="error-messages">
@@ -54,13 +56,14 @@
         </div>
 
         <div class="detail-item">
-          <ion-label>Password</ion-label>
+          <ion-label *ngIf="language == 'engleza'">Password</ion-label>
+          <ion-label *ngIf="language == 'romana'">Parolă</ion-label>
           <ion-item>
               <span class="icn" slot="start" *ngIf="!signupForm.get('password').invalid">
                 <ion-icon name="checkmark-circle"></ion-icon>
               </span>
               <ion-label> <ion-icon name="md-lock"></ion-icon></ion-label>
-              <ion-input #toggleInput formControlName="password" class="half-inp half-border-inp" type="password" placeholder="Password"></ion-input>
+              <ion-input #toggleInput formControlName="password" class="half-inp half-border-inp" type="password" [placeholder]="language == 'engleza' ? 'Password' : 'Parolă'"></ion-input>
               <button class="showhidePass" color="light" type="button" clear item-end passwordToggle [appTargetInput]="toggleInput">
                 <ion-icon name="eye-off-outline"></ion-icon>
               </button>
@@ -79,8 +82,11 @@
         
         <div class="second-item">
           <ion-item lines="none" id="rem" class="ion-no-padding">
-            <ion-label text-wrap>By creating an account, you agree to our
+            <ion-label text-wrap *ngIf="language == 'engleza'">By creating an account, you agree to our
               Term and Conditions</ion-label>
+            <ion-label text-wrap *ngIf="language == 'romana'">
+              Prin crearea unui cont, sunteți de acord cu 
+                              Termenii și condiții</ion-label>
             <ion-checkbox mode="ios" slot="start"></ion-checkbox>
           </ion-item>
         </div>
@@ -89,7 +95,7 @@
 
       <div class="loginbtn-holder" text-center>
         <ion-button size="block" type="submit" routerDirection="root" [disabled]="signupForm.invalid">
-          Signup
+          {{language == 'engleza' ? 'Signup' : 'înregistrare'}}
         </ion-button>
       </div>
     </form>

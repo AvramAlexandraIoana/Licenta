@@ -9,18 +9,25 @@
 <ion-content>
 
   <ion-item lines="none" class="infoHeader">
-    <ion-label class="header" color="dark">Doresti sa updatezi aceasta categorie?</ion-label>
+    <ion-label class="header" color="dark" *ngIf="language == 'romana'">Dorești sa updatezi această categorie?</ion-label>
+    <ion-label class="header" color="dark" *ngIf="language == 'engleza'">
+      Do you want to update this category?</ion-label>
   </ion-item>
-  <div style="font-size: 13px; color:gray; text-align: center;">
+  <div style="font-size: 13px; color:gray; text-align: center;"  *ngIf="language == 'romana'">
     O vom folosi pentru tranzactiile pe categorii
+     <br/>
+  </div>
+  <div style="font-size: 13px; color:gray; text-align: center;"  *ngIf="language == 'engleza'">
+    We will use it for category transactions
      <br/>
   </div>
   <form [formGroup]="categoryForm">
     <ion-list lines="full" class="paddingList">
       <div>
         <ion-item>
-          <ion-label position="stacked">Introdu numele categoriei</ion-label>
-          <ion-input  formControlName="categoryName" placeholder="Introdu numele categoriei" type="text"></ion-input>
+          <ion-label position="stacked" *ngIf="language == 'romana'">Introdu numele categoriei</ion-label>
+          <ion-label position="stacked" *ngIf="language == 'engleza'">Enter the category name</ion-label>
+          <ion-input  formControlName="categoryName" [placeholder]="language == 'romana' ? 'Introdu numele categoriei' : 'Enter the category name'" type="text"></ion-input>
         </ion-item>
         <div class="error-messages">
             <ng-container *ngFor="let error of errorMessages.categoryName">
@@ -32,7 +39,10 @@
         </div>
       </div>
       <div class="detail-item"  padding-horizontal scrollX="true" style="position: relative; top: 30px;">
-        <ion-label>Select one of this category icons</ion-label>
+        <ion-label *ngIf="language == 'engleza'">Select one of this category icons</ion-label>
+        <ion-label *ngIf="language == 'romana'">
+          Selectați una dintre imagini
+          </ion-label>
           <div class="category-holder" >
             <ion-radio-group formControlName="categoryUrl">
               <div class="rad-item" text-center *ngFor="let icon of iconObject;">
@@ -60,6 +70,6 @@
 
 <ion-footer class="ion-no-border">
   <div class="ion-padding">
-    <ion-button (click)="updateCategory()" expand="block" shape="round" expand="full" class="sendButton" [disabled]="categoryForm.invalid">Updateaza</ion-button>
+    <ion-button (click)="updateCategory()" expand="block" shape="round" expand="full" class="sendButton" [disabled]="categoryForm.invalid">{{language == 'engleza' ? 'Update' : 'Updatează'}}</ion-button>
   </div>
 </ion-footer>

@@ -4,7 +4,8 @@
           <div class="the-holder" padding>
               <ion-row class="title-row">
                   <ion-col size="8" text-left>
-                    <h4>Add amount</h4>
+                    <h4 *ngIf="language == 'engleza'">Add amount</h4>
+                    <h4 *ngIf="language == 'romana'">Adăugați suma</h4>
                   </ion-col>
                   <ion-col size="4" text-right (click)="dismiss()">
                     <ion-icon  name="close-outline"></ion-icon>

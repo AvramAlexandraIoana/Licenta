@@ -12,9 +12,15 @@ export class IntroPage implements OnInit {
     autoplay:true,
     loop:true
   }
+  language: string;
   constructor(private navControl:NavController) { }
 
   ngOnInit() {
+    this.language = localStorage.getItem("limba");
+    if (!this.language) {
+      localStorage["limba"] = "romana";
+      this.language = "romana";
+    }
   }
 
   goToLoginPage() {

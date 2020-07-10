@@ -17,6 +17,7 @@ export class CategoryPage implements OnInit {
   notification: { class: string; message: string; };
   typeView: string;
   model: Category;
+  language: string;
 
 
   constructor(private formBuilder: FormBuilder,
@@ -36,6 +37,7 @@ export class CategoryPage implements OnInit {
 
   ngOnInit() {
     this.isInit = true;
+    this.language = localStorage.getItem("limba");
     this.getCategoryLists();
   }
 

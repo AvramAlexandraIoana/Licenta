@@ -9,6 +9,7 @@ import * as _ from 'lodash';
   styleUrls: ['./add-amount-modal.page.scss'],
 })
 export class AddAmountModalPage implements OnInit {
+  language: string;
 
  
   constructor(private modalControl : ModalController, 
@@ -18,7 +19,9 @@ export class AddAmountModalPage implements OnInit {
               private adminService: AdminService) { }
 
   ngOnInit() {
+    this.language = localStorage.getItem("limba");
   }
+
 
   async presentToast(text, type) {
     const toast = await this.toastController.create({

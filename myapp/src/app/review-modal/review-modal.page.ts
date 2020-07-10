@@ -18,6 +18,7 @@ export class ReviewModalPage implements OnInit {
   ];
   types: any[] = [];
   userRoles: { [key: string]: any; };
+  language: string;
   constructor(private modalControl : ModalController, 
               private navControl : NavController,
               private params: NavParams,
@@ -25,6 +26,11 @@ export class ReviewModalPage implements OnInit {
               private adminService: AdminService) { }
 
   ngOnInit() {
+    this.language = localStorage.getItem("limba");
+    if (this.language == 'romana') {
+      this.availableTypes[1].name = "Sugestie"; 
+      this.availableTypes[2].name = "Altceva"; 
+    }
     this.verifiyRolesMatch();
   }
 

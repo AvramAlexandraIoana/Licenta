@@ -3,13 +3,14 @@
     <ion-buttons slot="start">
       <ion-back-button color="primary" defaultHref="tabs/tab1"></ion-back-button>
     </ion-buttons>
-    <ion-title>Reviews</ion-title>
+    <ion-title *ngIf="language == 'engleza'">Reviews</ion-title>
+    <ion-title *ngIf="language == 'romana'">Review-uri</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-row>
-    <ion-col class="header he1" (click)="sort()">
+    <ion-col class="header he1" (click)="sort()" *ngIf="language == 'engleza'">
       <ion-icon *ngIf="isSort" color="primary" name="arrow-up"></ion-icon>
       <ion-icon *ngIf="!isSort" color="primary"  name="arrow-down"></ion-icon>
       <ion-icon name="funnel" color="primary"></ion-icon>
@@ -17,11 +18,25 @@
       <br>
       <p class="clsP">Created Date</p>
     </ion-col>
-    <ion-col  class="header he2" (click)="reviewType()">
+    <ion-col class="header he1" (click)="sort()" *ngIf="language == 'romana'">
+      <ion-icon *ngIf="isSort" color="primary" name="arrow-up"></ion-icon>
+      <ion-icon *ngIf="!isSort" color="primary"  name="arrow-down"></ion-icon>
+      <ion-icon name="funnel" color="primary"></ion-icon>
+      Sortează după
+      <br>
+      <p class="clsP">Data de adăugare</p>
+    </ion-col>
+    <ion-col  class="header he2" (click)="reviewType()" *ngIf="language == 'engleza'">
       <ion-icon name="filter-outline" color="primary"></ion-icon>
       FILTER BY
       <br>
       <p class="clsP">Type</p>
+    </ion-col>
+    <ion-col  class="header he2" (click)="reviewType()" *ngIf="language == 'romana'">
+      <ion-icon name="filter-outline" color="primary"></ion-icon>
+      Filtrează
+      <br>
+      <p class="clsP">Tip</p>
     </ion-col>
   </ion-row>
 

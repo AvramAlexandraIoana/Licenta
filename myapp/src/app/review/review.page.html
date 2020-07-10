@@ -10,18 +10,27 @@
   </ion-item>
   <ion-card class="card-container">
     <ion-card-header>
-      <ion-card-title>Send us your feedback!</ion-card-title>
-      <ion-card-subtitle>Do you have a suggestion or found some bug? 
+      <ion-card-title *ngIf="language == 'engleza'">Send us your feedback!</ion-card-title>
+      <ion-card-subtitle *ngIf="language == 'engleza'">Do you have a suggestion or found some bug? 
             <br>
             let us know in the field below
+      </ion-card-subtitle>
+      <ion-card-title *ngIf="language == 'romana'">Trimiteți-ne feedback-ul dvs!</ion-card-title>
+      <ion-card-subtitle *ngIf="language == 'romana'">
+        Aveți o sugestie sau ați găsit o eroare? 
+            <br>
+        spuneți-ne în câmpulurile de mai jos
       </ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
       <form [formGroup]="reviewForm">
         <ion-list>
           <ion-item lines="none">
-            <ion-label>
+            <ion-label *ngIf="language == 'engleza'">
               How was your experiance?
+            </ion-label>
+            <ion-label *ngIf="language == 'romana'">
+              Cum a fost experiența ta?
             </ion-label>
           </ion-item>
           <ion-row >
@@ -45,8 +54,9 @@
           </ion-row>
         
           <ion-item>
-            <ion-label position="floating" style="font-size: 18px !important;">Describe your experiance here..</ion-label>
-            <ion-textarea formControlName="feedbackR" rows="4" cols="15" placeholder="Describe your experiance here.."></ion-textarea>
+            <ion-label position="floating" style="font-size: 18px !important;"> {{language == 'engleza' ? 'Describe your experiance here..' : '
+              Descrieți experiența dumnevoastră aici'}}</ion-label>
+            <ion-textarea formControlName="feedbackR" rows="4" cols="15" [placeholder]="language == 'engleza' ? 'Describe your experiance here..' : 'Descrieți experiența dumnevoastră aici..'"></ion-textarea>
           </ion-item>   
           <div class="error-messages">
             <ng-container *ngFor="let error of errorMessages.feedbackR">
@@ -62,19 +72,22 @@
               <div class="rad-item" text-center>
                 <ion-item text-center lines="none">
                   <ion-radio value="Bug"></ion-radio>
-                  <p>Bug</p>
+                  <p *ngIf="language == 'engleza'">Bug</p>
+                  <p *ngIf="language == 'romana'">Eroare</p>
                 </ion-item>
               </div>
               <div class="rad-item" text-center>
                 <ion-item text-center lines="none">
                   <ion-radio value="Suggestion"></ion-radio>
-                  <p>Suggestion</p>
+                  <p *ngIf="language == 'engleza'">Suggestion</p>
+                  <p *ngIf="language == 'romana'">Sugestie</p>
                 </ion-item>
               </div>
               <div class="rad-item" text-center>
                 <ion-item text-center lines="none">
                   <ion-radio value="Others"></ion-radio>
-                  <p>Others</p>
+                  <p *ngIf="language == 'engleza'">Others</p>
+                  <p *ngIf="language == 'romana'">Altele</p>
                 </ion-item>
               </div>
             </ion-radio-group>
@@ -94,7 +107,7 @@
   </ion-card>
 
   <div>
-    <ion-button [disabled]="reviewForm.invalid || (!isFirstPressed  && !isSecondPressed && !isThirdPressed && !isFourPressed)" (click)="sendReview()"  expand="block" shape="round" class="sendButton" >Send Feedback</ion-button>
+    <ion-button [disabled]="reviewForm.invalid || (!isFirstPressed  && !isSecondPressed && !isThirdPressed && !isFourPressed)" (click)="sendReview()"  expand="block" shape="round" class="sendButton" >{{language == 'engleza' ? 'Send Feedback' : 'Trimite feedback'}}</ion-button>
   </div>
 
 </ion-content>

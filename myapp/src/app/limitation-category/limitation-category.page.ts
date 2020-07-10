@@ -6,6 +6,7 @@ import { ModalController } from '@ionic/angular';
 import { LimitationModalPage } from '../limitation-modal/limitation-modal.page';
 import * as _ from 'lodash';
 import { UserService } from '../api/user.service';
+import { User } from '../_models/User';
 
 @Component({
   selector: 'app-limitation-category',
@@ -17,7 +18,8 @@ export class LimitationCategoryPage implements OnInit {
   jwtHelper = new JwtHelperService();
   userId: number;
   categories: Category[];
-  user: import("t:/Licenta/myapp/src/app/_models/User").User;
+  user: User;
+  language: string;
 
 
   constructor(private categoryService: CategoryService,
@@ -25,6 +27,7 @@ export class LimitationCategoryPage implements OnInit {
             private userService: UserService) { }
 
   ngOnInit() {
+    this.language = localStorage.getItem("limba");
     this.userId = this.getUserId();
     this.getUser();
     this.getCategories();

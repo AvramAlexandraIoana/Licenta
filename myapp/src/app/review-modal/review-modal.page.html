@@ -4,7 +4,9 @@
           <div class="the-holder" padding>
               <ion-row class="title-row">
                   <ion-col size="8" text-left>
-                    <h4>Select type to filter</h4>
+                    <h4 *ngIf="language == 'engleza'">Select type to filter</h4>
+                    <h4 *ngIf="language == 'romana'">
+                      Selectați tipul de a filtra</h4>
                   </ion-col>
                   <ion-col size="4" text-right (click)="dismiss()">
                     <ion-icon  name="close-outline"></ion-icon>
@@ -22,8 +24,8 @@
 
                     <ion-row class="rowButton">
                       <ion-item lines="none">
-                        <ion-button color="light"  (click)="dismiss()">Cancel</ion-button>
-                        <ion-button color="success"  (click)="updateType()">Apply</ion-button>
+                        <ion-button color="light"  (click)="dismiss()">{{language == 'engleza' ? 'Cancel' : 'Închide'}}</ion-button>
+                        <ion-button color="success"  (click)="updateType()">{{language == 'engleza' ? 'Apply' : 'Aplică'}}</ion-button>
                       </ion-item>
                     </ion-row>
 

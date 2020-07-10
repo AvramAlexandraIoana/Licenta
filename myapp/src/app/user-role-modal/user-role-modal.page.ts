@@ -18,12 +18,14 @@ export class UserRoleModalPage implements OnInit {
   ];
   roles: any[] = [];
   userRoles: { [key: string]: any; };
+  language: string;
   constructor(private modalControl : ModalController, 
               public navControl : NavController,
               public params: NavParams,
               public adminService: AdminService) { }
 
   ngOnInit() {
+    this.language = localStorage.getItem("limba");
     this.userRoles  = this.params.data.roles;
    
     this.verifiyRolesMatch();

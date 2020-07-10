@@ -6,22 +6,32 @@
 
 <ion-content >
   <ion-item lines="none" class="infoHeader">
-    <ion-label class="header" color="dark">Care este limita dorita pentru categorie?</ion-label>
+    <ion-label class="header" color="dark" *ngIf="language == 'romana'">Care este limita dorita pentru categorie?</ion-label>
+    <ion-label class="header" color="dark" *ngIf="language == 'engleza'">What is the desired limit for the category?</ion-label>
   </ion-item>
-  <div style="font-size: 13px; color:gray; text-align: center;">
+  <div style="font-size: 13px; color:gray; text-align: center;" *ngIf="language == 'romana'">
     O vom folosi pentru a limita tranzactiile 
     <br/>
  </div>
- <div style="font-size: 13px; color:gray; text-align: center;">
+ <div style="font-size: 13px; color:gray; text-align: center;" *ngIf="language == 'engleza'">
+    We will use it to limit transactions
+  <br/>
+</div>
+ <div style="font-size: 13px; color:gray; text-align: center;" *ngIf="language == 'romana'">
     lunare efectuate
    <br/>
+</div>
+<div style="font-size: 13px; color:gray; text-align: center;" *ngIf="language == 'engleza'">
+  performed monthly
+ <br/>
 </div>
   <form [formGroup]="limitationForm">
     <ion-list lines="full" class="paddingList">
       <div>
         <ion-item>
-          <ion-label position="stacked">Introdu suma</ion-label>
-          <ion-input placeholder="Introdu suma" type="number" formControlName="limit"></ion-input>
+          <ion-label position="stacked" *ngIf="language == 'romana'">Introdu suma</ion-label>
+          <ion-label position="stacked" *ngIf="language == 'engleza'">Enter the amount</ion-label>
+          <ion-input [placeholder]="language == 'romana' ? 'Introdu suma' : 'Enter the amount'" type="number" formControlName="limit"></ion-input>
         </ion-item>
         <div class="error-messages">
           <ng-container *ngFor="let error of errorMessages.limit">
@@ -32,9 +42,10 @@
           </ng-container>
         </div>
         <ion-item lines="none">
-          <ion-label  position="stacked">Selecteaza moneda</ion-label>
+          <ion-label  position="stacked" *ngIf="language == 'romana'">Selectează moneda</ion-label>
+          <ion-label  position="stacked" *ngIf="language == 'engleza'">Select the currency</ion-label>
         </ion-item>
-        <ion-select formControlName="moneda" class="selectForm" multiple="false" placeholder="Select Unit">
+        <ion-select formControlName="moneda" class="selectForm" multiple="false" [placeholder]="language == 'romana' ? 'Select Unit' : 'Selectează moneda'">
           <ion-select-option value="$" selected>USD</ion-select-option>
           <ion-select-option value="€">EURO</ion-select-option>
           <ion-select-option value="r">RON</ion-select-option>
@@ -48,6 +59,6 @@
 </ion-content>
 <ion-footer class="ion-no-border">
   <div class="ion-padding">
-    <ion-button  [disabled]="limitationForm.invalid" (click)="updateLimit()" expand="block" shape="round" expand="full" class="sendButton">Adauga limitare</ion-button>
+    <ion-button  [disabled]="limitationForm.invalid" (click)="updateLimit()" expand="block" shape="round" expand="full" class="sendButton">{{language == 'romana' ? 'Adaugă limitare' : 'Add limitation'}}</ion-button>
   </div>
 </ion-footer>

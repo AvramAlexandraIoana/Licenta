@@ -13,26 +13,37 @@
     <ion-slides pager="true" [options]="slideOpts">
       <ion-slide>
         <div class="slide-content" text-center>
-          <h4 text-wrap>Welcome, Manage your expenses</h4>
-          <p text-wrap>easily manage your expenses by your mobile</p>
+          <h4 text-wrap *ngIf="language == 'engleza'">Welcome, Manage your expenses</h4>
+          <p text-wrap *ngIf="language == 'engleza'">easily manage your expenses by your mobile</p>
+          <h4 text-wrap *ngIf="language == 'romana'">
+            Bine ați venit, Gestionați-vă cheltuielile</h4>
+          <p text-wrap *ngIf="language == 'romana'">gestionați cu ușurință cheltuielile prin intermediul telefonului mobil</p>
         </div>
       </ion-slide>
       <ion-slide>
         <div class="slide-content" text-center>
-          <h4 text-wrap>Welcome, Manage your expenses</h4>
-          <p text-wrap>easily manage your expenses by your mobile</p>
+          <h4 text-wrap *ngIf="language == 'engleza'">Welcome, Manage your expenses</h4>
+          <p text-wrap *ngIf="language == 'engleza'">easily manage your expenses by your mobile</p>
+          <h4 text-wrap *ngIf="language == 'romana'">
+            Bine ați venit, Gestionați-vă cheltuielile</h4>
+          <p text-wrap *ngIf="language == 'romana'">gestionați cu ușurință cheltuielile prin intermediul telefonului mobil</p>
         </div>
       </ion-slide>
       <ion-slide>
         <div class="slide-content" text-center>
-          <h4 text-wrap>Welcome, Manage your expenses</h4>
-          <p text-wrap>easily manage your expenses by your mobile</p>
+          <h4 text-wrap *ngIf="language == 'engleza'">Welcome, Manage your expenses</h4>
+          <p text-wrap *ngIf="language == 'engleza'">easily manage your expenses by your mobile</p>
+          <h4 text-wrap *ngIf="language == 'romana'">
+            Bine ați venit, Gestionați-vă cheltuielile</h4>
+          <p text-wrap *ngIf="language == 'romana'">gestionați cu ușurință cheltuielile prin intermediul telefonului mobil</p>
         </div>
       </ion-slide>
     </ion-slides>
     <div class="btn-user">
-      <ion-button id="login" (click)="goToLoginPage()">Login</ion-button>
-      <ion-button id="signUp" fill="none" (click)="goToSignUpPage()">Sign up</ion-button>
+      <ion-button id="login" (click)="goToLoginPage()" *ngIf="language == 'engleza'">Login</ion-button>
+      <ion-button id="login" (click)="goToLoginPage()" *ngIf="language == 'romana'">Loghează-te</ion-button>
+      <ion-button id="signUp" fill="none" (click)="goToSignUpPage()" *ngIf="language == 'engleza'">Sign up</ion-button>
+      <ion-button id="signUp" fill="none" (click)="goToSignUpPage()" *ngIf="language == 'romana'">Înregistrează-te</ion-button>
     </div>
   </div>
  

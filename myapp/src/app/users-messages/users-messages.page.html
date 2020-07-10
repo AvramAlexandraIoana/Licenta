@@ -3,7 +3,7 @@
       <ion-buttons slot="start">
         <ion-back-button color="dark" defaultHref="chat-history"></ion-back-button>
       </ion-buttons>
-      <ion-input [(ngModel)]="inputValue" placeholder="Cauta" (keyup)="onKeyUp($event); isKeyPress=true"></ion-input>
+      <ion-input [(ngModel)]="inputValue" [placeholder]="language == 'romana' ? 'Caută' : 'Search'" (keyup)="onKeyUp($event); isKeyPress=true"></ion-input>
       <ion-icon *ngIf="!isKeyPress" class="group" name="search-outline"></ion-icon>
       <div (click)="changeInputValue()" tappable>
         <ion-icon *ngIf="isKeyPress" class="group"  name="close-outline" ></ion-icon>
@@ -14,7 +14,8 @@
 
 <ion-content>
   <ion-grid class="paddingLeft">
-    <ion-label *ngIf="!isKeyPress" class="labelS">Recent Searches</ion-label>
+    <ion-label *ngIf="!isKeyPress" class="labelS" *ngIf="language == 'engleza'">Recent Searches</ion-label>
+    <ion-label *ngIf="!isKeyPress" class="labelS" *ngIf="language == 'romana'">Căutări recente</ion-label>
     <div *ngIf="!isKeyPress" class="selected-contacts" padding-horizontal scrollX="true">
       <div class="people" text-cente *ngFor="let user of recentUsers;">
         <ion-avatar class="avatar2" *ngIf="user.profilePictureName">
@@ -28,7 +29,8 @@
        </p>
       </div>
     </div>
-    <ion-label class="labelS">Suggested</ion-label>
+    <ion-label class="labelS" *ngIf="language == 'engleza'">Suggested</ion-label>
+    <ion-label class="labelS" *ngIf="language == 'romana'">Sugestii</ion-label>
     <div *ngFor="let user of users">
       <ion-row *ngIf="user.id != userId" (click)="goToMessageHistory(user)">
         <ion-col  size="2.2">

@@ -21,14 +21,14 @@ export class ChatHistoryPage implements OnInit {
   typeView: string;
   user: User;
   userM: User;
+  language: string;
 
   constructor(private userService: UserService,
     private messageService: MessagesService,
     private navControl: NavController) { }
 
   ngOnInit() {
-
-    
+    this.language = localStorage.getItem("limba");
     this.userId = this.getUserId();
     this.getImageName(this.userId);
     this.getUsersListMessages();

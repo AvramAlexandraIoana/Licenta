@@ -30,6 +30,7 @@ export class NotificationsPage implements OnInit {
   myDate: Date;
   user: User;
   response: Transaction;
+  language: string;
   
 
   constructor(private transactionService: TransactionService,
@@ -38,6 +39,7 @@ export class NotificationsPage implements OnInit {
               private toastController: ToastController) { }
 
   ngOnInit() {
+    this.language = localStorage.getItem("limba");
     this.myDate = new Date();
     console.log(this.myDate);
     this.userId = this.getUserId();

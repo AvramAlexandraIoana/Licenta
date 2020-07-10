@@ -7,17 +7,24 @@
 <ion-content>
 
   <ion-item lines="none" class="infoHeader">
-    <ion-label class="header" color="dark">Doresti sa efectuezi un transfer prin IBAN?</ion-label>
+    <ion-label class="header" color="dark" *ngIf="language == 'engleza'">
+      Do you want to make a transfer through IBAN?</ion-label>
+    <ion-label class="header" color="dark" *ngIf="language == 'romana'">Dorești să efectuezi un transfer prin IBAN?</ion-label>
   </ion-item>
-  <div style="font-size: 13px; color:gray; text-align: center;">
+  <div style="font-size: 13px; color:gray; text-align: center;" *ngIf="language == 'romana'">
      Introdu urmatoarele detalii
+     <br/>
+  </div>
+  <div style="font-size: 13px; color:gray; text-align: center;" *ngIf="language == 'engleza'">
+    Enter the following details
      <br/>
   </div>
  <form [formGroup]="sendMoneyForm" (ngSubmit)="goReviewRequestPage()">
   <div class="details">
       <div class="money-content">
         <div class="labelForSum" [ngClass]="isEnterSumInput  ||  !sendMoneyForm.get('suma').invalid ? 'visible' : 'hidden'">
-          <p>Introdu aici suma pentru fiecare contact</p>
+          <p *ngIf="language == 'romana'">Introdu aici suma pentru fiecare contact</p>
+          <p *ngIf="language == 'engleza'">Enter the amount for each contact here</p>
         </div>
         <ion-item>
           <div class="sign-container">
@@ -27,7 +34,9 @@
                     (ionFocus)="isEnterSumInput=true;" (ionBlur)="isEnterSumInput=false;" type="tel" formControlName="suma" class="suma"  value="5" text-center></ion-input>
         </ion-item>
         <div class="error-messages">
-          <p *ngIf="!sendMoneyForm.get('suma').invalid" style="color: gray;">Suma minima este de 5 {{sendMoneyForm.get('unit').value}} iar maxima este de 5000 {{sendMoneyForm.get('unit').value}}</p>
+          <p *ngIf="!sendMoneyForm.get('suma').invalid && language == 'romana'" style="color: gray;">Suma minima este de 5 {{sendMoneyForm.get('unit').value}} iar maxima este de 5000 {{sendMoneyForm.get('unit').value}}</p>
+          <p *ngIf="!sendMoneyForm.get('suma').invalid && language == 'engleza'" style="color: gray;">
+            The minimum amount is 5 {{sendMoneyForm.get('unit').value}} and the maximum is 5000 {{sendMoneyForm.get('unit').value}}</p>
           <ng-container *ngFor="let error of errorMessages.suma">
             <div class="error-message"
               *ngIf="sendMoneyForm.get('suma').hasError(error.type) && (sendMoneyForm.get('suma').dirty || sendMoneyForm.get('suma').touched)">
@@ -37,10 +46,15 @@
         </div>
         <div class="money-content">
           <div class="labelForSum" [ngClass]="isEnterIban  ||  !sendMoneyForm.get('iban').invalid ? 'visible' : 'hidden'">
-            <p>Introdu IBAN</p>
+            <p *ngIf="language == 'romana'">Introdu IBAN</p>
+            <p *ngIf="language == 'engleza'">Enter IBAN</p>
           </div>
-          <ion-item>
+          <ion-item *ngIf="language == 'romana'">
             <ion-input [placeholder]="!isEnterIban ? 'Introdu IBAN' : ''"  (ionInput)="isEnterIban=true" 
+            (ionFocus)="isEnterIban=true;" (ionBlur)="isEnterIban=false;" formControlName="iban"  type="text"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="language == 'engleza'">
+            <ion-input [placeholder]="!isEnterIban ? 'Enter IBAN' : ''"  (ionInput)="isEnterIban=true" 
             (ionFocus)="isEnterIban=true;" (ionBlur)="isEnterIban=false;" formControlName="iban"  type="text"></ion-input>
           </ion-item>
           <div class="error-messages">
@@ -54,10 +68,15 @@
         </div>
         <div class="money-content">
           <div class="labelForSum" [ngClass]="isEnterName  ||  !sendMoneyForm.get('beneficiar').invalid ? 'visible' : 'hidden'">
-            <p>Nume Beneficiar</p>
+            <p *ngIf="language == 'romana'">Nume Beneficiar</p>
+            <p *ngIf="language == 'engleza'">Name of beneficiary</p>
           </div>
-          <ion-item>
+          <ion-item *ngIf="language == 'romana'">
             <ion-input [placeholder]="!isEnterName ? 'Nume Beneficiar' : ''"  (ionInput)="isEnterName=true" 
+              (ionFocus)="isEnterName=true;" (ionBlur)="isEnterName=false;" formControlName="beneficiar"  type="text"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="language == 'engleza'">
+            <ion-input [placeholder]="!isEnterName ? 'Name of beneficiary' : ''"  (ionInput)="isEnterName=true" 
               (ionFocus)="isEnterName=true;" (ionBlur)="isEnterName=false;" formControlName="beneficiar"  type="text"></ion-input>
           </ion-item>
           <div class="error-messages">
@@ -72,11 +91,17 @@
       </div>
       <div class="detail-item-row">
         <div class="labelForSum" [ngClass]="isEnterDescriptionInput  ||  !sendMoneyForm.get('description').invalid ? 'visible' : 'hidden'">
-          <p>Introdu aici detaliile de plata</p>
+          <p *ngIf="language == 'romana'">Introdu aici detaliile de plată</p>
+          <p *ngIf="language == 'engleza'">Enter payment details here</p>
         </div>
         <ion-card>
-          <ion-card-content>
+          <ion-card-content *ngIf="language == 'romana'">
             <ion-textarea  [placeholder]="!isEnterDescriptionInput ? 'Introdu aici detaliile de plata' : ''" 
+                          (ionInput)="isEnterDescriptionInput=true" (ionFocus)="isEnterDescriptionInput=true;" (ionBlur)="isEnterDescriptionInput=false;" formControlName="description" rows="2" cols="30" >
+            </ion-textarea>
+          </ion-card-content>
+          <ion-card-content *ngIf="language == 'engleza'">
+            <ion-textarea  [placeholder]="!isEnterDescriptionInput ? 'Enter payment details here' : ''" 
                           (ionInput)="isEnterDescriptionInput=true" (ionFocus)="isEnterDescriptionInput=true;" (ionBlur)="isEnterDescriptionInput=false;" formControlName="description" rows="2" cols="30" >
             </ion-textarea>
           </ion-card-content>
@@ -94,7 +119,7 @@
 
 </form>
 <div class="ion-padding">
-  <ion-button  (click)="changeEmail()" expand="block" shape="round" expand="full" class="sendButton" [disabled]="sendMoneyForm.invalid">Salveaza</ion-button>
+  <ion-button  (click)="changeEmail()" expand="block" shape="round" expand="full" class="sendButton" [disabled]="sendMoneyForm.invalid">{{language == 'romana' ? 'Salvează' : 'Save'}}</ion-button>
 </div>
 
 </ion-content>

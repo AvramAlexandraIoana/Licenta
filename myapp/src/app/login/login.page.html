@@ -9,7 +9,8 @@
  <ion-content>
   <div class="the-content">
     <div class="the-title">
-      <h2>Welcome Login</h2>
+      <h2 *ngIf="language == 'engleza'">Welcome Login</h2>
+      <h2 *ngIf="language == 'romana'">Bine ai venit pe pagina de login</h2>
     </div>
     <div class="btns-holder">
       <ion-row>
@@ -29,12 +30,13 @@
       <div class="details">
 
         <div class="detail-item">
-          <ion-label>Username</ion-label>
+          <ion-label *ngIf="language == 'engleza'">Username</ion-label>
+          <ion-label *ngIf="language == 'romana'">Nume de utilizator</ion-label>
           <ion-item>
             <span class="icn" slot="start" *ngIf="!loginForm.get('username').invalid">
               <ion-icon name="checkmark-circle"></ion-icon>
             </span>
-            <ion-input formControlName="username" class="username" placeholder="Enter Name"> </ion-input>
+            <ion-input formControlName="username" class="username" [placeholder]="language == 'engleza' ? 'Enter Name' : 'Introdu numele de utilizator'"> </ion-input>
           </ion-item>
 
           <div class="error-messages">
@@ -47,13 +49,14 @@
           </div>
         </div>
         <div class="detail-item">
-          <ion-label>Password</ion-label>
+          <ion-label *ngIf="language == 'engleza'">Password</ion-label>
+          <ion-label *ngIf="language == 'romana'">Parolă</ion-label>
           <ion-item>
             <span class="icn" slot="start" *ngIf="!loginForm.get('password').invalid">
               <ion-icon name="checkmark-circle"></ion-icon>
             </span>
               <ion-label> <ion-icon name="md-lock"></ion-icon></ion-label>
-            <ion-input #toggleInput formControlName="password" class="half-inp half-border-inp" type="password" placeholder="Password"></ion-input>
+            <ion-input #toggleInput formControlName="password" class="half-inp half-border-inp" type="password" [placeholder]="language == 'engleza' ? 'Password' : 'Parolă'"></ion-input>
             <button class="showhidePass" color="light" type="button" clear item-end passwordToggle [appTargetInput]="toggleInput">
               <ion-icon name="eye-off-outline"></ion-icon>
             </button>          
@@ -74,12 +77,15 @@
           <ion-row>
             <ion-col>
               <ion-item lines="none" id="rem" class="ion-no-padding">
-                <ion-label>Remember me</ion-label>
+                <ion-label *ngIf="language == 'engleza'">Remember me</ion-label>
+                <ion-label *ngIf="language == 'romana'">
+                  Amintește-ți de mine</ion-label>
                 <ion-checkbox mode="ios" slot="start"></ion-checkbox>
               </ion-item>
             </ion-col>
             <ion-col class="col-forgot" text-right (click)="goToForgotPassword()">
-              <p>Forgot Password?</p>
+              <p *ngIf="language == 'engleza'">Forgot Password?</p>
+              <p *ngIf="language == 'romana'">Ai uitat parola?</p>
             </ion-col>
           </ion-row>
         </div>
@@ -87,7 +93,7 @@
       </div>
       <div class="login" text-center>
         <ion-button size="block" type="submit" routerDirection="root" [disabled]="loginForm.invalid">
-          Login
+          {{language == 'engleza' ? 'Login' : 'Loghează-te'}}
         </ion-button>
       </div>
 

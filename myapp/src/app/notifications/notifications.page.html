@@ -3,7 +3,8 @@
     <ion-buttons slot="start">
       <ion-back-button  color="primary"  defaultHref="tabs"></ion-back-button>
     </ion-buttons>
-    <ion-title>Notifications</ion-title>
+    <ion-title *ngIf="language == 'engleza'">Notifications</ion-title>
+    <ion-title *ngIf="language == 'romana'">Notificări</ion-title>
     <ion-buttons slot="end">
       <ion-button>
         <img src="assets/imgs/icn-more.svg" alt="">
@@ -15,7 +16,8 @@
 <ion-content padding>
   <div class="section">
     <div class="section-title">
-      <h4>Today</h4>
+      <h4 *ngIf="language == 'engleza'">Today</h4>
+      <h4 *ngIf="language == 'romana'">Astăzi</h4>
     </div>
     <div class="the-list">
       <div *ngFor="let transaction of transactions">
@@ -28,8 +30,15 @@
           </ion-avatar>
           <div *ngIf="transaction.userId1 == userId && transaction.isSend">
             <ion-label>
-              <div>
+              <div *ngIf="language == 'engleza'">
                 <h5 text-wrap>You received a payment of <span class="amount"> {{transaction.unit}} {{transaction.value.toFixed(2)}}</span> from  <span class="person">
+                  {{transaction.userName}}.
+                </span> </h5>
+                    <p>{{transaction.date | date:'shortTime' }}</p>
+              </div>
+              <div *ngIf="language == 'romana'">
+                <h5 text-wrap>Ați primit o sumă de
+                  <span class="amount"> {{transaction.unit}} {{transaction.value.toFixed(2)}}</span> de la  <span class="person">
                   {{transaction.userName}}.
                 </span> </h5>
                     <p>{{transaction.date | date:'shortTime' }}</p>
@@ -39,23 +48,29 @@
           </div>
         
 
-          <ion-label *ngIf="transaction.userId1 == userId && !transaction.isSend">
+          <ion-label *ngIf="transaction.userId1 == userId && !transaction.isSend && language == 'engleza'">
             <h5 text-wrap> <span class="person">{{transaction.userName}}
               </span> requested a payment of<span class="amount"> {{transaction.unit}} {{transaction.value.toFixed(2)}}</span>
               from you.</h5>
               <p>{{transaction.date | date:'shortTime' }}</p>
           </ion-label>
+          <ion-label *ngIf="transaction.userId1 == userId && !transaction.isSend && language == 'romana'">
+            <h5 text-wrap> <span class="person">{{transaction.userName}}
+              </span> a solicitat suma de <span class="amount"> {{transaction.unit}} {{transaction.value.toFixed(2)}}</span>
+               de la tine.</h5>
+              <p>{{transaction.date | date:'shortTime' }}</p>
+          </ion-label>
 
           <div class="end-slot" slot="end" *ngIf="transaction.userId1 == userId && !transaction.isSend">
             <ion-button  (click)="acceptTransaction(transaction)" *ngIf="!transaction.accepted" style="width: 85px !important;">
-              Pay
+              {{language == 'engleza' ? 'Pay' : 'Plătește'}}
             </ion-button>
             <img  *ngIf="transaction.accepted"src="assets/imgs/credit card-20s-40px (1).svg">
           </div>
 
           <div class="end-slot" slot="end" *ngIf="transaction.userId1 == userId && transaction.isSend">
             <ion-button *ngIf="!transaction.accepted" color="success" (click)="acceptTransaction(transaction)">
-              Accept
+              {{language == 'engleza' ? 'Accept' : 'Acceptă'}}
             </ion-button>
             <img  *ngIf="transaction.accepted"src="assets/imgs/credit card-20s-40px.svg">
           </div>
@@ -66,7 +81,8 @@
   </div>
   <div class="section">
     <div class="section-title">
-      <h4>Yesterday</h4>
+      <h4 *ngIf="language == 'engleza'">Yesterday</h4>
+      <h4 *ngIf="language == 'romana'">Ieri</h4>
     </div>
     <div class="the-list">
       <div *ngFor="let transaction of transactions">
@@ -78,29 +94,36 @@
             <img  src="https://ucarecdn.com/{{user.profilePictureName}}/"/>
           </ion-avatar>
           <ion-label *ngIf="transaction.userId1 == userId && transaction.isSend">
-            <h5 text-wrap>You received a payment of <span class="amount">{{transaction.unit}} {{transaction.value.toFixed(2)}}</span> from <span class="person">
+            <h5 text-wrap *ngIf="language == 'engleza'">You received a payment of <span class="amount">{{transaction.unit}} {{transaction.value.toFixed(2)}}</span> from <span class="person">
               {{transaction.userName}}
+            </span> </h5>
+            <h5 text-wrap *ngIf="language == 'romana'">Ați primit o sumă de
+              <span class="amount"> {{transaction.unit}} {{transaction.value.toFixed(2)}}</span> de la  <span class="person">
+              {{transaction.userName}}.
             </span> </h5>
                 <p>{{transaction.date | date:'shortTime' }}</p>
           </ion-label>
 
           <ion-label *ngIf="transaction.userId1 == userId && !transaction.isSend">
-            <h5 text-wrap> <span class="person">{{transaction.userName}}
+            <h5 text-wrap *ngIf="language == 'engleza'"> <span class="person">{{transaction.userName}}
               </span> requested a payment of<span class="amount">{{transaction.unit}} {{transaction.value.toFixed(2)}}</span>
               from </h5>
+            <h5 text-wrap *ngIf="language == 'romana'"> <span class="person">{{transaction.userName}}
+              </span> a solicitat suma de <span class="amount"> {{transaction.unit}} {{transaction.value.toFixed(2)}}</span>
+               de la tine.</h5>
               <p>{{transaction.date | date:'shortTime' }}</p>
             </ion-label>
 
             <div class="end-slot" slot="end" *ngIf="transaction.userId1 == userId && !transaction.isSend">
               <ion-button  (click)="acceptTransaction(transaction)" *ngIf="!transaction.accepted" style="width: 85px !important;">
-                Pay
+                {{language == 'engleza' ? 'Pay' : 'Plătește'}}
               </ion-button>
               <img  *ngIf="transaction.accepted"src="assets/imgs/credit card-20s-40px (1).svg">
             </div>
   
             <div class="end-slot" slot="end" *ngIf="transaction.userId1 == userId && transaction.isSend">
               <ion-button *ngIf="!transaction.accepted" color="success" (click)="acceptTransaction(transaction)">
-                Accept
+                {{language == 'engleza' ? 'Accept' : 'Acceptă'}}
               </ion-button>
               <img  *ngIf="transaction.accepted"src="assets/imgs/credit card-20s-40px.svg">
             </div>
@@ -112,7 +135,8 @@
 
   <div class="section">
     <div class="section-title">
-      <h4>This week</h4>
+      <h4 *ngIf="language == 'engleza'">This week</h4>
+      <h4 *ngIf="language == 'romana'">Această săptămână</h4>
     </div>
     <div class="the-list">
       <div *ngFor="let transaction of transactions">
@@ -124,29 +148,36 @@
             <img  src="https://ucarecdn.com/{{user.profilePictureName}}/"/>
           </ion-avatar>
           <ion-label *ngIf="transaction.userId1 == userId && transaction.isSend">
-            <h5 text-wrap>You received a payment of <span class="amount">{{transaction.unit}} {{transaction.value.toFixed(2)}}</span> from <span class="person">
+            <h5 text-wrap *ngIf="language == 'engleza'">You received a payment of <span class="amount">{{transaction.unit}} {{transaction.value.toFixed(2)}}</span> from <span class="person">
               {{transaction.userName}}
+            </span> </h5>
+            <h5 text-wrap *ngIf="language == 'romana'">Ați primit o sumă de
+              <span class="amount"> {{transaction.unit}} {{transaction.value.toFixed(2)}}</span> de la  <span class="person">
+              {{transaction.userName}}.
             </span> </h5>
                 <p>{{transaction.date | date:'shortTime' }}</p>
           </ion-label>
 
           <ion-label *ngIf="transaction.userId1 == userId && !transaction.isSend">
-            <h5 text-wrap> <span class="person">{{transaction.userName}}
+            <h5 text-wrap *ngIf="language == 'engleza'">  <span class="person">{{transaction.userName}}
               </span> requested a payment of<span class="amount">{{transaction.unit}} {{transaction.value.toFixed(2)}}</span>
               from </h5>
+            <h5 text-wrap *ngIf="language == 'romana'"> <span class="person">{{transaction.userName}}
+              </span> a solicitat suma de <span class="amount"> {{transaction.unit}} {{transaction.value.toFixed(2)}}</span>
+               de la tine.</h5>
               <p>{{transaction.date | date:'shortTime' }}</p>
             </ion-label>
          
             <div class="end-slot" slot="end" *ngIf="transaction.userId1 == userId && !transaction.isSend">
               <ion-button  (click)="acceptTransaction(transaction)" *ngIf="!transaction.accepted" style="width: 85px !important;">
-                Pay
+                {{language == 'engleza' ? 'Pay' : 'Plătește'}}
               </ion-button>
               <img  *ngIf="transaction.accepted"src="assets/imgs/credit card-20s-40px (1).svg">
             </div>
   
             <div class="end-slot" slot="end" *ngIf="transaction.userId1 == userId && transaction.isSend">
               <ion-button *ngIf="!transaction.accepted" color="success" (click)="acceptTransaction(transaction)">
-                Accept
+                {{language == 'engleza' ? 'Accept' : 'Acceptă'}}
               </ion-button>
               <img  *ngIf="transaction.accepted"src="assets/imgs/credit card-20s-40px.svg">
             </div>

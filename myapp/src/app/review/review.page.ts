@@ -37,6 +37,7 @@ export class ReviewPage implements OnInit {
     ]
   }
   model: any;
+  language: string;
 
 
   constructor(private userService: UserService,
@@ -46,6 +47,7 @@ export class ReviewPage implements OnInit {
               private toastController: ToastController) { }
 
   ngOnInit() {
+    this.language = localStorage.getItem("limba");
     this.createReviewForm();
     this.userId = this.getUserId();
     this.getImageName(this.userId);

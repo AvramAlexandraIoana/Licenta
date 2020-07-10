@@ -8,11 +8,17 @@
 
 <ion-content>
   <ion-item lines="none" class="infoHeader">
-    <ion-label class="header" color="dark">Doresti sa adaugi limitari pe categorii?</ion-label>
+    <ion-label class="header" color="dark" *ngIf="language == 'romana'">Dorești să adaugi limitări pe categorii?</ion-label>
+    <ion-label class="header" color="dark" *ngIf="language == 'engleza'">Do you want to add category limitations
+      ?</ion-label>
   </ion-item>
-  <div style="font-size: 13px; color:gray; text-align: center;">
-     Le vom folosi  cand efectuezi tranzactii
+  <div style="font-size: 13px; color:gray; text-align: center;" *ngIf="language == 'romana'">
+     Le vom folosi  cand efectuezi tranzacții
      <br>
+  </div>
+  <div style="font-size: 13px; color:gray; text-align: center;" *ngIf="language == 'engleza'">
+    We will use them when you make transactions
+    <br>
   </div>
   <ion-list>
     <ion-item *ngFor="let item of categories">
@@ -22,11 +28,16 @@
       <ion-label>
         <h4>{{item.categoryName}}</h4>
       </ion-label>
-      <div slot="end" style="position: relative; font-size: 14px;">
+      <div slot="end" style="position: relative; font-size: 14px;" *ngIf="language == 'romana'">
          <ion-button  size="small" color="primary" (click)="addLimit(item)">
-           Seteaza
+           Setează
          </ion-button>
       </div>
+      <div slot="end" style="position: relative; font-size: 14px;" *ngIf="language == 'engleza'">
+        <ion-button  size="small" color="primary" (click)="addLimit(item)">
+          Set
+        </ion-button>
+     </div>
     </ion-item>
   </ion-list>
 

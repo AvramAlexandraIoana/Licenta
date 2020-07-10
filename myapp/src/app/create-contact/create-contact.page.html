@@ -12,15 +12,17 @@
         <img class="logoImg" src="assets/imgs/contacts-1.1s-128px (1).svg" alt="">
       </div>
       <ion-card-header>
-        <ion-card-title>Adauga un nou contact</ion-card-title>
+        <ion-card-title *ngIf="language == 'romana'">Adaugă un nou contact</ion-card-title>
+        <ion-card-title *ngIf="language == 'engleza'">Add a new contact</ion-card-title>
       </ion-card-header>
       <ion-card-content>
         <form [formGroup]="contactForm">
           <ion-list lines="full" class="paddingList">
             <div>
               <ion-item>
-                <ion-label position="stacked">Nume</ion-label>
-                <ion-input formControlName="name" placeholder="Numele contactului" type="text"></ion-input>
+                <ion-label position="stacked" *ngIf="language == 'romana'">Nume</ion-label>
+                <ion-label position="stacked" *ngIf="language == 'engleza'">Name</ion-label>
+                <ion-input formControlName="name" [placeholder]="language == 'romana' ? 'Numele contactului' : 'Contact name'" type="text"></ion-input>
               </ion-item>
               <div class="error-messages">
                 <ng-container *ngFor="let error of errorMessages.name">
@@ -34,8 +36,9 @@
       
             <div>
               <ion-item>
-                <ion-label position="floating">Numar de telefon</ion-label>
-                <ion-input  formControlName="phoneNumber" type="tel" placeholder="Numar de telefon"  (ionInput)="isEnterAdress1Input=true" (ionFocus)="isEnterAdress1Input=true;" (ionBlur)="isEnterAdress1Input=false;"></ion-input>
+                <ion-label position="floating" *ngIf="language == 'romana'">Număr de telefon</ion-label>
+                <ion-label position="floating" *ngIf="language == 'engleza'">Phone number</ion-label>
+                <ion-input  formControlName="phoneNumber" type="tel" [placeholder]="language == 'romana' ? 'Număr de telefon' : 'Phone number'"  (ionInput)="isEnterAdress1Input=true" (ionFocus)="isEnterAdress1Input=true;" (ionBlur)="isEnterAdress1Input=false;"></ion-input>
               </ion-item>
               <div class="error-messages">
                 <ng-container *ngFor="let error of errorMessages.phoneNumber">
@@ -49,7 +52,7 @@
           </ion-list>
       
           <div class="ion-padding">
-            <ion-button  (click)="createContact()" expand="block" shape="round" expand="full" class="sendButton"  [disabled]="contactForm.invalid">Salveaza</ion-button>
+            <ion-button  (click)="createContact()" expand="block" shape="round" expand="full" class="sendButton"  [disabled]="contactForm.invalid">{{language == 'romana' ? 'Salvează' : 'Save'}}</ion-button>
           </div>
 
         </form>

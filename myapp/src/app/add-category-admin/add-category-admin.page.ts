@@ -24,6 +24,7 @@ export class AddCategoryAdminPage implements OnInit {
     ]
   }
   model: Category;
+  language: string;
   
   constructor(private formBuilder: FormBuilder,
             private categoryService: CategoryService,
@@ -31,7 +32,7 @@ export class AddCategoryAdminPage implements OnInit {
             private navControl: NavController) { }
 
   ngOnInit() {
-
+    this.language = localStorage.getItem("limba");
     var item = new Category();
     item.CategoryName = "Transport";
     item.CategoryUrl = "transport.svg";

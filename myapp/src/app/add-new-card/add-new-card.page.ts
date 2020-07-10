@@ -31,6 +31,7 @@ export class AddNewCardPage implements OnInit {
   }
   decodedToken: any;
   userId: number;
+  language: string;
   
   constructor( private route: ActivatedRoute, 
               private formBuilder: FormBuilder,
@@ -41,7 +42,7 @@ export class AddNewCardPage implements OnInit {
               private accountService: AccountService) { }
 
   ngOnInit() {
-
+    this.language = localStorage.getItem("limba");
     this.createNewCardForm();
     
   }

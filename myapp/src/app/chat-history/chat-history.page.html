@@ -9,14 +9,15 @@
      </ion-avatar>
     </ion-col>
     <ion-col>
-      <ion-label>Chats</ion-label>
+      <ion-label *ngIf="language == 'engleza'">Chats</ion-label>
+      <ion-label *ngIf="language == 'romana'">Mesagerie</ion-label>
     </ion-col>
  
   </ion-row>
 </ion-header>
 
 <ion-content>  
-  <ion-searchbar  mode="ios" showCancelButton="never" class="search" placeholder="Cauta" (mousedown)="keyPress()"></ion-searchbar>
+  <ion-searchbar  mode="ios" showCancelButton="never" class="search" [placeholder]="language == 'romana' ? 'Cauta' : 'Search'" (mousedown)="keyPress()"></ion-searchbar>
   <ion-grid class="paddingLeft">
     <div *ngFor="let user of users">
       <ion-row *ngIf="user.id != userId" (click)="goToMessageHistory(user)">

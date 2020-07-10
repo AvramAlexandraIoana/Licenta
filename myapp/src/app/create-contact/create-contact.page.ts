@@ -38,6 +38,7 @@ export class CreateContactPage implements OnInit {
   }
   model: any;
   decodedToken: any;
+  language: string;
 
 
   constructor(private toastController: ToastController,
@@ -53,6 +54,7 @@ export class CreateContactPage implements OnInit {
     private contactService: ContactService) { }
 
   ngOnInit() {  
+    this.language == localStorage.getItem("limba");
     this.createContactForm();
   }
 

@@ -3,7 +3,7 @@
       <ion-buttons slot="start">
         <ion-back-button color="light" defaultHref="tabs"></ion-back-button>
       </ion-buttons>
-      <ion-input class="header" [(ngModel)]="inputValue" placeholder="Search in users list" (keyup)="onKeyUp($event); isKeyPress=true"></ion-input>
+      <ion-input class="header" [(ngModel)]="inputValue" [placeholder]="language == 'engleza' ? 'Search in users list' : 'Caută în lista de utilizatori'" (keyup)="onKeyUp($event); isKeyPress=true"></ion-input>
       <ion-icon *ngIf="!isKeyPress" class="group" name="search-outline"></ion-icon>
       <div (click)="changeInputValue()" tappable>
         <ion-icon *ngIf="isKeyPress" class="group"  name="close-outline" ></ion-icon>
@@ -32,14 +32,17 @@
       </ion-col>
       <ion-col  size="4" *ngIf="user.areSumaR">
         <ion-item>
-          <ion-input [(ngModel)]="user.sR" type="numeric" placeholder="Add Amount"></ion-input>
+          <ion-input [(ngModel)]="user.sR" type="numeric" [placeholder]="language == 'engleză' ? 'Add Amount' : 'Adaugă bani'"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col  *ngIf="user.areSumaR" size="2" style="text-align: end;" (click)="addAmount(user, 'R')">
         <img src="assets/imgs/plus-20s-23px.svg">
       </ion-col>
-      <ion-col  *ngIf="!user.areSumaR" size="8" style="font-size: 14px;">
+      <ion-col  *ngIf="!user.areSumaR && language == 'engleza'" size="8" style="font-size: 14px;">
           User doesn't had RON card
+      </ion-col>
+      <ion-col  *ngIf="!user.areSumaR && language == 'romana'" size="8" style="font-size: 14px;">
+        Utilizatorul nu are un card în ron
       </ion-col>
     </ion-row>
     <ion-row class="rowContainer" >
@@ -51,14 +54,17 @@
       </ion-col>
       <ion-col  size="4" *ngIf="user.areSumaE">
         <ion-item>
-          <ion-input [(ngModel)]="user.sE" type="numeric" placeholder="Add Amount"></ion-input>
+          <ion-input [(ngModel)]="user.sE" type="numeric" [placeholder]="language == 'engleză' ? 'Add Amount' : 'Adaugă bani'"></ion-input>
         </ion-item>     
       </ion-col>
       <ion-col    *ngIf="user.areSumaE" size="2" style="text-align: end;" (click)="addAmount(user, 'E')">
         <img src="assets/imgs/plus-20s-23px.svg">
       </ion-col>
-      <ion-col  *ngIf="!user.areSumaE" size="8" style="font-size: 14px;">
+      <ion-col  *ngIf="!user.areSumaE && language == 'engleza'" size="8" style="font-size: 14px;">
         User doesn't had EUR card
+      </ion-col>
+      <ion-col  *ngIf="!user.areSumaE && language == 'romana'" size="8" style="font-size: 14px;">
+        Utilizatorul nu are un card în euro
       </ion-col>
     </ion-row>
 
@@ -71,14 +77,17 @@
       </ion-col>
       <ion-col  size="4" *ngIf="user.areSumaD">
         <ion-item>
-          <ion-input [(ngModel)]="user.sD" type="numeric" placeholder="Add Amount"></ion-input>
+          <ion-input [(ngModel)]="user.sD" type="numeric" [placeholder]="language == 'engleză' ? 'Add Amount' : 'Adaugă bani'"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col *ngIf="user.areSumaD" size="2" style="text-align: end;" (click)="addAmount(user, 'D')"> 
         <img src="assets/imgs/plus-20s-23px.svg">
       </ion-col>
-      <ion-col  *ngIf="!user.areSumaD" size="8" style="font-size: 14px;">
+      <ion-col  *ngIf="!user.areSumaD && language == 'engleza'" size="8" style="font-size: 14px;">
         User doesn't had USD card
+      </ion-col>
+      <ion-col  *ngIf="!user.areSumaE && language == 'romana'" size="8" style="font-size: 14px;">
+        Utilizatorul nu are un card în dolari
       </ion-col>
     </ion-row>
   </div>

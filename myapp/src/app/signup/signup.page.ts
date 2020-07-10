@@ -35,12 +35,14 @@ export class SignupPage implements OnInit {
       { type:'pattern', message: 'Password must contain numbers,uppercase and lowercase letters '}
     ]
   }
+  language: string;
 
   constructor(public formBuilder: FormBuilder, private auth: AuthService, private navControl: NavController) { 
     this.createSignupForm();
   }
 
   ngOnInit() {
+    this.language = localStorage.getItem("limba");
   }
 
   createSignupForm() {

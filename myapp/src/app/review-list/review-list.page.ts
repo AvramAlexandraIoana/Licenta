@@ -18,12 +18,14 @@ export class ReviewListPage implements OnInit {
   sortBy: number;
   name: any;
   valid: boolean;
+  language: string;
 
 
   constructor(private reviewService: ReviewService,
               private modalControl: ModalController) { }
 
   ngOnInit() {
+    this.language = localStorage.getItem("limba");
     this.nr1 = 0;
     this.nr2 = 10;
     this.isSort = true;

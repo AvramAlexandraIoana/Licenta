@@ -12,16 +12,25 @@
       <ion-row justify-content-center align-items-center>
         <div class="money-content">
           <div class="labelForSum" *ngIf="(isEnterSumInput  ||  !categoryTransaction.get('suma').invalid)">
-            <p>Introdu aici suma</p>
+            <p *ngIf="language == 'romana'">Introdu aici suma</p>
+            <p *ngIf="language == 'engleza'">Enter the amount here</p>
           </div>
-          <ion-item>
+          <ion-item *ngIf="language == 'romana'">
             <div class="sign-container">
               <h1>{{categoryTransaction.get('unit').value}}</h1>
             </div>
             <ion-input [placeholder]="!isEnterSumInput ? 'Introdu aici suma' : ''" (ionInput)="isEnterSumInput=true" (ionFocus)="isEnterSumInput=true;" (ionBlur)="isEnterSumInput=false;" type="tel" formControlName="suma" class="suma"  value="5" text-center></ion-input>
           </ion-item>
+          <ion-item *ngIf="language == 'engleza'">
+            <div class="sign-container">
+              <h1>{{categoryTransaction.get('unit').value}}</h1>
+            </div>
+            <ion-input [placeholder]="!isEnterSumInput ? 'Enter the amount here' : ''" (ionInput)="isEnterSumInput=true" (ionFocus)="isEnterSumInput=true;" (ionBlur)="isEnterSumInput=false;" type="tel" formControlName="suma" class="suma"  value="5" text-center></ion-input>
+          </ion-item>
           <div class="error-messages">
-            <p *ngIf="!categoryTransaction.get('suma').invalid" style="color: gray;">Suma minima este de 5 {{categoryTransaction.get('unit').value}} iar maxima este de 5000 {{categoryTransaction.get('unit').value}}</p>
+            <p *ngIf="!categoryTransaction.get('suma').invalid && language == 'engleza'" style="color: gray;">Suma minimă este de 5 {{categoryTransaction.get('unit').value}} iar maximă este de 5000 {{categoryTransaction.get('unit').value}}</p>
+            <p *ngIf="!categoryTransaction.get('suma').invalid && language == 'romana'" style="color: gray;">
+              The minimum amount is 5 {{categoryTransaction.get('unit').value}} and the maximum is 5000 {{categoryTransaction.get('unit').value}}</p>
             <ng-container *ngFor="let error of errorMessages.suma">
               <div class="error-message"
                 *ngIf="categoryTransaction.get('suma').hasError(error.type) && (categoryTransaction.get('suma').dirty || categoryTransaction.get('suma').touched)">
@@ -31,7 +40,7 @@
           </div>
             <div class="unit-container">
               <ion-item text-center lines="none">
-                <ion-select multiple="false" placeholder="Select Unit" formControlName="unit" (ionChange)="reset()">
+                <ion-select multiple="false" [placeholder]="language == 'romana' ? 'Select Unit' : 'Selectează moneda'" formControlName="unit" (ionChange)="reset()">
                   <ion-select-option value="$" selected>USD</ion-select-option>
                   <ion-select-option value="€">EURO</ion-select-option>
                   <ion-select-option value="r">RON</ion-select-option>
@@ -41,15 +50,17 @@
           </div>
       </ion-row>
       <ion-row>
-        <ion-label>Transaction Date</ion-label>
+        <ion-label *ngIf="language == 'engleza'">Transaction Date</ion-label>
+        <ion-label *ngIf="language == 'romana'">Data tranzacției</ion-label>
         <ion-item> 
-          <ion-datetime formControlName="transactionDate" placeholder="Selecteaza data" min="1960" readonly></ion-datetime>
+          <ion-datetime formControlName="transactionDate" [placeholder]="language == 'romana' ? 'Selecteaza data' : 'Select tansaction date'" min="1960" readonly></ion-datetime>
 
         </ion-item>
       </ion-row>
       <div class="detail-item"  padding-horizontal scrollX="true">
   
-        <ion-label>Category</ion-label>
+        <ion-label *ngIf="language == 'engleza'">Category</ion-label>
+        <ion-label *ngIf="language == 'romana'">Categorie</ion-label>
           <div class="category-holder" >
             <ion-radio-group formControlName="categoryId">
               <div class="rad-item" text-center *ngFor="let icon of categoryIcons">
@@ -65,9 +76,11 @@
   
        
       <ion-row class="detail-item-row" style="position: relative; top: 60px;">
-        <ion-label  [ngClass]="isEnterDescriptionInput  ||  !categoryTransaction.get('description').invalid ? 'visible' : 'hidden'">Introdu aici detaliile de plata</ion-label>
+        <ion-label  *ngIf="language == 'romana'" [ngClass]="isEnterDescriptionInput  ||  !categoryTransaction.get('description').invalid ? 'visible' : 'hidden'">Introdu aici detaliile de plată</ion-label>
+        <ion-label  *ngIf="language == 'engleza'"  [ngClass]="isEnterDescriptionInput  ||  !categoryTransaction.get('description').invalid ? 'visible' : 'hidden'">Enter your payment details here</ion-label>
         <ion-item style="position: relative; left: -4%;">
-          <ion-textarea rows="5" cols="50" placeholder="Enter any notes here..." formControlName="description">
+          <ion-textarea rows="5" cols="50" [placeholder]="language == 'romana' ? '
+          Introduceți descrierea aici...' : 'Enter any notes here'" formControlName="description">
   
           </ion-textarea>
         </ion-item>
@@ -91,7 +104,7 @@
       </ion-row>
     </ion-grid>
     <div class="ion-padding">
-      <ion-button (click)="sendCategoryTransaction()" expand="block" shape="round" expand="full" class="sendButton">Trimite</ion-button>
+      <ion-button (click)="sendCategoryTransaction()" expand="block" shape="round" expand="full" class="sendButton">{{language == 'romana' ? 'Trimite' : 'Send'}}</ion-button>
     </div>
 
   </form>
