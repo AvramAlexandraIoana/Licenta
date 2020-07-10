@@ -61,6 +61,7 @@ namespace WebFMI.Data
         {
             byte[] passwordHash, passwordSalt;
             CreatePasswordHash(password, out passwordHash, out passwordSalt);
+            user.Language = "romana";
 
             user.PasswordSalt = passwordSalt;
             // poweruser.PasswordHash = passwordHash;
