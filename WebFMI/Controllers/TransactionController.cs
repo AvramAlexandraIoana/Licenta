@@ -118,7 +118,7 @@ namespace WebFMI.Controllers
                 tr.Description = transaction.Description;
                 tr.Date = transaction.Date;
                 tr.ImageUrl = user.ProfilePictureName;
-                tr.UserName = user.Name;
+                tr.UserName = user.UserName;
                 var transact = await _context.Transactions.AddAsync(tr);
                 await _context.SaveChangesAsync();
             }
