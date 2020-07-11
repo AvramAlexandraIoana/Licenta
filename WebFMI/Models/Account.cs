@@ -11,6 +11,7 @@ namespace WebFMI.Models
         [Key]
         public int AccountId { get; set; }
 
+        public string Iban { get; set; }
         public string AccountNumber { get; set; }
 
         public string CardHolderName { get; set; }

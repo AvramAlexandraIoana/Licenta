@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using sinkien.IBAN4Net;
 using WebFMI.Data;
 using WebFMI.Models;
 
@@ -64,7 +66,15 @@ namespace WebFMI.Controllers
             {
                 user.AreSumaE = true;
             }
-
+            var validate = account.AccountNumber.Substring(0, 10);
+            // How to generate IBAN:
+           Iban iban = new IbanBuilder()
+                .CountryCode(CountryCode.GetCountryCode("RO"))
+                .BankCode("0800")
+                .AccountNumberPrefix("000019")
+                .AccountNumber(account.AccountNumber.Substring(0, 10))
+                .Build();
+            account.Iban = iban.ToString();
             _repo.Update(user);
             var save = await _repo.SaveAsync(user);
             account.UserId = id;
