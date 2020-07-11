@@ -69,7 +69,7 @@ namespace WebFMI.Controllers
             var validate = account.AccountNumber.Substring(0, 10);
             // How to generate IBAN:
            Iban iban = new IbanBuilder()
-                .CountryCode(CountryCode.GetCountryCode("RO"))
+                .CountryCode(CountryCode.GetCountryCode("CZ"))
                 .BankCode("0800")
                 .AccountNumberPrefix("000019")
                 .AccountNumber(account.AccountNumber.Substring(0, 10))

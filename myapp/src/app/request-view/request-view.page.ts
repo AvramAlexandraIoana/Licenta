@@ -10,6 +10,7 @@ import { UserService } from '../api/user.service';
 import { AuthService } from '../api/auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AccountService } from '../api/account.service';
+import { User } from '../_models/User';
 
 
 @Component({
@@ -30,7 +31,7 @@ export class RequestViewPage implements OnInit {
   decodedToken: any;
   limit: any;
   error: boolean;
-  user: import("t:/Licenta/myapp/src/app/_models/User").User;
+  user: User;
   userId: number;
   cards: Account[];
   language: string;

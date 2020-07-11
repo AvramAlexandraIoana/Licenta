@@ -32,6 +32,15 @@ export class TransactionService {
 
   }
 
+  saveIbanTransaction(transaction: any) {
+    return this.http.post<Transaction>(this.url + '/new/iban', JSON.stringify(transaction), this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.errorHandler)
+    );
+
+  }
+
   getTransactions(userId: number): Observable<Transaction[]> {
     return this.http.get<Transaction[]>(this.url + '/index/' + userId, this.httpOptions)
     .pipe(

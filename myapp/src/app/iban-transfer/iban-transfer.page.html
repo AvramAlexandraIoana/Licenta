@@ -23,8 +23,8 @@
   <div class="details">
       <div class="money-content">
         <div class="labelForSum" [ngClass]="isEnterSumInput  ||  !sendMoneyForm.get('suma').invalid ? 'visible' : 'hidden'">
-          <p *ngIf="language == 'romana'">Introdu aici suma pentru fiecare contact</p>
-          <p *ngIf="language == 'engleza'">Enter the amount for each contact here</p>
+          <p *ngIf="language == 'romana'">Introdu aici suma</p>
+          <p *ngIf="language == 'engleza'">Enter the amount here</p>
         </div>
         <ion-item>
           <div class="sign-container">
@@ -44,6 +44,15 @@
             </div>
           </ng-container>
         </div>
+        <div class="unit-container">
+          <ion-item text-center lines="none">
+            <ion-select multiple="false" [placeholder]="language == 'romana' ? 'Select Unit' : 'Selectează moneda'" formControlName="unit" (ionChange)="reset()">
+              <ion-select-option value="$" selected>USD</ion-select-option>
+              <ion-select-option value="€">EURO</ion-select-option>
+              <ion-select-option value="r">RON</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </div>  
         <div class="money-content">
           <div class="labelForSum" [ngClass]="isEnterIban  ||  !sendMoneyForm.get('iban').invalid ? 'visible' : 'hidden'">
             <p *ngIf="language == 'romana'">Introdu IBAN</p>
@@ -119,7 +128,7 @@
 
 </form>
 <div class="ion-padding">
-  <ion-button  (click)="changeEmail()" expand="block" shape="round" expand="full" class="sendButton" [disabled]="sendMoneyForm.invalid">{{language == 'romana' ? 'Salvează' : 'Save'}}</ion-button>
+  <ion-button  (click)="sendMoneyWithIban()" expand="block" shape="round" expand="full" class="sendButton" [disabled]="sendMoneyForm.invalid">{{language == 'romana' ? 'Salvează' : 'Save'}}</ion-button>
 </div>
 
 </ion-content>

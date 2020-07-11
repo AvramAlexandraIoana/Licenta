@@ -10,6 +10,7 @@ using WebFMI.Data;
 using WebFMI.Models;
 using System.Globalization;
 using Org.BouncyCastle.Ocsp;
+using sinkien.IBAN4Net;
 
 namespace WebFMI.Controllers
 {
@@ -57,6 +58,75 @@ namespace WebFMI.Controllers
                 return BadRequest("Nu exista  tranzactia!");
             }
             return Ok(transaction);
+        }
+        [HttpPost("new/iban")]
+        public async Task<IActionResult> AddIbanTransaction(IbanTransaction transaction)
+        {
+            transaction.Date = DateTime.Now;
+            var account = await _context.Accounts.Where(u => (u.CardHolderName == transaction.Name && u.Iban == transaction.Iban)).ToListAsync();
+            if (account.Count == 0)
+            {
+                return BadRequest("Nu exista iban-ul sau numele introdus");
+            }
+            transaction.UserId1 = account[0].UserId;
+            User user = await _context.Users.FindAsync(transaction.UserId);
+            try
+            {
+                if (transaction.IsSend)
+                {
+                  ;
+                    if (transaction.Unit == "$" && transaction.IsSend && user.AreSumaD)
+                    {
+                        if (user.SumaD - user.SumaDSpend - transaction.Value >= 0)
+                        {
+                            user.SumaDSpend += transaction.Value;
+                        }
+                        else
+                        {
+                            return Ok(false);
+                        }
+                    }
+                    else if (transaction.Unit == "€" && transaction.IsSend && user.AreSumaE)
+                    {
+                        if (user.SumaE - user.SumaESpend - transaction.Value >= 0)
+                        {
+                            user.SumaESpend += transaction.Value;
+                        }
+                        else
+                        {
+                            return Ok(false);
+                        }
+                    }
+                    else if (transaction.Unit == "r" && transaction.IsSend && user.AreSumaR)
+                    {
+                        if (user.SumaR - user.SumaRSpend - transaction.Value >= 0)
+                        {
+                            user.SumaRSpend += transaction.Value;
+                        }
+                        else
+                        {
+                            return Ok(false);
+                        }
+                    }
+                }
+                Transaction tr = new Transaction();
+                tr.UserId = transaction.UserId;
+                tr.UserId1 = transaction.UserId1;
+                tr.IsSend = transaction.IsSend;
+                tr.Value = transaction.Value;
+                tr.Unit = transaction.Unit;
+                tr.Description = transaction.Description;
+                tr.Date = transaction.Date;
+                tr.ImageUrl = user.ProfilePictureName;
+                tr.UserName = transaction.Name;
+                var transact = await _context.Transactions.AddAsync(tr);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                return BadRequest("Nu se permite");
+            }
+            return Ok(true);
         }
 
         [HttpPost("new")]
