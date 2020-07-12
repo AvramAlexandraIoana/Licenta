@@ -224,7 +224,7 @@ export class ProfilePage implements OnInit {
     this.pictureUrl = imgEntry.path;
     this.file.resolveLocalFilesystemUrl(imgEntry.filePath)
         .then(entry => {
-       //  ( < FileEntry > entry).file(file => this.readFile(file))
+       ( < FileEntry > entry).file(file => this.readFile(file))
         })
         .catch(err => {
             this.presentToast('Error while reading file.', "warning");
@@ -254,7 +254,7 @@ export class ProfilePage implements OnInit {
     const data = new FormData();
     data.append("file", file, name);
     data.append("UPLOADCARE_STORE", "1");
-    data.append("UPLOADCARE_PUB_KEY", "90c1d8d2d64899fd64ee");
+    data.append("UPLOADCARE_PUB_KEY", "75fa15a18f29623048ab");
 
     const loading = await this.loadingController.create({
       message: 'Uploading image...',
