@@ -46,7 +46,7 @@ namespace WebFMI.Controllers
         {
             
 
-            return await _context.Reviews.ToListAsync();
+            return await _context.Reviews.Where(u => u.Score < 0).ToListAsync();
         }
 
         [HttpGet("reviewIndex/{num1}/{num2}/{sort}/{name}")]
@@ -54,17 +54,17 @@ namespace WebFMI.Controllers
         {
             if (sort == 0 && name == "null")
             {
-                return await _context.Reviews.Skip(num1).Take(num2).ToListAsync();
+                return await _context.Reviews.Where(u => u.Score < 0).Skip(num1).Take(num2).ToListAsync();
             }
             else if (sort == 1 && name == "null")
             {
-                return await _context.Reviews.OrderByDescending(u => u.CreatedOn).Skip(num1).Take(num2).ToListAsync();
+                return await _context.Reviews.Where(u => u.Score < 0).OrderByDescending(u => u.CreatedOn).Skip(num1).Take(num2).ToListAsync();
             } else  if (sort == 0)
             {
-                return await _context.Reviews.Where(u => u.Type == name).Skip(num1).Take(num2).ToListAsync();
+                return await _context.Reviews.Where(u => u.Type == name && u.Score < 0).Skip(num1).Take(num2).ToListAsync();
             } else
             {
-                return await _context.Reviews.OrderByDescending(u => u.CreatedOn).Where(u => u.Type == name).Skip(num1).Take(num2).ToListAsync();
+                return await _context.Reviews.Where(u => u.Score < 0).OrderByDescending(u => u.CreatedOn).Where(u => u.Type == name).Skip(num1).Take(num2).ToListAsync();
 
             }
 
