@@ -18,6 +18,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
+using sinkien.IBAN4Net;
 using WebFMI.Data;
 using WebFMI.Dtos;
 using WebFMI.Models;
@@ -29,17 +30,21 @@ namespace WebFMI.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthRepository _repo;
-      
+
+        private readonly IBankingRepository<User> _repo1;
 
         private readonly IConfiguration _config;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
 
         private readonly IEmailSender _emailSender;
+        private readonly ApplicationDbContext _context;
 
-        public AuthController(IAuthRepository repo, IConfiguration config,
+        public AuthController(ApplicationDbContext context, IBankingRepository<User> repo1, IAuthRepository repo, IConfiguration config,
             UserManager<User> userManager, SignInManager<User> signInManager, IEmailSender emailSender)
         {
+            this._context = context;
+            this._repo1 = repo1;
             _config = config;
             this._userManager = userManager;
             this._signInManager = signInManager;
@@ -82,6 +87,11 @@ namespace WebFMI.Controllers
 
             var createdUser = await _repo.Register(userToCreate, userForRegisterDto.Password);
 
+            AddNewCardModel addNewCard = new AddNewCardModel();
+            addNewCard.CardHolderName = createdUser.UserName;
+            addNewCard.ConversionMoney = "RON";
+            var account = await AddNewCard(addNewCard, createdUser.Id);
+
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(createdUser);
             var confirmationLink = Url.Action(nameof(ConfirmEmail), "Account", new { token, name = createdUser.UserName }, Request.Scheme);
             await _emailSender.SendEmailAsync(userForRegisterDto.Email, "Test message", confirmationLink);
@@ -92,6 +102,86 @@ namespace WebFMI.Controllers
 
 
         }
+
+        public async Task<Account> AddNewCard(AddNewCardModel card, int id)
+        {
+
+            var chars = "0123456789";
+            var cardNumbers = new char[16];
+            var random = new Random();
+
+            for (int i = 0; i < cardNumbers.Length; i++)
+            {
+                cardNumbers[i] = chars[random.Next(chars.Length)];
+            }
+
+            var cardNumber = new String(cardNumbers);
+
+            Account account = new Account();
+            account.AccountNumber = cardNumber;
+
+
+
+            User user = await _context.Users.FindAsync(id);
+            if (card.ConversionMoney == "RON")
+            {
+                user.AreSumaR = true;
+                user.DefaultCard = "r";
+            }
+            else if (card.ConversionMoney == "USD")
+            {
+                user.AreSumaD = true;
+                user.DefaultCard = "$";
+
+            }
+            else
+            {
+                user.AreSumaE = true;
+                user.DefaultCard = "€";
+            }
+            var validate = account.AccountNumber.Substring(0, 10);
+            // How to generate IBAN:
+            Iban iban = new IbanBuilder()
+                 .CountryCode(CountryCode.GetCountryCode("CZ"))
+                 .BankCode("0800")
+                 .AccountNumberPrefix("000019")
+                 .AccountNumber(account.AccountNumber.Substring(0, 10))
+                 .Build();
+            account.Iban = iban.ToString();
+            _repo1.Update(user);
+            var save = await _repo1.SaveAsync(user);
+            account.UserId = id;
+            account.CardHolderName = card.CardHolderName;
+
+            DateTime expiryDate = DateTime.Now.AddYears(3);
+            string formatted = expiryDate.ToString("MM/yy");
+            account.ExpiryDate = formatted;
+
+            var securityCodes = new char[3];
+
+            for (int i = 0; i < securityCodes.Length; i++)
+            {
+                securityCodes[i] = chars[random.Next(chars.Length)];
+            }
+
+            var securityCode = new String(securityCodes);
+
+            account.SecurityCode = securityCode;
+            account.Conversion = card.ConversionMoney;
+
+            try
+            {
+                var acc = await _context.Accounts.AddAsync(account);
+                await _context.SaveChangesAsync();
+                return account;
+            }
+            catch (Exception e)
+            {
+            }
+
+            return null;
+        }
+
 
 
         [HttpPost("login")]
@@ -144,6 +234,11 @@ namespace WebFMI.Controllers
             };
 
             var createdUser = await _repo.Register(userToCreate, userForRegisterDto.Password);
+
+            AddNewCardModel addNewCard = new AddNewCardModel();
+            addNewCard.CardHolderName = createdUser.UserName;
+            addNewCard.ConversionMoney = "RON";
+            var account = await AddNewCard(addNewCard, createdUser.Id);
 
             var userFromRepo = await _repo.Login(userForRegisterDto.Username.ToLower(), userForRegisterDto.Password);
 
