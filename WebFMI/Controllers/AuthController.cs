@@ -116,7 +116,24 @@ namespace WebFMI.Controllers
         public async Task<IActionResult> GoogleLogin(UserForRegisterDto userForRegisterDto)
         {
             userForRegisterDto.Password = "googleLogin";
-            var user = Register(userForRegisterDto);
+            userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
+            if (await _repo.UserExists(userForRegisterDto.Username))
+            {
+                return BadRequest("Username already exists");
+            }
+
+            var userToCreate = new User
+            {
+                Name = userForRegisterDto.Username,
+                UserName = userForRegisterDto.Username,
+                NormalizedUserName = userForRegisterDto.Username,
+                NormalizedEmail = userForRegisterDto.Email,
+                Email = userForRegisterDto.Email,
+                SecurityStamp = Guid.NewGuid().ToString()
+
+            };
+
+            var createdUser = await _repo.Register(userToCreate, userForRegisterDto.Password);
 
             var userFromRepo = await _repo.Login(userForRegisterDto.Username.ToLower(), userForRegisterDto.Password);
 

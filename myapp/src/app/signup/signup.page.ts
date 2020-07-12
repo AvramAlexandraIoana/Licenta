@@ -79,6 +79,7 @@ export class SignupPage implements OnInit {
       
       }, error => {
         console.log(error);
+        this.navControl.navigateRoot('login');
       })
   }
 

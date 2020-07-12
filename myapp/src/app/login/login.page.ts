@@ -128,7 +128,8 @@ export class LoginPage implements OnInit {
           //  this.router.navigate(["user"]);
           this.model = {
             'Username': user.displayName,
-            'Email': user.email
+            'Email': user.email,
+            'Password': 'googleLogin'
           }
           this.auth.googleLogin(this.model).subscribe(res => {
             console.log("Logged in successfully");
