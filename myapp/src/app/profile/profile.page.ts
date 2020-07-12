@@ -20,6 +20,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { NavigationExtras } from '@angular/router';
 import { ImageHistoryService } from '../api/image-history.service';
 import { FaceObject } from '../_models/FaceObject';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 @Component({
   selector: 'app-profile',
@@ -60,7 +62,9 @@ export class ProfilePage implements OnInit {
     private ref: ChangeDetectorRef, private filePath: FilePath,
     public navControl: NavController,
     private imageHistoryService: ImageHistoryService,
-    private alertController: AlertController) { }
+    private alertController: AlertController,
+    private googlePlus: GooglePlus,
+    private nativeStorage: NativeStorage) { }
  
 
   ionViewWillEnter(){
@@ -421,11 +425,24 @@ export class ProfilePage implements OnInit {
     //this.navControl.navigateBack("request");
   }
 
-
+  doGoogleLogout(){
+    this.googlePlus.logout()
+    .then(res => {
+      //user logged out so we will remove him from the NativeStorage
+      this.nativeStorage.remove('google_user');
+    }, err => {
+      console.log(err);
+    });
+  }
 
 
   logOut() {
-    localStorage.removeItem('token');
+    if (localStorage.getItem("googleLogin") == "1") {
+      localStorage.setItem("googleLogin", "0");
+      this.doGoogleLogout();
+    } else {
+      localStorage.removeItem('token');
+    }
     this.presentToast("Log out successfully", "success");
     this.navControl.navigateRoot(["login"]);
 

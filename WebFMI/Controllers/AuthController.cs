@@ -119,7 +119,17 @@ namespace WebFMI.Controllers
             userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
             if (await _repo.UserExists(userForRegisterDto.Username))
             {
-                return BadRequest("Username already exists");
+                var user = await _repo.Login(userForRegisterDto.Username.ToLower(), userForRegisterDto.Password);
+
+                if (user == null)
+                {
+                    return Unauthorized();
+                }
+
+                return Ok(new
+                {
+                    token = GenerateJwtToken(user).Result
+                });
             }
 
             var userToCreate = new User

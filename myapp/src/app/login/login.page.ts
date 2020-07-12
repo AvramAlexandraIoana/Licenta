@@ -126,8 +126,9 @@ export class LoginPage implements OnInit {
         })
         .then(() => {
           //  this.router.navigate(["user"]);
+          localStorage.setItem("googleLogin", "1");
           this.model = {
-            'Username': user.displayName,
+            'Username': user.givenName,
             'Email': user.email,
             'Password': 'googleLogin'
           }
