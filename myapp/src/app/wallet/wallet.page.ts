@@ -15,6 +15,7 @@ import { Transaction } from '../_models/Transaction';
 import { CategoryTransactionsService } from '../api/category-transactions.service';
 import { CategoryTransaction } from '../_models/CategoryTransaction';
 import { UserService } from '../api/user.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-wallet',
@@ -241,6 +242,12 @@ export class WalletPage implements OnInit {
     });
 
   }
+
+  checkIsWeek(date: any) {
+    var now = moment();
+    return moment(date).isoWeek() == now.isoWeek();
+  }
+
 
   getCategoryTransactionPerDay(unit) {
     this.categoryTransactionService.getCategoryTransactionsForToday(this.userId, unit).subscribe( res => {

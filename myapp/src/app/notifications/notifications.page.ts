@@ -8,6 +8,7 @@ import * as _ from 'lodash';
 import { User } from '../_models/User';
 import { UserService } from '../api/user.service';
 import { ToastController } from '@ionic/angular';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-notifications',
@@ -58,6 +59,12 @@ export class NotificationsPage implements OnInit {
 
 
   }
+
+  checkIsWeek(date: any) {
+    var now = moment();
+    return moment(date).isoWeek() == now.isoWeek();
+  }
+
 
   async presentToast(text, type) {
     const toast = await this.toastController.create({

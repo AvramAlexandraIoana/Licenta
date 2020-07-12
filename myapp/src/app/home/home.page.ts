@@ -7,6 +7,7 @@ import * as _ from 'lodash';
 import * as moment from 'moment'
 import { User } from '../_models/User';
 import { UserService } from '../api/user.service';
+import { NodeWithI18n } from '@angular/compiler';
 
 @Component({
   selector: 'app-home',
@@ -35,6 +36,7 @@ export class HomePage implements OnInit {
   money: string;
   defaultCard: string;
   language: string;
+  notifications: Transaction[];
 
 
   constructor(private transactionService: TransactionService,
@@ -92,11 +94,21 @@ export class HomePage implements OnInit {
     // (transaction.date | date:'ww') == (myDate | date:'ww')
     this.transactionService.getTransactionNotificationNumber(this.userId).subscribe( res => {
       console.log(res);
-      this.notifictation = res;
-      var currentDate = moment();
-      var filtered = this.notifictation.filter(d => moment(d.Date).isSame(currentDate, 'week'));
+      this.notifications = res;
+      var now = moment();
+      var filtered = _.filter(this.notifications, function(object) {
+        console.log("FILTRE");
+        console.log(moment(object.date).isoWeek());
+        console.log(now.isoWeek());
+        return moment(object.date).isoWeek() == now.isoWeek();
+      })
       this.num = filtered.length;
     });
+  }
+
+  checkIsWeek(date: any) {
+    var now = moment();
+    return moment(date).isoWeek() == now.isoWeek();
   }
 
   goToReview() {

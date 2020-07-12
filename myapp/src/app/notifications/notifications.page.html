@@ -5,11 +5,6 @@
     </ion-buttons>
     <ion-title *ngIf="language == 'engleza'">Notifications</ion-title>
     <ion-title *ngIf="language == 'romana'">Notificări</ion-title>
-    <ion-buttons slot="end">
-      <ion-button>
-        <img src="assets/imgs/icn-more.svg" alt="">
-      </ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -140,7 +135,7 @@
     </div>
     <div class="the-list">
       <div *ngFor="let transaction of transactions">
-        <ion-item *ngIf="(transaction.date | date:'ww') == (myDate | date:'ww') - 1">
+        <ion-item *ngIf="checkIsWeek(transaction.date)">
           <ion-avatar slot="start" *ngIf="!transaction.isSend">
             <img  src="https://ucarecdn.com/{{transaction.imageUrl}}/"/>
           </ion-avatar>
