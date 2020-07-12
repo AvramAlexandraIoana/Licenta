@@ -7,6 +7,7 @@ import { Deeplinks } from '@ionic-native/deeplinks/ngx';
 import { HomePage } from './home/home.page';
 import { ForgotPasswordPage } from './forgot-password/forgot-password.page';
 import { ResetPasswordPage } from './reset-password/reset-password.page';
+import { AuthService } from './api/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -19,23 +20,25 @@ export class AppComponent {
       title: 'Users Details',
       url: 'users-details',
       icon: 'list',
-      roles: ['Admin']
-    },
-    {
-      title: 'Category',
-      url: 'category',
-      roles: ['Admin']
+      allowed: false
     },
     {
       title: 'Review-list',
       url: 'review-list' ,
-      roles: ['Admin']
-
+      icon: 'list',
+      allowed: false
+    },
+    {
+      title: 'Category',
+      url: 'category',
+      icon: 'list',
+      allowed: false
     },
     {
       title: 'Set amount user',
       url: 'manager-transfer-money',
-      roles: ['Admin']
+      icon: 'list',
+      allowed: false
 
     }
   ]
@@ -45,9 +48,22 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private deeplinks: Deeplinks,
-    private navControl:NavController
+    private navControl:NavController,
+    private authService: AuthService
   ) {
     this.initializeApp();
+    if (this.authService.decodedToken) {
+      const userRoles = this.authService.decodedToken.role as Array<string>;
+      console.log('Role');
+      console.log(userRoles);
+      this.appPages[0].allowed = this.authService.roleMatch(['Admin']);
+      this.appPages[1].allowed = this.authService.roleMatch(['Admin']);
+      this.appPages[2].allowed = this.authService.roleMatch(['Store-Manager']);
+      this.appPages[3].allowed = this.authService.roleMatch(['Store-Manager']);
+      console.log(this.appPages[0].allowed);
+
+    }
+   
   }
 
  
