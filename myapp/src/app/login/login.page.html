@@ -1,11 +1,4 @@
-<!-- <ion-header no-border>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="onboard"></ion-back-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
- -->
+
  <ion-content>
   <div class="the-content">
     <div class="the-title">
@@ -14,11 +7,6 @@
     </div>
     <div class="btns-holder">
       <ion-row>
-        <ion-col>
-          <ion-button fill="none" text-center (click)="loginWithFacebook()">
-            <img src="assets/imgs/facebook.svg" alt="">
-          </ion-button>
-        </ion-col>
         <ion-col>
           <ion-button fill="none" text-center (click)="doGoogleLogin()">
             <img src="assets/imgs/google.svg" alt="">
@@ -98,8 +86,11 @@
       </div>
 
     </form>
-    <div class="signup" text-center padding-horizontal>
+    <div class="signup" text-center padding-horizontal *ngIf="language == 'engleza'">
       <p>Don't have an account?<span (click)="goSignup()">Sign Up</span></p>
+    </div>
+    <div class="signup" text-center padding-horizontal *ngIf="language == 'romana'">
+      <p>Nu ai cont?<span (click)="goSignup()">Crează cont</span></p>
     </div>
   </div>
 </ion-content>
