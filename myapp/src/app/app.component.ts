@@ -16,48 +16,27 @@ import { ResetPasswordPage } from './reset-password/reset-password.page';
 export class AppComponent {
   public appPages = [
     {
-      title: 'Home',
-      url: 'tab1',
-      icon: 'home'
-
-    }, 
-    {
-      title: 'Request',
-      url: 'request',
-      icon: 'list'
-    },
-    {
       title: 'Users Details',
       url: 'users-details',
-      icon: 'list'
+      icon: 'list',
+      roles: ['Admin']
     },
     {
       title: 'Category',
-      url: 'category'
-    },
-    {
-      title: 'Forgot Password',
-      url: 'forgot-password'
-    },
-    {
-      title: 'Recover Password',
-      url: 'reset-password'
-    },
-    {
-      title: 'Messages',
-      url: 'chat-history'
-    },
-    {
-      title: 'Notifications',
-      url: 'notifications'
+      url: 'category',
+      roles: ['Admin']
     },
     {
       title: 'Review-list',
-      url: 'review-list' 
+      url: 'review-list' ,
+      roles: ['Admin']
+
     },
     {
       title: 'Set amount user',
-      url: 'manager-transfer-money'
+      url: 'manager-transfer-money',
+      roles: ['Admin']
+
     }
   ]
   
@@ -70,6 +49,8 @@ export class AppComponent {
   ) {
     this.initializeApp();
   }
+
+ 
 
   initializeApp() {
     this.platform.ready().then(() => {
