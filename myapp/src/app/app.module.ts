@@ -47,7 +47,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-const configS: SocketIoConfig = { url: 'https://EllipticalMountainousModulus--avramioanaalexa.repl.co', options: {} };
+const configS: SocketIoConfig = { url: 'https://LegalTatteredCone--five-nine.repl.co', options: {} };
 
 const config = new AuthServiceConfig([
   {
