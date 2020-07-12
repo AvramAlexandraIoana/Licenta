@@ -35,7 +35,14 @@ namespace WebFMI.Data
             }
 
            return user;
+        }
 
+        public async Task<User> LoginGoogle(User user)
+        {
+            var user1 = Register(user, "googleLogin");
+
+
+            return user;
         }
         /*
          Compare password from login component with password saved in the database

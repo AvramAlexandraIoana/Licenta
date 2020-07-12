@@ -24,6 +24,21 @@ export class AuthService {
       }
     }
   }
+  googleLogin(model: any) {
+    return this.http.post(this.baseUrl + 'googleLogin', model, { headers: new HttpHeaders({ 'Content-Type': 'application/json'}) })
+    .pipe(
+      map((response: any) => {
+        const  user = response;
+        if (user) {
+          localStorage.setItem('token', user.token);
+          this.decodedToken = this.jwtHelper.decodeToken(user.token);
+          console.log(this.decodedToken);
+        
+          
+        }
+      })
+    )
+  }
 
   login(model: any) {
     return this.http.post(this.baseUrl + 'login', model, { headers: new HttpHeaders({ 'Content-Type': 'application/json'}) })

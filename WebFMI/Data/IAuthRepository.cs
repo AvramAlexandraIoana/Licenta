@@ -12,6 +12,8 @@ namespace WebFMI.Data
 
         Task<User> Login(string userName, string password);
 
+        Task<User> LoginGoogle(User user);
+
         Task<bool> UserExists(string userName);
     }
 }

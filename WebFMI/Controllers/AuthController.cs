@@ -112,6 +112,25 @@ namespace WebFMI.Controllers
              });    
         }
 
+        [HttpPost("googleLogin")]
+        public async Task<IActionResult> GoogleLogin(UserForRegisterDto userForRegisterDto)
+        {
+            userForRegisterDto.Password = "googleLogin";
+            var user = Register(userForRegisterDto);
+
+            var userFromRepo = await _repo.Login(userForRegisterDto.Username.ToLower(), userForRegisterDto.Password);
+
+            if (userFromRepo == null)
+            {
+                return Unauthorized();
+            }
+
+            return Ok(new
+            {
+                token = GenerateJwtToken(userFromRepo).Result
+            });
+        }
+
         [HttpGet("confirmEmail")]
         public async Task<IActionResult> ConfirmEmail(string token, string name)
         {

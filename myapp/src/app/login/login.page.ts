@@ -93,6 +93,17 @@ export class LoginPage implements OnInit {
     this.navControl.navigateForward('signup');
   }
 
+  doGoogleLogout(){
+    this.googlePlus.logout()
+    .then(res => {
+      //user logged out so we will remove him from the NativeStorage
+      this.nativeStorage.remove('google_user');
+      this.router.navigate(["/login"]);
+    }, err => {
+      console.log(err);
+    });
+  }
+
   async doGoogleLogin(){
     const loading = await this.loadingController.create({
       message: 'Please wait...'
@@ -104,6 +115,8 @@ export class LoginPage implements OnInit {
       //'offline': true, // Optional, but requires the webClientId - if set to true the plugin will also return a serverAuthCode, which can be used to grant offline access to a non-Google server
       })
       .then(user => {
+        console.log("UTILIZATOR");
+        console.log(user);
         this.user = user;
         //save user data on the native storage
         this.nativeStorage.setItem('google_user', {
@@ -112,7 +125,15 @@ export class LoginPage implements OnInit {
           picture: user.imageUrl
         })
         .then(() => {
-           this.router.navigate(["user"]);
+          //  this.router.navigate(["user"]);
+          this.model = {
+            'Username': user.displayName,
+            'Email': user.email
+          }
+          this.auth.googleLogin(this.model).subscribe(res => {
+            console.log("Logged in successfully");
+            this.navControl.navigateRoot('tabs');
+          })
         }, (error) => {
           console.log(error);
         })
