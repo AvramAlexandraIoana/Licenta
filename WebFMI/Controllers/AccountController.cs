@@ -115,10 +115,46 @@ namespace WebFMI.Controllers
         {
             var account = await _context.Accounts.FindAsync(id);
             var userId = account.UserId;
-            var  transactionsList = await _context.Transactions.Where(u => u.UserId == userId || u.UserId1 == userId).ToListAsync();
-            for (var i =0; i < transactionsList.Count(); i ++)
+            var unit = "€";
+            if (account.Conversion == "RON")
             {
-                var element = transactionsList[i];
+                unit = "r";
+            }
+            else if (account.Conversion == "USD")
+            {
+                unit = "$";
+            }
+            var user = await _context.Users.FindAsync(userId);
+            var  transactionsList = await _context.Transactions.Where(u => (u.UserId == userId || u.UserId1 == userId) && u.Unit == unit).ToListAsync();
+            for (var i = 0; i < transactionsList.Count(); i++)
+            {
+                Transaction transaction = await _context.Transactions.FindAsync(transactionsList[i].TransactionId);
+                _context.Transactions.Remove(transaction);
+            }
+            var categoryTransactionList = await _context.CategoryTransactions.Where(u => u.UserId == userId && u.Unit == unit).ToListAsync();
+            for (var i = 0; i < categoryTransactionList.Count(); i++)
+            {
+                CategoryTransaction categoryTransaction = await _context.CategoryTransactions.FindAsync(categoryTransactionList[i].CategoryTransactionId);
+                _context.CategoryTransactions.Remove(categoryTransaction);
+            }
+
+            if (account.Conversion == "RON")
+            {
+                user.AreSumaR = false;
+                user.SumaRSpend = 0;
+                user.SumaR = 0;
+            }
+            else if (account.Conversion == "EURO")
+            {
+                user.AreSumaE = false;
+                user.SumaESpend = 0;
+                user.SumaE = 0;
+            }
+            else if (account.Conversion == "USD")
+            {
+                user.AreSumaD = false;
+                user.SumaDSpend = 0;
+                user.SumaD= 0;
             }
 
             if (account == null)
