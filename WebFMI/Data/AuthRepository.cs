@@ -97,7 +97,7 @@ namespace WebFMI.Data
 
         public async Task<bool> UserExists(string username)
         {
-            if (await _context.Users.AnyAsync(x => x.Name == username))
+            if (await _context.Users.AnyAsync(x => x.UserName == username))
             {
                 return true;
             }

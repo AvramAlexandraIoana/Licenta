@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, ToastController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../api/auth.service';
 
@@ -37,7 +37,10 @@ export class SignupPage implements OnInit {
   }
   language: string;
 
-  constructor(public formBuilder: FormBuilder, private auth: AuthService, private navControl: NavController) { 
+  constructor(public formBuilder: FormBuilder, 
+              private auth: AuthService, 
+              private navControl: NavController,
+              private toastController: ToastController) { 
     this.createSignupForm();
   }
 
@@ -62,6 +65,16 @@ export class SignupPage implements OnInit {
     })
   }
 
+  async presentToast(text, type) {
+    const toast = await this.toastController.create({
+        message: text,
+        position: 'bottom',
+        duration: 3000,
+        color: type
+    });
+    toast.present();
+  }
+
   signup() {
        // stop here if form is invalid
       if (this.signupForm.invalid) {
@@ -75,11 +88,12 @@ export class SignupPage implements OnInit {
       }
       this.auth.register(this.model).subscribe( next => {
         console.log("Regster in successfully");
+        this.presentToast('Sign up succesfully.', "success");
         this.goToLoginPage();
       
       }, error => {
         console.log(error);
-        this.navControl.navigateRoot('login');
+        this.presentToast('Username already exists.', "danger");
       })
   }
 

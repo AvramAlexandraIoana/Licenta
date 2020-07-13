@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { NavController, AlertController, Platform, LoadingController } from '@ionic/angular';
+import { NavController, AlertController, Platform, LoadingController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
@@ -43,7 +43,8 @@ export class LoginPage implements OnInit {
     public alertController: AlertController,
     public formBuilder: FormBuilder, 
     private auth: AuthService, 
-    private navControl: NavController) { 
+    private navControl: NavController,
+    private toastController: ToastController) { 
     this.createLoginForm();
   }
 
@@ -64,6 +65,15 @@ export class LoginPage implements OnInit {
           Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')]]
     })
   }
+  async presentToast(text, type) {
+    const toast = await this.toastController.create({
+        message: text,
+        position: 'bottom',
+        duration: 3000,
+        color: type
+    });
+    toast.present();
+  }
 
 
   login() {
@@ -79,10 +89,10 @@ export class LoginPage implements OnInit {
     }
     this.auth.login(this.model).subscribe( next => {
       console.log("Logged in successfully");
+      this.presentToast('Log in succesfully.', "success");
       this.navControl.navigateRoot('tabs');
-
-    
     }, error => {
+      this.presentToast('An error ocurred.', "danger");
       console.log(error);
     })
   
