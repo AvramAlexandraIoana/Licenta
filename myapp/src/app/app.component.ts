@@ -91,4 +91,8 @@ export class AppComponent {
     
     });
   }
+
+  initComponent() {
+    console.log("INIT");
+  }
 }

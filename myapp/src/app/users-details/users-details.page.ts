@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, ModalController, NavController } from '@ionic/angular';
 import { AdminService } from '../api/admin.service';
 import { UserAdmin } from '../_models/UserAdmin';
 import { User } from '../_models/User';
@@ -32,7 +32,7 @@ export class UsersDetailsPage implements OnInit {
 
 
 
-  constructor(private alertControl: AlertController, private adminService: AdminService, private modalControl: ModalController) { 
+  constructor(private alertControl: AlertController, private navControl: NavController, private adminService: AdminService, private modalControl: ModalController) { 
     this.adminService.getUsersWithRoles().subscribe(res => {
       this.rows = res;
       this.temp = res;
@@ -50,6 +50,10 @@ export class UsersDetailsPage implements OnInit {
       this.tableStyle = "dark";
     }
 
+  }
+
+  backButtons() {
+    this.navControl.navigateBack("tabs/tab1");
   }
 
   getRowClass(row) {

@@ -1,7 +1,7 @@
 <ion-header no-border>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-menu-button (click)="menuButton()"></ion-menu-button>
     </ion-buttons>
     <ion-title *ngIf="language == 'engleza'">Your Budgets</ion-title>
     <ion-title *ngIf="language == 'romana'">Bugetul tau</ion-title>

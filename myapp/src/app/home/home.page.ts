@@ -204,6 +204,13 @@ export class HomePage implements OnInit {
     this.navControl.navigateRoot(["chat-history"]);
   }
 
+  menuButton() {
+    console.log("BUTTONS");
+  }
+
+  ionViewWillEnter() {
+    console.log("INAPOI");
+  }
 
 
 
