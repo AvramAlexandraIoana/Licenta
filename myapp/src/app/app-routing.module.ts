@@ -101,10 +101,6 @@ const routes: Routes = [
         loadChildren: () => import('./user/user.module').then( m => m.UserPageModule)
       },
       {
-        path: 'upload-image',
-        loadChildren: () => import('./upload-image/upload-image.module').then( m => m.UploadImagePageModule)
-      },
-      {
         path: 'login1',
         loadChildren: () => import('./login1/login1.module').then( m => m.Login1PageModule)
       },

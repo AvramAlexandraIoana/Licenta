@@ -14,8 +14,8 @@
 
 <ion-content>
   <ion-grid class="paddingLeft">
-    <ion-label *ngIf="!isKeyPress" class="labelS" *ngIf="language == 'engleza'">Recent Searches</ion-label>
-    <ion-label *ngIf="!isKeyPress" class="labelS" *ngIf="language == 'romana'">Căutări recente</ion-label>
+    <ion-label *ngIf="!isKeyPress && language == 'engleza'" class="labelS">Recent Searches</ion-label>
+    <ion-label *ngIf="!isKeyPress && language == 'romana'" class="labelS">Căutări recente</ion-label>
     <div *ngIf="!isKeyPress" class="selected-contacts" padding-horizontal scrollX="true">
       <div class="people" text-cente *ngFor="let user of recentUsers;">
         <ion-avatar class="avatar2" *ngIf="user.profilePictureName">
