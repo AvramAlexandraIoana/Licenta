@@ -114,7 +114,7 @@ namespace WebFMI.Controllers
         public async Task<IActionResult> DeleteCard(int id)
         {
             var account = await _context.Accounts.FindAsync(id);
-            var userId = account.UserId;
+            /*var userId = account.UserId;
             var unit = "€";
             if (account.Conversion == "RON")
             {
@@ -155,7 +155,7 @@ namespace WebFMI.Controllers
                 user.AreSumaD = false;
                 user.SumaDSpend = 0;
                 user.SumaD= 0;
-            }
+            }*/
 
             if (account == null)
             {
