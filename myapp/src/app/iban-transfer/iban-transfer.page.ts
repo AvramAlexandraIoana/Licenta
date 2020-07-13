@@ -31,6 +31,12 @@ export class IbanTransferPage implements OnInit {
     'unit': [
       { type: 'required', message: 'Unitatea este obligatorie'}
     ],
+    'beneficiar': [
+      { type: 'required', message: 'Beneficiarul este obligatoriu'}
+    ],
+    'iban': [
+      { type: 'required', message: 'Iban-ul este obligatoriu'}
+    ],
     'description': [
       { type: 'required', message: 'Descrierea este obligatorie'},
       { type: 'maxlength', message: 'Lungimea maxima este de 30 de caractere'},

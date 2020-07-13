@@ -81,7 +81,7 @@
     <ion-label class="paddingClass" *ngIf="language == 'engleza'">The rest of the contacts</ion-label>
     <ion-card  [ngClass]="contact.isSelected ? 'selectedItem' : 'unselectedItem'" *ngFor="let contact of filterCond(contactsFound, 2)">
       <ion-card-content  [ngClass]="contact.isSelected ? 'selectedItem' : 'unselectedItem'">
-        <ion-item (click)="addToSelectPeople(contact)" lines="none">
+        <ion-item (click)="addToSelectPeople(contact, contact.isSelected)" lines="none">
           <ion-avatar class="avatarContact"   slot="start" *ngIf="contact?.imageURL">
               <img  src="https://ucarecdn.com/{{(contact?.imageURL)}}/"/>
           </ion-avatar> 
@@ -105,7 +105,7 @@
   <ion-list>
       <ion-card  [ngClass]="contact.isSelected ? 'selectedItem' : 'unselectedItem'"  *ngFor="let contact of contactsFound">
         <ion-card-content [ngClass]="contact.isSelected ? 'selectedItem' : 'unselectedItem'">
-          <ion-item (click)="addToSelectPeople(contact)" lines="none">
+          <ion-item (click)="addToSelectPeople(contact, contact.isSelected)" lines="none">
             <ion-avatar slot="start">
                 <img src="assets/imgs/yogie.png" alt="">
             </ion-avatar>

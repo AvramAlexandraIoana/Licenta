@@ -5,7 +5,7 @@
       </ion-buttons>
       <ion-input class="search" [(ngModel)]="inputValue" [placeholder]="language == 'romana' ? 'Caută în lista de categorii' : 'Search the list of categories'" (keyup)="onKeyUp($event); isKeyPress=true"></ion-input>
       <ion-icon *ngIf="!isKeyPress" class="group" name="search-outline"></ion-icon>
-      <div (click)="changeInputValue()" tappable>
+      <div  tappable>
         <ion-icon *ngIf="isKeyPress" class="group"  name="close-outline" ></ion-icon>
       </div>
   </div>

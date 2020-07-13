@@ -21,7 +21,7 @@
   <ion-label *ngIf="language == 'engleza'">
     {{typeView == 'send' ? 'Choose the desired card and pay' : 'Choose the card where the money will go'}}
   </ion-label>
-  <ion-slides mode="ios" [options]="sliderConfig">
+  <ion-slides mode="ios">
     <ion-slide *ngFor="let card of cards;  index as pos">
       <div *ngIf="conditionPosition(pos)" class="visa-card" text-center>
           <svg id="Card_1" data-name="Card 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="290" height="177" viewBox="0 0 290 177">

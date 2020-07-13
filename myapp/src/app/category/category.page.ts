@@ -18,6 +18,8 @@ export class CategoryPage implements OnInit {
   typeView: string;
   model: Category;
   language: string;
+  isKeyPress: boolean;
+  inputValue: string;
 
 
   constructor(private formBuilder: FormBuilder,
@@ -100,6 +102,9 @@ export class CategoryPage implements OnInit {
     
     this.navControl.navigateForward([url],navigationExtras);
     //this.navControl.navigateBack("request");
+  }
+
+  onKeyUp(event) {
   }
 
 

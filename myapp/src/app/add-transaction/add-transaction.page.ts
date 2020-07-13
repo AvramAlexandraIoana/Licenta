@@ -39,9 +39,10 @@ export class AddTransactionPage implements OnInit {
   }
   model: any;
   decodedToken: any;
-
+  isEnterDescriptionInput: any;
   categoryIcons: Array<Category> = [];
   language: string;
+  isEnterSumInput: any;
   
 
   constructor(public toastController: ToastController,

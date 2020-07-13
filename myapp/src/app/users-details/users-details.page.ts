@@ -18,15 +18,14 @@ import _ from 'lodash';
 export class UsersDetailsPage implements OnInit {
 
     rows : any;
-
-
+    isKeyPress: any;
     tableStyle = "bootstrap";
     customRowClass = false;
     selected: any[] = [];
     temp: UserAdmin[];
     @ViewChild(DatatableComponent) table: DatatableComponent;
     inputValue: any;
-  language: string;
+    language: string;
     //roles: Role[] = [];
 
 

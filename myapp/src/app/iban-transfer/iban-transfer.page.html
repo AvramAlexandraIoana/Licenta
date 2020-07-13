@@ -19,7 +19,7 @@
     Enter the following details
      <br/>
   </div>
- <form [formGroup]="sendMoneyForm" (ngSubmit)="goReviewRequestPage()">
+ <form [formGroup]="sendMoneyForm">
   <div class="details">
       <div class="money-content">
         <div class="labelForSum" [ngClass]="isEnterSumInput  ||  !sendMoneyForm.get('suma').invalid ? 'visible' : 'hidden'">
@@ -46,7 +46,7 @@
         </div>
         <div class="unit-container">
           <ion-item text-center lines="none">
-            <ion-select multiple="false" [placeholder]="language == 'romana' ? 'Select Unit' : 'Selectează moneda'" formControlName="unit" (ionChange)="reset()">
+            <ion-select multiple="false" [placeholder]="language == 'romana' ? 'Select Unit' : 'Selectează moneda'" formControlName="unit">
               <ion-select-option value="$" selected>USD</ion-select-option>
               <ion-select-option value="€">EURO</ion-select-option>
               <ion-select-option value="r">RON</ion-select-option>

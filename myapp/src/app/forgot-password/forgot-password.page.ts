@@ -10,7 +10,7 @@ import { NavController } from '@ionic/angular';
 })
 export class ForgotPasswordPage implements OnInit {
 
-  private forgotForm:  FormGroup;
+  forgotForm:  FormGroup;
 
   errorMessages = {
     'email':[
