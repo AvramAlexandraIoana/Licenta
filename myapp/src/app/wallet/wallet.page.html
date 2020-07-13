@@ -243,7 +243,7 @@
        <div  *ngFor="let transaction of perWeek">
          <!-- {{(transaction.transactions.date | date:'ww')}}
          {{ (myDate | date:'ww')}} -->
-          <ion-item *ngIf=" checkIsWeek(transaction.date)  && transaction.user">
+          <ion-item *ngIf="checkIsWeek(transaction.date)  && transaction.user">
             <ion-col size="2.5">
             <div *ngFor="let user of transaction.user">
               <div class="thumb" slot="start" *ngIf="user.id != userId">
@@ -278,7 +278,7 @@
             </ion-label>
           </ion-col>
         </ion-item>
-        <ion-item *ngIf="!transaction.user">
+        <ion-item *ngIf="checkIsWeek(transaction.transactionDate) && !transaction.user">
             <ion-col size="2" >
               <div>
                 <div class="thumb" slot="start">

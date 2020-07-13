@@ -81,10 +81,9 @@
     </div>
     <div class="the-list">
       <div *ngFor="let transaction of transactions">
-        {{(transaction.date | date:'dd') == ((myDate | date:'dd') - 1)}}
-         {{(transaction.date | date:'dd'}}
-         {{((myDate | date:'dd') - 1)}}
-        <ion-item *ngIf="(transaction.date | date:'dd') == ((myDate | date:'dd') - 1)">  
+        <!-- {{(transaction.date | date:'dd')}}
+        {{(myDate | date:'dd')}} -->
+        <ion-item *ngIf="(transaction.date | date:'dd') == ((myDate | date:'dd'))">  
           <ion-avatar slot="start" *ngIf="!transaction.isSend">
             <img  src="https://ucarecdn.com/{{transaction.imageUrl}}/"/>
           </ion-avatar>

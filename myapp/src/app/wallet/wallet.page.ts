@@ -131,19 +131,26 @@ export class WalletPage implements OnInit {
   setAmount() {
     this.userService.getUser(this.userId).subscribe( res => {
       console.log(res);
-      this.user = res;     
+      this.user = res;   
+      this.procent = 100;  
       if (this.currentUnit== "r") {
         this.income =  this.user.sumaR - this.user.sumaRSpend;
         this.expense = this.user.sumaRSpend;
-        this.procent =  this.user.sumaRSpend * 100 / this.user.sumaR ;
+        if (this.income) {
+          this.procent =  this.income * 100 / this.user.sumaR ;
+        }
       } else if (this.currentUnit== "$") {
         this.income =  this.user.sumaD - this.user.sumaDSpend;
-        this.expense = this.user.sumaDSpend;        
-        this.procent =  this.user.sumaDSpend * 100 / this.user.sumaD ;
+        this.expense = this.user.sumaDSpend;   
+        if (this.income) {     
+          this.procent =  this.income * 100 / this.user.sumaD ;
+        }
       } else if (this.currentUnit== "€") {
         this.income =  this.user.sumaE - this.user.sumaESpend;
-        this.expense = this.user.sumaESpend;   
-        this.procent =  this.user.sumaESpend * 100 / this.user.sumaE ;
+        this.expense = this.user.sumaESpend; 
+        if (this.income) {       
+          this.procent =  this.income * 100 / this.user.sumaE ;
+        }
       }
 
     })
@@ -473,6 +480,7 @@ requestSMSPermission() {
           this.getTransactionPerYear(this.cards[index].unit);
         }
     });
+    this.setAmount();
   }
 
 }

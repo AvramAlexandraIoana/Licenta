@@ -68,19 +68,19 @@ namespace WebFMI.Controllers
             }
             var validate = account.AccountNumber.Substring(0, 10);
             // How to generate IBAN:
-           Iban iban = new IbanBuilder()
-                .CountryCode(CountryCode.GetCountryCode("CZ"))
-                .BankCode("0800")
-                .AccountNumberPrefix("000019")
-                .AccountNumber(account.AccountNumber.Substring(0, 10))
-                .Build();
+            Iban iban = new IbanBuilder()
+                 .CountryCode(CountryCode.GetCountryCode("CZ"))
+                 .BankCode("0800")
+                 .AccountNumberPrefix("000019")
+                 .AccountNumber(account.AccountNumber.Substring(0, 10))
+                 .Build();
             account.Iban = iban.ToString();
             _repo.Update(user);
             var save = await _repo.SaveAsync(user);
             account.UserId = id;
             account.CardHolderName = card.CardHolderName;
 
-            DateTime  expiryDate = DateTime.Now.AddYears(3);
+            DateTime expiryDate = DateTime.Now.AddYears(3);
             string formatted = expiryDate.ToString("MM/yy");
             account.ExpiryDate = formatted;
 
@@ -114,6 +114,13 @@ namespace WebFMI.Controllers
         public async Task<IActionResult> DeleteCard(int id)
         {
             var account = await _context.Accounts.FindAsync(id);
+            var userId = account.UserId;
+            var  transactionsList = await _context.Transactions.Where(u => u.UserId == userId || u.UserId1 == userId).ToListAsync();
+            for (var i =0; i < transactionsList.Count(); i ++)
+            {
+                var element = transactionsList[i];
+            }
+
             if (account == null)
             {
                 return BadRequest("Nu exista cardul!");
