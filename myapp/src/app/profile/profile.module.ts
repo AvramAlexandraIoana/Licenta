@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ProfilePageRoutingModule } from './profile-routing.module';
 
 import { ProfilePage } from './profile.page';
+import { AppHasRoleDirective } from '../_directives/app-has-role.directive';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { ProfilePage } from './profile.page';
     IonicModule,
     ProfilePageRoutingModule
   ],
-  declarations: [ProfilePage]
+  declarations: [ProfilePage, AppHasRoleDirective]
 })
 export class ProfilePageModule {}

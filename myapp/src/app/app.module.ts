@@ -67,7 +67,7 @@ export function provideConfig() {
 }
 
 @NgModule({
-  declarations: [AppComponent, AppHasRoleDirective],
+  declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, 
     NgxDatatableModule,

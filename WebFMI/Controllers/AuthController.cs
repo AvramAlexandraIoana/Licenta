@@ -273,6 +273,29 @@ namespace WebFMI.Controllers
             return BadRequest("Nu e bine");
         }
 
+        [HttpGet("getRoles/{id}")]
+        public async Task<IActionResult> GetRoles(int id)
+        {
+            var userRoles = await _context.Users
+               .Where(u => u.Id == id)
+               .Select(user => new
+               {
+                   Id = user.Id,
+                   UserName = user.UserName,
+                   City = user.City,
+                   PhoneNumber = user.PhoneNumber,
+                   Roles = (from userRole in _context.UserRoles
+                            join role in _context.Roles
+                            on userRole.RoleId
+                            equals role.Id
+                            where userRole.UserId == user.Id
+                            select role.Name).ToList()
+               }).ToListAsync();
+            return Ok(userRoles[0].Roles);
+
+        }
+       
+
         [HttpPost("forgotPassword")]
        // [ValidateAntiForgeryToken]
         public async Task<IActionResult> ForgotPassword(ForgotPasswordModel forgotPasswordModel)

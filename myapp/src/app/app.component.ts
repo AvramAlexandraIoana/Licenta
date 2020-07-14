@@ -17,29 +17,30 @@ import { AuthService } from './api/auth.service';
 export class AppComponent {
   public appPages = [
     {
+      title: 'Request money',
+      url: 'request',
+      icon: 'list'
+    },
+    {
+      title: 'Income',
+      url: 'add-transaction'
+    },
+    {
+      title: 'Chat',
+      url: 'users-messages'
+    },
+    {
+      title: 'Notifications',
+      url: 'notification',
+      icon: 'list'
+    },
+    {
+      title: 'Add limitation',
+      url: 'limitation-category'
+    },
+    {
       title: 'Users Details',
-      url: 'users-details',
-      icon: 'list',
-      allowed: false
-    },
-    {
-      title: 'Review-list',
-      url: 'review-list' ,
-      icon: 'list',
-      allowed: false
-    },
-    {
-      title: 'Category',
-      url: 'category',
-      icon: 'list',
-      allowed: false
-    },
-    {
-      title: 'Set amount user',
-      url: 'manager-transfer-money',
-      icon: 'list',
-      allowed: false
-
+      url: 'users-details'
     }
   ]
   
@@ -52,17 +53,6 @@ export class AppComponent {
     private authService: AuthService
   ) {
     this.initializeApp();
-    if (this.authService.decodedToken) {
-      const userRoles = this.authService.decodedToken.role as Array<string>;
-      console.log('Role');
-      console.log(userRoles);
-      this.appPages[0].allowed = this.authService.roleMatch(['Admin']);
-      this.appPages[1].allowed = this.authService.roleMatch(['Admin']);
-      this.appPages[2].allowed = this.authService.roleMatch(['Store-Manager']);
-      this.appPages[3].allowed = this.authService.roleMatch(['Store-Manager']);
-      console.log(this.appPages[0].allowed);
-
-    }
    
   }
 

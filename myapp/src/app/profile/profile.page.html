@@ -130,6 +130,50 @@
                 <p class="body" *ngIf="language == 'romana'">Deloghează-te din aplicație</p>
               </div>
             </ion-item>
+            <ion-item lines="none" *appAppHasRole="['Admin']"  [routerLink]="['/users-details']" [routerDirection]="'root'">
+              <div class="thumb1" slot="start">
+                <img src="assets/imgs/superuser-20s-36px.svg" alt="" >
+              </div>
+              <div>
+                <p class="header" *ngIf="language == 'engleza'">Users Details</p>
+                <p class="body" *ngIf="language == 'engleza'">Users Details for admin</p>
+                <p class="header" *ngIf="language == 'romana'">Detaliile utilizatorilor</p>
+                <p class="body" *ngIf="language == 'romana'">Detalile utilizatorilor pentru admin</p>
+              </div>
+            </ion-item>
+            <ion-item lines="none" *appAppHasRole="['Admin']" [routerLink]="['/review-list']" [routerDirection]="'root'">
+              <div class="thumb1" slot="start">
+                <img src="assets/imgs/superuser-20s-36px.svg" alt="" >
+              </div>
+              <div>
+                <p class="header" *ngIf="language == 'engleza'">Negative feedback list</p>
+                <p class="body" *ngIf="language == 'engleza'">Negative feedback list for admin</p>
+                <p class="header" *ngIf="language == 'romana'">Lista feedback-urilor negative</p>
+                <p class="body" *ngIf="language == 'romana'">Pentru admin</p>
+              </div>
+            </ion-item>
+            <ion-item lines="none" *appAppHasRole="['Store-Manager']" [routerLink]="['/category']" [routerDirection]="'root'">
+              <div class="thumb1" slot="start">
+                <img src="assets/imgs/superuser-20s-36px.svg" alt="" >
+              </div>
+              <div>
+                <p class="header" *ngIf="language == 'engleza'">Category list</p>
+                <p class="body" *ngIf="language == 'engleza'">Category list for manager</p>
+                <p class="header" *ngIf="language == 'romana'">Lista de categorii</p>
+                <p class="body" *ngIf="language == 'romana'">Lista de categorii pentru manager</p>
+              </div>
+            </ion-item>
+            <ion-item lines="none" *appAppHasRole="['Store-Manager']" [routerLink]="['/manager-transfer-money']" [routerDirection]="'root'">
+              <div class="thumb1" slot="start">
+                <img src="assets/imgs/superuser-20s-36px.svg" alt="" >
+              </div>
+              <div>
+                <p class="header" *ngIf="language == 'engleza'">Feeds accounts</p>
+                <p class="body" *ngIf="language == 'engleza'">Feeds accounts for manager</p>
+                <p class="header" *ngIf="language == 'romana'">Alimentează conturi</p>
+                <p class="body" *ngIf="language == 'romana'">Alimentează conturi pentru manager</p>
+              </div>
+            </ion-item>
         </div>
      </div>
     </div>

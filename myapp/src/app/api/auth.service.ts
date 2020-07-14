@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { map } from 'rxjs/operators';
+import { map, catchError, retry } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,8 @@ export class AuthService {
   baseUrl: string;
   jwtHelper = new JwtHelperService();
   decodedToken: any;
+  token: string;
+  httpOptions: { headers: HttpHeaders; };
 
   constructor(private http: HttpClient) { 
 
@@ -22,8 +25,16 @@ export class AuthService {
         this.decodedToken = this.jwtHelper.decodeToken(userToken);
         console.log(this.decodedToken);
       }
+      this.token = localStorage.getItem('token');
+      this.httpOptions  = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json; charset=utf-8',
+          'Authorization':  `Bearer ${this.token}`
+        })
+      };
     }
   }
+  ng
   googleLogin(model: any) {
     return this.http.post(this.baseUrl + 'googleLogin', model, { headers: new HttpHeaders({ 'Content-Type': 'application/json'}) })
     .pipe(
@@ -124,7 +135,15 @@ export class AuthService {
     return !this.jwtHelper.isTokenExpired(token);
   }
 
-  roleMatch(allowedRoles): boolean {
+  getRoles(userId: number) {
+    return this.http.get<any[]>(this.baseUrl + 'getRoles/' + userId, this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.errorHandler)
+    );
+  }
+
+  roleMatch(allowedRoles, userRoles): boolean {
     if (!this.decodedToken) {
       var userToken = localStorage.getItem('token');
       if (userToken) {
@@ -133,7 +152,6 @@ export class AuthService {
       }
     }
     let isMatch = false;
-    const userRoles = this.decodedToken.role as Array<string>
     if (allowedRoles) {
       allowedRoles.forEach(element => {
         if(userRoles) {
@@ -149,5 +167,18 @@ export class AuthService {
     
 
     return isMatch;
+  }
+
+  errorHandler(error) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // Get client-side error
+      errorMessage = error.error.message;
+    } else {
+      // Get server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    console.log(errorMessage);
+    return throwError(errorMessage);
   }
 }
