@@ -67,9 +67,12 @@ export class HomePage implements OnInit {
   setAmount() {
     this.userService.getUser(this.userId).subscribe( res => {
       console.log(res);
+
       this.user = res;
       this.gaugeLabel = "of ";
-     
+      this.defaultCard = this.user.defaultCard;
+      localStorage.setItem("card", this.defaultCard);
+
       if (this.user.defaultCard == "r") {
         this.gaugeLabel += 'lei' + this.user.sumaR;
         this.gaugePrependText = "lei";
@@ -94,7 +97,9 @@ export class HomePage implements OnInit {
     // (transaction.date | date:'ww') == (myDate | date:'ww')
     this.transactionService.getTransactionNotificationNumber(this.userId).subscribe( res => {
       console.log(res);
-      this.notifications = res;
+      this.notifications = _.filter(res, function(object){
+          return !object.rejected;
+      });
       var now = moment();
       var filtered = _.filter(this.notifications, function(object) {
         console.log("FILTRE");
@@ -138,7 +143,6 @@ export class HomePage implements OnInit {
 
   getTransactionPerDay() {
     this.userId = this.getUserId();
-    this.defaultCard = localStorage.getItem("card");
     this.transactionService.getTransactionsForToday(this.getUserId(), this.defaultCard).subscribe( res => {
       this.transactionPerDay = res;
       console.log("Zi");

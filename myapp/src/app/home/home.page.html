@@ -112,16 +112,29 @@
               <div *ngFor="let user of transaction.user">
                   <h4 *ngIf="user.id != userId">{{user.name}}</h4>
               </div>
-              <div [ngClass]="transaction.transactions.accepted ? 'divAccepted' : 'divWaiting' " *ngIf="language == 'romana'"> 
-                <img  *ngIf="!transaction.transactions.accepted"  src="assets/imgs/wait-20s-32px.svg"/>
-                <img *ngIf="transaction.transactions.accepted" src="assets/imgs/check-20s-23px.svg"/>
-                  {{transaction.transactions.accepted ? 'Acceptată' : 'În așteptare'}}         
-              </div> 
-              <div [ngClass]="transaction.transactions.accepted ? 'divAccepted' : 'divWaiting' " *ngIf="language == 'engleza'"> 
-                <img  *ngIf="!transaction.transactions.accepted"  src="assets/imgs/wait-20s-32px.svg"/>
-                <img *ngIf="transaction.transactions.accepted" src="assets/imgs/check-20s-23px.svg"/>
-                  {{transaction.transactions.accepted ? 'Accepted' : 'Waiting'}}                 
-              </div> 
+              <span *ngIf="!transaction.transactions.rejected">
+                <div [ngClass]="transaction.transactions.accepted ? 'divAccepted' : 'divWaiting' " *ngIf="language == 'romana'"> 
+                  <img  *ngIf="!transaction.transactions.accepted"  src="assets/imgs/wait-20s-32px.svg"/>
+                  <img *ngIf="transaction.transactions.accepted" src="assets/imgs/check-20s-23px.svg"/>
+                    {{transaction.transactions.accepted ? 'Acceptată' : 'În așteptare'}}         
+                </div> 
+                <div [ngClass]="transaction.transactions.accepted ? 'divAccepted' : 'divWaiting' " *ngIf="language == 'engleza'"> 
+                  <img  *ngIf="!transaction.transactions.accepted"  src="assets/imgs/wait-20s-32px.svg"/>
+                  <img *ngIf="transaction.transactions.accepted" src="assets/imgs/check-20s-23px.svg"/>
+                    {{transaction.transactions.accepted ? 'Accepted' : 'Waiting'}}                 
+                </div> 
+              </span>
+              <span *ngIf="transaction.transactions.rejected">
+                <div [ngClass]="transaction.transactions.accepted ? 'divAccepted' : 'divWaiting' " *ngIf="language == 'romana'"> 
+                  <img src="assets/imgs/close-1.1s-36px.svg"/>
+                    {{transaction.transactions.rejected ? 'Respinsă' : 'Respinsă'}}         
+                </div> 
+                <div [ngClass]="transaction.transactions.accepted ? 'divAccepted' : 'divWaiting' " *ngIf="language == 'engleza'"> 
+                  <img src="assets/imgs/close-1.1s-36px.svg"/>
+                    {{transaction.transactions.rejected ? 'Canceled' : 'Canceled'}}                 
+                </div> 
+              </span>
+             
             </ion-label>
            </ion-col>
             <ion-col style="text-align: right;">
@@ -153,16 +166,28 @@
                 <div *ngFor="let user of transaction.user">
                     <h4 *ngIf="user.id != userId">{{user.name}}</h4>
                 </div>
-                <div [ngClass]="transaction.transactions.accepted ? 'divAccepted' : 'divWaiting' " *ngIf="language == 'romana'"> 
-                  <img  *ngIf="!transaction.transactions.accepted"  src="assets/imgs/wait-20s-32px.svg"/>
-                  <img *ngIf="transaction.transactions.accepted" src="assets/imgs/check-20s-23px.svg"/>
-                    {{transaction.transactions.accepted ? 'Acceptată' : 'În așteptare'}}         
-                </div> 
-                <div [ngClass]="transaction.transactions.accepted ? 'divAccepted' : 'divWaiting' " *ngIf="language == 'engleza'"> 
-                  <img  *ngIf="!transaction.transactions.accepted"  src="assets/imgs/wait-20s-32px.svg"/>
-                  <img *ngIf="transaction.transactions.accepted" src="assets/imgs/check-20s-23px.svg"/>
-                    {{transaction.transactions.accepted ? 'Accepted' : 'Waiting'}}                 
-                </div> 
+                <span *ngIf="!transaction.transactions.rejected">
+                  <div [ngClass]="transaction.transactions.accepted ? 'divAccepted' : 'divWaiting' " *ngIf="language == 'romana'"> 
+                    <img  *ngIf="!transaction.transactions.accepted"  src="assets/imgs/wait-20s-32px.svg"/>
+                    <img *ngIf="transaction.transactions.accepted" src="assets/imgs/check-20s-23px.svg"/>
+                      {{transaction.transactions.accepted ? 'Acceptată' : 'În așteptare'}}         
+                  </div> 
+                  <div [ngClass]="transaction.transactions.accepted ? 'divAccepted' : 'divWaiting' " *ngIf="language == 'engleza'"> 
+                    <img  *ngIf="!transaction.transactions.accepted"  src="assets/imgs/wait-20s-32px.svg"/>
+                    <img *ngIf="transaction.transactions.accepted" src="assets/imgs/check-20s-23px.svg"/>
+                      {{transaction.transactions.accepted ? 'Accepted' : 'Waiting'}}                 
+                  </div> 
+                </span>
+                <span *ngIf="transaction.transactions.rejected">
+                  <div [ngClass]="transaction.transactions.accepted ? 'divAccepted' : 'divWaiting' " *ngIf="language == 'romana'"> 
+                    <img src="assets/imgs/close-1.1s-36px.svg"/>
+                      {{transaction.transactions.rejected ? 'Respinsă' : 'Respinsă'}}         
+                  </div> 
+                  <div [ngClass]="transaction.transactions.accepted ? 'divAccepted' : 'divWaiting' " *ngIf="language == 'engleza'"> 
+                    <img src="assets/imgs/close-1.1s-36px.svg"/>
+                      {{transaction.transactions.rejected ? 'Canceled' : 'Canceled'}}                 
+                  </div> 
+                </span>
               </ion-label>
               </ion-col>
               <ion-col style="text-align: right;">
@@ -192,16 +217,28 @@
                   <div *ngFor="let user of transaction.user">
                       <h4 *ngIf="user.id != userId">{{user.name}}</h4>
                   </div>
-                  <div [ngClass]="transaction.transactions.accepted ? 'divAccepted' : 'divWaiting' " *ngIf="language == 'romana'"> 
-                    <img  *ngIf="!transaction.transactions.accepted"  src="assets/imgs/wait-20s-32px.svg"/>
-                    <img *ngIf="transaction.transactions.accepted" src="assets/imgs/check-20s-23px.svg"/>
-                      {{transaction.transactions.accepted ? 'Acceptată' : 'În așteptare'}}         
-                  </div> 
-                  <div [ngClass]="transaction.transactions.accepted ? 'divAccepted' : 'divWaiting' " *ngIf="language == 'engleza'"> 
-                    <img  *ngIf="!transaction.transactions.accepted"  src="assets/imgs/wait-20s-32px.svg"/>
-                    <img *ngIf="transaction.transactions.accepted" src="assets/imgs/check-20s-23px.svg"/>
-                      {{transaction.transactions.accepted ? 'Accepted' : 'Waiting'}}                 
-                  </div> 
+                  <span *ngIf="!transaction.transactions.rejected">
+                    <div [ngClass]="transaction.transactions.accepted ? 'divAccepted' : 'divWaiting' " *ngIf="language == 'romana'"> 
+                      <img  *ngIf="!transaction.transactions.accepted"  src="assets/imgs/wait-20s-32px.svg"/>
+                      <img *ngIf="transaction.transactions.accepted" src="assets/imgs/check-20s-23px.svg"/>
+                        {{transaction.transactions.accepted ? 'Acceptată' : 'În așteptare'}}         
+                    </div> 
+                    <div [ngClass]="transaction.transactions.accepted ? 'divAccepted' : 'divWaiting' " *ngIf="language == 'engleza'"> 
+                      <img  *ngIf="!transaction.transactions.accepted"  src="assets/imgs/wait-20s-32px.svg"/>
+                      <img *ngIf="transaction.transactions.accepted" src="assets/imgs/check-20s-23px.svg"/>
+                        {{transaction.transactions.accepted ? 'Accepted' : 'Waiting'}}                 
+                    </div> 
+                  </span>
+                  <span *ngIf="transaction.transactions.rejected">
+                    <div [ngClass]="transaction.transactions.accepted ? 'divAccepted' : 'divWaiting' " *ngIf="language == 'romana'"> 
+                      <img src="assets/imgs/close-1.1s-36px.svg"/>
+                        {{transaction.transactions.rejected ? 'Respinsă' : 'Respinsă'}}         
+                    </div> 
+                    <div [ngClass]="transaction.transactions.accepted ? 'divAccepted' : 'divWaiting' " *ngIf="language == 'engleza'"> 
+                      <img src="assets/imgs/close-1.1s-36px.svg"/>
+                        {{transaction.transactions.rejected ? 'Canceled' : 'Canceled'}}                 
+                    </div> 
+                  </span>
                 </ion-label>
               </ion-col>
               <ion-col style="text-align: right;">
@@ -229,16 +266,28 @@
                 <div *ngFor="let user of transaction.user">
                     <h4 *ngIf="user.id != userId">{{user.name}}</h4>
                 </div>
-                <div [ngClass]="transaction.transactions.accepted ? 'divAccepted' : 'divWaiting' " *ngIf="language == 'romana'"> 
-                  <img  *ngIf="!transaction.transactions.accepted"  src="assets/imgs/wait-20s-32px.svg"/>
-                  <img *ngIf="transaction.transactions.accepted" src="assets/imgs/check-20s-23px.svg"/>
-                    {{transaction.transactions.accepted ? 'Acceptată' : 'În așteptare'}}         
-                </div> 
-                <div [ngClass]="transaction.transactions.accepted ? 'divAccepted' : 'divWaiting' " *ngIf="language == 'engleza'"> 
-                  <img  *ngIf="!transaction.transactions.accepted"  src="assets/imgs/wait-20s-32px.svg"/>
-                  <img *ngIf="transaction.transactions.accepted" src="assets/imgs/check-20s-23px.svg"/>
-                    {{transaction.transactions.accepted ? 'Accepted' : 'Waiting'}}                 
-                </div> 
+                <span *ngIf="!transaction.transactions.rejected">
+                  <div [ngClass]="transaction.transactions.accepted ? 'divAccepted' : 'divWaiting' " *ngIf="language == 'romana'"> 
+                    <img  *ngIf="!transaction.transactions.accepted"  src="assets/imgs/wait-20s-32px.svg"/>
+                    <img *ngIf="transaction.transactions.accepted" src="assets/imgs/check-20s-23px.svg"/>
+                      {{transaction.transactions.accepted ? 'Acceptată' : 'În așteptare'}}         
+                  </div> 
+                  <div [ngClass]="transaction.transactions.accepted ? 'divAccepted' : 'divWaiting' " *ngIf="language == 'engleza'"> 
+                    <img  *ngIf="!transaction.transactions.accepted"  src="assets/imgs/wait-20s-32px.svg"/>
+                    <img *ngIf="transaction.transactions.accepted" src="assets/imgs/check-20s-23px.svg"/>
+                      {{transaction.transactions.accepted ? 'Accepted' : 'Waiting'}}                 
+                  </div> 
+                </span>
+                <span *ngIf="transaction.transactions.rejected">
+                  <div [ngClass]="transaction.transactions.accepted ? 'divAccepted' : 'divWaiting' " *ngIf="language == 'romana'"> 
+                    <img src="assets/imgs/close-1.1s-36px.svg"/>
+                      {{transaction.transactions.rejected ? 'Respinsă' : 'Respinsă'}}         
+                  </div> 
+                  <div [ngClass]="transaction.transactions.accepted ? 'divAccepted' : 'divWaiting' " *ngIf="language == 'engleza'"> 
+                    <img src="assets/imgs/close-1.1s-36px.svg"/>
+                      {{transaction.transactions.rejected ? 'Canceled' : 'Canceled'}}                 
+                  </div> 
+                </span>
               </ion-label>
              </ion-col>
              <ion-col style="text-align: right;">

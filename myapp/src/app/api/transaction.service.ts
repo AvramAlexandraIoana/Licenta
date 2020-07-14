@@ -57,6 +57,14 @@ export class TransactionService {
     );
   }
 
+  cancelTrasact(transactionId: number, transaction): Observable<Transaction> {
+    return this.http.put<Transaction>(this.url + '/cancel/' + transactionId, JSON.stringify(transaction), this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.errorHandler)
+    );
+  }
+
   getMoneySpend(userId: number): Observable<Transaction[]> {
     return this.http.get<Transaction[]>(this.url + '/getSpendMoney/' + userId, this.httpOptions)
     .pipe(

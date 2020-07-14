@@ -163,4 +163,16 @@ export class NotificationsPage implements OnInit {
     })
   }
 
+  cancelTransaction(transaction) {
+    transaction.rejected = true;
+    this.transactionService.cancelTrasact(transaction.transactionId, transaction).subscribe( res => {
+      console.log(res);
+      if (!res) {
+          this.presentToast("Fonduri insuficiente", "danger");
+      } else {
+        transaction.rejected = true;
+      }
+    })
+  }
+
 }

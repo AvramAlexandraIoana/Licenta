@@ -12,5 +12,7 @@ export class Transaction {
    IsSend: boolean;
    Date: Date;
    Accepted: boolean;
+   Rejected: boolean;
+
 }   
 

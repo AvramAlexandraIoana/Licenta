@@ -190,6 +190,51 @@ namespace WebFMI.Controllers
             return Ok(transactionList);
         }
 
+        [HttpPut("cancel/{id}")]
+        public async Task<IActionResult> CancelTransaction(int id, Transaction requestTransaction)
+        {
+            Transaction transaction = await _context.Transactions.FindAsync(id);
+            if (transaction == null)
+            {
+                return BadRequest("Nu exista Tranzactia!");
+            }
+            transaction.Description = requestTransaction.Description;
+            transaction.Value = requestTransaction.Value;
+            var idUser = requestTransaction.UserId;
+            var user = await _context.Users.FindAsync(idUser);
+            if (requestTransaction.Unit == "$" && requestTransaction.IsSend && user.AreSumaD)
+            {
+                if (user.SumaDSpend - requestTransaction.Value >=0)
+                {
+                    user.SumaDSpend -= requestTransaction.Value;
+
+                }
+                transaction.Rejected = true;
+
+            }
+            else if (requestTransaction.Unit == "€" && requestTransaction.IsSend && user.AreSumaE)
+            {
+                if (user.SumaESpend - requestTransaction.Value >= 0)
+                {
+                    user.SumaESpend -= requestTransaction.Value;
+                }
+                transaction.Rejected = true;
+
+            }
+            else if (requestTransaction.Unit == "r" && requestTransaction.IsSend && user.AreSumaR)
+            {
+                if (user.SumaRSpend - requestTransaction.Value >= 0)
+                {
+                    user.SumaRSpend -= requestTransaction.Value;
+                }
+                transaction.Rejected = true;
+
+            }
+
+            await _context.SaveChangesAsync();
+            return Ok(transaction);
+        }
+
         [HttpPut("edit/{id}")]
         public async Task<IActionResult> EditTransaction(int id, Transaction requestTransaction)
         {
@@ -226,7 +271,7 @@ namespace WebFMI.Controllers
                 transaction.Accepted = requestTransaction.Accepted;
 
             }
-            else  if (requestTransaction.Unit == "€" && !!requestTransaction.IsSend && user.AreSumaE)
+            else  if (requestTransaction.Unit == "€" && !requestTransaction.IsSend && user.AreSumaE)
             { 
                 if (user.SumaE - user.SumaE - requestTransaction.Value >= 0)
                 {
@@ -246,7 +291,7 @@ namespace WebFMI.Controllers
                 transaction.Accepted = requestTransaction.Accepted;
 
             }
-            else if (requestTransaction.Unit == "r" && !!requestTransaction.IsSend &&  user.AreSumaR)
+            else if (requestTransaction.Unit == "r" && !requestTransaction.IsSend &&  user.AreSumaR)
             {
                 if (user.SumaR - user.SumaRSpend -  requestTransaction.Value >= 0)
                 {
@@ -263,8 +308,6 @@ namespace WebFMI.Controllers
 
             await _context.SaveChangesAsync();
             return Ok(transaction);
-
-
         }
 
         [HttpDelete("delete/{id}")]
