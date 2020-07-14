@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TransactionService } from '../api/transaction.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Transaction } from '../_models/Transaction';
-import { NavController } from '@ionic/angular';
+import { NavController, AngularDelegate } from '@ionic/angular';
 import * as _ from 'lodash';
 import * as moment from 'moment'
 import { User } from '../_models/User';
@@ -20,7 +20,7 @@ export class HomePage implements OnInit {
   gaugeValue : any;
   gaugeLabel = "of $3824";
   gaugePrependText = "$"
-  category: any = "day";
+  category: any = 'day';
   decodedToken: any;
   jwtHelper = new JwtHelperService();
   transactionPerDay: Transaction[];
@@ -42,7 +42,6 @@ export class HomePage implements OnInit {
   constructor(private transactionService: TransactionService,
               private navControl: NavController,
               private userService: UserService) {
-    this.getTransactionPerDay();
    }
 
   ngOnInit() {
@@ -67,7 +66,6 @@ export class HomePage implements OnInit {
   setAmount() {
     this.userService.getUser(this.userId).subscribe( res => {
       console.log(res);
-
       this.user = res;
       this.gaugeLabel = "of ";
       this.defaultCard = this.user.defaultCard;
@@ -88,7 +86,7 @@ export class HomePage implements OnInit {
         this.gaugeValue =  this.user.sumaESpend * 100 / this.user.sumaE;
 
       }
-
+      this.getTransactionPerDay();
     })
   }
 

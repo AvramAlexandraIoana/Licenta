@@ -76,8 +76,8 @@
         <h3 *ngIf="language == 'engleza'">Transaction</h3>
         <h3 *ngIf="language == 'romana'">Trazacții</h3>
         <div class="segment">
-            <ion-segment (ionChange)="segmentChanged($event)" value="category">
-              <ion-segment-button value="day">
+            <ion-segment (ionChange)="segmentChanged($event)" [(ngModel)]="category">
+              <ion-segment-button id="first-day" value="day">
                 <ion-label *ngIf="language == 'engleza'">Day</ion-label>
                 <ion-label *ngIf="language == 'romana'">Zi</ion-label>
               </ion-segment-button>
