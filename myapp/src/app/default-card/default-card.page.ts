@@ -47,13 +47,13 @@ export class DefaultCardPage implements OnInit {
     this.userId = this.getUserId();
     this.language = localStorage.getItem("limba");
     this.getUser();
-    this.loadDataAccount();
   }
 
   getUser() {
     this.userService.getUser(this.userId).subscribe(res => {
       this.user = res;
       console.log(res);
+      this.loadDataAccount();
     });
   }
 
@@ -80,6 +80,8 @@ export class DefaultCardPage implements OnInit {
       var index = _.findIndex(this.cards, function(object) {
         return object.conversion == u.defaultCard;
       });
+      console.log("ioana");
+      console.log(index);
       if(index != -1) {
         this.cards[index].checked = true;
         console.log("ioana");
