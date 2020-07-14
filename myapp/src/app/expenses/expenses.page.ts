@@ -146,7 +146,7 @@ export class ExpensesPage implements OnInit {
     }
     if (x) {
       if (x.size) {
-        dataPoints.push({y : money, name: "Transferuri Pay",  unit: this.user.defaultCard});
+        dataPoints.push({y :  x.sum, name: "Transferuri Pay",  unit: this.user.defaultCard});
         this.dataShow.push({name: "Transferuri Pay", size: x.size, sum: x.sum, conversion: moned});
       }
     }
