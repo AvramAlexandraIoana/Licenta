@@ -52,6 +52,11 @@ namespace WebFMI.Models
 
         public bool AreSumaD { get; set; }
 
+        public int LimitationR { get; set; }
+        public int LimitationE { get; set; }
+
+        public int LimitationD { get; set; }
+
 
 
         public string DefaultCard { get; set; }

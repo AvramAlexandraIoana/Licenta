@@ -111,7 +111,7 @@ namespace WebFMI.Controllers
                                  Size = x.Count()
                              }).ToListAsync();
             var transactionCount = await _context.Transactions
-                                    .Where(u => u.UserId == id && u.IsSend && u.Date.Month == month + 1)
+                                    .Where(u => (u.UserId == id  && !u.Rejected  && u.IsSend && u.Date.Month == month + 1))
                                     .GroupBy(x => x.UserId).Select(x =>
                                      new MoneySpend
                                      {
@@ -119,6 +119,15 @@ namespace WebFMI.Controllers
                                          Id = x.Key,
                                          Size = x.Count()
                                      }).ToListAsync();
+            var transactionCount1 = await _context.Transactions
+                                 .Where(u => (u.UserId1 == id && !u.Rejected && !u.IsSend && u.Date.Month == month + 1))
+                                 .GroupBy(x => x.UserId).Select(x =>
+                                  new MoneySpend
+                                  {
+                                      Sum = x.Sum(y => y.Value),
+                                      Id = x.Key,
+                                      Size = x.Count()
+                                  }).ToListAsync();
             if (transactionCount.Count() > 0)
             {
                 leaveQuota.Add(new MoneySpend

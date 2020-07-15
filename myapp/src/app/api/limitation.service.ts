@@ -23,8 +23,8 @@ export class LimitationService {
     };
    }
 
-   saveLimit(limit: any) {
-    return this.http.post<Limitation>(this.url + '/new', JSON.stringify(limit), this.httpOptions)
+   saveLimit(limit: any, userId: number) {
+    return this.http.post<Limitation>(this.url + '/new/' + userId, JSON.stringify(limit), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.errorHandler)

@@ -6,6 +6,8 @@ import * as _ from 'lodash';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LimitationService } from '../api/limitation.service';
 import { Limitation } from '../_models/Limitation';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { UserService } from '../api/user.service';
 
 @Component({
   selector: 'app-limitation-modal',
@@ -23,20 +25,56 @@ export class LimitationModalPage implements OnInit {
     ]
   }
   language: string;
+  userId: number;
+  jwtHelper = new JwtHelperService();
+  decodedToken: any;
+  user: any;
+  units: any = [];
   
   constructor(private modalControl : ModalController, 
               public navControl : NavController,
               public params: NavParams,
               public adminService: AdminService,
               private formBuilder: FormBuilder,
-              private limitationService: LimitationService) { }
+              private limitationService: LimitationService,
+              private userService: UserService) { }
 
   ngOnInit() {
     this.language = localStorage.getItem("limba");
     this.moned = "$";
+    this.getUser();
     this.category  = this.params.data;
     this.createForm();
+    this.userId = this.getUserId();
 
+  }
+
+  getUser() {
+    this.userService.getUser(this.userId).subscribe(res => {
+      this.user = res;
+      console.log(res);
+      this.moned = this.user.defaultCard;
+      if (this.user.areSumaD) {
+          this.units.push({"val": '$', "name": 'USD'})
+      }
+      if (this.user.areSumaE) {
+        this.units.push({"val": '€', "name": 'EURO'})
+      }
+      if (this.user.areSumaR) {
+        this.units.push({"val": 'r', "name": 'RON'})
+    }
+    console.log(this.units);
+    
+
+    });
+  }
+
+  getUserId() {
+    var userToken = localStorage.getItem('token');
+    if (userToken) {
+        this.decodedToken = this.jwtHelper.decodeToken(userToken);
+        return Number(this.decodedToken.nameid);
+    }
   }
 
   createForm() {
@@ -62,7 +100,7 @@ export class LimitationModalPage implements OnInit {
     limitation.categoryName =  this.category.categoryName;
     limitation.userId =  this.category.userId;
 
-    this.limitationService.saveLimit(limitation).subscribe(res => {
+    this.limitationService.saveLimit(limitation, this.userId).subscribe(res => {
       console.log(res);
     })
     this.dismiss();

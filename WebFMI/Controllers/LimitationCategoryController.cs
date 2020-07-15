@@ -37,12 +37,13 @@ namespace WebFMI.Controllers
         }
 
 
-        [HttpPost("new")]
-        public async Task<IActionResult> Create(LimitationCategory limit)
+        [HttpPost("new/id")]
+        public async Task<IActionResult> Create(LimitationCategory limit, int id)
         {
             try
             {
                 var limitation = await _context.LimitationCategories.AddAsync(limit);
+                var user = await _context.Users.FindAsync(id);
                 await _context.SaveChangesAsync();
                 return Ok(201);
             }
