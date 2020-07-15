@@ -273,7 +273,7 @@ namespace WebFMI.Controllers
             }
             else  if (requestTransaction.Unit == "€" && !requestTransaction.IsSend && user.AreSumaE)
             { 
-                if (user.SumaE - user.SumaE - requestTransaction.Value >= 0)
+                if (user.SumaE - user.SumaESpend - requestTransaction.Value >= 0)
                 {
                     user.SumaESpend += requestTransaction.Value;
                     transaction.Accepted = requestTransaction.Accepted;
