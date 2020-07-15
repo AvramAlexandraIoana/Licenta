@@ -175,7 +175,8 @@
                 <div  *ngFor="let user of transaction.user">
                   <div class="thumb" slot="start" *ngIf="user.id != userId">
                     <ion-avatar>
-                      <img  src="https://ucarecdn.com/{{user.profilePictureName}}/"/>
+                      <img *ngIf="user.profilePictureName"  src="https://ucarecdn.com/{{user.profilePictureName}}/"/>
+                      <img   *ngIf="!user.profilePictureName"  src="assets/imgs/yogie.png" />
                     </ion-avatar>
                   </div>
                 </div>
@@ -260,7 +261,8 @@
             <div *ngFor="let user of transaction.user">
               <div class="thumb" slot="start" *ngIf="user.id != userId">
                 <ion-avatar>
-                  <img  src="https://ucarecdn.com/{{user.profilePictureName}}/"/>
+                  <img *ngIf="user.profilePictureName"  src="https://ucarecdn.com/{{user.profilePictureName}}/"/>
+                  <img   *ngIf="!user.profilePictureName"  src="assets/imgs/yogie.png" />
                 </ion-avatar>
               </div>
               </div>
@@ -307,7 +309,8 @@
               <div>
                 <div class="thumb" slot="start">
                   <ion-avatar>
-                    <img src="assets/imgs/{{transaction.imageUrl}}" alt="">
+                    <img *ngIf="user.profilePictureName"  src="https://ucarecdn.com/{{user.profilePictureName}}/"/>
+                    <img   *ngIf="!user.profilePictureName"  src="assets/imgs/yogie.png" />
                   </ion-avatar>
                 </div>
               </div>
@@ -343,9 +346,10 @@
             <ion-col size="2.5">
              <div *ngFor="let user of transaction.user">
                <div class="thumb" slot="start" *ngIf="user.id != userId">
-                 <ion-avatar>
-                   <img  src="https://ucarecdn.com/{{user.profilePictureName}}/"/>
-                 </ion-avatar>
+                <ion-avatar>
+                  <img *ngIf="user.profilePictureName"  src="https://ucarecdn.com/{{user.profilePictureName}}/"/>
+                  <img   *ngIf="!user.profilePictureName"  src="assets/imgs/yogie.png" />
+                </ion-avatar>
                </div>
               </div>
             </ion-col>
@@ -429,7 +433,8 @@
             <div *ngFor="let user of transaction.user">
               <div class="thumb" slot="start" *ngIf="user.id != userId">
                 <ion-avatar>
-                  <img  src="https://ucarecdn.com/{{user.profilePictureName}}/"/>
+                  <img *ngIf="user.profilePictureName"  src="https://ucarecdn.com/{{user.profilePictureName}}/"/>
+                  <img   *ngIf="!user.profilePictureName"  src="assets/imgs/yogie.png" />
                 </ion-avatar>
               </div>
              </div>

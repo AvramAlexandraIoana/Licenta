@@ -231,7 +231,7 @@ export class ProfilePage implements OnInit {
     this.pictureUrl = imgEntry.path;
     this.file.resolveLocalFilesystemUrl(imgEntry.filePath)
         .then(entry => {
-      //  ( < FileEntry > <unknown>entry).file(file => this.readFile(file))
+         ( < FileEntry > <unknown>entry).file(file => this.readFile(file))
         })
         .catch(err => {
             this.presentToast('Error while reading file.', "warning");
