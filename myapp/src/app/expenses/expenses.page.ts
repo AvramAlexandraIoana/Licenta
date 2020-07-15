@@ -131,6 +131,11 @@ export class ExpensesPage implements OnInit {
         dataPoints.push({y : x.sum, name: findCategory.categoryName, unit: this.user.defaultCard});
         this.dataShow.push({name: findCategory.categoryName, url: findCategory.categoryUrl, size: x.size, sum: x.sum, conversion: moned});
         sum += x.sum;
+      } else {
+        if (x.size) {
+          dataPoints.push({y :  x.sum, name: "Transferuri Pay",  unit: this.user.defaultCard});
+          this.dataShow.push({name: "Transferuri Pay", size: x.size, sum: x.sum, conversion: moned});
+        }
       }
      
     }
@@ -144,12 +149,12 @@ export class ExpensesPage implements OnInit {
     } else if (this.user.defaultCard == "€") {
       money = this.user.sumaE - sum;
     }
-    if (x) {
-      if (x.size) {
-        dataPoints.push({y :  x.sum, name: "Transferuri Pay",  unit: this.user.defaultCard});
-        this.dataShow.push({name: "Transferuri Pay", size: x.size, sum: x.sum, conversion: moned});
-      }
-    }
+    // if (x) {
+    //   if (x.size) {
+    //     dataPoints.push({y :  x.sum, name: "Transferuri Pay",  unit: this.user.defaultCard});
+    //     this.dataShow.push({name: "Transferuri Pay", size: x.size, sum: x.sum, conversion: moned});
+    //   }
+    // }
    
     console.log(this.data);
     console.log(this.dataShow);
