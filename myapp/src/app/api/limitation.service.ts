@@ -13,7 +13,7 @@ export class LimitationService {
   httpOptions: { headers: HttpHeaders; };
   token: string;
   constructor(private http: HttpClient) {
-    this.url = environment.url + '/limitationCategory';
+    this.url = environment.url + '/limitation';
     this.token = localStorage.getItem('token');
     this.httpOptions  = {
       headers: new HttpHeaders({

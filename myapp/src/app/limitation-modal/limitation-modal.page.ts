@@ -46,6 +46,9 @@ export class LimitationModalPage implements OnInit {
     this.category  = this.params.data;
     this.createForm();
     this.userId = this.getUserId();
+    this.limitationService.getLimitList().subscribe(res => {
+      console.log(res);
+    })
 
   }
 
@@ -94,7 +97,7 @@ export class LimitationModalPage implements OnInit {
       return;
     }
     var limitation = new Limitation();
-    limitation.limit =  this.limitationForm.controls['limit'].value;
+    limitation.value =  this.limitationForm.controls['limit'].value;
     limitation.unit =  this.limitationForm.controls['moneda'].value;
     limitation.categoryId =  this.category.categoryId;
     limitation.categoryName =  this.category.categoryName;

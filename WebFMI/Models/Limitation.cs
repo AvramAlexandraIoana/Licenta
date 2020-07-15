@@ -6,25 +6,20 @@ using System.Threading.Tasks;
 
 namespace WebFMI.Models
 {
-    public class LimitationCategory
+    public class Limitation
     {
         [Key]
-        public int LimitationCategoryId { get; set; }
+        public int Id { get; set; }
 
         public string Unit { get; set; }
+        public int Value { get; set; }
 
-        public float Limit { get; set; }
-
-        public string CategoryId { get; set; }
-
-        public virtual Category Category { get; set; }
-
+        public int CategoryId { get; set; }
         public string CategoryName { get; set; }
 
         public int UserId { get; set; }
 
 
-
-
+        public virtual User User { get; set; }
     }
 }

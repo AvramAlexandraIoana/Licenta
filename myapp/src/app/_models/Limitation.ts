@@ -1,6 +1,6 @@
 export class Limitation {    
     unit: string;
-    limit: number;
+    value: number;
     userId: number;
     categoryId: number;
     categoryName: string;

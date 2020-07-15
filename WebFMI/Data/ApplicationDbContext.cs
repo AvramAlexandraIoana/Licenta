@@ -40,8 +40,9 @@ namespace WebFMI.Data
         public DbSet<RecentSearch> RecentSearches { get; set; }
 
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<Limitation> Limitations { get; set; }
 
-        public DbSet<LimitationCategory> LimitationCategories { get; set; }
+
 
 
 

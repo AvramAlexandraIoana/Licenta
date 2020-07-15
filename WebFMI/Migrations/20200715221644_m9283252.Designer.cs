@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebFMI.Data;
 
 namespace WebFMI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200715221644_m9283252")]
+    partial class m9283252
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -253,9 +255,9 @@ namespace WebFMI.Migrations
                     b.ToTable("HistoryImages");
                 });
 
-            modelBuilder.Entity("WebFMI.Models.Limitation", b =>
+            modelBuilder.Entity("WebFMI.Models.LimitationCategory", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("LimitationCategoryId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -266,20 +268,20 @@ namespace WebFMI.Migrations
                     b.Property<string>("CategoryName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<float>("Limit")
+                        .HasColumnType("real");
+
                     b.Property<string>("Unit")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Value")
-                        .HasColumnType("int");
+                    b.HasKey("LimitationCategoryId");
 
-                    b.HasKey("Id");
+                    b.HasIndex("CategoryId");
 
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Limitations");
+                    b.ToTable("LimitationCategories");
                 });
 
             modelBuilder.Entity("WebFMI.Models.Message", b =>
@@ -756,11 +758,11 @@ namespace WebFMI.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WebFMI.Models.Limitation", b =>
+            modelBuilder.Entity("WebFMI.Models.LimitationCategory", b =>
                 {
-                    b.HasOne("WebFMI.Models.User", "User")
+                    b.HasOne("WebFMI.Models.Category", "Category")
                         .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
