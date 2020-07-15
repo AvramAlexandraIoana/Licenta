@@ -41,9 +41,7 @@
             <div class="unit-container">
               <ion-item text-center lines="none">
                 <ion-select multiple="false" [placeholder]="language == 'romana' ? 'Select Unit' : 'Selectează moneda'" formControlName="unit">
-                  <ion-select-option value="$" selected>USD</ion-select-option>
-                  <ion-select-option value="€">EURO</ion-select-option>
-                  <ion-select-option value="r">RON</ion-select-option>
+                  <ion-select-option *ngFor="let u of units " value="{{u.val}}">{{u.name}}</ion-select-option>
                 </ion-select>
               </ion-item>
             </div>  

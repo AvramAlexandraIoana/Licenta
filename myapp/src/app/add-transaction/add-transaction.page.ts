@@ -9,6 +9,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { CategoryService } from '../api/category.service';
 import { Category } from '../_models/Category';
 import * as _ from 'lodash';
+import { UserService } from '../api/user.service';
 
 @Component({
   selector: 'app-add-transaction',
@@ -43,12 +44,16 @@ export class AddTransactionPage implements OnInit {
   categoryIcons: Array<Category> = [];
   language: string;
   isEnterSumInput: any;
-  
+  units: any = [];
+  user: any;
+  userId: number;
 
   constructor(public toastController: ToastController,
               public categoryService: CategoryService,
               public categoryTransactionService: CategoryTransactionsService,
-              public formBuilder: FormBuilder, public modalControl: ModalController, public navControl: NavController, private route: ActivatedRoute) { }
+              public formBuilder: FormBuilder, public modalControl: ModalController, public navControl: NavController, 
+              private route: ActivatedRoute,
+              private userService: UserService) { }
 
   ngOnInit() {
     this.unit = '$';
@@ -57,6 +62,8 @@ export class AddTransactionPage implements OnInit {
     this.categoryService.getCategoryList().subscribe(res => {
       this.categoryIcons = res;
       console.log(this.categoryIcons);
+      this.userId = this.getUserId();
+      this.getUser();
     });
 
   }
@@ -68,6 +75,26 @@ export class AddTransactionPage implements OnInit {
     });
 
     return await modal.present();
+  }
+
+  getUser() {
+    this.userService.getUser(this.userId).subscribe(res => {
+      this.user = res;
+      console.log(res);
+      this.unit = this.user.defaultCard;
+      if (this.user.areSumaD) {
+          this.units.push({"val": '$', "name": 'USD'})
+      }
+      if (this.user.areSumaE) {
+        this.units.push({"val": '€', "name": 'EURO'})
+      }
+      if (this.user.areSumaR) {
+        this.units.push({"val": 'r', "name": 'RON'})
+      }
+      console.log("UNITS");
+      console.log(this.units);
+    
+    });
   }
 
   createCategoryTransaction() {
