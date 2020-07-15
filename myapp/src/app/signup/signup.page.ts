@@ -52,7 +52,7 @@ export class SignupPage implements OnInit {
     this.signupForm = this.formBuilder.group({
       'username': ['', [Validators.required,
                         Validators.minLength(10),
-                        Validators.maxLength(40),
+                        Validators.maxLength(30),
                         Validators.pattern('^[a-zA-Z0-9_.+-]+$')]],
       'email': ['', [Validators.required,
                       Validators.minLength(10),
@@ -88,12 +88,20 @@ export class SignupPage implements OnInit {
       }
       this.auth.register(this.model).subscribe( next => {
         console.log("Regster in successfully");
-        this.presentToast('Sign up succesfully.', "success");
+        if (this.language == "engleza") {
+          this.presentToast('Sign up succesfully.', "success");
+        } else {
+          this.presentToast('Intregistrare cu succes.', "success");
+        }
         this.goToLoginPage();
       
       }, error => {
         console.log(error);
-        this.presentToast('Username already exists.', "danger");
+        if (this.language == "engleza") {
+          this.presentToast('Username already exists.', "danger");
+        } else {
+          this.presentToast('Username-ul deja exista.', "danger");
+        }
       })
   }
 

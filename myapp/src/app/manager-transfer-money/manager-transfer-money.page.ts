@@ -73,7 +73,11 @@ export class ManagerTransferMoneyPage implements OnInit {
 
     this.userService.updateUser(user.id, user).subscribe(res => {
       console.log(res);
-      this.presentToast("Amount added", "success");
+      if (this.language == "engleza") {
+        this.presentToast("Amount added", "success");
+      } else {
+        this.presentToast("Suma adaugata", "success");
+      }
       user.sR = x;
       user.sE = y;
       user.sD = z;

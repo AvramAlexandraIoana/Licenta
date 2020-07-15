@@ -3,6 +3,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../api/auth.service';
 import { MustMatch } from 'src/app/_helpers/must-match.validator';
+import { NavController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-reset-password-profile',
@@ -32,7 +33,9 @@ export class ResetPasswordProfilePage implements OnInit {
   decodedToken: any;
   language: string;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService,
+               private navControl: NavController,
+               private toastController: ToastController) { }
 
   ngOnInit() {
     this.resetForm = this.formBuilder.group({
@@ -73,6 +76,16 @@ export class ResetPasswordProfilePage implements OnInit {
     return number;
   }
   
+  async presentToast(text, type) {
+    const toast = await this.toastController.create({
+        message: text,
+        position: 'bottom',
+        duration: 3000,
+        color: type
+    });
+    toast.present();
+  }
+
   changePassword() {
     if (this.resetForm.invalid) {
       return;
@@ -86,6 +99,12 @@ export class ResetPasswordProfilePage implements OnInit {
 
     this.authService.resetPasswordFromProfile(this.model).subscribe(res => {
       console.log("Success");
+      if (this.language == "engleza") {
+        this.presentToast('Password changed succesfully.', "success");
+      } else {
+        this.presentToast('Parola schimbata.', "success");
+      }
+      this.navControl.navigateBack("tabs/tab5");
 
     });
 

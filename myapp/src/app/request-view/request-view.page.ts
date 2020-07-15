@@ -207,7 +207,11 @@ export class RequestViewPage implements OnInit {
       this.transactionService.saveTransaction(this.model).subscribe(res => {
         console.log(res);
         if (!res) {
-          this.presentToast("Nu ai fonduri suficiente", "danger");
+          if (this.language == "romana") {
+            this.presentToast("Fonduri insuficiente", "danger");
+          } else {
+            this.presentToast("Insufficient funds", "danger");
+          }         
         } else {
            this.showSuccessModal();
         }

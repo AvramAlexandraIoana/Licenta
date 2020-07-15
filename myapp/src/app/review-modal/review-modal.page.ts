@@ -78,7 +78,11 @@ export class ReviewModalPage implements OnInit {
     };
 
     if (arrayRoles.length > 1) {
-      this.presentToast("You can select one of types", "warning");
+      if (this.language == "engleza") {
+        this.presentToast("You can select one of types", "warning");
+      } else {
+        this.presentToast("Trebuie selectat un singur tip", "warning");
+      }
       return;
     }
 

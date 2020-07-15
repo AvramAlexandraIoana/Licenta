@@ -84,12 +84,20 @@ export class ModifyFullNamePage implements OnInit {
 
     console.log(this.user);
     this.userService.updateUser(this.user.id, this.user).subscribe( next => {
-       this.presentToast("Username modificat!", "success");
+       if (this.language == "romana") {
+        this.presentToast("Username modificat!", "success");
+       } else {
+        this.presentToast("Username changed!", "success");
+       }
        //this.navControl.navigateRoot('modify-profile');
        this.dismiss();
 
       }, error => {
-        this.presentToast("S-a produs o eroare!", "warning");
+        if (this.language == "romana") {
+          this.presentToast("S-a produs o eroare!", "warning");
+        } else{
+          this.presentToast("An error occurred!", "warning");
+        }
         console.log(error);
       })
   }

@@ -149,7 +149,11 @@ export class AddTransactionPage implements OnInit {
     this.categoryTransactionService.saveCategoryTransaction(this.model).subscribe(res => {
       console.log(res);
         if (!res) {
-          this.presentToast("Nu ai fonduri suficiente", "danger");
+          if (this.language == "romana") {
+            this.presentToast("Nu ai fonduri suficiente", "danger");
+          } else {
+            this.presentToast("You don't have enough funds", "danger");
+          }
         } else {
            this.showSuccessModal();
         }

@@ -86,7 +86,11 @@ export class AddCategoryAdminPage implements OnInit {
     this.model.CategoryUrl = this.categoryForm.controls['categoryUrl'].value;
      this.categoryService.saveCategory(this.model).subscribe(res => {
       console.log("Categorie adaugata cu succes!");
-      this.presentToast("Categorie adaugata cu succes!", "success");
+      if (this.language == "romana") {
+        this.presentToast("Category successfully added!", "success");
+      } else {
+
+      }
       this.navControl.navigateBack('category');
 
     });

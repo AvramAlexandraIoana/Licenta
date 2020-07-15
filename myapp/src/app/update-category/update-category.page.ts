@@ -101,7 +101,11 @@ export class UpdateCategoryPage implements OnInit {
     this.model.CategoryUrl = this.categoryForm.controls['categoryUrl'].value;
      this.categoryService.updateCategory(this.categoryForm.controls["categoryId"].value, this.model).subscribe(res => {
       console.log("Categorie updatata cu succes!");
-      this.presentToast("Categorie updatata cu succes!", "success");
+      if (this.language == "romana") {
+        this.presentToast("Categorie updatata cu succes!", "success");
+      } else {
+        this.presentToast("Successfully updated category!", "success");
+      }
       this.navControl.navigateBack('category');
 
     });

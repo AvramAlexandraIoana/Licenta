@@ -99,7 +99,11 @@ export class AddNewCardPage implements OnInit {
 
      this.accountService.saveAccount(model, this.userId).subscribe( res => {
        console.log(res);
-       this.presentToast("Card adaugat", "success");
+       if (this.language == "romana") {
+        this.presentToast("Card adaugat", "success");
+       } else {
+        this.presentToast("Card added", "success");
+       }
        this.navControl.navigateBack("tabs/tab4");
      })
     

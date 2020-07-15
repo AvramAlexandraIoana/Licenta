@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../api/auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-reset-password',
@@ -30,7 +31,7 @@ export class ResetPasswordPage implements OnInit {
   model: any;
   decodedToken: any;
   hasError1: boolean;
-  constructor(private formBuilder: FormBuilder, private authService: AuthService) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private navControl: NavController) { }
 
   ngOnInit() {
     this.resetForm = this.formBuilder.group({

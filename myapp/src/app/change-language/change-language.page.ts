@@ -92,18 +92,31 @@ export class ChangeLanguagePage implements OnInit {
     });
     console.log(checkedLanguage);
     if (checkedLanguage.length > 1) {
-      this.presentToast("Trebuie selectata o singura limba!", "warning");
+      if (this.language == "romana") {
+        this.presentToast("Trebuie selectata o singura limba!", "warning");
+      } else {
+        this.presentToast("Only one language must be selected!", "warning");
+      }
     } else if (checkedLanguage.length == 1) { 
       this.user.language = checkedLanguage[0].value;
       this.userService.updateUser(this.user.id, this.user).subscribe( res => {
         console.log(res);
         localStorage.setItem("limba", this.user.language);
-        this.presentToast("Limba schimbata", "success");
+        if (this.language == "romana") {
+          this.presentToast("Limba schimbata", "success");
+        } else {
+          this.presentToast("Language changed", "success");
+        }
         this.dismiss();
       })
 
     } else {
-      this.presentToast("Trebuie selectata o singura limba!", "warning");
+      if (this.language == "romana") {
+        this.presentToast("Trebuie selectata o singura limba!", "warning");
+      } else {
+        this.presentToast("Only one language must be selected!", "warning");
+
+      }
 
     }
   }

@@ -89,7 +89,11 @@ export class LoginPage implements OnInit {
     }
     this.auth.login(this.model).subscribe( next => {
       console.log("Logged in successfully");
-      this.presentToast('Log in succesfully.', "success");
+      if (this.language == "engleza") {
+        this.presentToast('Log in succesfully.', "success");
+      } else {
+        this.presentToast('Logare cu succes.', "success");
+      }
       this.navControl.navigateRoot('tabs/tab1');
     }, error => {
       this.presentToast('An error ocurred.', "danger");
@@ -144,6 +148,7 @@ export class LoginPage implements OnInit {
           }
           this.auth.googleLogin(this.model).subscribe(res => {
             console.log("Logged in successfully");
+            this.presentToast('Log in succesfully.', "success");
             this.navControl.navigateRoot('tabs/tab1');
           })
         }, (error) => {

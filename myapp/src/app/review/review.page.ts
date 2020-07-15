@@ -98,7 +98,11 @@ export class ReviewPage implements OnInit {
 
     this.reviewService.saveReview(this.model).subscribe(res => {
       console.log("Review salvat");
-      this.presentToast("Review salvat", "success");
+      if (this.language == "romana") {
+        this.presentToast("Feedback salvat", "success");
+      } else {
+        this.presentToast("Feedback saved", "success");
+      }
       this.dismiss();
     });
 

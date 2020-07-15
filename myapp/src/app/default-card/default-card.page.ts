@@ -114,12 +114,20 @@ export class DefaultCardPage implements OnInit {
     this.user.email =  this.modifyEmailForm.controls['email'].value;
     console.log(this.user);
     this.userService.updateUser(this.user.id, this.user).subscribe( next => {
-       this.presentToast("Adresa  de e-mail modificata!", "success");
+       if (this.language == "romana") {
+        this.presentToast("Adresa  de e-mail modificata!", "success");
+       } else {
+        this.presentToast("Email address changed!", "success");
+       }
        this.dismiss();
        //this.navControl.navigateRoot('modify-profile');
 
     }, error => {
-      this.presentToast("S-a produs o eroare!", "warning");
+      if (this.language == "romana") {
+        this.presentToast("S-a produs o eroare!", "danger");
+      } else {
+        this.presentToast("An error occurred!", "danger");
+      }
       console.log(error);
     })
   }
@@ -132,7 +140,11 @@ export class DefaultCardPage implements OnInit {
     });
     console.log(checkedCards);
     if (checkedCards.length > 1) {
-      this.presentToast("Trebuie selectat un singur card!", "warning");
+      if (this.language == "romana") {
+        this.presentToast("Trebuie selectat un singur card!", "warning");
+      }  else {
+        this.presentToast("Only one card must be selected!", "warning");
+      }
     } else if (checkedCards.length == 1) { 
       if (checkedCards[0].conversion == "USD") {
         this.user.defaultCard = "$";
@@ -144,12 +156,20 @@ export class DefaultCardPage implements OnInit {
       this.userService.updateUser(this.user.id, this.user).subscribe( res => {
         console.log(res);
         localStorage.setItem("card", this.user.defaultCard);
-        this.presentToast("Card default salvat", "success");
+        if (this.language == "romana") {
+          this.presentToast("Card default salvat", "success");
+        } else {
+          this.presentToast("Card default saved", "success");
+        }
         this.dismiss();
       })
 
     } else {
-      this.presentToast("Trebuie selectat un  card!", "warning");
+      if (this.language == "romana") {
+        this.presentToast("Trebuie selectat un  card!", "warning");
+      }  else {
+        this.presentToast("A card must be selected!", "warning");
+      }
 
     }
   }

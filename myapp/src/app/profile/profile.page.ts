@@ -54,6 +54,8 @@ export class ProfilePage implements OnInit {
   isInit: boolean = false;
   noFace: boolean;
   language: string;
+  oldImage: string;
+  oldPictureUrl: string;
 
  
   constructor(private sanitizer: DomSanitizer, private st: AngularFireStorage, private userService: UserService, private camera: Camera, private file: File, private http: HttpClient, private webview: WebView,
@@ -225,10 +227,11 @@ export class ProfilePage implements OnInit {
 
   startUpload(imgEntry) {
     this.isFirstLoad = false;
+    this.oldPictureUrl = this.pictureUrl;
     this.pictureUrl = imgEntry.path;
     this.file.resolveLocalFilesystemUrl(imgEntry.filePath)
         .then(entry => {
-      //  ( < FileEntry > <unknown>entry).file(file => this.readFile(file))
+       ( < FileEntry > <unknown>entry).file(file => this.readFile(file))
         })
         .catch(err => {
             this.presentToast('Error while reading file.', "warning");
@@ -269,6 +272,7 @@ export class ProfilePage implements OnInit {
     this.http.post("https://upload.uploadcare.com/base/", data)
       .subscribe((event: any)=> {
         console.log(event);
+        this.oldImage = this.imageURL;
         this.imageURL = event.file;
         const model = {
           "id": this.userId,
@@ -311,6 +315,8 @@ export class ProfilePage implements OnInit {
               } else {
                 this.presentAlert("More faces");
               }
+              this.pictureUrl = this.oldPictureUrl;
+              console.log(this.pictureUrl);
 
             }
         })
@@ -443,7 +449,11 @@ export class ProfilePage implements OnInit {
     } else {
       localStorage.removeItem('token');
     }
-    this.presentToast("Log out successfully", "success");
+    if (this.language == "engleza") {
+      this.presentToast("Log out successfully", "success");
+    } else {
+      this.presentToast("Delogare cu succes", "success");
+    }
     this.navControl.navigateRoot(["login"]);
 
   }

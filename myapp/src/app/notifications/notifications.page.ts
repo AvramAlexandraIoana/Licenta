@@ -156,7 +156,11 @@ export class NotificationsPage implements OnInit {
       console.log(res);
       if (!res) {
         transaction.accepted = false;
-        this.presentToast("Fonduri insuficiente", "danger");
+        if (this.language == "romana") {
+          this.presentToast("Fonduri insuficiente", "danger");
+        } else {
+          this.presentToast("Insufficient funds", "danger");
+        }
       } else {
         transaction.accepted = true;
       }
@@ -168,8 +172,12 @@ export class NotificationsPage implements OnInit {
     this.transactionService.cancelTrasact(transaction.transactionId, transaction).subscribe( res => {
       console.log(res);
       if (!res) {
+        if (this.language == "romana") {
           this.presentToast("Fonduri insuficiente", "danger");
-      } else {
+        } else {
+          this.presentToast("Insufficient funds", "danger");
+        }      
+      }  else {
         transaction.rejected = true;
       }
     })

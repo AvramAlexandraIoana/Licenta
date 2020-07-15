@@ -81,12 +81,20 @@ export class ModifyEmailPage implements OnInit {
     this.user.email =  this.modifyEmailForm.controls['email'].value;
     console.log(this.user);
     this.userService.updateUser(this.user.id, this.user).subscribe( next => {
-       this.presentToast("Adresa  de e-mail modificata!", "success");
+       if (this.language == "romana") {
+        this.presentToast("Adresa  de e-mail modificata!", "success");
+       } else {
+        this.presentToast("Email address changed!", "success");
+       }
        this.dismiss();
        //this.navControl.navigateRoot('modify-profile');
 
     }, error => {
-      this.presentToast("S-a produs o eroare!", "warning");
+      if (this.language == "romana") {
+        this.presentToast("S-a produs o eroare!", "warning");
+      } else {
+        this.presentToast("An error occurred!", "warning");
+      }
       console.log(error);
     })
   }

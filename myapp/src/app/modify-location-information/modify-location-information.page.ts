@@ -97,12 +97,20 @@ export class ModifyLocationInformationPage implements OnInit {
       this.user.judet = this.modifyLocationForm.controls['judet'].value;
       console.log(this.user);
       this.userService.updateUser(this.user.id, this.user).subscribe( next => {
-         this.presentToast("Adresa modificata!", "success");
+         if (this.language == "romana") {
+          this.presentToast("Adresa modificata!", "success");
+         } else {
+          this.presentToast("Address changed!", "success");
+         }
          //this.navControl.navigateRoot('modify-profile');
          this.dismiss();
 
       }, error => {
-        this.presentToast("S-a produs o eroare!", "warning");
+        if (this.language == "romana") {
+          this.presentToast("S-a produs o eroare!", "warning");
+        } else {
+          this.presentToast("An error occurred!", "warning");
+        }
         console.log(error);
       })
   }
