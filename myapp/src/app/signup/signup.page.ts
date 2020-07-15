@@ -25,7 +25,7 @@ export class SignupPage implements OnInit {
     'email':[
       { type:'required', message: 'Email is required'},
       { type:'minlength', message: 'Email lenght must be longer than or equal to 6 characters '},
-      { type:'maxlength', message: 'Email lenght Cannot exceed 20 characters '},
+      { type:'maxlength', message: 'Email lenght Cannot exceed 40 characters '},
       { type:'pattern', message: 'Please enter valid email format '}
     ],
     'password':[
@@ -56,7 +56,7 @@ export class SignupPage implements OnInit {
                         Validators.pattern('^[a-zA-Z0-9_.+-]+$')]],
       'email': ['', [Validators.required,
                       Validators.minLength(10),
-                      Validators.maxLength(30),
+                      Validators.maxLength(40),
                       Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9.-]+.[a-zA-Z0-9.-]+$')]],
       'password': ['', [ Validators.required,
                         Validators.minLength(6),
