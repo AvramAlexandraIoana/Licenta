@@ -54,6 +54,40 @@ namespace WebFMI.Controllers
 
             try
             {
+                var leaveQuota = await _context.CategoryTransactions
+                            .Where(Q => Q.UserId == transaction.UserId && Q.CategoryId == transaction.CategoryId && Q.Unit == transaction.Unit)
+                            .GroupBy(x => x.CategoryId).Select(x =>
+                            new MoneySpend
+                            {
+                                Sum = x.Sum(y => y.Value),
+                                Id = x.Key,
+                                Size = x.Count()
+                            }).ToListAsync();
+                if (leaveQuota.Count() > 0)
+                {
+                    var sum = leaveQuota[0].Sum;
+                    var id = leaveQuota[0].Id;
+                    var findLimitation = await _context.Limitations.Where(u => u.CategoryId == id && u.Unit == transaction.Unit && u.UserId == transaction.UserId).ToListAsync();
+                    if (findLimitation.Count() > 0)
+                    {
+                        if (sum + transaction.Value > findLimitation[0].Value)
+                        {
+                            return BadRequest("LIMITARE");
+                        }
+                    }
+           
+                } else
+                {
+                    var findLimitation = await _context.Limitations.Where(u => u.CategoryId == transaction.CategoryId  && u.Unit == transaction.Unit && u.UserId == transaction.UserId).ToListAsync();
+                    if (findLimitation.Count() > 0)
+                    {
+                        if (transaction.Value > findLimitation[0].Value)
+                        {
+                            return BadRequest("LIMITARE");
+                        }
+                    }
+                }
+
                 var user = await _context.Users.FindAsync(transaction.UserId);
                 if (transaction.Unit == "$")
                 {

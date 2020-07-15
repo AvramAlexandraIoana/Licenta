@@ -158,6 +158,13 @@ export class AddTransactionPage implements OnInit {
            this.showSuccessModal();
         }
       
+    }, error => {
+      console.log(error);
+      if (this.language == "engleza") {
+        this.presentToast('Limitation exceeded!', "danger");
+      } else {
+        this.presentToast('Limitare depasita!', "danger");
+      }
     });
   }
 
