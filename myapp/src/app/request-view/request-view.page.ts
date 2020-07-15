@@ -196,7 +196,7 @@ export class RequestViewPage implements OnInit {
       this.model.Value = Number(this.peopleSelected[i].data.suma);
       this.model.UserId =  this.userId;
       this.model.UserId1 = this.peopleSelected[i]._objectInstance.id;
-      this.model.Unit = this.sendMoneyData.unit;
+      this.model.Unit = this.currentUnit;
       this.model.ImageUrl = this.user.profilePictureName;
       this.model.UserName = this.user.name;
       if (this.typeView == "send") {

@@ -24,7 +24,7 @@ export class IntroPage implements OnInit {
   }
 
   goToLoginPage() {
-    this.navControl.navigateRoot('tabs');
+    this.navControl.navigateRoot('tabs/tab1');
   }
 
   goToSignUpPage() {

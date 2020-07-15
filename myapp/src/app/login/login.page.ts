@@ -90,7 +90,7 @@ export class LoginPage implements OnInit {
     this.auth.login(this.model).subscribe( next => {
       console.log("Logged in successfully");
       this.presentToast('Log in succesfully.', "success");
-      this.navControl.navigateRoot('tabs');
+      this.navControl.navigateRoot('tabs/tab1');
     }, error => {
       this.presentToast('An error ocurred.', "danger");
       console.log(error);
@@ -144,7 +144,7 @@ export class LoginPage implements OnInit {
           }
           this.auth.googleLogin(this.model).subscribe(res => {
             console.log("Logged in successfully");
-            this.navControl.navigateRoot('tabs');
+            this.navControl.navigateRoot('tabs/tab1');
           })
         }, (error) => {
           console.log(error);

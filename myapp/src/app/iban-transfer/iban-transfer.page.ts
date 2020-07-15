@@ -54,6 +54,9 @@ export class IbanTransferPage implements OnInit {
   language: string;
   decodedToken: any;
   jwtHelper = new JwtHelperService();
+  user: any;
+  units: any = [];
+  userId: number;
 
   constructor(public ngZ: NgZone, 
     public navControl: NavController,
@@ -63,7 +66,8 @@ export class IbanTransferPage implements OnInit {
     public keyboard: Keyboard,
     private transactionService: TransactionService,
     private toastController: ToastController,
-    private modalControl: ModalController) {
+    private modalControl: ModalController,
+    private userService: UserService) {
      this.checkIfKeyboardIsOpen();
   }
 
@@ -78,9 +82,11 @@ export class IbanTransferPage implements OnInit {
         this.peopleSelected = JSON.parse(params.special);
       }
     });
+    this.userId = this.getUserId();
    
     this.createSendMoneyForm();
     this.setTitlePage();
+    this.getUser();
   }
 
   checkIfKeyboardIsOpen() {
@@ -99,6 +105,25 @@ export class IbanTransferPage implements OnInit {
           }
         });
     };
+  }
+
+  getUser() {
+    this.userService.getUser(this.userId).subscribe(res => {
+      this.user = res;
+      console.log(res);
+      this.unit = this.user.defaultCard;
+      if (this.user.areSumaD) {
+          this.units.push({"val": '$', "name": 'USD'})
+      }
+      if (this.user.areSumaE) {
+        this.units.push({"val": '€', "name": 'EURO'})
+      }
+      if (this.user.areSumaR) {
+        this.units.push({"val": 'r', "name": 'RON'})
+    }
+    
+
+    });
   }
   
   getUserId() {

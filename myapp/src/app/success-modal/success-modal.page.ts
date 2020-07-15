@@ -24,6 +24,8 @@ export class SuccessModalPage implements OnInit {
 
   goHomePage()
   {
-    this.navControl.navigateRoot('/tabs');
+    localStorage.setItem("refresh", "1");
+    this.navControl.navigateBack("tabs/tab1");
+
   }
 }

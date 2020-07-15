@@ -37,14 +37,18 @@ export class HomePage implements OnInit {
   defaultCard: string;
   language: string;
   notifications: Transaction[];
+  init: boolean = false;
 
 
   constructor(private transactionService: TransactionService,
               private navControl: NavController,
               private userService: UserService) {
+                console.log("constructor");
    }
 
   ngOnInit() {
+    this.init = true;
+    console.log("INIT");
     this.userId = this.getUserId();
     this.language = localStorage.getItem("limba");
     console.log(this.language);
@@ -57,6 +61,21 @@ export class HomePage implements OnInit {
   
   }
 
+  ionViewWillEnter() {
+    console.log("COME BACK");
+  }
+
+  ionViewDidEnter() {
+    console.log("COME AKDK");
+  }
+
+  ionViewWillLeave() {
+    console.log("ddf");
+  }
+
+  ionViewDidLeave() {
+    console.log("hdjf");
+  }
   getSpendMoney() {
     this.transactionService.getMoneySpend(this.userId).subscribe( res => {
       console.log(res);
@@ -151,6 +170,13 @@ export class HomePage implements OnInit {
   }
 
   verifyType(transaction) {
+    if (localStorage.getItem("refresh") == "1") {
+      localStorage.setItem("refresh", "0");
+      this.init = true;
+      this.setAmount();
+      this.getNotification();
+      this.getSpendMoney();
+    }
     console.log(transaction);
     console.log(this.userId);
     if (transaction.userId == this.userId && transaction.isSend) {
@@ -208,10 +234,6 @@ export class HomePage implements OnInit {
 
   menuButton() {
     console.log("BUTTONS");
-  }
-
-  ionViewWillEnter() {
-    console.log("INAPOI");
   }
 
 

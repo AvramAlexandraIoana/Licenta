@@ -88,7 +88,7 @@ export class ChatHistoryPage implements OnInit {
   }
 
   dismiss() {
-    this.navControl.navigateBack("tabs");
+    this.navControl.navigateBack("tabs/tab1");
   }
 
 

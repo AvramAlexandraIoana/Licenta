@@ -1,7 +1,7 @@
 <ion-header>
   <div class="navbarBackground">
       <ion-buttons slot="start">
-        <ion-back-button color="light" defaultHref="tabs"></ion-back-button>
+        <ion-back-button color="light" defaultHref="tabs/tab1"></ion-back-button>
       </ion-buttons>
       <ion-input [(ngModel)]="inputValue" [placeholder]="language == 'romana' ? 'Cauta in agenda' : 'Search the agenda'" (keyup)="onKeyUp($event); isKeyPress=true"></ion-input>
       <ion-icon *ngIf="!isKeyPress" class="group" name="search-outline"></ion-icon>
