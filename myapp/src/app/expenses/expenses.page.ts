@@ -52,6 +52,34 @@ export class ExpensesPage implements OnInit {
     
   }
 
+  ionViewWillEnter() {
+    console.log("COME BACK");
+    this.month = this.todayDate.getMonth();
+    this.luna = this.months[this.month];
+    console.log(this.luna);
+    this.language = localStorage.getItem("limba");
+    if (this.language == "engleza") {
+      this.months = this.monthsEnglish;
+    }
+  
+    
+    console.log(this.months[this.todayDate.getMonth()]);
+    this.userId = this.getUserId();
+    this.getUser();
+  }
+
+  ionViewDidEnter() {
+    console.log("COME AKDK");
+  }
+
+  ionViewWillLeave() {
+    console.log("ddf");
+  }
+
+  ionViewDidLeave() {
+    console.log("hdjf");
+  }
+
 
   getUser() {
     this.userService.getUser(this.userId).subscribe(res => {
