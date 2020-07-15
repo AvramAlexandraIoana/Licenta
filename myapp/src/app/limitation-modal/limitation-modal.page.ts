@@ -100,7 +100,7 @@ export class LimitationModalPage implements OnInit {
     limitation.categoryName =  this.category.categoryName;
     limitation.userId =  this.category.userId;
 
-    this.limitationService.saveLimit(limitation, this.userId).subscribe(res => {
+    this.limitationService.saveLimit(limitation).subscribe(res => {
       console.log(res);
     })
     this.dismiss();
