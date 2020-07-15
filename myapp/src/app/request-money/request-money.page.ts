@@ -5,6 +5,9 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import _ from 'lodash';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { timeout } from 'rxjs/operators';
+import { UserService } from '../api/user.service';
+import { User } from '../_models/User';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 
 @Component({
@@ -41,8 +44,20 @@ export class RequestMoneyPage implements OnInit {
   IsKeyboardOpen: boolean=false;
   model: any;
   language: string;
+  user: User;
+  decodedToken: any;
+  jwtHelper = new JwtHelperService();
+  userId: number;
+  units: any = [];
 
-  constructor(public ngZ: NgZone, public navControl: NavController, private route: ActivatedRoute, private formBuilder: FormBuilder, public  platform: Platform, public keyboard: Keyboard) {
+
+  constructor(public ngZ: NgZone, 
+              public navControl: NavController,
+              private route: ActivatedRoute, 
+              private formBuilder: FormBuilder, 
+              public  platform: Platform, 
+              public keyboard: Keyboard,
+              private userService: UserService) {
      this.checkIfKeyboardIsOpen();
   }
 
@@ -60,6 +75,36 @@ export class RequestMoneyPage implements OnInit {
    
     this.createSendMoneyForm();
     this.setTitlePage();
+    this.userId = this.getUserId();
+    this.getUser();
+  }
+
+  
+  getUserId() {
+    var userToken = localStorage.getItem('token');
+    if (userToken) {
+        this.decodedToken = this.jwtHelper.decodeToken(userToken);
+        return Number(this.decodedToken.nameid);
+    }
+  }
+
+  getUser() {
+    this.userService.getUser(this.userId).subscribe(res => {
+      this.user = res;
+      console.log(res);
+      this.unit = this.user.defaultCard;
+      if (this.user.areSumaD) {
+          this.units.push({"val": '$', "name": 'USD'})
+      }
+      if (this.user.areSumaE) {
+        this.units.push({"val": '€', "name": 'EURO'})
+      }
+      if (this.user.areSumaR) {
+        this.units.push({"val": 'r', "name": 'RON'})
+    }
+    
+
+    });
   }
 
   checkIfKeyboardIsOpen() {

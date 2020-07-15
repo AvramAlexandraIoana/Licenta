@@ -27,5 +27,8 @@ export class User {
     sE: number;
     defaultCard: string;
     language: string;
+    areSumaD: boolean;
+    areSumaE: boolean;
+    areSumaR: boolean;
 }   
 
