@@ -16,7 +16,8 @@
     <ion-row class="rowContainer" style="height: 50px;">
       <ion-col size="2">
         <ion-avatar>
-          <img  src="https://ucarecdn.com/{{user.profilePictureName}}/"/>
+          <img  *ngIf="user.profilePictureName" src="https://ucarecdn.com/{{user.profilePictureName}}/"/>
+          <img   *ngIf="!user.profilePictureName"  src="assets/imgs/yogie.png" />
         </ion-avatar>
       </ion-col>
       <ion-col class="name">
@@ -86,7 +87,7 @@
       <ion-col  *ngIf="!user.areSumaD && language == 'engleza'" size="8" style="font-size: 14px;">
         User doesn't had USD card
       </ion-col>
-      <ion-col  *ngIf="!user.areSumaE && language == 'romana'" size="8" style="font-size: 14px;">
+      <ion-col  *ngIf="!user.areSumaD && language == 'romana'" size="8" style="font-size: 14px;">
         Utilizatorul nu are un card în dolari
       </ion-col>
     </ion-row>

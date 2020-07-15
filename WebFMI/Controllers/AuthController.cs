@@ -94,7 +94,7 @@ namespace WebFMI.Controllers
 
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(createdUser);
             var confirmationLink = Url.Action(nameof(ConfirmEmail), "Account", new { token, name = createdUser.UserName }, Request.Scheme);
-            //await _emailSender.SendEmailAsync(userForRegisterDto.Email, "Test message", confirmationLink);
+            await _emailSender.SendEmailAsync(userForRegisterDto.Email, "Test message", confirmationLink);
 
 
            

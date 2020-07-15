@@ -19,7 +19,7 @@ export class SignupPage implements OnInit {
     'username':[
       { type:'required', message: 'Username is required'},
       { type:'minlength', message: 'Username lenght must be longer than or equal to 6 characters '},
-      { type:'maxlength', message: 'Username lenght Cannot exceed 20 characters '},
+      { type:'maxlength', message: 'Username lenght Cannot exceed 30 characters '},
       { type:'pattern', message: 'Please enter valid Username format '}
     ],
     'email':[
@@ -52,7 +52,7 @@ export class SignupPage implements OnInit {
     this.signupForm = this.formBuilder.group({
       'username': ['', [Validators.required,
                         Validators.minLength(10),
-                        Validators.maxLength(20),
+                        Validators.maxLength(40),
                         Validators.pattern('^[a-zA-Z0-9_.+-]+$')]],
       'email': ['', [Validators.required,
                       Validators.minLength(10),
