@@ -1,5 +1,5 @@
-import { Component, OnInit, NgZone } from '@angular/core';
-import { NavController, ModalController, AlertController, ToastController } from '@ionic/angular';
+import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
+import { NavController, ModalController, AlertController, ToastController, IonSlides } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SuccessModalPage } from '../success-modal/success-modal.page';
 import _ from 'lodash';
@@ -33,8 +33,11 @@ export class RequestViewPage implements OnInit {
   error: boolean;
   user: User;
   userId: number;
-  cards: Account[];
+  cards: any[];
   language: string;
+  @ViewChild('slides', {static: true}) slides: IonSlides;
+  currentUnit: any;
+
 
   
   constructor(private transactionService: TransactionService,
@@ -75,6 +78,7 @@ export class RequestViewPage implements OnInit {
       if (params && params.data) {
         this.sendMoneyData = JSON.parse(params.data);
       }
+      this.currentUnit = this.sendMoneyData.unit;
     }
 
     this.userId = this.getUserId();
@@ -93,6 +97,26 @@ export class RequestViewPage implements OnInit {
     this.accountService.getAccountList(this.userId).subscribe(res => {
       console.log(res);
       this.cards = res;
+      for (var i = 0; i < this.cards.length; i++) {
+        if (this.cards[i].conversion == "USD") {
+          this.cards[i].unit = "$";
+        } else if (this.cards[i].conversion == "EURO") {
+          this.cards[i].unit = "€";
+        } else if (this.cards[i].conversion == "RON") {
+          this.cards[i].unit = "r";
+        }
+      }
+      var defaultUnit = this.currentUnit;
+      var findCardDefault = _.find(this.cards, function(object) {
+        return object.unit == defaultUnit;
+      });
+      console.log("DEFAULT");
+      console.log(findCardDefault);
+      if (this.cards.length > 1) {
+        var aux = this.cards[0];
+        this.cards[0] = this.cards[1];
+        this.cards[1] = aux;
+      }
     });
   }
 
@@ -242,5 +266,17 @@ export class RequestViewPage implements OnInit {
       this.peopleSelected.splice(i, i + 1);
     }
   }
+
+  slideChanged(e: any) {
+   console.log("SLIDE CHANGED");
+   console.log(e);
+   this.slides.getActiveIndex().then((index: number) => {
+    console.log(index);
+    console.log(this.cards[index]);
+    this.currentUnit = this.cards[index].unit;
+   });
+  }
+
+
 
 }
