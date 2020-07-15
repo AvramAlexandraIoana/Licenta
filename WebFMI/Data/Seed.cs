@@ -64,7 +64,7 @@ namespace WebFMI.Data
                 var poweruser = new User
                 {
                     Name = "admin@gmail.com",
-                    UserName = "admin@gmail.com",
+                    UserName = "AdministratorAplicatie",
                     Email = "admin@gmail.com",
                     EmailConfirmed = true,
                     NormalizedEmail = "admin@gmail.com",
