@@ -119,9 +119,10 @@
     <ion-card [ngClass]="contact?.data.suma > limit ? 'warningClass' : 'okayClass'">
       <ion-card-content>
         <ion-item lines="none">
-          <ion-avatar slot="start" style="height: 50px;">
+          <ion-avatar slot="start" style="height: 50px; width: 50px;">
             <ion-icon *ngIf="peopleSelected.length > 1" class="closeIcon" name="close-outline" (click)="deleteContacts(i)"></ion-icon>
-              <img src="assets/imgs/yogie.png" alt="">
+            <img   *ngIf="contact?.imageURL" src="https://ucarecdn.com/{{(contact?.imageURL)}}/"/>
+            <img   *ngIf="!contact?.imageURL"  src="assets/imgs/yogie.png" />
           </ion-avatar>
           <ion-col>
             <ion-label>
