@@ -60,7 +60,7 @@ export class SignupPage implements OnInit {
                       Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9.-]+.[a-zA-Z0-9.-]+$')]],
       'password': ['', [ Validators.required,
                         Validators.minLength(6),
-                        Validators.maxLength(12),
+                        Validators.maxLength(20),
                         Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')]]
     })
   }
