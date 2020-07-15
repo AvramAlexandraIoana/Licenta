@@ -154,7 +154,7 @@ namespace WebFMI.Controllers
                                          Size = x.Count()
                                      }).ToListAsync();
             var transactionCount1 = await _context.Transactions
-                                 .Where(u => (u.UserId1 == id && !u.Rejected && !u.IsSend && u.Date.Month == month + 1))
+                                 .Where(u => (u.UserId1 == id && u.Accepted && !u.IsSend && u.Date.Month == month + 1))
                                  .GroupBy(x => x.UserId).Select(x =>
                                   new MoneySpend
                                   {
@@ -164,18 +164,32 @@ namespace WebFMI.Controllers
                                   }).ToListAsync();
             if (transactionCount.Count() > 0)
             {
+                if (transactionCount1.Count() > 0)
+                {
+                    leaveQuota.Add(new MoneySpend
+                    {
+                        Sum = transactionCount.First().Sum + transactionCount1.First().Sum,
+                        Size = transactionCount.First().Size + transactionCount1.First().Size
+                    }); 
+                } else
+                {
+                    leaveQuota.Add(new MoneySpend
+                    {
+                        Sum = transactionCount.First().Sum ,
+                        Size = transactionCount.First().Size
+                    });
+                }
+
+            } if (transactionCount1.Count() > 0)
+            {
                 leaveQuota.Add(new MoneySpend
                 {
-                    Sum = transactionCount.First().Sum,
-                    Size = transactionCount.First().Size
+                    Sum = transactionCount1.First().Sum,
+                    Size = transactionCount1.First().Size
                 });
             }
-          
 
-
-
-
-            return Ok(leaveQuota);
+             return Ok(leaveQuota);
 
         }
 
