@@ -51,6 +51,7 @@ export class HomePage implements OnInit {
     console.log("INIT");
     this.userId = this.getUserId();
     this.language = localStorage.getItem("limba");
+    this.getUser();
     console.log(this.language);
     this.myDate = new Date();
     console.log(this.myDate);
@@ -59,6 +60,16 @@ export class HomePage implements OnInit {
     this.getSpendMoney();
    
   
+  }
+
+  
+  getUser() {
+    this.userService.getUser(this.userId).subscribe(res => {
+      this.user = res;
+      this.language = res.language;
+      localStorage.setItem("limba", this.language);
+     
+    });
   }
 
   ionViewWillEnter() {

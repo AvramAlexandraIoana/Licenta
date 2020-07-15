@@ -23,7 +23,8 @@
       <ion-row *ngIf="user.id != userId" (click)="goToMessageHistory(user)">
         <ion-col  size="2.2">
           <ion-avatar class="avatar">
-            <img  src="https://ucarecdn.com/{{user.profilePictureName}}/"/>
+            <img  *ngIf="user.profilePictureName" src="https://ucarecdn.com/{{user.profilePictureName}}/"/>
+            <img  *ngIf="!user.profilePictureName"src="assets/imgs/josie.png" alt="">
           </ion-avatar>
         </ion-col>
         <ion-col>

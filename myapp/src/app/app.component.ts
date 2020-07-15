@@ -33,15 +33,8 @@ export class AppComponent {
       title: 'Notifications',
       url: 'notification',
       icon: 'list'
-    },
-    {
-      title: 'Add limitation',
-      url: 'limitation-category'
-    },
-    {
-      title: 'Users Details',
-      url: 'users-details'
     }
+   
   ]
   
   constructor(

@@ -58,7 +58,7 @@
       <div class="error-messages">
         <ng-container *ngFor="let error of errorMessages.categoryUrl">
           <div class="error-message"
-            *ngIf="categoryForm.get('CategoryUrl').hasError(error.type) && (categoryForm.get('CategoryUrl').dirty || categoryForm.get('CategoryUrl').touched)">
+            *ngIf="categoryForm.get('categoryUrl').hasError(error.type) && (categoryForm.get('categoryUrl').dirty || categoryForm.get('categoryUrl').touched)">
             {{error.message}}
           </div>
         </ng-container>
