@@ -13,6 +13,8 @@ namespace WebFMI.Models
         public int Sum { get; set; }
 
         public int Size { get; set; }
+
+        public string CategoryName { get; set; }
     }
 
 }

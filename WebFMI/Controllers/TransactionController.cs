@@ -69,6 +69,8 @@ namespace WebFMI.Controllers
                 return BadRequest("Nu exista iban-ul sau numele introdus");
             }
             transaction.UserId1 = account[0].UserId;
+            var limitation = await _context.Limitations.Where(u => u.UserId == transaction.UserId && u.Unit == transaction.Unit && u.CategoryName == "Tranzactii").ToListAsync();
+
             User user = await _context.Users.FindAsync(transaction.UserId);
             try
             {
@@ -79,6 +81,14 @@ namespace WebFMI.Controllers
                     {
                         if (user.SumaD - user.SumaDSpend - transaction.Value >= 0)
                         {
+                            if (limitation.Count() > 0)
+                            {
+                                if (user.SumaDSpend + transaction.Value > limitation[0].Value)
+                                {
+                                    return BadRequest("LIMITARE");
+                                }
+
+                            }
                             user.SumaDSpend += transaction.Value;
                         }
                         else
@@ -90,6 +100,14 @@ namespace WebFMI.Controllers
                     {
                         if (user.SumaE - user.SumaESpend - transaction.Value >= 0)
                         {
+                            if (limitation.Count() > 0)
+                            {
+                                if (user.SumaESpend + transaction.Value > limitation[0].Value)
+                                {
+                                    return BadRequest("LIMITARE");
+                                }
+
+                            }
                             user.SumaESpend += transaction.Value;
                         }
                         else
@@ -101,6 +119,14 @@ namespace WebFMI.Controllers
                     {
                         if (user.SumaR - user.SumaRSpend - transaction.Value >= 0)
                         {
+                            if (limitation.Count() > 0)
+                            {
+                                if (user.SumaRSpend + transaction.Value > limitation[0].Value)
+                                {
+                                    return BadRequest("LIMITARE");
+                                }
+
+                            }
                             user.SumaRSpend += transaction.Value;
                         }
                         else
@@ -133,6 +159,7 @@ namespace WebFMI.Controllers
         public async Task<IActionResult> AddTransaction(Transaction transaction)
         {
             transaction.Date = DateTime.Now;
+            var limitation = await _context.Limitations.Where(u => u.UserId == transaction.UserId && u.Unit == transaction.Unit && u.CategoryName == "Tranzactii").ToListAsync();
             
            
 
@@ -145,7 +172,16 @@ namespace WebFMI.Controllers
                     {
                         if (user.SumaD - user.SumaDSpend - transaction.Value >= 0)
                         {
-                            user.SumaDSpend += transaction.Value;
+                            if (limitation.Count() > 0 )
+                            {
+                                if (user.SumaDSpend + transaction.Value > limitation[0].Value)
+                                {
+                                    return BadRequest("LIMITARE");
+                                }
+
+                            }
+
+                             user.SumaDSpend += transaction.Value;
                         } else
                         {
                             return Ok(false);
@@ -155,6 +191,14 @@ namespace WebFMI.Controllers
                     {
                         if (user.SumaE -  user.SumaESpend - transaction.Value >= 0)
                         {
+                            if (limitation.Count() > 0)
+                            {
+                                if (user.SumaESpend + transaction.Value > limitation[0].Value)
+                                {
+                                    return BadRequest("LIMITARE");
+                                }
+
+                            }
                             user.SumaESpend += transaction.Value;
                         }
                         else
@@ -165,6 +209,14 @@ namespace WebFMI.Controllers
                     {
                         if (user.SumaR - user.SumaRSpend - transaction.Value >= 0)
                         {
+                            if (limitation.Count() > 0)
+                            {
+                                if (user.SumaRSpend + transaction.Value > limitation[0].Value)
+                                {
+                                    return BadRequest("LIMITARE");
+                                }
+
+                            }
                             user.SumaRSpend += transaction.Value;
                         }
                         else
@@ -244,6 +296,7 @@ namespace WebFMI.Controllers
                 return BadRequest("Nu exista Tranzactia!");
             }
             transaction.Description = requestTransaction.Description;
+            var limitation = await _context.Limitations.Where(u => u.UserId == transaction.UserId && u.Unit == transaction.Unit && u.CategoryName == "Tranzactii").ToListAsync();
             transaction.Value = requestTransaction.Value;
             var idUser = requestTransaction.UserId1;
             var user = await _context.Users.FindAsync(idUser);
@@ -257,6 +310,14 @@ namespace WebFMI.Controllers
             {
                 if (user.SumaD - user.SumaDSpend - requestTransaction.Value >= 0 )
                 {
+                    if (limitation.Count() > 0)
+                    {
+                        if (user.SumaDSpend + transaction.Value > limitation[0].Value)
+                        {
+                            return BadRequest("LIMITARE");
+                        }
+
+                    }
                     user.SumaDSpend += requestTransaction.Value;
                     transaction.Accepted = requestTransaction.Accepted;
 
@@ -267,6 +328,7 @@ namespace WebFMI.Controllers
                 }
             } else if (requestTransaction.Unit == "€" && requestTransaction.IsSend &&  user.AreSumaE)
             {
+              
                 user.SumaE += requestTransaction.Value;
                 transaction.Accepted = requestTransaction.Accepted;
 
@@ -275,6 +337,14 @@ namespace WebFMI.Controllers
             { 
                 if (user.SumaE - user.SumaESpend - requestTransaction.Value >= 0)
                 {
+                    if (limitation.Count() > 0)
+                    {
+                        if (user.SumaESpend + transaction.Value > limitation[0].Value)
+                        {
+                            return BadRequest("LIMITARE");
+                        }
+
+                    }
                     user.SumaESpend += requestTransaction.Value;
                     transaction.Accepted = requestTransaction.Accepted;
 
@@ -295,6 +365,14 @@ namespace WebFMI.Controllers
             {
                 if (user.SumaR - user.SumaRSpend -  requestTransaction.Value >= 0)
                 {
+                    if (limitation.Count() > 0)
+                    {
+                        if (user.SumaRSpend + transaction.Value > limitation[0].Value)
+                        {
+                            return BadRequest("LIMITARE");
+                        }
+
+                    }
                     user.SumaRSpend += requestTransaction.Value;
                     transaction.Accepted = requestTransaction.Accepted;
 

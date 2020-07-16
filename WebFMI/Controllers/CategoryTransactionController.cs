@@ -169,23 +169,27 @@ namespace WebFMI.Controllers
                     leaveQuota.Add(new MoneySpend
                     {
                         Sum = transactionCount.First().Sum + transactionCount1.First().Sum,
-                        Size = transactionCount.First().Size + transactionCount1.First().Size
+                        Size = transactionCount.First().Size + transactionCount1.First().Size,
+                        CategoryName = "Transferuri"
                     }); 
                 } else
                 {
                     leaveQuota.Add(new MoneySpend
                     {
                         Sum = transactionCount.First().Sum ,
-                        Size = transactionCount.First().Size
+                        Size = transactionCount.First().Size,
+                        CategoryName = "Transferuri"
                     });
                 }
 
-            } if (transactionCount1.Count() > 0)
+            } else if (transactionCount1.Count() > 0)
             {
                 leaveQuota.Add(new MoneySpend
                 {
                     Sum = transactionCount1.First().Sum,
-                    Size = transactionCount1.First().Size
+                    Size = transactionCount1.First().Size,
+                    CategoryName = "Transferuri"
+
                 });
             }
 

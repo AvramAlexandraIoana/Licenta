@@ -160,7 +160,7 @@ export class ExpensesPage implements OnInit {
         this.dataShow.push({name: findCategory.categoryName, url: findCategory.categoryUrl, size: x.size, sum: x.sum, conversion: moned});
         sum += x.sum;
       } else {
-        if (x.size) {
+        if (x.size && x.categoryName == "Transferuri") {
           dataPoints.push({y :  x.sum, name: "Transferuri Pay",  unit: this.user.defaultCard});
           this.dataShow.push({name: "Transferuri Pay", size: x.size, sum: x.sum, conversion: moned});
         }
